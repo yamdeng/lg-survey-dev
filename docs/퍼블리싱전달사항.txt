@@ -1,0 +1,47 @@
+#.중요정리
+ -아이콘은 antd를 사용해도 되고 편하신대로 해주시면 됩니다.
+ -css 보다는 scss로 하는게 어떨까 합니다.
+ -컴포넌트 단위로 하는 module.css는 개인적으로는 추천하지 않습니다.(JS로 따지면 스타일 컴포넌트이죠. 유지보수도 많이 않좋고 여러모로 장점이 없어보여요.)
+ -퍼블리싱 폴더 구조는 아래와 같이 정의하는 걸로 확정합니다.
+  : src/resources/css, src/resources/images, src/resources/fonts
+  : public/favicon.ico
+ -공유한 프로젝트에서 다운로드를 받으신 후 npm install 명령어를 실행해서 라이브러리를 다운하고 .vscode 파일에 정의한 확장플러그인을 설치하라고 하면 설치하시면 됩니다. 그렇게 하면 모든 사람이 동일한 prettier/eslint가 적용됩니다. 기존 퍼블리싱 프로젝트에는 관련 라이브러리가 없어서 각각 다른 prettier가 동작이 됬을 거예요(.prettierrc.json 파일이 적용이 않됬을 거예요.)
+ -toast는 react-toastify 라이브러리를 사용합니다.
+
+#.퍼블리싱 실행 방법 : 퍼블리싱 관련 포트는 9082로 고정하겠습니다.
+ -npm run dev:publish
+
+#.기존에 작업하신 파일을 해당 프로젝트로 옮겨놓았습니다.
+ -시작앤트리파일 : publish.tsx, PublishApp.tsx
+ -컴포넌트는 src/publish 폴더에 전부 복사해놓았습니다.
+ -
+
+
+
+### antd 관련 전달사항 ###
+
+ #.antd에서 사용해야하는 필수 컴포넌트
+  https://ant.design/components/select
+  https://ant.design/components/auto-complete
+  https://ant.design/components/date-picker
+  https://ant.design/components/time-picker
+  https://ant.design/components/tree-select
+  https://ant.design/components/modal
+  https://ant.design/components/tooltip
+
+#.antd에서 고려할만한 컴포넌트 : 순수 css로 하는걸 추천드립니다.
+ -https://ant.design/components/splitter
+ -https://ant.design/components/collapse
+ -https://ant.design/components/popover
+ -https://ant.design/components/tag
+ -https://ant.design/components/switch
+ -https://ant.design/components/upload : 파일업로드 필요시 해당 컴포넌트를 사용하면 될 것 같은데 커스텀 공수가 많이 들어요. 사용하지 않아도 해당 컴포넌트는 공수가 꽤 듭니다.
+ -https://ant.design/components/menu : 메뉴도 가능하면 세로 기준으로 아이콘까지 보이고 않보이고 이런 기능이 필요하지 않다면 디자인/퍼블리싱 받아서 진행하는게 더 좋아보여요.
+
+ #.Button, Typography, Input, Radio, Space, Divider, Flex, Grid, Layout, Menu, Pagination, Tabs, Spin... 등등 저 컴포넌트를 사용해도 이점이 없습니다. 디자인대로 퍼블리싱된 것을 기준으로 개발하는게 더 이점이 커보여요.
+
+ #.각종 input은 순수 css로 하는 것으로 해주면 좋습니다. 예를들면 Search 같은 것들은 input 우측에 아이콘 주고 하면 됩니다. 라디오나 체크박스는 각 동그라미나 네모를 클릭하지 않고 라벨을 클릭해도 선택 액션만 잘 먹게끔만 반영해주시면 될 것 같애요(개발과는 무관한 애기입니다.)
+
+ #.제가 확인했을떄는 위의 컴포넌트 말고는 추천할만 것을 있으면 의견부탁드려요.(Grid, Flext, Layout은 가능하면 사용않하는게 나아보여요.)
+
+

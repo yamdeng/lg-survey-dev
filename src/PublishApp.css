@@ -1,0 +1,41 @@
+/* ant-css 커스텀 레이아웃 */
+
+/* layout */
+.ant-layout-page .ant-layout-header .ant-flex {
+  /* gap: 10px; */
+}
+
+/* sider */
+.survey-sider-top {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10px;
+  height: 60px;
+}
+
+/* menu */
+.ant-menu {
+  text-align: left;
+}
+
+/* page */
+.content-inner {
+  padding: 10px 20px;
+}
+.page-content {
+}
+
+/* header */
+#root .ant-layout-header {
+  --ant-layout-header-bg: #f5f5f5;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+/* footer */

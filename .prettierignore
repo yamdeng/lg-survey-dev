@@ -1,0 +1,3 @@
+**/*.css
+**/*.scss
+vite.config.ts
