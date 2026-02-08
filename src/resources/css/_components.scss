@@ -1,0 +1,84 @@
+@layer components {
+
+  // component.scss
+  .ant-btn-primary {
+    // background-color: $primary-color !important;
+  }
+
+  .ant-btn {
+    font-weight: 600;
+    text-transform: uppercase;
+    
+    &.ant-btn-primary {
+      // box-shadow: 0 4px 10px rgba($my-primary-color, 0.3);
+    }
+    [class^="ant-btn"] {
+      position: relative;
+      top: 1px;
+    }
+    .ant-btn-icon + span {
+      position: relative; top: 1px;
+    }
+  }
+
+
+
+  .ant-input {
+    &:focus {
+      // border-color: $my-primary-color;
+    }
+  }
+
+
+
+  /* form */
+  .page-form-block {
+    border-radius: 6px;
+    padding: 20px;
+
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    border: 1px solid #e9ebee;
+    /* border: 1px solid #f0f0f0; */
+  }
+  .page-form-block .form-group {
+    display: flex;
+    flex-flow: row wrap;
+    width: calc(100% - 120px);
+  }
+  .page-form-block .ant-form {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .form-group + .ant-btn {
+    height: 100%;
+    min-height: 38px;
+    max-height: 50px;
+  }
+
+  .ant-form-item {
+    margin: 0;
+  }
+  .page-form-box .ant-form-item-control {
+    min-width: 100px;
+  }
+
+  :where(.css-dev-only-do-not-override-1d8anct).ant-space-compact-block {
+    width: auto;
+  }
+
+  :where(.css-dev-only-do-not-override-1d8anct).ant-select-compact-item:not(
+      .ant-select-compact-first-item
+    ).ant-select-compact-last-item {
+    border-start-start-radius: 5px;
+    border-end-start-radius: 5px;
+  }
+
+}

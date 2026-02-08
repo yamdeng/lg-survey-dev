@@ -1,5 +1,5 @@
 import { GlobalOutlined } from '@ant-design/icons';
-import { Form, Select, Space } from 'antd';
+import { Form, Select } from 'antd';
 
 type FieldType = {
   language?: string;
@@ -7,7 +7,7 @@ type FieldType = {
 
 const LanguageSelect = () => {
   return (
-    <Space.Compact block>
+    <div className="form-item-group">
       <GlobalOutlined />
       <Form.Item<FieldType>
         label="언어"
@@ -26,7 +26,7 @@ const LanguageSelect = () => {
           style={{ minWidth: 100 }}
         />
       </Form.Item>
-    </Space.Compact>
+    </div>
   );
 };
 

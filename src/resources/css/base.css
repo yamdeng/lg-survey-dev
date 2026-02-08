@@ -1,4 +1,0 @@
-@layer reset, antd;
-
-/* @see https://ant.design/docs/react/compatible-style-cn#resetcss */
-@import url(antd/dist/reset.css) layer(reset);

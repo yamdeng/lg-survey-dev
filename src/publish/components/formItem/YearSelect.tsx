@@ -1,5 +1,5 @@
 import { CalendarOutlined } from '@ant-design/icons';
-import { Form, Select, Space } from 'antd';
+import { Form, Select } from 'antd';
 
 type FieldType = {
   year?: string;
@@ -7,15 +7,12 @@ type FieldType = {
 
 const YearSelect = () => {
   return (
-    <Space.Compact block>
+    <div className="form-item-group">
       <CalendarOutlined />
-      <Form.Item<FieldType>
-        label="년도"
-        name="year"
-        rules={[{ required: true, message: '년도 필수선택' }]}
-      >
+      <Form.Item<FieldType> label="년도" name="year" rules={[{ required: true }]}>
         <Select
           // defaultValue="2026"
+          id="year"
           placeholder="년도"
           options={[
             { label: '2021', value: '2021' },
@@ -25,10 +22,10 @@ const YearSelect = () => {
             { label: '2025', value: '2025' },
             { label: '2026', value: '2026' },
           ]}
-          style={{ minWidth: 100 }}
+          style={{ minWidth: 80 }}
         />
       </Form.Item>
-    </Space.Compact>
+    </div>
   );
 };
 

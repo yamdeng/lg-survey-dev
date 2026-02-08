@@ -1,0 +1,110 @@
+@layer base {
+
+    @font-face {
+        font-family: 'LG EI Headline';
+        src: url('../fonts/LGEIHeadlineTTF-Regular.eot');
+        src: url('../fonts/LGEIHeadlineTTF-Regular.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEIHeadlineTTF-Regular.woff2') format('woff2'),
+             url('../fonts/LGEIHeadlineTTF-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'LG EI Headline';
+        src: url('../fonts/LGEIHeadlineTTF-Bold.eot');
+        src: url('../fonts/LGEIHeadlineTTF-Bold.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEIHeadlineTTF-Bold.woff2') format('woff2'),
+             url('../fonts/LGEIHeadlineTTF-Bold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'LG EI Headline';
+        src: url('../fonts/LGEIHeadlineTTF-Light.eot');
+        src: url('../fonts/LGEIHeadlineTTF-Light.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEIHeadlineTTF-Light.woff2') format('woff2'),
+             url('../fonts/LGEIHeadlineTTF-Light.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'LG EI Headline';
+        src: url('../fonts/LGEIHeadlineTTF-Semibold.eot');
+        src: url('../fonts/LGEIHeadlineTTF-Semibold.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEIHeadlineTTF-Semibold.woff2') format('woff2'),
+             url('../fonts/LGEIHeadlineTTF-Semibold.woff') format('woff');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'LG EI Headline';
+        src: url('../fonts/LGEIHeadlineTTF-Thin.eot');
+        src: url('../fonts/LGEIHeadlineTTF-Thin.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEIHeadlineTTF-Thin.woff2') format('woff2'),
+             url('../fonts/LGEIHeadlineTTF-Thin.woff') format('woff');
+        font-weight: 100;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    
+    
+    @font-face {
+        font-family: 'LG EI Text';
+        src: url('../fonts/LGEITextTTF-Regular.eot');
+        src: url('../fonts/LGEITextTTF-Regular.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEITextTTF-Regular.woff2') format('woff2'),
+             url('../fonts/LGEITextTTF-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'LG EI Text';
+        src: url('../fonts/LGEITextTTF-Bold.eot');
+        src: url('../fonts/LGEITextTTF-Bold.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEITextTTF-Bold.woff2') format('woff2'),
+             url('../fonts/LGEITextTTF-Bold.woff') format('woff');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'LG EI Text';
+        src: url('../fonts/LGEITextTTF-Light.eot');
+        src: url('../fonts/LGEITextTTF-Light.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEITextTTF-Light.woff2') format('woff2'),
+             url('../fonts/LGEITextTTF-Light.woff') format('woff');
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+    }
+    
+    @font-face {
+        font-family: 'LG EI Text';
+        src: url('../fonts/LGEITextTTF-SemiBold.eot');
+        src: url('../fonts/LGEITextTTF-SemiBold.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/LGEITextTTF-SemiBold.woff2') format('woff2'),
+             url('../fonts/LGEITextTTF-SemiBold.woff') format('woff');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+    }
+
+
+}
+
+
+
+
+

@@ -14,8 +14,6 @@ import 'ag-grid-community/styles/ag-theme-quartz.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-tooltip/dist/react-tooltip.css';
 
-import './resources/css/index.css';
-
 setAutoFreeze(false);
 
 const AppComponent = <PublishApp />;

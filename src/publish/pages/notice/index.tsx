@@ -1,8 +1,10 @@
 import HeaderMenu from '@/publish/components/headerMenu';
 import { HomeOutlined, PaperClipOutlined } from '@ant-design/icons';
 import type { TableColumnsType } from 'antd';
-import { Breadcrumb, Input, Select, Space, Table } from 'antd';
-import { Content, Header } from 'antd/es/layout/layout';
+import { Input, Select, Table, Form, Button } from 'antd';
+
+import { Home, Search, FilePenLine, ClipboardList } from 'lucide-react';
+import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 
 interface DataType {
   key: React.Key;
@@ -136,28 +138,41 @@ const data = [
 ];
 
 const Notice = () => {
+  const [form] = Form.useForm();
   return (
-    <div className="ant-layout-page">
-      <Header>
-        <Breadcrumb
-          separator=">"
-          items={[{ href: '/', title: <HomeOutlined /> }, { title: 'Main' }, { title: '공지사항' }]}
-        />
-        <HeaderMenu />
-      </Header>
-      <Content>
+    <>
+      <header className="content-header">
+        <FlexBox className="content-inner" justify={'space-between'}>
+          <div className="bread-crumb">
+            <dl className="bread-crumb-list">
+              <dt>
+                <a href="/">
+                  <Home size={16} />
+                </a>
+              </dt>
+              <dd>
+                <a href="#">Edition</a>
+              </dd>
+              <dd>
+                <a href="#">Language Info</a>
+              </dd>
+            </dl>
+          </div>
+          <HeaderMenu />
+        </FlexBox>
+      </header>
+      <main className="content-main">
         <div className="content-inner">
-          {/* title 컴포넌트 변경예정 */}
-          <h3 className="page-title" style={{ textAlign: 'left' }}>
-            Dashboard Menu01 - Notice : 공지사항
-          </h3>
+          <div className="content-title">
+            <FilePenLine size={18} />
+            <h3 className="title-text">Menu02-sub02 Title : Languge Info</h3>
+          </div>
 
-          <div className="page-content">
-            <div className="page-form-wrap">
-              {/* 검색폼 영역 */}
-              <div className="page-form-box" style={{ justifyContent: 'flex-end' }}>
-                <Space orientation="horizontal" style={{ justifyContent: 'end' }}>
-                  <Space.Compact block>
+          <div className="content-body">
+            <div className="form-block border-none">
+              <Form form={form}>
+                <div className="form-inline justify-end">
+                  <div className="form-item-group">
                     <Select
                       defaultValue="opt-3"
                       placeholder="제목+내용"
@@ -168,30 +183,39 @@ const Notice = () => {
                       ]}
                       style={{ width: 200 }}
                     />
-                  </Space.Compact>
-                  <Space.Compact block>
+                  </div>
+                  <div className="form-item-group">
                     <Input.Search
                       style={{ width: 400 }}
                       defaultValue="2345"
                       placeholder="검색하세요"
                     />
-                  </Space.Compact>
-                </Space>
+                  </div>
+                </div>
+              </Form>
+            </div>
+
+            <div className="grid-block">
+              <div className="grid-block-header">
+                <div className="content-title">
+                  <ClipboardList size={18} />
+                  <h3 className="title-text">Survey Info</h3>
+                </div>
               </div>
 
-              {/* 테이블 또는 ag grid 영역 */}
-              <div className="page-grid-table">
+              <div className="grid-block-body">
+                {/* AntD- 기본 테이블 */}
                 <Table<DataType>
                   columns={columns}
                   dataSource={data}
-                  pagination={{ pageSize: 3, simple: true }}
+                  pagination={{ pageSize: 8, simple: true }}
                 />
               </div>
             </div>
           </div>
         </div>
-      </Content>
-    </div>
+      </main>
+    </>
   );
 };
 

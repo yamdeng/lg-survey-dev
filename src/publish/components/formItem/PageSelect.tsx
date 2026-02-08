@@ -1,5 +1,5 @@
 import { FileTextOutlined } from '@ant-design/icons';
-import { Form, Select, Space } from 'antd';
+import { Form, Select } from 'antd';
 
 type FieldType = {
   page?: string;
@@ -7,7 +7,7 @@ type FieldType = {
 
 const PageSelect = () => {
   return (
-    <Space.Compact block>
+    <div className="form-item-group">
       <FileTextOutlined />
       <Form.Item<FieldType>
         label="페이지"
@@ -15,7 +15,7 @@ const PageSelect = () => {
         rules={[{ required: false, message: '선택' }]}
       >
         <Select
-          defaultValue="전체"
+          // defaultValue="전체"
           placeholder="1"
           options={[
             { label: '1', value: '1' },
@@ -28,7 +28,7 @@ const PageSelect = () => {
           style={{ minWidth: 60 }}
         />
       </Form.Item>
-    </Space.Compact>
+    </div>
   );
 };
 

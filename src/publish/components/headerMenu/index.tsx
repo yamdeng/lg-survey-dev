@@ -1,18 +1,19 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Flex } from 'antd';
+import { UserRound, LogOut } from 'lucide-react';
+import { Button } from 'antd';
 
 const HeaderMenu = () => {
   return (
-    <Flex wrap>
+    <div className="header-menu">
       <Button type="link">
-        <UserOutlined />
+        <UserRound size={16} />
         My Page
       </Button>
       <Button type="link">
-        <LockOutlined />
+        <LogOut size={16} />
         Log Out
       </Button>
-    </Flex>
+    </div>
   );
 };
 

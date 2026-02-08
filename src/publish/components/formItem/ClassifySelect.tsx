@@ -1,5 +1,5 @@
 import { ReconciliationOutlined } from '@ant-design/icons';
-import { Form, Select, Space } from 'antd';
+import { Form, Select } from 'antd';
 
 type FieldType = {
   classify?: string;
@@ -7,7 +7,7 @@ type FieldType = {
 
 const ClassifySelect = () => {
   return (
-    <Space.Compact block>
+    <div className="form-item-group">
       <ReconciliationOutlined />
       <Form.Item<FieldType>
         label="구분"
@@ -15,16 +15,16 @@ const ClassifySelect = () => {
         rules={[{ required: true, message: '필수선택' }]}
       >
         <Select
-          defaultValue="국내 사무직"
+          // defaultValue="국내 사무직"
           placeholder="구분"
           options={[
             { label: '국내 사무직', value: 'native' },
             { label: '국외 사무직', value: 'foreign' },
           ]}
-          style={{ minWidth: 160 }}
+          style={{ minWidth: 140 }}
         />
       </Form.Item>
-    </Space.Compact>
+    </div>
   );
 };
 

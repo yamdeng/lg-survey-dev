@@ -1,5 +1,5 @@
 import { FormOutlined } from '@ant-design/icons';
-import { Form, Select, Space } from 'antd';
+import { Form, Select } from 'antd';
 
 type FieldType = {
   survey?: string;
@@ -7,13 +7,9 @@ type FieldType = {
 
 const SurveySelect = () => {
   return (
-    <Space.Compact block>
+    <div className="form-item-group">
       <FormOutlined />
-      <Form.Item<FieldType>
-        label="설문"
-        name="survey"
-        rules={[{ required: true, message: '필수선택' }]}
-      >
+      <Form.Item<FieldType> label="설문" name="survey" rules={[{ required: true }]}>
         <Select
           // defaultValue="2025 국내 사무직 설문조사"
           placeholder="구분"
@@ -24,7 +20,7 @@ const SurveySelect = () => {
           style={{ minWidth: 340 }}
         />
       </Form.Item>
-    </Space.Compact>
+    </div>
   );
 };
 

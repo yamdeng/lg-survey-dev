@@ -1,5 +1,5 @@
 import { InsertRowLeftOutlined } from '@ant-design/icons';
-import { Form, Select, Space } from 'antd';
+import { Form, Select } from 'antd';
 
 type FieldType = {
   companyname?: string;
@@ -7,7 +7,7 @@ type FieldType = {
 
 const CompanyNameSelect = () => {
   return (
-    <Space.Compact block>
+    <div className="form-item-group">
       <InsertRowLeftOutlined />
       <Form.Item<FieldType>
         label="회사명"
@@ -22,10 +22,10 @@ const CompanyNameSelect = () => {
             { label: '구글', value: 'opt-2' },
             { label: '아마존', value: 'opt-3' },
           ]}
-          style={{ minWidth: 260 }}
+          style={{ minWidth: 240 }}
         />
       </Form.Item>
-    </Space.Compact>
+    </div>
   );
 };
 

@@ -6,17 +6,8 @@ import { useState } from 'react';
 import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
 import HeaderMenu from '@/publish/components/headerMenu';
 import { Checkbox, Form, Input, Radio, Select } from 'antd';
-
-import { HomeOutlined, ProfileOutlined } from '@ant-design/icons';
-
-// const { TextArea } = Input;
-
-// const normFile = (e: any) => {
-//   if (Array.isArray(e)) {
-//     return e;
-//   }
-//   return e;
-// };
+import { Home, Search, FilePenLine, ClipboardList } from 'lucide-react';
+import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 
 interface DataType {
   key: React.Key;
@@ -120,27 +111,35 @@ const CommonInfo = () => {
   const [componentDisabled, setComponentDisabled] = useState<boolean>(true);
 
   return (
-    <div className="ant-layout-page">
-      <Header>
-        <Breadcrumb
-          separator=">"
-          items={[
-            { href: '/', title: <HomeOutlined /> },
-            { title: 'Question' },
-            { title: 'Common Info' },
-          ]}
-        />
-        <HeaderMenu />
-      </Header>
-      <Content>
-        <div className="content-inner">
-          <div className="page-title">
-            <ProfileOutlined />
-            <h3>Dashboard Menu03-sub01 : Title - Common Info</h3>
+    <>
+      <header className="content-header">
+        <FlexBox className="content-inner" justify={'space-between'}>
+          <div className="bread-crumb">
+            <dl className="bread-crumb-list">
+              <dt>
+                <a href="/">
+                  <Home size={16} />
+                </a>
+              </dt>
+              <dd>
+                <a href="#">Question</a>
+              </dd>
+              <dd>
+                <a href="#">Common Info</a>
+              </dd>
+            </dl>
           </div>
-
-          <div className="page-content">
-            <div className="page-form-wrap">
+          <HeaderMenu />
+        </FlexBox>
+      </header>
+      <main className="content-main">
+        <div className="content-inner">
+          <div className="content-title">
+            <FilePenLine size={18} />
+            <h3 className="title-text">Menu02-sub02 Title : Languge Info</h3>
+          </div>
+          <div className="content-body">
+            <div className="form-block border-none">
               {/* 검색폼 영역 */}
               <div className="page-form-box">
                 <Form>
@@ -176,8 +175,8 @@ const CommonInfo = () => {
             </div>
           </div>
         </div>
-      </Content>
-    </div>
+      </main>
+    </>
   );
 };
 

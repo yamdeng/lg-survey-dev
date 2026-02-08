@@ -1,0 +1,20 @@
+@use "./mixins" as *;
+
+@layer reset, base, design-system, components, utilities;
+
+@import "antd/dist/reset.css" layer(reset);
+@import "./_reset.scss" layer(reset);
+
+@import "./_fonts.scss" layer(base);      
+@import "./_variables.scss" layer(base); 
+@import "./_layout.scss" layer(base);     
+
+@import "./_theme.scss" layer(design-system); 
+
+@import "./_animation.scss" layer(components);
+@import "./_components.scss" layer(components);
+@import "./_pages.scss" layer(components);  
+
+@import "./global.css" layer(utilities);  
+
+
