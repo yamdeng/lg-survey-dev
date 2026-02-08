@@ -56,3 +56,5 @@ https://ant.design/components/menu
 
   이외는 위에 가이드 주신대로 scss등 다시 세팅하고 Grid, Flext, Layout -  사용 삭제함 
   FlexBox 컴포넌트 새로 만들어서 사용.
+
+  --> ant-design/icons 삭제, lucide-react 사용으로 icon 변경
