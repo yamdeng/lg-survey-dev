@@ -69,7 +69,7 @@ const LanguageInfo = () => {
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">Menu02-sub02 Title : Languge Info</h3>
+            <h3 className="title-text">Menu02-sub02 Title : Language Info</h3>
           </div>
 
           <div className="content-body">

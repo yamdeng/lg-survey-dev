@@ -32,7 +32,7 @@ const items: MenuItem[] = [
     label: 'Edition',
     children: [
       { key: '21', label: <Link to="/edition/surveyInfo">Survey info</Link> },
-      { key: '22', label: <Link to="/edition/langugeInfo">Languge info</Link> },
+      { key: '22', label: <Link to="/edition/languageInfo">Language info</Link> },
     ],
   },
   {
@@ -162,7 +162,6 @@ function MenuList() {
         defaultSelectedKeys={['1']}
         openKeys={stateOpenKeys}
         onOpenChange={onOpenChange}
-        // style={{ width: 256 }}
         items={items}
       />
     </>
