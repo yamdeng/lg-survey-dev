@@ -111,6 +111,7 @@ const items: MenuItem[] = [
 interface LevelKeysProps {
   key?: string;
   children?: LevelKeysProps[];
+  collapsed?: boolean;
 }
 
 const getLevelKeys = (items1: LevelKeysProps[]) => {
@@ -131,7 +132,7 @@ const getLevelKeys = (items1: LevelKeysProps[]) => {
 
 const levelKeys = getLevelKeys(items as LevelKeysProps[]);
 
-function MenuList() {
+function MenuList({ collapsed }: ChildProps) {
   const [stateOpenKeys, setStateOpenKeys] = useState(['1', '11']);
 
   const onOpenChange: MenuProps['onOpenChange'] = (openKeys) => {
@@ -162,6 +163,7 @@ function MenuList() {
         defaultSelectedKeys={['1']}
         openKeys={stateOpenKeys}
         onOpenChange={onOpenChange}
+        inlineCollapsed={collapsed}
         items={items}
       />
     </>

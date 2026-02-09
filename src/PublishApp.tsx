@@ -1,5 +1,3 @@
-import '@/resources/css/index.scss';
-
 import { useState } from 'react';
 
 import MenuList from '@/publish/components/MenuList';
@@ -9,17 +7,26 @@ import { ConfigProvider, Button } from 'antd';
 import { customTheme } from '@/publish/customTheme';
 import PageList from '@/publish/PageList';
 
+import '@/resources/css/index.scss';
+
 function PublishApp() {
   const [collapsed, setCollapsed] = useState<boolean>(false);
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
 
   return (
     <>
       <ConfigProvider theme={customTheme}>
         <div className="survey">
-          {/* MenuList 이후 일반 컴포넌트로 변경함 */}
           <aside className={collapsed ? 'sv-aside collapsed' : 'sv-aside'}>
-            <SiderTop collapsed={collapsed} setCollapsed={setCollapsed} />
-            <MenuList />
+            <SiderTop
+              collapsed={collapsed}
+              setCollapsed={setCollapsed}
+              toggleCollapsed={toggleCollapsed}
+            />
+            <MenuList collapsed={collapsed} />
           </aside>
 
           <div className="sv-content">
