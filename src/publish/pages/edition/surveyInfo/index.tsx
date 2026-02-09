@@ -1,7 +1,8 @@
+import { AgGridReact } from 'ag-grid-react';
+import { themeQuartz } from 'ag-grid-community';
 import { Button, DatePicker } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
 import { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
 
 const smileIcon = <SmileOutlined />;
 const { RangePicker } = DatePicker;
@@ -111,8 +112,9 @@ const SurveyInfo = () => {
 
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <div className={'ag-theme-quartz'} style={{ height: 280 }}>
+                  <div style={{ height: 280 }}>
                     <AgGridReact
+                      theme={themeQuartz}
                       rowModelType="clientSide"
                       suppressMultiSort={true}
                       domLayout={'normal'}
