@@ -18,14 +18,15 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 // 프로젝트 import
 import '@/resources/css/index.scss';
+import '@/publish/components/test/publish-dev.scss';
 
-import App from './App.tsx';
+import PublishDevApp from './PublishDevApp.tsx';
 import './yupLocale';
 
 setAutoFreeze(false);
 
-const AppComponent = <App />;
-const basename = '/';
+const AppComponent = <PublishDevApp />;
+const basename = '/publish-dev';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter basename={basename}>
