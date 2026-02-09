@@ -1,16 +1,54 @@
 @use "mixins" as *;
 
 @layer design-system {
+  // 1. typography
+
+  // 2. colors
+
+  // 3. spacing
+
+  // 4. table
+
+
+
+
+
+
+
+
+
+
+
 
   
+  // 5. form
+  .ant-input {
+    &:focus {
+      // border-color: $my-primary-color;
+    }
+  }
+
+  // 6. button
+  .ant-btn {
+    font-weight: 600;
+    text-transform: uppercase;
+    
+    &.ant-btn-primary {
+      // box-shadow: 0 4px 10px rgba($my-primary-color, 0.3);
+    }
+    [class^="ant-btn"] {
+      position: relative;
+      top: 1px;
+      width: 18px;
+    }
+    .ant-btn-icon + span {
+      position: relative; top: 1px;
+    }
+  }
+  .ant-btn-primary {
+    // background-color: $primary-color !important;
+  }
 }
 
 
 
-// 1. typography
-
-// 2. colors
-
-// 3. spacing
-
-// 4. table

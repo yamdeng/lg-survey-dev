@@ -1,33 +1,13 @@
 @layer components {
 
   // component.scss
-  .ant-btn-primary {
-    // background-color: $primary-color !important;
-  }
-
-  .ant-btn {
-    font-weight: 600;
-    text-transform: uppercase;
-    
-    &.ant-btn-primary {
-      // box-shadow: 0 4px 10px rgba($my-primary-color, 0.3);
-    }
-    [class^="ant-btn"] {
-      position: relative;
-      top: 1px;
-    }
-    .ant-btn-icon + span {
-      position: relative; top: 1px;
-    }
-  }
+  
 
 
 
-  .ant-input {
-    &:focus {
-      // border-color: $my-primary-color;
-    }
-  }
+
+
+  
 
 
 
