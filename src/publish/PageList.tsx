@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import DashboardMain from '@/publish/pages/dashboardMain';
 import Notice from '@/publish/pages/notice';
 
-import LangugeInfo from '@/publish/pages/edition/langugeInfo';
+import LanguageInfo from '@/publish/pages/edition/languageInfo';
 import SurveyInfo from '@/publish/pages/edition/surveyInfo';
 
 import CommonInfo from '@/publish/pages/question/commonInfo';
@@ -17,7 +17,7 @@ const RoutesList = () => {
       <Route path="/notice" element={<Notice />} />
 
       <Route path="/edition/surveyInfo" element={<SurveyInfo />} />
-      <Route path="/edition/langugeInfo" element={<LangugeInfo />} />
+      <Route path="/edition/languageInfo" element={<LanguageInfo />} />
 
       <Route path="/question/commonInfo" element={<CommonInfo />} />
       <Route path="/question/questionInfo" element={<QuestionInfo />} />

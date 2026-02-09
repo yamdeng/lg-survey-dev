@@ -29,7 +29,7 @@ for (let index = 0; index < 10; index++) {
   });
 }
 
-const LangugeInfo = () => {
+const LanguageInfo = () => {
   const [form] = Form.useForm();
 
   const [columns] = useState<any>([
@@ -168,4 +168,4 @@ const LangugeInfo = () => {
   );
 };
 
-export default LangugeInfo;
+export default LanguageInfo;

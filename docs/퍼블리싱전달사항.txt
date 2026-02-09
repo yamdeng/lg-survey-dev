@@ -53,6 +53,8 @@ https://ant.design/components/menu
 
   Form, FormItem, Select 는 한세트여서 select만사용하고 Form, FormItem 삭제하니 에러가 납니다.
   FormItem 이 라벨로 사용하는 세트 컴포넌트여서 FormItem과 Form 은 그냥 사용하려고 합니다.
+  <form> 일반태그 사용시 에러남 --> antD의 <Form> 컴포넌트와 같이 사용해야 함
+  > installHook.js:1 Warning: Can not find FormContext. Please make sure you wrap Field under Form.
 
   이외는 위에 가이드 주신대로 scss등 다시 세팅하고 Grid, Flext, Layout -  사용 삭제함 
   FlexBox 컴포넌트 새로 만들어서 사용.

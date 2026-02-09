@@ -196,13 +196,6 @@ const Notice = () => {
             </div>
 
             <div className="grid-block">
-              <div className="grid-block-header">
-                <div className="content-title">
-                  <ClipboardList size={18} />
-                  <h3 className="title-text">Survey Info</h3>
-                </div>
-              </div>
-
               <div className="grid-block-body">
                 {/* AntD- 기본 테이블 */}
                 <Table<DataType>

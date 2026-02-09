@@ -12,7 +12,7 @@ const SurveySelect = () => {
       <Form.Item<FieldType> label="설문" name="survey" rules={[{ required: true }]}>
         <Select
           // defaultValue="2025 국내 사무직 설문조사"
-          placeholder="구분"
+          placeholder="설문"
           options={[
             { label: '2025 국내 사무직 설문조사', value: 'native' },
             { label: '2025 국외 사무직 설문조사', value: 'foreign' },
