@@ -708,6 +708,20 @@ const normalizeTreeData = (nodes: any[]): any[] => {
   });
 };
 
+const getFilterListByMenuList = (menuList, keyword) => {
+  const list = menuList;
+  const filtedList = list.filter((menuInfo) => {
+    const { title, fileName, path } = menuInfo;
+    const componentName = fileName || path;
+    if (keyword) {
+      return title.indexOf(keyword) !== -1 || componentName.indexOf(keyword) !== -1;
+    } else {
+      return true;
+    }
+  });
+  return filtedList;
+};
+
 export default {
   formatString,
   saveInfoToLocalStorage,
@@ -758,4 +772,5 @@ export default {
   findTreeNodeByKey,
   downloadFile,
   normalizeTreeData,
+  getFilterListByMenuList,
 };

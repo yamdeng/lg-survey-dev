@@ -10,8 +10,8 @@ import { createStore } from 'zustand';
 //   import.meta.env.VITE_LOCAL_DEVELOP && import.meta.env.VITE_LOCAL_DEVELOP === 'true';
 
 export const useAppStore = createStore<any>((set, get) => ({
-  accessToken: CommonUtil.getByLocalStorage('accessToken') || '', // 인증토큰
-  refreshToken: CommonUtil.getByLocalStorage('refreshToken') || '', // 리프레쉬토큰
+  accessToken: localStorage.getItem('accessToken') || '', // 인증토큰
+  refreshToken: localStorage.getItem('refreshToken') || '', // 리프레쉬토큰
   isAuthError: false, // 인증실패 여부 : 로컬 개발일 경우에만 사용
 
   profile: null,

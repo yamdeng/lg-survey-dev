@@ -1,0 +1,85 @@
+import Config from '@/config/Config';
+import { useMovePage } from '@/hooks/useMovePage';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { toast } from 'react-toastify';
+import CommonToolTip from '@/components/common/CommonToolTip';
+import CommonUtil from '@/utils/CommonUtil';
+import ReactUtil from '@/utils/ReactUtil';
+
+function CommonRouteTable({ moduleDirectoryPath, keyword, checkedNewTab, pageList }) {
+  const list = CommonUtil.getFilterListByMenuList(pageList, keyword);
+  const movePage = useMovePage();
+
+  return (
+    <div>
+      <table className="publish-app-table">
+        <thead>
+          <tr>
+            <th>이름</th>
+            <th>파일</th>
+            <th>설명</th>
+          </tr>
+        </thead>
+        <tbody>
+          {list.map((menuInfo) => {
+            const { title, path, fileName, description, success } = menuInfo;
+            const componentName = fileName || path;
+            const hrefString =
+              Config.hrefBasePath + moduleDirectoryPath + componentName + Config.reactFileExtension;
+            const trClassName = success ? 'success' : '';
+
+            let descriptionComponent = <div>{description}</div>;
+            const descriptionToolTipId = title;
+
+            if (description) {
+              descriptionComponent = (
+                <CopyToClipboard
+                  text={description}
+                  onCopy={() => toast.success('설명 클립보드 복사 완료')}
+                >
+                  <div>
+                    <span
+                      data-tooltip-id={descriptionToolTipId}
+                      className="publish-tooltip-description"
+                    >
+                      설명
+                    </span>
+                    <CommonToolTip toolTipId={descriptionToolTipId} message={description} />
+                  </div>
+                </CopyToClipboard>
+              );
+            }
+
+            return (
+              <tr key={title} className={trClassName}>
+                <td style={{ padding: 5 }}>
+                  <a
+                    href={''}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      movePage(`${moduleDirectoryPath}${path}`, checkedNewTab);
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: ReactUtil.replaceHighlightMarkup(title, keyword),
+                    }}
+                  />
+                </td>
+                <td style={{ padding: 5 }}>
+                  <a
+                    href={hrefString}
+                    dangerouslySetInnerHTML={{
+                      __html: ReactUtil.replaceHighlightMarkup(componentName, keyword),
+                    }}
+                  />
+                </td>
+                <td style={{ padding: 5 }}>{descriptionComponent}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export default CommonRouteTable;

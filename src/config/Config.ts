@@ -4,6 +4,7 @@ const hrefBasePath = `vscode://file/${profileFolderPath}${baseFilePath}`;
 
 const Config = {
   appVersion: '0.1',
+  reactFileExtension: '.tsx',
   hrefBasePath: hrefBasePath,
   defaultTablePagination: true,
   defaultGridHeight: 460,
