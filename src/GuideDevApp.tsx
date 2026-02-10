@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { setNavigator } from '@/utils/navigation';
 
-function PublishDevApp() {
+function GuideDevApp() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -12,9 +12,10 @@ function PublishDevApp() {
 
   return (
     <>
+      <div>aaa</div>
       <ToastContainer autoClose={3000} hideProgressBar={true} position="top-center" />
     </>
   );
 }
 
-export default PublishDevApp;
+export default GuideDevApp;

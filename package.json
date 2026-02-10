@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --port 8082",
     "dev:publish": "vite --port 9082 --mode publish",
-    "dev:pudev": "vite --port 9102 --mode publishdev",
+    "dev:guidedev": "vite --port 9102 --mode guidedev",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

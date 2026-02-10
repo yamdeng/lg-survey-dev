@@ -20,13 +20,13 @@ import 'react-tooltip/dist/react-tooltip.css';
 import '@/resources/css/index.scss';
 import '@/publish/components/test/publish-dev.scss';
 
-import PublishDevApp from './PublishDevApp.tsx';
+import GuideDevApp from './GuideDevApp.tsx';
 import './yupLocale';
 
 setAutoFreeze(false);
 
-const AppComponent = <PublishDevApp />;
-const basename = '/publish-dev';
+const AppComponent = <GuideDevApp />;
+const basename = '/';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter basename={basename}>
