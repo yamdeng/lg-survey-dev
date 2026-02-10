@@ -15,7 +15,7 @@ function PublishApp() {
   return (
     <>
       <div className="survey">
-        <aside className={collapsed ? 'sv-aside collapsed' : 'sv-aside'}>
+        <aside className={collapsed ? 'collapsed' : ''}>
           <SiderTop
             collapsed={collapsed}
             setCollapsed={setCollapsed}

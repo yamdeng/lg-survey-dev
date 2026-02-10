@@ -1,10 +1,9 @@
 import { AgGridReact } from 'ag-grid-react';
-import { themeQuartz } from 'ag-grid-community';
+import { themeQuartz, themeAlpine, colorSchemeLight } from 'ag-grid-community';
 import { Button, DatePicker } from 'antd';
 import { SmileOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 
-const smileIcon = <SmileOutlined />;
 const { RangePicker } = DatePicker;
 
 // Form
@@ -38,15 +37,15 @@ const SurveyInfo = () => {
   const [form] = Form.useForm();
 
   const [columns] = useState<any>([
-    { field: 'name1', headerName: '설문코드', width: 100, align: 'center' },
-    { field: 'name2', headerName: '구분', width: 100 },
+    { field: 'name1', headerName: '설문코드', width: 100 },
+    { field: 'name2', headerName: '구분', width: 120 },
     { field: 'name3', headerName: '설문유형', width: 120 },
-    { field: 'name4', headerName: '회사', width: 160 },
+    { field: 'name4', headerName: '회사', width: 200 },
     { field: 'name5', headerName: '설문명', width: 320 },
-    { field: 'name6', headerName: '대상년도', width: 80, align: 'center' },
-    { field: 'name7', headerName: '시작일자', width: 100, align: 'center' },
-    { field: 'name8', headerName: '종료일자', width: 100, align: 'center' },
-    { field: 'name9', headerName: '상태', width: 100, align: 'center' },
+    { field: 'name6', headerName: '대상년도', width: 90 },
+    { field: 'name7', headerName: '시작일자', width: 100 },
+    { field: 'name8', headerName: '종료일자', width: 100 },
+    { field: 'name9', headerName: '상태', width: 120 },
   ]);
 
   return (
@@ -75,16 +74,16 @@ const SurveyInfo = () => {
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">Menu02-sub01 Title : Survey Info</h3>
+            <h3 className="title-text">Survey Info</h3>
           </div>
 
           <div className="content-body">
             <div className="form-block">
               <Form form={form}>
                 <div className="form-inline">
-                  <YearSelect /> {/* 년도 iqYear */}
-                  <CompanyNameSelect /> {/* 회사명 iqCmpny */}
-                  <StatusSelect /> {/* 처리상태 iqStatus */}
+                  <YearSelect /> {/* // 년도 iqYear */}
+                  <CompanyNameSelect /> {/*// 회사명 iqCmpny */}
+                  <StatusSelect /> {/* // 처리상태 iqStatus */}
                 </div>
 
                 <Button
@@ -104,6 +103,8 @@ const SurveyInfo = () => {
                 <div className="content-title">
                   <ClipboardList size={18} />
                   <h3 className="title-text">Survey List</h3>
+                  {/* 게시판 전체 데이터 건수 */}
+                  <small className="num">( 113 )</small>
                 </div>
                 <div className="btn-group-end">
                   <Button type="primary" size="middle" icon={<Download size={18} />} />
@@ -114,7 +115,7 @@ const SurveyInfo = () => {
                 <div className="ag-grid">
                   <div style={{ height: 280 }}>
                     <AgGridReact
-                      theme={themeQuartz}
+                      theme={themeAlpine}
                       rowModelType="clientSide"
                       suppressMultiSort={true}
                       domLayout={'normal'}
@@ -125,6 +126,7 @@ const SurveyInfo = () => {
                       tooltipHideDelay={1000}
                       tooltipMouseTrack={true}
                       enableBrowserTooltips={false}
+                      headerHeight={40}
                     />
                   </div>
 
@@ -163,196 +165,198 @@ const SurveyInfo = () => {
                     <col width="12%" />
                     <col width="46%" />
                   </colgroup>
-                  <tr>
-                    <th>
-                      <label htmlFor="year">대상년도</label>
-                    </th>
-                    <td>
-                      <input id="year" type="text" value="2025" />
-                    </td>
-                    <th>
-                      <label htmlFor="survey">설문유형</label>
-                    </th>
-                    <td>
-                      <select id="survey" style={{ width: 300 }}>
-                        <option value="LG WAY 1"> LG WAY 1 </option>
-                        <option value="LG WAY 2"> LG WAY 3 </option>
-                        <option value="LG WAY 3"> LG WAY 4 </option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <label htmlFor="code">설문코드</label>
-                    </th>
-                    <td>
-                      <input id="code" type="text" value="2025W394" readOnly />
-                      {/* <span className="data-text">2025W394</span> */}
-                    </td>
-                    <th>
-                      <label htmlFor="survey">상위코드</label>
-                    </th>
-                    <td>
-                      <input id="code2" type="text" value="2025U0052" readOnly />
-                      {/* <span className="data-text">2025U0052</span> */}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th colSpan={4}>
-                      <label htmlFor="comp">회 사</label>
-                    </th>
-                  </tr>
-                  <tr>
-                    <td colSpan={4}>
-                      <ul className="form-item-list">
-                        <li className="form-item">
-                          <input type="checkbox" value="All" id="All" />
-                          <label htmlFor="All">전체</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="A" id="A" />
-                          <label htmlFor="A">LG 전자</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="B" id="B" />
-                          <label htmlFor="B">LG 마그나</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="A" id="C" />
-                          <label htmlFor="C">LG 디스플레이</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="D" id="D" />
-                          <label htmlFor="D">LG 이노텍</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="E" id="E" />
-                          <label htmlFor="E">LG 전자</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="F" id="F" />
-                          <label htmlFor="F">LG 마그나</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="G" id="G" />
-                          <label htmlFor="G">LG 디스플레이</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="H" id="H" />
-                          <label htmlFor="H">LG 이노텍</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="All" id="All" />
-                          <label htmlFor="All">전체</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="A" id="A" />
-                          <label htmlFor="A">LG 전자</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="B" id="B" />
-                          <label htmlFor="B">LG 마그나</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="A" id="C" />
-                          <label htmlFor="C">LG 디스플레이</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="D" id="D" />
-                          <label htmlFor="D">LG 이노텍</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="E" id="E" />
-                          <label htmlFor="E">LG 전자</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="F" id="F" />
-                          <label htmlFor="F">LG 마그나</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="G" id="G" />
-                          <label htmlFor="G">LG 디스플레이</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="H" id="H" />
-                          <label htmlFor="H">LG 이노텍</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="All" id="All" />
-                          <label htmlFor="All">전체</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="A" id="A" />
-                          <label htmlFor="A">LG 전자</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="B" id="B" />
-                          <label htmlFor="B">LG 마그나</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="A" id="C" />
-                          <label htmlFor="C">LG 디스플레이</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="D" id="D" />
-                          <label htmlFor="D">LG 이노텍</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="E" id="E" />
-                          <label htmlFor="E">LG 전자</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="F" id="F" />
-                          <label htmlFor="F">LG 마그나</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="G" id="G" />
-                          <label htmlFor="G">LG 디스플레이</label>
-                        </li>
-                        <li className="form-item">
-                          <input type="checkbox" value="H" id="H" />
-                          <label htmlFor="H">LG 이노텍</label>
-                        </li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <label htmlFor="test">구분</label>
-                    </th>
-                    <td>
-                      <select id="test" required style={{ width: 275 }}>
-                        <option value="01">국내 사무직</option>
-                        <option value="02">국외 사무직</option>
-                        <option value="03">국내 현장직</option>
-                        <option value="04">국외 현장직</option>
-                      </select>
-                    </td>
-                    <th>
-                      <label htmlFor="surveyName">설문명</label>
-                    </th>
-                    <td>
-                      <select id="surveyName" style={{ width: 275 }}>
-                        <option value="01">설문시연 테스트1</option>
-                        <option value="02">설문시연 테스트2</option>
-                        <option value="03">설문시연 테스트3</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th>
-                      <label htmlFor="date">설문 일자</label>
-                    </th>
-                    <td>
-                      <RangePicker />
-                    </td>
-                    <th>
-                      <label htmlFor="date2">결과조회 일자</label>
-                    </th>
-                    <td>
-                      <RangePicker />
-                    </td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th>
+                        <label htmlFor="year">대상년도</label>
+                      </th>
+                      <td>
+                        <input id="year" type="text" value="2025" />
+                      </td>
+                      <th>
+                        <label htmlFor="survey">설문유형</label>
+                      </th>
+                      <td>
+                        <select id="survey" style={{ width: 300 }}>
+                          <option value="LG WAY 1"> LG WAY 1 </option>
+                          <option value="LG WAY 2"> LG WAY 3 </option>
+                          <option value="LG WAY 3"> LG WAY 4 </option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <label htmlFor="code">설문코드</label>
+                      </th>
+                      <td>
+                        <input id="code" type="text" value="2025W394" readOnly />
+                        {/* <span className="data-text">2025W394</span> */}
+                      </td>
+                      <th>
+                        <label htmlFor="survey">상위코드</label>
+                      </th>
+                      <td>
+                        <input id="code2" type="text" value="2025U0052" readOnly />
+                        {/* <span className="data-text">2025U0052</span> */}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th colSpan={4}>
+                        <label htmlFor="comp">회 사</label>
+                      </th>
+                    </tr>
+                    <tr>
+                      <td colSpan={4}>
+                        <ul className="form-item-list">
+                          <li className="form-item">
+                            <input type="checkbox" value="All" id="All" />
+                            <label htmlFor="All">전체</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="A" id="A" />
+                            <label htmlFor="A">LG 전자</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="B" id="B" />
+                            <label htmlFor="B">LG 마그나</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="A" id="C" />
+                            <label htmlFor="C">LG 디스플레이</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="D" id="D" />
+                            <label htmlFor="D">LG 이노텍</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="E" id="E" />
+                            <label htmlFor="E">LG 전자</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="F" id="F" />
+                            <label htmlFor="F">LG 마그나</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="G" id="G" />
+                            <label htmlFor="G">LG 디스플레이</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="H" id="H" />
+                            <label htmlFor="H">LG 이노텍</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="All" id="All" />
+                            <label htmlFor="All">전체</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="A" id="A" />
+                            <label htmlFor="A">LG 전자</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="B" id="B" />
+                            <label htmlFor="B">LG 마그나</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="A" id="C" />
+                            <label htmlFor="C">LG 디스플레이</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="D" id="D" />
+                            <label htmlFor="D">LG 이노텍</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="E" id="E" />
+                            <label htmlFor="E">LG 전자</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="F" id="F" />
+                            <label htmlFor="F">LG 마그나</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="G" id="G" />
+                            <label htmlFor="G">LG 디스플레이</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="H" id="H" />
+                            <label htmlFor="H">LG 이노텍</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="All" id="All" />
+                            <label htmlFor="All">전체</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="A" id="A" />
+                            <label htmlFor="A">LG 전자</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="B" id="B" />
+                            <label htmlFor="B">LG 마그나</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="A" id="C" />
+                            <label htmlFor="C">LG 디스플레이</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="D" id="D" />
+                            <label htmlFor="D">LG 이노텍</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="E" id="E" />
+                            <label htmlFor="E">LG 전자</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="F" id="F" />
+                            <label htmlFor="F">LG 마그나</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="G" id="G" />
+                            <label htmlFor="G">LG 디스플레이</label>
+                          </li>
+                          <li className="form-item">
+                            <input type="checkbox" value="H" id="H" />
+                            <label htmlFor="H">LG 이노텍</label>
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <label htmlFor="test">구분</label>
+                      </th>
+                      <td>
+                        <select id="test" required style={{ width: 275 }}>
+                          <option value="01">국내 사무직</option>
+                          <option value="02">국외 사무직</option>
+                          <option value="03">국내 현장직</option>
+                          <option value="04">국외 현장직</option>
+                        </select>
+                      </td>
+                      <th>
+                        <label htmlFor="surveyName">설문명</label>
+                      </th>
+                      <td>
+                        <select id="surveyName" style={{ width: 275 }}>
+                          <option value="01">설문시연 테스트1</option>
+                          <option value="02">설문시연 테스트2</option>
+                          <option value="03">설문시연 테스트3</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>
+                        <label htmlFor="date">설문 일자</label>
+                      </th>
+                      <td>
+                        <RangePicker />
+                      </td>
+                      <th>
+                        <label htmlFor="date2">결과조회 일자</label>
+                      </th>
+                      <td>
+                        <RangePicker />
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
               <div className="btn-group-end">

@@ -34,7 +34,7 @@ const SurveyInfo = () => {
 
   const [columns] = useState<any>([
     { field: 'name1', headerName: '설문코드', width: 100, align: 'center' },
-    { field: 'name2', headerName: '구분', width: 100 },
+    { field: 'name2', headerName: '구분', width: 140 },
     { field: 'name3', headerName: '설문유형', width: 120 },
     { field: 'name4', headerName: '회사', width: 160 },
     { field: 'name5', headerName: '설문명', width: 320 },

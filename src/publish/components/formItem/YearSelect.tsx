@@ -22,7 +22,7 @@ const YearSelect = () => {
             { label: '2025', value: '2025' },
             { label: '2026', value: '2026' },
           ]}
-          style={{ minWidth: 80 }}
+          style={{ minWidth: 70 }}
         />
       </Form.Item>
     </div>

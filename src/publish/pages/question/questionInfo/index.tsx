@@ -1,6 +1,7 @@
-import { Button } from 'antd';
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
+
+import { Button } from 'antd';
 
 import ClassifySelect from '@/publish/components/formItem/ClassifySelect';
 import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
@@ -23,7 +24,7 @@ for (let index = 0; index < 10; index++) {
     name2: index + 1,
     name3: 'AA000002',
     name4: '객관식(단일선택)',
-    name5: '영어',
+    name5: '한국어',
     name6: '구성원 비전 인식',
     name7: '다음은 회사와 구성원의 꿈과 열정에 관련된 문항입니다.',
     name8: '선택',
@@ -35,16 +36,20 @@ const QuestionInfo = () => {
   const [form] = Form.useForm();
 
   const [columns] = useState<any>([
-    { field: 'name', headerName: '페이지', width: 70, align: 'center' },
+    { field: 'name', headerName: '페이지', width: 70 },
     { field: 'name2', headerName: '순서', width: 60 },
-    { field: 'name3', headerName: '문항키', width: 94 },
-    { field: 'name4', headerName: '문항유형', width: 150 },
-    { field: 'name5', headerName: '언어', width: 100, align: 'center' },
-    { field: 'name6', headerName: '문항제목', width: 160, align: 'center' },
-    { field: 'name7', headerName: '문항내용', width: 400, align: 'center' },
-    { field: 'name8', headerName: '보기', width: 60, align: 'center' },
-    { field: 'name9', headerName: '보기내용', width: 400, align: 'center' },
+    { field: 'name3', headerName: '문항키', width: 98 },
+    { field: 'name4', headerName: '문항유형', width: 140 },
+    { field: 'name5', headerName: '언어', width: 100 },
+    { field: 'name6', headerName: '문항제목', width: 140 },
+    { field: 'name7', headerName: '문항내용', width: 380 },
+    { field: 'name8', headerName: '보기', width: 60 },
+    { field: 'name9', headerName: '보기내용', width: 380 },
   ]);
+
+  const rowSelection = useMemo(() => {
+    return { mode: 'multiRow' };
+  }, []);
 
   return (
     <>
@@ -72,7 +77,7 @@ const QuestionInfo = () => {
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">Menu03-sub02 Title : Question Info</h3>
+            <h3 className="title-text">Question Info</h3>
           </div>
 
           <div className="content-body">
@@ -103,7 +108,9 @@ const QuestionInfo = () => {
               <div className="grid-block-header">
                 <div className="content-title">
                   <ClipboardList size={18} />
-                  <h3 className="title-text">Question Info</h3>
+                  <h3 className="title-text">Question List</h3>
+                  {/* 게시판 전체 데이터 건수 */}
+                  <small className="num">( 973 )</small>
                 </div>
                 <div className="btn-group-end">
                   <Button type="primary" size="middle" icon={<Download size={18} />} />
@@ -119,15 +126,17 @@ const QuestionInfo = () => {
                       domLayout={'normal'}
                       rowData={rowData}
                       columnDefs={columns}
-                      pagination={false}
+                      pagination={true}
                       tooltipShowDelay={100}
                       tooltipHideDelay={1000}
                       tooltipMouseTrack={true}
                       enableBrowserTooltips={false}
+                      headerHeight={40}
+                      rowSelection={rowSelection}
                     />
                   </div>
 
-                  <div className="pagination">
+                  {/* <div className="pagination">
                     <a className="first" href="">
                       <span className="sr-only">이전</span>
                     </a>
@@ -150,7 +159,7 @@ const QuestionInfo = () => {
                     <a className="last" href="">
                       <span className="sr-only">다음</span>
                     </a>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="btn-group-end">

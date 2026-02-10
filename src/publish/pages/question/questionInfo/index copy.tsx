@@ -2,13 +2,14 @@ import { Button } from 'antd';
 import { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
-import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
 import ClassifySelect from '@/publish/components/formItem/ClassifySelect';
-
+import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
+import LanguageSelect from '@/publish/components/formItem/LanguageSelect';
+import PageSelect from '@/publish/components/formItem/PageSelect';
 import SurveySelect from '@/publish/components/formItem/SurveySelect';
 import YearSelect from '@/publish/components/formItem/YearSelect';
-
 import HeaderMenu from '@/publish/components/headerMenu';
+
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 import { Form } from 'antd';
 
@@ -18,29 +19,31 @@ const rowData: any[] = [];
 
 for (let index = 0; index < 10; index++) {
   rowData.push({
-    name: '12345678' + (index + 1),
-    name2: '국내 사무직',
-    name3: 'LG 테스트 회사명',
-    name4: '2025 LG Way 설문 (국내사무직)',
-    name5: '2025',
-    name6: '2025.01.01',
-    name7: '2025.12.01',
-    name8: '확정',
+    name: index + 1,
+    name2: index + 1,
+    name3: 'AA000002',
+    name4: '객관식(단일선택)',
+    name5: '영어',
+    name6: '구성원 비전 인식',
+    name7: '다음은 회사와 구성원의 꿈과 열정에 관련된 문항입니다.',
+    name8: '선택',
+    name9: '1. 매우그렇다 2. 그렇다 3. 보통이다 4. 아니다 5. 매우 아니다',
   });
 }
 
-const LanguageInfo = () => {
+const QuestionInfo = () => {
   const [form] = Form.useForm();
 
   const [columns] = useState<any>([
-    { field: 'name', headerName: '설문코드', width: 150, align: 'center' },
-    { field: 'name2', headerName: '구분', width: 200 },
-    { field: 'name3', headerName: '회사', width: 300 },
-    { field: 'name4', headerName: '설문명', width: 400 },
-    { field: 'name5', headerName: '대상년도', width: 100, align: 'center' },
-    { field: 'name6', headerName: '시작일자', width: 100, align: 'center' },
-    { field: 'name7', headerName: '종료일자', width: 100, align: 'center' },
-    { field: 'name8', headerName: '확정여부', width: 100, align: 'center' },
+    { field: 'name', headerName: '페이지', width: 70, align: 'center' },
+    { field: 'name2', headerName: '순서', width: 60 },
+    { field: 'name3', headerName: '문항키', width: 94 },
+    { field: 'name4', headerName: '문항유형', width: 150 },
+    { field: 'name5', headerName: '언어', width: 100, align: 'center' },
+    { field: 'name6', headerName: '문항제목', width: 160, align: 'center' },
+    { field: 'name7', headerName: '문항내용', width: 400, align: 'center' },
+    { field: 'name8', headerName: '보기', width: 60, align: 'center' },
+    { field: 'name9', headerName: '보기내용', width: 400, align: 'center' },
   ]);
 
   return (
@@ -55,10 +58,10 @@ const LanguageInfo = () => {
                 </a>
               </dt>
               <dd>
-                <a href="#">Edition</a>
+                <a href="#">Question</a>
               </dd>
               <dd>
-                <a href="#">Language Info</a>
+                <a href="#">Question Info</a>
               </dd>
             </dl>
           </div>
@@ -69,7 +72,7 @@ const LanguageInfo = () => {
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">Menu02-sub02 Title : Language Info</h3>
+            <h3 className="title-text">Menu03-sub02 Title : Question Info</h3>
           </div>
 
           <div className="content-body">
@@ -80,6 +83,8 @@ const LanguageInfo = () => {
                   <CompanyNameSelect /> {/* 회사명 */}
                   <ClassifySelect /> {/* 구분 */}
                   <SurveySelect /> {/* 설문 */}
+                  <PageSelect /> {/* 페이지 */}
+                  <LanguageSelect /> {/* 언어 */}
                 </div>
 
                 <Button
@@ -98,7 +103,7 @@ const LanguageInfo = () => {
               <div className="grid-block-header">
                 <div className="content-title">
                   <ClipboardList size={18} />
-                  <h3 className="title-text">Language Info</h3>
+                  <h3 className="title-text">Question Info</h3>
                 </div>
                 <div className="btn-group-end">
                   <Button type="primary" size="middle" icon={<Download size={18} />} />
@@ -107,19 +112,18 @@ const LanguageInfo = () => {
 
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <div className={'ag-theme-quartz'} style={{ height: 400 }}>
+                  <div className={'ag-theme-quartz'} style={{ height: 500 }}>
                     <AgGridReact
                       rowModelType="clientSide"
                       suppressMultiSort={true}
                       domLayout={'normal'}
                       rowData={rowData}
                       columnDefs={columns}
-                      pagination={true}
+                      pagination={false}
                       tooltipShowDelay={100}
                       tooltipHideDelay={1000}
                       tooltipMouseTrack={true}
                       enableBrowserTooltips={false}
-                      headerHeight={40}
                     />
                   </div>
 
@@ -151,9 +155,9 @@ const LanguageInfo = () => {
               </div>
               <div className="btn-group-end">
                 <Button
-                  // color="primary"
-                  // variant="outlined"
-                  type="primary"
+                  color="primary"
+                  variant="outlined"
+                  // type="primary"
                   icon={<Search />}
                   iconPlacement="end"
                   size="large"
@@ -169,4 +173,4 @@ const LanguageInfo = () => {
   );
 };
 
-export default LanguageInfo;
+export default QuestionInfo;
