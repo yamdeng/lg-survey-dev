@@ -27,7 +27,7 @@ function AppButton(props) {
     ...rest
   } = props;
 
-  const baseClassName = classNames('btn', {
+  const baseClassName = classNames('app-btn', {
     small: size === 'small' ? true : false,
     middle: size === 'middle' ? true : false,
     large: size === 'large' ? true : false,

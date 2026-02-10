@@ -152,7 +152,7 @@ function AppAutoComplete(props) {
     [isValueString, onlySelect, valueKey, onSelect, onChange],
   );
 
-  const applyClassName = classNames('app-select', {
+  const applyClassName = classNames('app-form-select', {
     focused: isFocused,
     disabled: disabled,
     'select-in-valid': !isFocused && errorMessage,
