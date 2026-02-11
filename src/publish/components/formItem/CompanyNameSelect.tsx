@@ -7,7 +7,7 @@ type FieldType = {
 
 const CompanyNameSelect = () => {
   return (
-    <div className="form-item-group">
+    <div className="form-item">
       <InsertRowLeftOutlined />
       <Form.Item<FieldType>
         label="회사명"

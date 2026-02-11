@@ -7,7 +7,7 @@ type FieldType = {
 
 const LanguageSelect = () => {
   return (
-    <div className="form-item-group">
+    <div className="form-item">
       <GlobalOutlined />
       <Form.Item<FieldType>
         label="언어"

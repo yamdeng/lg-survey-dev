@@ -105,16 +105,32 @@
     }
 
     .form-block { 
-      border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; padding: 16px 0;
-      > form {
-        display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid #d9d9db; border-bottom: 1px solid #d9d9db; 
+      padding: 16px 20px 16px 0;
+      // border-color: #181d1f; 
+      > form, .ant-form {
+        display: flex; align-items: center; justify-content: space-between; gap: 20px;
       }
       &.border-none {
         border-top: none; border-bottom: none; padding: 10px 0;
       }
       .form-inline { 
-        display: flex; flex-flow: row wrap; align-items: center;  gap: 10px 0;
-        .form-item-group { display: flex; align-items: center; margin-left: 14px; }
+        display: flex; flex-flow: row wrap; align-items: center;  gap: 8px 0;
+        // justify-content: center;
+        .form-item { 
+          display: flex; align-items: center; margin-left: 14px; position: relative;
+          label { 
+            display: flex; align-items: center; margin-right: 10px;
+            white-space: nowrap; 
+            .lucide { width: 16px; color: #555; margin-right: 4px; }
+            strong { 
+              // color: var(--sv-primary-color); 
+              color: #a50934; font-weight: normal;
+              position: relative; top: -2px; left: 2px;
+            }
+          }
+        }
+
         .ant-space-compact-block { width: auto !important; }
         .ant-form-item { margin-bottom: 0 !important; }
         &.justify-end { justify-content: flex-end; width: 100%;  }
@@ -122,6 +138,27 @@
       }
       
     }
+
+
+
+    //Form Custom
+    .form-input-outlined {
+      outline: 1px solid var(--sv-color-border); border-radius: var(--sv-border-radius); line-height: 32px; height: 32px;
+      position: relative; display: flex; align-items: center; 
+      font-size: 14px; line-height: 1.6;
+      &:has(:focus) { outline-color: #b32549; }
+      > input { line-height: 30px; color: #000000e0; width: 100%; padding: 0 24px 0 10px; }
+      input::placeholder { color: #ccc; opacity: 1; }
+      & + .icon-sch { 
+        width: 26px; height: 26px; background-color: #fcfcfc;
+        position: absolute; right: 4px; border-radius: 4px;
+      }
+    }
+    // .app-form-input {
+    //   border: 1px solid #eee; border-radius: 4px; line-height: 30px;
+    // }
+
+
 
     // Grid
     .grid-block { 
@@ -275,3 +312,58 @@
 
   
 } // @layer base
+
+
+
+
+
+
+// color-mix(in srgb, #fff, #181d1f 2%)
+
+
+
+
+
+// .css-var-r0.ant-select-css-var {
+//     --sv-select-internal_fixed_item_margin: 2px;
+//     --sv-select-z-index-popup: 1050;
+//     --sv-select-option-selected-color: rgba(0, 0, 0, 0.88);
+//     --sv-select-option-selected-font-weight: 600;
+//     --sv-select-option-selected-bg: #e6cfd1;
+//     --sv-select-option-active-bg: rgba(0, 0, 0, 0.04);
+//     --sv-select-option-padding: 5px 12px;
+//     --sv-select-option-font-size: 14px;
+//     --sv-select-option-line-height: 1.5714285714285714;
+//     --sv-select-option-height: 32px;
+//     --sv-select-selector-bg: #ffffff;
+//     --sv-select-clear-bg: #ffffff;
+//     --sv-select-single-item-height-lg: 40px;
+//     --sv-select-multiple-item-bg: rgba(0, 0, 0, 0.06);
+//     --sv-select-multiple-item-border-color: transparent;
+//     --sv-select-multiple-item-height: 24px;
+//     --sv-select-multiple-item-height-sm: 16px;
+//     --sv-select-multiple-item-height-lg: 32px;
+//     --sv-select-multiple-selector-bg-disabled: rgba(0, 0, 0, 0.04);
+//     --sv-select-multiple-item-color-disabled: rgba(0, 0, 0, 0.25);
+//     --sv-select-multiple-item-border-color-disabled: transparent;
+//     --sv-select-show-arrow-padding-inline-end: 18px;
+//     --sv-select-hover-border-color: #b32549;
+//     --sv-select-active-border-color: #a50934;
+//     --sv-select-active-outline-color: rgba(123, 2, 13, 0.19);
+//     --sv-select-select-affix-padding: 4px;
+// }
+
+
+
+// .css-var-r0.ant-form-css-var {
+//     --sv-form-label-required-mark-color: #ff4d4f;
+//     --sv-form-label-color: rgba(0, 0, 0, 0.88);
+//     --sv-form-label-font-size: 14px;
+//     --sv-form-label-height: 32px;
+//     --sv-form-label-colon-margin-inline-start: 2px;
+//     --sv-form-label-colon-margin-inline-end: 8px;
+//     --sv-form-item-margin-bottom: 24px;
+//     --sv-form-vertical-label-padding: 0 0 8px;
+//     --sv-form-vertical-label-margin: 0px;
+//     --sv-form-inline-item-margin-bottom: 0px;
+// }

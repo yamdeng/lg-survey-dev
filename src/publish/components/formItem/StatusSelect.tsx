@@ -7,7 +7,7 @@ type FieldType = {
 
 const StatusSelect = () => {
   return (
-    <div className="form-item-group">
+    <div className="form-item">
       <ReconciliationOutlined />
       <Form.Item<FieldType> label="처리상태" name="iqStatus" rules={[{ required: true }]}>
         <Select

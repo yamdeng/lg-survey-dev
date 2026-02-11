@@ -7,7 +7,7 @@ type FieldType = {
 
 const PageSelect = () => {
   return (
-    <div className="form-item-group">
+    <div className="form-item">
       <FileTextOutlined />
       <Form.Item<FieldType>
         label="페이지"

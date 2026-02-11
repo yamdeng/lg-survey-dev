@@ -14,7 +14,21 @@ import HeaderMenu from '@/publish/components/headerMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 import { Form } from 'antd';
 
-import { Home, Download, Search, FilePenLine, ClipboardList } from 'lucide-react';
+import {
+  Home,
+  Download,
+  Search,
+  FilePenLine,
+  ClipboardList,
+  Plus,
+  CalendarDays,
+  FileInput,
+  FilePen,
+  Building2,
+  StickyNote,
+  Globe,
+} from 'lucide-react';
+import AppSelect from '@/publish/components/comform/AppSelect';
 
 const rowData: any[] = [];
 
@@ -84,21 +98,105 @@ const QuestionInfo = () => {
             <div className="form-block">
               <Form form={form}>
                 <div className="form-inline">
-                  <YearSelect /> {/* 년도 */}
-                  <CompanyNameSelect /> {/* 회사명 */}
-                  <ClassifySelect /> {/* 구분 */}
-                  <SurveySelect /> {/* 설문 */}
-                  <PageSelect /> {/* 페이지 */}
-                  <LanguageSelect /> {/* 언어 */}
+                  <AppSelect
+                    placeholder="년도"
+                    label="년도"
+                    icon={<CalendarDays />}
+                    required
+                    defaultValue="2026"
+                    id="iqYear"
+                    name="iqYear"
+                    width={80}
+                    options={[
+                      { label: '2021', value: '2021' },
+                      { label: '2022', value: '2022' },
+                      { label: '2023', value: '2023' },
+                      { label: '2024', value: '2024' },
+                      { label: '2025', value: '2025' },
+                      { label: '2026', value: '2026' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="회사명"
+                    label="회사명"
+                    icon={<Building2 />}
+                    required
+                    defaultValue="LG CNS"
+                    id="iqCmpny"
+                    name="iqCmpny"
+                    width={200}
+                    options={[
+                      { label: 'LG CNS', value: 'cp01' },
+                      { label: 'LG 전자', value: 'cp02' },
+                      { label: 'LG 123', value: 'cp03' },
+                      { label: 'LG 1234', value: 'cp04' },
+                      { label: 'LG 1235', value: 'cp05' },
+                      { label: 'LG 1236', value: 'cp06' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="처리상태"
+                    label="처리상태"
+                    icon={<FileInput />}
+                    required
+                    defaultValue="설문 생성"
+                    id="iqStatus"
+                    name="iqStatus"
+                    width={140}
+                    options={[
+                      { label: '설문 생성', value: '설문 생성' },
+                      { label: '설문 작성 중', value: '설문 작성 중' },
+                      { label: '설문 종료', value: '설문 종료' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="설문선택"
+                    label="설문"
+                    icon={<FilePen />}
+                    // defaultValue="설문조사"
+                    id="iqSurvey"
+                    name="iqSurvey"
+                    width={280}
+                    options={[
+                      { label: '2025 국내 사무직 설문조사', value: 'sv001' },
+                      { label: '2025 국외 사무직 설문조사', value: 'sv002' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="선택"
+                    label="페이지"
+                    icon={<StickyNote />}
+                    // defaultValue="0"
+                    id="iqPage"
+                    name="iqPage"
+                    width={80}
+                    options={[
+                      { label: '1', value: '1' },
+                      { label: '2', value: '2' },
+                      { label: '3', value: '3' },
+                      { label: '4', value: '4' },
+                      { label: '5', value: '5' },
+                      { label: '6', value: '6' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="언어선택"
+                    label="언어"
+                    icon={<Globe />}
+                    // defaultValue="1"
+                    id="iqLang"
+                    name="iqLang"
+                    width={120}
+                    options={[
+                      { label: '한국어', value: 'ko' },
+                      { label: '영어', value: 'en' },
+                      { label: '중국어', value: 'ch' },
+                      { label: '일본', value: 'jp' },
+                    ]}
+                  />
                 </div>
 
-                <Button
-                  htmlType="submit"
-                  // color="primary"
-                  // variant="outlined"
-                  type="primary"
-                  icon={<Search size={18} />}
-                >
+                <Button htmlType="submit" type="primary" icon={<Search size={18} />}>
                   조회
                 </Button>
               </Form>
@@ -133,34 +231,8 @@ const QuestionInfo = () => {
                       enableBrowserTooltips={false}
                       headerHeight={40}
                       rowSelection={rowSelection}
-                      // checkboxSelection={true}
                     />
                   </div>
-
-                  {/* <div className="pagination">
-                    <a className="first" href="">
-                      <span className="sr-only">이전</span>
-                    </a>
-                    <a className="prev" href="">
-                      <span className="sr-only">이전</span>
-                    </a>
-                    <span>
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((pageIndex) => {
-                        const pageComponent = (
-                          <a href="" key={pageIndex}>
-                            {pageIndex}
-                          </a>
-                        );
-                        return pageComponent;
-                      })}
-                    </span>
-                    <a className="next" href="">
-                      <span className="sr-only">다음</span>
-                    </a>
-                    <a className="last" href="">
-                      <span className="sr-only">다음</span>
-                    </a>
-                  </div> */}
                 </div>
               </div>
               <div className="btn-group-end">

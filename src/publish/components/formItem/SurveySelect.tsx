@@ -7,7 +7,7 @@ type FieldType = {
 
 const SurveySelect = () => {
   return (
-    <div className="form-item-group">
+    <div className="form-item">
       <FormOutlined />
       <Form.Item<FieldType> label="설문" name="survey" rules={[{ required: true }]}>
         <Select

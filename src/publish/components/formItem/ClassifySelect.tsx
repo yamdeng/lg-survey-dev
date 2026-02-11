@@ -7,7 +7,7 @@ type FieldType = {
 
 const ClassifySelect = () => {
   return (
-    <div className="form-item-group">
+    <div className="form-item">
       <ReconciliationOutlined />
       <Form.Item<FieldType>
         label="구분"

@@ -46,8 +46,33 @@
   }
 
   ::selection {
-    background-color: var(--color-primary-light, #e6f7ff);
+    // background-color: var(--color-primary-light, #e6f7ff);
     color: var(--color-primary, #1890ff);
+  }
+
+  /* Standard syntax (most modern browsers) */
+  ::placeholder {
+    color: #ccc;
+  }
+
+  /* Chrome, Opera, Safari */
+  ::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  /* Firefox 19+ */
+  ::-moz-placeholder {
+    color: #ccc;
+  }
+
+  /* Edge 12-18 and Internet Explorer 10+ */
+  :-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  /* Firefox 18- (older versions) */
+  :-moz-placeholder {
+    color: #ccc;
   }
 
   html.color-blind-mode {

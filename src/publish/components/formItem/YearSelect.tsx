@@ -7,7 +7,7 @@ type FieldType = {
 
 const YearSelect = () => {
   return (
-    <div className="form-item-group">
+    <div className="form-item">
       <CalendarOutlined />
       <Form.Item<FieldType> label="년도" name="year" rules={[{ required: true }]}>
         <Select

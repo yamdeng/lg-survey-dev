@@ -21,10 +21,9 @@ import {
   ClipboardList,
   Plus,
   CalendarDays,
-  FileInput,
-  Building2,
 } from 'lucide-react';
 
+import AppSearchInput from '@/publish/components/comform/AppSearchInput';
 import AppSelect from '@/publish/components/comform/AppSelect';
 
 const rowData: any[] = [];
@@ -91,60 +90,38 @@ const SurveyInfo = () => {
             <div className="form-block">
               <Form>
                 <div className="form-inline">
-                  <AppSelect
-                    placeholder="년도"
-                    label="년도"
+                  <YearSelect /> {/*  // 년도 iqYear */}
+                  <CompanyNameSelect /> {/*  // 회사명 iqCmpny */}
+                  <StatusSelect /> {/*   // 처리상태 iqStatus */}
+                  <AppSearchInput
+                    placeholder="placeholder"
+                    label="label text"
                     icon={<CalendarDays />}
                     required
-                    defaultValue="2026"
-                    id="iqYear"
-                    name="iqYear"
-                    width={80}
-                    options={[
-                      { label: '2021', value: '2021' },
-                      { label: '2022', value: '2022' },
-                      { label: '2023', value: '2023' },
-                      { label: '2024', value: '2024' },
-                      { label: '2025', value: '2025' },
-                      { label: '2026', value: '2026' },
-                    ]}
-                  />
-                  <AppSelect
-                    placeholder="회사명"
-                    label="회사명"
-                    icon={<Building2 />}
-                    required
-                    defaultValue="LG CNS"
-                    id="iqCmpny"
-                    name="iqCmpny"
-                    width={140}
-                    options={[
-                      { label: 'LG CNS', value: 'cp01' },
-                      { label: 'LG 전자', value: 'cp02' },
-                      { label: 'LG 123', value: 'cp03' },
-                      { label: 'LG 1234', value: 'cp04' },
-                      { label: 'LG 1235', value: 'cp05' },
-                      { label: 'LG 1236', value: 'cp06' },
-                    ]}
-                  />
-                  <AppSelect
-                    placeholder="처리상태"
-                    label="처리상태"
-                    icon={<FileInput />}
-                    required
-                    defaultValue="설문 생성"
-                    id="iqStatus"
-                    name="iqStatus"
+                    defaultValue="defaultValue"
+                    id="idTest"
+                    name="nameText"
                     width={200}
-                    options={[
-                      { label: '설문 생성', value: '설문 생성' },
-                      { label: '설문 작성 중', value: '설문 작성 중' },
-                      { label: '설문 종료', value: '설문 종료' },
-                    ]}
+                  />
+                  <AppSelect
+                    placeholder="placeholder"
+                    label="label text"
+                    icon={<CalendarDays />}
+                    required
+                    defaultValue="defaultValue"
+                    id="idTest2"
+                    name="nameText2"
+                    width={160}
                   />
                 </div>
 
-                <Button htmlType="submit" type="primary" icon={<Search size={18} />}>
+                <Button
+                  htmlType="submit"
+                  // color="primary"
+                  // variant="outlined"
+                  type="primary"
+                  icon={<Search size={18} />}
+                >
                   조회
                 </Button>
               </Form>

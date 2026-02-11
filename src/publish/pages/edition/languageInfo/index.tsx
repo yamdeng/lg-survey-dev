@@ -2,17 +2,24 @@ import { Button } from 'antd';
 import { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
-import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
-import ClassifySelect from '@/publish/components/formItem/ClassifySelect';
-
-import SurveySelect from '@/publish/components/formItem/SurveySelect';
-import YearSelect from '@/publish/components/formItem/YearSelect';
-
 import HeaderMenu from '@/publish/components/headerMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 import { Form } from 'antd';
 
-import { Home, Download, Search, FilePenLine, ClipboardList } from 'lucide-react';
+import {
+  Home,
+  Download,
+  Search,
+  FilePenLine,
+  ClipboardList,
+  Plus,
+  CalendarDays,
+  FileInput,
+  FilePen,
+  Building2,
+} from 'lucide-react';
+
+import AppSelect from '@/publish/components/comform/AppSelect';
 
 const rowData: any[] = [];
 
@@ -69,26 +76,81 @@ const LanguageInfo = () => {
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">Menu02-sub02 Title : Language Info</h3>
+            <h3 className="title-text">Language Info</h3>
           </div>
 
           <div className="content-body">
             <div className="form-block">
               <Form form={form}>
                 <div className="form-inline">
-                  <YearSelect /> {/* 년도 */}
-                  <CompanyNameSelect /> {/* 회사명 */}
-                  <ClassifySelect /> {/* 구분 */}
-                  <SurveySelect /> {/* 설문 */}
+                  <AppSelect
+                    placeholder="년도"
+                    label="년도"
+                    icon={<CalendarDays />}
+                    required
+                    defaultValue="2026"
+                    id="iqYear"
+                    name="iqYear"
+                    width={80}
+                    options={[
+                      { label: '2021', value: '2021' },
+                      { label: '2022', value: '2022' },
+                      { label: '2023', value: '2023' },
+                      { label: '2024', value: '2024' },
+                      { label: '2025', value: '2025' },
+                      { label: '2026', value: '2026' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="회사명"
+                    label="회사명"
+                    icon={<Building2 />}
+                    required
+                    defaultValue="LG CNS"
+                    id="iqCmpny"
+                    name="iqCmpny"
+                    width={160}
+                    options={[
+                      { label: 'LG CNS', value: 'cp01' },
+                      { label: 'LG 전자', value: 'cp02' },
+                      { label: 'LG 123', value: 'cp03' },
+                      { label: 'LG 1234', value: 'cp04' },
+                      { label: 'LG 1235', value: 'cp05' },
+                      { label: 'LG 1236', value: 'cp06' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="처리상태"
+                    label="처리상태"
+                    icon={<FileInput />}
+                    required
+                    defaultValue="설문 생성"
+                    id="iqStatus"
+                    name="iqStatus"
+                    width={140}
+                    options={[
+                      { label: '설문 생성', value: '설문 생성' },
+                      { label: '설문 작성 중', value: '설문 작성 중' },
+                      { label: '설문 종료', value: '설문 종료' },
+                    ]}
+                  />
+                  <AppSelect
+                    placeholder="설문"
+                    label="설문"
+                    icon={<FilePen />}
+                    required
+                    defaultValue="설문조사"
+                    id="iqSurvey"
+                    name="iqSurvey"
+                    width={280}
+                    options={[
+                      { label: '2025 국내 사무직 설문조사', value: 'sv001' },
+                      { label: '2025 국외 사무직 설문조사', value: 'sv002' },
+                    ]}
+                  />
                 </div>
 
-                <Button
-                  htmlType="submit"
-                  // color="primary"
-                  // variant="outlined"
-                  type="primary"
-                  icon={<Search size={18} />}
-                >
+                <Button htmlType="submit" type="primary" icon={<Search size={18} />}>
                   조회
                 </Button>
               </Form>
@@ -122,33 +184,9 @@ const LanguageInfo = () => {
                       headerHeight={40}
                     />
                   </div>
-
-                  {/* <div className="pagination">
-                    <a className="first" href="">
-                      <span className="sr-only">이전</span>
-                    </a>
-                    <a className="prev" href="">
-                      <span className="sr-only">이전</span>
-                    </a>
-                    <span>
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((pageIndex) => {
-                        const pageComponent = (
-                          <a href="" key={pageIndex}>
-                            {pageIndex}
-                          </a>
-                        );
-                        return pageComponent;
-                      })}
-                    </span>
-                    <a className="next" href="">
-                      <span className="sr-only">다음</span>
-                    </a>
-                    <a className="last" href="">
-                      <span className="sr-only">다음</span>
-                    </a>
-                  </div> */}
                 </div>
               </div>
+
               <div className="btn-group-end">
                 <Button
                   // color="primary"
