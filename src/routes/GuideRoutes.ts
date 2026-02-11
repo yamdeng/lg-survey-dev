@@ -4,6 +4,8 @@ import PCheckboxRadio from '@/guide/publish/PCheckboxRadio';
 import PDatePicker from '@/guide/publish/PDatePicker';
 import PSelect from '@/guide/publish/PSelect';
 import PTextInput from '@/guide/publish/PTextInput';
+import PLoadingBar from '@/guide/publish/PLoadingBar';
+import PAlertConfirmModal from '@/guide/publish/PAlertConfirmModal';
 
 /* dev 관련 가이드 컴포넌트 import */
 import GuideNavigate from '@/guide/dev/GuideNavigate';
@@ -43,6 +45,20 @@ export const PublishRoutes = {
       title: 'select',
       Component: PSelect,
       path: 'PSelect',
+      description: '',
+      success: false,
+    },
+    {
+      title: 'AlertConfirmModal',
+      Component: PAlertConfirmModal,
+      path: 'PAlertConfirmModal',
+      description: '',
+      success: false,
+    },
+    {
+      title: 'LoadingBar',
+      Component: PLoadingBar,
+      path: 'PLoadingBar',
       description: '',
       success: false,
     },

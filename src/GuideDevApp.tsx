@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import { setNavigator } from '@/utils/navigation';
 import GuideHome from './guide/GuideHome';
 import { useDevRoute, usePublishRoute } from './routes/useGuideRoute';
+import LoadingBarContainer from '@/components/layout/LoadingBarContainer';
 
 function GuideDevApp() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ function GuideDevApp() {
         {devRoute}
       </Routes>
       <ToastContainer autoClose={3000} hideProgressBar={true} position="top-center" />
+      <LoadingBarContainer />
     </>
   );
 }

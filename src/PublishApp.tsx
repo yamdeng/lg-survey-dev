@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import LoadingBarContainer from '@/components/layout/LoadingBarContainer';
 
 import MenuList from '@/publish/components/MenuList';
 import SiderTop from '@/publish/components/siderTop';
@@ -28,6 +29,7 @@ function PublishApp() {
           <PageList />
         </div>
       </div>
+      <LoadingBarContainer />
     </>
   );
 }
