@@ -5,11 +5,6 @@ import { useState } from 'react';
 
 const { RangePicker } = DatePicker;
 
-// Form
-import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
-import YearSelect from '@/publish/components/formItem/YearSelect';
-import StatusSelect from '@/publish/components/formItem/StatusSelect';
-
 import HeaderMenu from '@/publish/components/headerMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 import { Form } from 'antd';
@@ -165,7 +160,7 @@ const SurveyInfo = () => {
 
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <div style={{ height: 280 }}>
+                  <div style={{ height: 300 }}>
                     <AgGridReact
                       theme={themeAlpine}
                       rowModelType="clientSide"
@@ -236,10 +231,8 @@ const SurveyInfo = () => {
                       <td colSpan={4}>
                         <ul className="form-item-list">
                           <li className="form-item">
-                            <label htmlFor="All">
-                              전체
-                              <input type="checkbox" value="All" id="All" />
-                            </label>
+                            <input type="checkbox" value="All" id="All" />
+                            <label htmlFor="All">전체</label>
                           </li>
                           <li className="form-item">
                             <input type="checkbox" value="A" id="A" />

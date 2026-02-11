@@ -8,8 +8,21 @@
   //   --sv-menu-collapsed-width: 60px !important;
   // }
 
+  /* Design Tokens */
   $color-split: rgba(5, 5, 5, 0.06);
   $color-primary: #a50934;
+  $font-family-base: 'LG EI Text', 'Noto Sans KR', sans-serif;
+  $font-family-title: 'LG EI Headline', 'Noto Sans KR', sans-serif;
+  $font-size-base: 14px;
+  $font-size-lg: 16px;
+  $font-size-sm: 12px;
+
+  :root {
+    --sv-color-split: $color-split;
+    --sv-color-primary: $color-primary;
+    --sv-font-family-base: $font-family-base;
+    --ag-header-font-family: $font-family-base;
+  }
 
 }
 
