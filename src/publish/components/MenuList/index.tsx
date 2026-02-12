@@ -25,6 +25,10 @@ const items: MenuItem[] = [
     key: '1',
     icon: <DesktopOutlined />,
     label: <Link to="/notice">Notice</Link>,
+    children: [
+      { key: '11', label: <Link to="/notice">Notice</Link> },
+      { key: '12', label: <Link to="/notice/modify">Notice 상세</Link> },
+    ],
   },
   {
     key: '2',

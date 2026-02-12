@@ -6,8 +6,8 @@ import { Input, Select, Table, Form, Button } from 'antd';
 import { Home, Search, FilePenLine, ClipboardList, Paperclip } from 'lucide-react';
 
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
-import AppSearchInput from '@/publish/components/comform/AppSearchInput';
-import AppSelect from '@/publish/components/comform/AppSelect';
+import AppSearchInput from '@/publish/components/common/AppSearchInput';
+import AppSelect from '@/publish/components/common/AppSelect';
 
 interface DataType {
   key: React.Key;
@@ -28,15 +28,23 @@ for (let index = 0; index < 10; index++) {
   });
 }
 
+const IconPaperclip = () => {};
+
 const Notice = () => {
   const [form] = Form.useForm();
 
   const [columns] = useState<any>([
-    { field: 'name1', headerName: `<Paperclip />`, width: 60, align: 'center' },
+    {
+      field: 'name1',
+      headerName: ``,
+      headerComponent: () => <Paperclip size={14} style={{ marginLeft: 5 }} />,
+      width: 60,
+      cellStyle: { textAlign: 'center' },
+    },
     { field: 'name2', headerName: '제목', width: 400 },
-    { field: 'name3', headerName: '게시자', width: 120 },
-    { field: 'name4', headerName: '수정일', width: 100, align: 'center' },
-    { field: 'name5', headerName: '조회수', width: 100, align: 'center' },
+    { field: 'name3', headerName: '게시자', width: 120, cellStyle: { textAlign: 'center' } },
+    { field: 'name4', headerName: '수정일', width: 100, cellStyle: { textAlign: 'center' } },
+    { field: 'name5', headerName: '조회수', width: 100, cellStyle: { textAlign: 'center' } },
   ]);
 
   return (

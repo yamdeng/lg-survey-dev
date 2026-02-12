@@ -28,7 +28,7 @@ import {
   StickyNote,
   Globe,
 } from 'lucide-react';
-import AppSelect from '@/publish/components/comform/AppSelect';
+import AppSelect from '@/publish/components/common/AppSelect';
 
 const rowData: any[] = [];
 

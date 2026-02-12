@@ -29,6 +29,7 @@ function AppSelect(props) {
     label,
     icon,
     value,
+    readonly,
     defaultValue,
     onChange,
     placeholder = '',

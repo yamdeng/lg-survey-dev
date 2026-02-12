@@ -121,42 +121,10 @@ const SurveyInfo = () => {
                       enableBrowserTooltips={false}
                     />
                   </div>
-
-                  {/* <div className="pagination">
-                    <a className="first" href="">
-                      <span className="sr-only">이전</span>
-                    </a>
-                    <a className="prev" href="">
-                      <span className="sr-only">이전</span>
-                    </a>
-                    <span>
-                      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((pageIndex) => {
-                        const pageComponent = (
-                          <a href="" key={pageIndex}>
-                            {pageIndex}
-                          </a>
-                        );
-                        return pageComponent;
-                      })}
-                    </span>
-                    <a className="next" href="">
-                      <span className="sr-only">다음</span>
-                    </a>
-                    <a className="last" href="">
-                      <span className="sr-only">다음</span>
-                    </a>
-                  </div> */}
                 </div>
               </div>
               <div className="btn-group-end">
-                <Button
-                  // color="primary"
-                  // variant="outlined"
-                  type="primary"
-                  icon={<Search />}
-                  iconPlacement="end"
-                  size="large"
-                >
+                <Button type="primary" icon={<Search />} iconPlacement="end" size="large">
                   미리보기
                 </Button>
               </div>

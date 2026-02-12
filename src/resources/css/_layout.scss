@@ -91,9 +91,64 @@
       }
       .content-body {
         flex-grow: 1; width: 100%; display: flex; flex-direction: column; 
+        .content-block-modify { 
+          margin-bottom: 20px; 
+          .modify-table {
+            width: 100%;
+            > tbody > tr {
+            > th { 
+               font-size: 14px; font-weight: 600;
+               padding: 10px 10px 10px 24px; text-align: left;
+               // background-color: #fafafb; 
+               background-color: #f7f7f7; 
+               border: 1px solid #d9d9d9; 
+               &[colSpan] { text-align: center; padding: 10px; }
+               // justify-content: flex-end;
+             }
+            > td { 
+               font-size: 14px; font-weight: 400; min-height: 38px;
+               padding: 5px 10px 4px; border: 1px solid #c9c9c9; position: relative;
+               > select { border: 1px solid #d9d9d9; border-radius: 3px; 
+                         padding: 4px 20px 4px 10px !important; height: 28px; }
+               > input[type="text"] { max-width: calc(100% - 20px);
+                 border: 1px solid #d9d9d9; border-radius: 3px; padding: 4px 2px 2px 8px; height: 28px; 
+                 &:focus { border-color: #a20707; }
+                 &[readOnly] { border-color: #fff !important; }
+                 + .btnclear { display: none; 
+                               width: 14px; height: 14px; background-color: #999; border-radius: 20px; }
+               }
+               
+             } 
+            }
+            button { background-color: #c6c6c6; padding: 4px 18px; border-radius: 4px; }
+          }
+        }
+
       }
 
     }
+
+    .table-type2 {
+      width: 100%; margin-top: 10px; margin-bottom: 10px;
+      border-top: 2px solid #111; border-bottom: 2px solid #ddd;
+      thead {
+        background-color: #f4f4f4;
+        text-align: center;
+        th, td { padding: 10px 10px; border-left: 1px solid  #e9e9e9;  }
+        td:first-child { border-right: 0; }
+        td:last-child { border-right: 0; }
+      } 
+      } 
+      tbody {
+         td { 
+          font-size: 14px; font-weight: 400; min-height: 38px; line-height: 1.2;
+          padding: 12px 10px; position: relative;
+          border-left: 1px solid  #e9e9e9; border-bottom: 1px solid #e9e9e9;
+          &:last-child { border-right: 0; }
+        } 
+      }
+    }
+
     .content-footer { 
       height: 40px; width: 100%;  display: flex; border-top: 1px solid var(--sv-color-split); 
       .copyright { width: 100%; text-align: center; }
@@ -152,6 +207,7 @@
       & + .icon-sch { 
         width: 26px; height: 26px; background-color: #fcfcfc;
         position: absolute; right: 4px; border-radius: 4px;
+        cursor: pointer;
       }
     }
     // .app-form-input {
@@ -237,6 +293,10 @@
       }
     }
 
+    .fileupload-block {
+              margin: 10px 10px 20px;
+             } 
+
     select {
       /* 1. 기본 스타일 제거 */
       -webkit-appearance: none; /* 크롬, 사파리, 엣지 */
@@ -311,7 +371,7 @@
 
 
   
-} // @layer base
+ // @layer base
 
 
 
