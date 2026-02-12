@@ -169,7 +169,7 @@ const LanguageInfo = () => {
 
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <div className={'ag-theme-quartz'} style={{ height: 400 }}>
+                  <div style={{ height: 400 }}>
                     <AgGridReact
                       rowModelType="clientSide"
                       suppressMultiSort={true}

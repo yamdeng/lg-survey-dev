@@ -55,63 +55,81 @@
   // AG - grid
   /* ag-grid 테마 내에서 요약 패널 숨김 */
   .survey {
-
-    // page nav - 요약블럭 삭제
-    .ag-paging-row-summary-panel {
-        display: none !important;
-    }
   
-    .ag-root {
-      .ag-header {
-
-        // .ag-header-cell[col-id="ag-Grid-SelectionColumn"] {
-        //   padding: 0 10px !important;
-        //   width: 30px !important;
-        // }
-        
-
-        .ag-header-cell-label {
-         justify-content: center;
-         .ag-header-cell-text {
-           font-size: 13px;
-           font-weight: 600;
-          //  color: #2a2a2a;
-           color: #000000;
+    .ag-root-wrapper {
+      // border-radius: var(--ag-wrapper-border-radius);
+      border: 1px solid #ddddde !important;
+      border-radius: 4px !important;
+      .ag-root {
+        .ag-header {
+  
+          // .ag-header-cell[col-id="ag-Grid-SelectionColumn"] {
+          //   padding: 0 10px !important;
+          //   width: 30px !important;
+          // }
+          
+          .ag-header-cell-label {
+           justify-content: center;
+           .ag-header-cell-text {
+             font-size: 13px;
+             font-weight: 500;
+             color: #000000;
+           }
          }
-       }
-
-       .ag-header-cell-resize {
-          &:after {
-                  // background-color: var(--ag-header-column-resize-handle-color);
-                  // content: "";
-                  // height: var(--ag-header-column-resize-handle-height);
-                  // position: absolute;
-                  // top: calc(50% - var(--ag-header-column-resize-handle-height) * .5);
-                  // width: var(--ag-header-column-resize-handle-width);
-                  // z-index: 1;
-                  width: 1px !important; // 게시판 헤더 구분선
-              }
-        }
-
-      }
   
-      .ag-body {
-        .ag-row {
-          color: var(--ag-cell-text-color);
-          font-family: "LG EI Text", system-ui, Helvetica, Arial, sans-serif;
-          font-size: var(--ag-data-font-size);
-          .ag-cell {
+         .ag-header-cell-resize {
+            &:after {
+                    // background-color: var(--ag-header-column-resize-handle-color);
+                    // content: "";
+                    // height: var(--ag-header-column-resize-handle-height);
+                    // position: absolute;
+                    // top: calc(50% - var(--ag-header-column-resize-handle-height) * .5);
+                    // width: var(--ag-header-column-resize-handle-width);
+                    // z-index: 1;
+                    width: 1px !important; // 게시판 헤더 구분선
+                }
+          }
+  
+        }
     
+        .ag-body {
+          .ag-row {
+            color: var(--ag-cell-text-color);
+            font-family: "LG EI Text", system-ui, Helvetica, Arial, sans-serif;
+            font-size: var(--ag-data-font-size);
+            .ag-cell {
+      
+            }
           }
         }
+  
+        
       }
 
+      .ag-paging-panel {
+        background-color: #fff;
+        // page nav - 요약블럭 삭제
+        .ag-paging-row-summary-panel {
+          display: none !important;
+        }
+        .ag-picker-field-wrapper {
+          border: 1px solid #d9d9d9 !important;
+        }
+      }
+      .ag-list-item{
+        background-color: #fff !important;
+      }
+      .ag-list-item.ag-active-item {
+        background-color: #eaeaea !important;
+      }
       
-    }
   
   }
 
 }
 
 
+
+}
 // --ag-background-color: var(--ag-inherited-background-color, #fff);
+// ag-picker-collapsed

@@ -1,5 +1,4 @@
 import { AgGridReact } from 'ag-grid-react';
-import { themeQuartz, themeAlpine, colorSchemeLight } from 'ag-grid-community';
 import { Button, DatePicker } from 'antd';
 import { useState } from 'react';
 
@@ -162,7 +161,6 @@ const SurveyInfo = () => {
                 <div className="ag-grid">
                   <div style={{ height: 300 }}>
                     <AgGridReact
-                      theme={themeAlpine}
                       rowModelType="clientSide"
                       suppressMultiSort={true}
                       domLayout={'normal'}
