@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
    #.<AppButton /> 전용 속성
     -size : 'small', 'middle', 'large'
-    -variant : 'primary', 'secondary'...
+    -theme : 'primary', 'secondary'...
     -disabled : boolean
     -icon : 아이콘 이미지
     -onClick : () => {}

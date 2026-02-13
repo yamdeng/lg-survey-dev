@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 
 // Form Components
+import AppButton from '@/publish/components/common/AppButton';
 import AppSelect from '@/publish/components/common/AppSelect';
 import AppTextInput from '@/publish/components/common/AppTextInput';
 import AppCheckboxGroup from '@/publish/components/common/AppCheckboxGroup';
@@ -40,8 +41,6 @@ for (let index = 0; index < 10; index++) {
 }
 
 const SurveyInfo = () => {
-  // const [form] = Form.useForm();
-
   const [columns] = useState<any>([
     { field: 'name1', headerName: '설문코드', width: 120, cellStyle: { textAlign: 'center' } },
     { field: 'name2', headerName: '구분', width: 140, cellStyle: { textAlign: 'center' } },
@@ -54,7 +53,7 @@ const SurveyInfo = () => {
     { field: 'name9', headerName: '상태', width: 120, cellStyle: { textAlign: 'center' } },
   ]);
 
-  // CheckBox Group 에서는 checked 속성도 각각 넘겨줘야 할것 같습니다.
+  // 퍼블 화면 출력 용
   const CompanyOptions = [
     { label: '전제', value: 'All' },
     { label: 'LG 전자', value: 'E10001' },
@@ -156,10 +155,9 @@ const SurveyInfo = () => {
                     ]}
                   />
                   <AppSelect
-                    value="LG CNS"
+                    value="cp01"
                     label="회사명"
                     icon={<Building2 />}
-                    defaultValue="LG CNS"
                     id="iqCmpny"
                     name="iqCmpny"
                     width={200}
@@ -188,9 +186,7 @@ const SurveyInfo = () => {
                   />
                 </div>
 
-                <Button htmlType="submit" type="primary" icon={<Search size={18} />}>
-                  조회
-                </Button>
+                <AppButton icon={<Search size={18} />} value="조회" />
               </Form>
             </div>
 
@@ -203,7 +199,7 @@ const SurveyInfo = () => {
                   <small className="num">( 113 )</small>
                 </div>
                 <div className="btn-group-end">
-                  <Button type="primary" size="small" icon={<Download size={14} />} />
+                  <AppButton icon={<Download size={14} />} size="small" value="" />
                 </div>
               </div>
 
@@ -238,16 +234,15 @@ const SurveyInfo = () => {
                   <tbody>
                     <tr>
                       <th>
-                        <label htmlFor="year" type="text" className="required">
+                        <label htmlFor="year" className="required">
                           대상년도
                         </label>
                       </th>
                       <td>
-                        {/* <input id="year" type="text" defaultValue="2025" /> */}
                         <AppTextInput name="year" value="2025" />
                       </td>
                       <th>
-                        <label htmlFor="survey" type="text" className="required">
+                        <label htmlFor="survey" className="required">
                           설문유형
                         </label>
                       </th>
@@ -256,7 +251,7 @@ const SurveyInfo = () => {
                           id="survey"
                           width={274}
                           value="LG WAY"
-                          // readonly={true} --> readonly 추가 필요함
+                          // disabled={true}
                           options={[
                             { label: 'LG WAY 1', value: 'LG01' },
                             { label: 'LG WAY 2', value: 'LG02' },
@@ -267,7 +262,7 @@ const SurveyInfo = () => {
                     </tr>
                     <tr>
                       <th>
-                        <label htmlFor="code" type="text" className="required">
+                        <label htmlFor="code" className="required">
                           설문코드
                         </label>
                       </th>
@@ -275,7 +270,7 @@ const SurveyInfo = () => {
                         <AppTextInput id="code" name="code" value="2025W394" readOnly />
                       </td>
                       <th>
-                        <label htmlFor="survey" type="text" className="required">
+                        <label htmlFor="survey" className="required">
                           상위코드
                         </label>
                       </th>
@@ -295,7 +290,7 @@ const SurveyInfo = () => {
                     </tr>
                     <tr>
                       <th>
-                        <label htmlFor="test" type="text" className="required">
+                        <label htmlFor="test" className="required">
                           구분
                         </label>
                       </th>
@@ -304,7 +299,7 @@ const SurveyInfo = () => {
                           id="classify"
                           width={274}
                           value="국내 사무직"
-                          // readonly={true} --> readonly 추가 필요함
+                          // disabled={true}
                           options={[
                             { label: '국내 사무직', value: 'LG01' },
                             { label: '국외 사무직', value: 'LG02' },
@@ -314,7 +309,7 @@ const SurveyInfo = () => {
                         />
                       </td>
                       <th>
-                        <label htmlFor="surveyName" type="text" className="required">
+                        <label htmlFor="surveyName" className="required">
                           설문명
                         </label>
                       </th>
@@ -334,7 +329,6 @@ const SurveyInfo = () => {
                         </label>
                       </th>
                       <td>
-                        {/* <RangePicker /> */}
                         <AppRangeDatePicker
                           id="svdate"
                           name="svdate"
@@ -360,9 +354,7 @@ const SurveyInfo = () => {
                 </table>
               </div>
               <div className="btn-group-end">
-                <Button type="primary" icon={<Plus size={18} />} iconPlacement="end" size="large">
-                  신규
-                </Button>
+                <AppButton icon={<Plus size={20} />} size="large" value="신규" />
               </div>
             </div>
           </div>

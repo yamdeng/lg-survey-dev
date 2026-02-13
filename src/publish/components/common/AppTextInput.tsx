@@ -25,6 +25,7 @@ function AppTextInput(props) {
     width,
     hiddenClearButton = false,
     inputType = 'text',
+    readOnly,
     ...rest
   } = props;
 
@@ -55,6 +56,7 @@ function AppTextInput(props) {
             }}
             placeholder={placeholder}
             disabled={disabled}
+            readOnly={readOnly} // 퍼블 : TextInput-인풋만 readonly 속성 추가 했습니다. - as is 속성 그대로 옮김
           />
           {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
             <button className="btnclear" onClick={() => onChange('')}></button>

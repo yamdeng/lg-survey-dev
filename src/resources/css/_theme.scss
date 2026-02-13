@@ -22,51 +22,56 @@
 
   
   // 5. form
-  .ant-input {
-    &:focus {
-      // border-color: $my-primary-color;
+
+
+  // 6. button app-btn middle primary
+  .app-btn {
+    display: flex; justify-content: center; align-items: center; 
+    &.small {
+      gap: 5px;
+      height: 30px;
+      font-size: 13px;
+      padding: 0 10px;
+    }
+    &.middle {
+      gap: 8px;
+      height: 36px;
+      font-size: 14px;
+      padding: 0 16px 0 12px;
+    }
+    &.large {
+      gap: 12px;
+      height: 40px;
+      font-size: 16px;
+      padding: 0 20px 0 16px;
+      line-height: 41px; // test
+    }
+    &.primary {
+      background-color: var(--sv-color-primary);
+      color: var(--color-white);
+      border: none;
+      &:hover { background-color: var(--sv-color-primary); opacity: 0.8; }
+      border-radius: var(--sv-border-radius);
+    }
+    &.secondary {
+      background-color: var(--color-white);
+      color: var(--sv-color-primary);
+      border: 1px solid var(--sv-color-primary);
+      &:hover { border-color: var(--sv-color-primary); opacity: 0.8; }
+      border-radius: var(--sv-border-radius);
     }
   }
 
-  // 6. button
-  .ant-btn {
-    font-weight: 600;
-    text-transform: uppercase;
-    
-    &.ant-btn-primary {
-      // box-shadow: 0 4px 10px rgba($my-primary-color, 0.3);
-    }
-    [class^="ant-btn"] {
-      position: relative;
-      top: 1px;
-      width: 18px;
-    }
-    .ant-btn-icon + span {
-      position: relative; top: 1px;
-    }
-  }
-  .ant-btn-primary {
-    // background-color: $primary-color !important;
-  }
 
-
-// border-radius: var(--ag-wrapper-border-radius); 8px
 
   // AG - grid
-  /* ag-grid 테마 내에서 요약 패널 숨김 */
   .survey {
   
     .ag-root-wrapper {
-      // border-radius: var(--ag-wrapper-border-radius);
       border: 1px solid #ddddde !important;
       border-radius: 4px !important;
       .ag-root {
         .ag-header {
-  
-          // .ag-header-cell[col-id="ag-Grid-SelectionColumn"] {
-          //   padding: 0 10px !important;
-          //   width: 30px !important;
-          // }
           
           .ag-header-cell-label {
            justify-content: center;
@@ -79,13 +84,6 @@
   
          .ag-header-cell-resize {
             &:after {
-                    // background-color: var(--ag-header-column-resize-handle-color);
-                    // content: "";
-                    // height: var(--ag-header-column-resize-handle-height);
-                    // position: absolute;
-                    // top: calc(50% - var(--ag-header-column-resize-handle-height) * .5);
-                    // width: var(--ag-header-column-resize-handle-width);
-                    // z-index: 1;
                     width: 1px !important; // 게시판 헤더 구분선
                 }
           }
@@ -124,87 +122,72 @@
       }
       
   
-  }
-
-
-  // 테이블 기본 테마 - 정리중
-  .table-basic {
-      width: 100%; margin-top: 10px; margin-bottom: 10px;
-      border-top: 2px solid #8a8a8a; border-bottom: 2px solid #e7e7e7;
-      font-size: 14px; font-weight: 400; min-height: 38px; line-height: 1.2;
-      > thead {
-        background-color: #f4f4f4;
-        text-align: center;
-        border-bottom: 1px solid #d5d5d5;
-        tr {
-          th, td { padding: 10px 10px; 
-            // border-left: 1px solid  #e9e9e9;  
-            border-color: #e9e9e9 !important;
-          }
-          td:first-child { border-left: 0; }
-          td:last-child { border-right: 0; }
-        }
-      } 
-      > tbody {
-        tr {
-          th, td { 
-           padding: 6px 10px 5px; position: relative; height: 32px;
-          //  border-left: 1px solid  #e9e9e9; 
-           border-color: #e9e9e9 !important;
-           border-bottom: 1px solid #e9e9e9;
-           > button { 
-             background-color: #ebebeb; color: #333333; cursor: pointer; 
-             padding: 4px 10px 4px 14px; border-radius: 4px; transition: .3s;
-             &.del { 
-                &::before { content: "x"; color: #333; margin-right: 4px; position: relative; left: -4px; top: -1px;} 
-              }
-             &:hover { background-color: #e5e5e5; }
-           }
-         } 
-         td:first-child { border-left: 0; &[align="center"] {color: #6f6f6f; } }
-         td:last-child { border-right: 0; }
-        }
-      }
-  } 
-
-  // 상세정보 공통 테이블
-  .modify-table {
-    width: 100%;
-    > tbody {
-      th { 
-        font-size: 14px; font-weight: 600;
-        padding: 10px 10px 10px 24px; text-align: left;
-        // background-color: #fafafb; 
-        background-color: #f7f7f7; 
-        border: 1px solid #d9d9d9; 
-        &[colSpan] { text-align: center; padding: 10px; }
-        label{ 
-          display: inline-block;
-          &[class="required"]::after { content: "*"; display: inline-block; 
-            margin-left: 2px; font-size: 12px; color: #484848;
-            position: relative; top: -2px;
-          }
-        }
-      }
-      td { 
-        font-size: 14px; font-weight: 400; min-height: 38px;
-        padding: 4px 10px; border: 1px solid #c9c9c9; 
-        > select { border: 1px solid #d9d9d9; border-radius: 3px; 
-                    padding: 4px 20px 4px 10px !important; height: 28px; }
-        > input[type="text"] { transition: .3s;
-          border: 1px solid #d9d9d9; border-radius: 3px; padding: 4px 2px 2px 8px; height: 30px; 
-          &[readOnly] { border-color: #fff !important; }
-          &:focus { border-color: #a50934; }
-        }
-          
-      } 
     }
+
+    // 테이블 기본 테마
+    .table-basic {
+        width: 100%; margin-top: 10px; margin-bottom: 10px;
+        border-top: 2px solid #8a8a8a; border-bottom: 2px solid #e7e7e7;
+        font-size: 14px; font-weight: 400; min-height: 38px; line-height: 1.2;
+        > thead {
+          background-color: #f4f4f4;
+          text-align: center;
+          border-bottom: 1px solid #d5d5d5;
+          tr {
+            th, td { padding: 10px 10px; 
+              border-color: #e9e9e9 !important;
+            }
+            td:first-child { border-left: 0; }
+            td:last-child { border-right: 0; }
+          }
+        } 
+        > tbody {
+          tr {
+            th, td { 
+            padding: 6px 10px 5px; position: relative; height: 32px;
+            border-color: #e9e9e9 !important;
+            border-bottom: 1px solid #e9e9e9;
+            > button { 
+              background-color: #ebebeb; color: #333333; cursor: pointer; 
+              padding: 4px 10px 4px 14px; border-radius: 4px; transition: .3s;
+              &.del { 
+                  &::before { content: "x"; color: #333; margin-right: 4px; position: relative; left: -4px; top: -1px;} 
+                }
+              &:hover { background-color: #e5e5e5; }
+            }
+          } 
+          td:first-child { border-left: 0; &[align="center"] {color: #6f6f6f; } }
+          td:last-child { border-right: 0; }
+          }
+        }
+    } 
+
+    // 상세정보 공통 테이블
+    .modify-table {
+      width: 100%;
+      > tbody {
+        th { 
+          font-size: 14px; font-weight: 600;
+          padding: 10px 10px 10px 24px; text-align: left;
+          // background-color: #fafafb; 
+          background-color: #f7f7f7; 
+          border: 1px solid #d9d9d9; 
+          &[colSpan] { text-align: center; padding: 10px; }
+          label{ 
+            display: inline-block;
+            &[class="required"]::after { content: "*"; display: inline-block; 
+              margin-left: 2px; font-size: 12px; color: #484848;
+              position: relative; top: -2px;
+            }
+          }
+        }
+        td { 
+          font-size: 14px; font-weight: 400; min-height: 38px;
+          padding: 4px 10px; border: 1px solid #c9c9c9;             
+        } 
+      }
+    }
+
   }
 
 }
-
-
-
-}
-// --ag-background-color: var(--ag-inherited-background-color, #fff);
-// ag-picker-collapsed

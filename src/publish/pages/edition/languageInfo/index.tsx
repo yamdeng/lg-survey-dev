@@ -19,6 +19,7 @@ import {
   Building2,
 } from 'lucide-react';
 
+import AppButton from '@/publish/components/common/AppButton';
 import AppSelect from '@/publish/components/common/AppSelect';
 
 const rowData: any[] = [];
@@ -150,9 +151,7 @@ const LanguageInfo = () => {
                   />
                 </div>
 
-                <Button htmlType="submit" type="primary" icon={<Search size={18} />}>
-                  조회
-                </Button>
+                <AppButton icon={<Search size={18} />} value="조회" />
               </Form>
             </div>
 
@@ -163,7 +162,7 @@ const LanguageInfo = () => {
                   <h3 className="title-text">Language Info</h3>
                 </div>
                 <div className="btn-group-end">
-                  <Button type="primary" size="middle" icon={<Download size={18} />} />
+                  <AppButton icon={<Download size={14} />} size="small" value="" />
                 </div>
               </div>
 
@@ -188,16 +187,12 @@ const LanguageInfo = () => {
               </div>
 
               <div className="btn-group-end">
-                <Button
-                  // color="primary"
-                  // variant="outlined"
-                  type="primary"
-                  icon={<Search />}
-                  iconPlacement="end"
+                <AppButton
+                  icon={<Search size={20} />}
                   size="large"
-                >
-                  미리보기
-                </Button>
+                  theme="secondary"
+                  value="미리보기"
+                />
               </div>
             </div>
           </div>

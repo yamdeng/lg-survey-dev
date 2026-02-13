@@ -3,12 +3,6 @@ import { AgGridReact } from 'ag-grid-react';
 
 import { Button } from 'antd';
 
-import ClassifySelect from '@/publish/components/formItem/ClassifySelect';
-import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
-import LanguageSelect from '@/publish/components/formItem/LanguageSelect';
-import PageSelect from '@/publish/components/formItem/PageSelect';
-import SurveySelect from '@/publish/components/formItem/SurveySelect';
-import YearSelect from '@/publish/components/formItem/YearSelect';
 import HeaderMenu from '@/publish/components/headerMenu';
 
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
@@ -28,6 +22,8 @@ import {
   StickyNote,
   Globe,
 } from 'lucide-react';
+
+import AppButton from '@/publish/components/common/AppButton';
 import AppSelect from '@/publish/components/common/AppSelect';
 
 const rowData: any[] = [];
@@ -196,9 +192,7 @@ const QuestionInfo = () => {
                   />
                 </div>
 
-                <Button htmlType="submit" type="primary" icon={<Search size={18} />}>
-                  조회
-                </Button>
+                <AppButton icon={<Search size={18} />} value="조회" />
               </Form>
             </div>
 
@@ -211,7 +205,7 @@ const QuestionInfo = () => {
                   <small className="num">( 973 )</small>
                 </div>
                 <div className="btn-group-end">
-                  <Button type="primary" size="middle" icon={<Download size={18} />} />
+                  <AppButton icon={<Download size={14} />} size="small" value="" />
                 </div>
               </div>
 
@@ -236,16 +230,12 @@ const QuestionInfo = () => {
                 </div>
               </div>
               <div className="btn-group-end">
-                <Button
-                  color="primary"
-                  variant="outlined"
-                  // type="primary"
-                  icon={<Search />}
-                  iconPlacement="end"
+                <AppButton
+                  icon={<Search size={20} />}
                   size="large"
-                >
-                  미리보기
-                </Button>
+                  theme="secondary"
+                  value="미리보기"
+                />
               </div>
             </div>
           </div>

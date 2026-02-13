@@ -3,9 +3,6 @@ import { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
 // Form
-import CompanyNameSelect from '@/publish/components/formItem/CompanyNameSelect';
-import YearSelect from '@/publish/components/formItem/YearSelect';
-import StatusSelect from '@/publish/components/formItem/StatusSelect';
 
 import HeaderMenu from '@/publish/components/headerMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
@@ -76,11 +73,7 @@ const SurveyInfo = () => {
           <div className="content-body">
             <div className="form-block">
               <Form form={form}>
-                <div className="form-inline">
-                  <YearSelect /> {/* 년도 iqYear */}
-                  <CompanyNameSelect /> {/* 회사명 iqCmpny */}
-                  <StatusSelect /> {/* 처리상태 iqStatus */}
-                </div>
+                <div className="form-inline"></div>
 
                 <Button
                   htmlType="submit"

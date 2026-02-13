@@ -7,6 +7,7 @@ import { Home, Search, FilePenLine, Plus, X, Check } from 'lucide-react';
 
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 // Form Components
+import AppButton from '@/publish/components/common/AppButton';
 import AppSelect from '@/publish/components/common/AppSelect';
 import AppTextInput from '@/publish/components/common/AppTextInput';
 
@@ -163,12 +164,8 @@ const NoticeMgmt = () => {
               </table>
             </div>
             <div className="btn-group-end">
-              <Button type="primary" icon={<Check size={18} />} size="large">
-                저장
-              </Button>
-              <Button type="default" icon={<X size={18} />} size="large">
-                취소
-              </Button>
+              <AppButton icon={<Check size={18} />} value="저장" />
+              <AppButton icon={<X size={18} />} value="취소" theme="secondary" />
             </div>
           </div>
         </div>
