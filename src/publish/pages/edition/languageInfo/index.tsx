@@ -175,12 +175,12 @@ const LanguageInfo = () => {
                       domLayout={'normal'}
                       rowData={rowData}
                       columnDefs={columns}
-                      pagination={true}
                       tooltipShowDelay={100}
                       tooltipHideDelay={1000}
                       tooltipMouseTrack={true}
                       enableBrowserTooltips={false}
                       headerHeight={40}
+                      // pagination={true} // 퍼블 페이징 화면출력 삭제
                     />
                   </div>
                 </div>

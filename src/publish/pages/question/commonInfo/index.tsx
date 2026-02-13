@@ -57,10 +57,6 @@ const CommonInfo = () => {
     { field: 'name9', headerName: '보기내용', width: 400 },
   ]);
 
-  const rowSelection = useMemo(() => {
-    return { mode: 'multiRow' };
-  }, []);
-
   return (
     <>
       <header className="content-header">
@@ -218,13 +214,12 @@ const CommonInfo = () => {
                       domLayout={'normal'}
                       rowData={rowData}
                       columnDefs={columns}
-                      pagination={true}
                       tooltipShowDelay={100}
                       tooltipHideDelay={1000}
                       tooltipMouseTrack={true}
                       enableBrowserTooltips={false}
                       headerHeight={40}
-                      rowSelection={rowSelection}
+                      // pagination={true} // 퍼블 페이징 화면출력 삭제
                     />
                   </div>
                 </div>

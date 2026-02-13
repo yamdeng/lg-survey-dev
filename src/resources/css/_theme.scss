@@ -50,14 +50,14 @@
       background-color: var(--sv-color-primary);
       color: var(--color-white);
       border: none;
-      &:hover { background-color: var(--sv-color-primary); opacity: 0.8; }
+      &:hover { background-color: var(--sv-color-primary); opacity: 0.9; }
       border-radius: var(--sv-border-radius);
     }
     &.secondary {
       background-color: var(--color-white);
       color: var(--sv-color-primary);
       border: 1px solid var(--sv-color-primary);
-      &:hover { border-color: var(--sv-color-primary); opacity: 0.8; }
+      &:hover { border-color: var(--sv-color-primary); opacity: 0.9; }
       border-radius: var(--sv-border-radius);
     }
   }

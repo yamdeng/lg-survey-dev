@@ -110,7 +110,7 @@ const Notice = () => {
                       domLayout={'normal'}
                       rowData={rowData}
                       columnDefs={columns}
-                      pagination={true}
+                      // pagination={true} // 퍼블 페이징 화면출력 삭제
                       tooltipShowDelay={100}
                       tooltipHideDelay={1000}
                       tooltipMouseTrack={true}
