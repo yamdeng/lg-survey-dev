@@ -1,8 +1,8 @@
-import Logo from '@/publish/components/Logo';
 import React from 'react';
+import AppButton from '@/publish/components/common/AppButton';
+import Logo from '@/publish/components/Logo';
 
-import { MenuOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { TextAlignJustify } from 'lucide-react';
 
 interface ChildProps {
   collapsed?: boolean;
@@ -13,8 +13,12 @@ interface ChildProps {
 
 const SiderTop = ({ collapsed, setCollapsed, toggleCollapsed }: ChildProps) => {
   return (
-    <div className="survey-sider-top">
-      <Button type="text" icon={<MenuOutlined />} onClick={toggleCollapsed} />
+    <div className="side-top">
+      <AppButton
+        icon={<TextAlignJustify size={16} />}
+        onClick={toggleCollapsed}
+        theme="secondary"
+      />
       <Logo />
     </div>
   );

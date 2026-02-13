@@ -5,7 +5,7 @@ export const Logo = () => {
     <div className="survey-logo">
       <Link to="/">
         <h1 className="app-title">
-          <span className="blind">Test Pub AntD</span>
+          <span className="blind">LOGO TEST</span>
         </h1>
       </Link>
     </div>

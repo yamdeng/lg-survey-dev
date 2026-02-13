@@ -17,12 +17,14 @@ function PublishApp() {
     <>
       <div className="survey">
         <aside className={collapsed ? 'collapsed' : ''}>
-          <SiderTop
-            collapsed={collapsed}
-            setCollapsed={setCollapsed}
-            toggleCollapsed={toggleCollapsed}
-          />
-          <MenuList collapsed={collapsed} />
+          <div className="side-fixed">
+            <SiderTop
+              collapsed={collapsed}
+              setCollapsed={setCollapsed}
+              toggleCollapsed={toggleCollapsed}
+            />
+            <MenuList collapsed={collapsed} />
+          </div>
         </aside>
 
         <div className="sv-content">

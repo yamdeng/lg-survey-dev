@@ -36,7 +36,7 @@ export const customTheme: ThemeConfig = {
       // itemColor: '#fff',
       // itemHoverBg: '#444',
       // itemSelectedBg: '#333',
-      collapsedWidth: 60,
+      collapsedWidth: 80,
     },
     Button: {
       colorPrimary: '#a50934',
