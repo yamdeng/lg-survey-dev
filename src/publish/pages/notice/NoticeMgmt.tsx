@@ -9,8 +9,6 @@ import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 // Form Components
 import AppSelect from '@/publish/components/common/AppSelect';
 import AppTextInput from '@/publish/components/common/AppTextInput';
-import AppCheckboxGroup from '@/publish/components/common/AppCheckboxGroup';
-import AppRangeDatePicker from '@/publish/components/common/AppRangeDatePicker';
 
 const NoticeMgmt = () => {
   return (
@@ -28,7 +26,7 @@ const NoticeMgmt = () => {
                 <a href="#">Notice</a>
               </dd>
               <dd>
-                <a href="#">Notice Modify</a>
+                <a href="#">Write/Modify</a>
               </dd>
             </dl>
           </div>
@@ -57,7 +55,6 @@ const NoticeMgmt = () => {
                       <label htmlFor="title">제목</label>
                     </th>
                     <td colSpan={3}>
-                      {/* <input id="year" type="text" defaultValue="2025" /> */}
                       <AppTextInput name="title" width={'100%'} />
                     </td>
                   </tr>
@@ -66,7 +63,7 @@ const NoticeMgmt = () => {
                       <label htmlFor="writer">작성자</label>
                     </th>
                     <td colSpan={3}>
-                      <AppTextInput name="writer" value="CNS" width={'100%'} readOnly />
+                      <AppTextInput name="writer" value="LG CNS" width={'100%'} readOnly />
                     </td>
                   </tr>
 
@@ -120,7 +117,7 @@ const NoticeMgmt = () => {
                         <FlexBox justify="flex-end">
                           <button className="add">추가</button>
                         </FlexBox>
-                        <table className="table-type2">
+                        <table className="table-basic">
                           <colgroup>
                             <col width="5%" />
                             <col width="80%" />
@@ -128,26 +125,32 @@ const NoticeMgmt = () => {
                           </colgroup>
                           <thead>
                             <tr>
-                              <td></td>
+                              <td align="center"></td>
                               <td>파일명</td>
                               <td>삭제</td>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td align="center">1</td>
+                              <td>오늘의 첨부 엑셀 파일.xls</td>
+                              <td align="center">
+                                <button className="del">삭제</button>
+                              </td>
                             </tr>
                             <tr>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td align="center">2</td>
+                              <td>오늘의 첨부 엑셀 파일2.xls</td>
+                              <td align="center">
+                                <button className="del">삭제</button>
+                              </td>
                             </tr>
                             <tr>
+                              <td align="center"></td>
                               <td></td>
-                              <td></td>
-                              <td></td>
+                              <td align="center">
+                                <button className="del">삭제</button>
+                              </td>
                             </tr>
                           </tbody>
                         </table>

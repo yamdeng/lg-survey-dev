@@ -128,26 +128,8 @@
 
     }
 
-    .table-type2 {
-      width: 100%; margin-top: 10px; margin-bottom: 10px;
-      border-top: 2px solid #111; border-bottom: 2px solid #ddd;
-      thead {
-        background-color: #f4f4f4;
-        text-align: center;
-        th, td { padding: 10px 10px; border-left: 1px solid  #e9e9e9;  }
-        td:first-child { border-right: 0; }
-        td:last-child { border-right: 0; }
-      } 
-      } 
-      tbody {
-         td { 
-          font-size: 14px; font-weight: 400; min-height: 38px; line-height: 1.2;
-          padding: 12px 10px; position: relative;
-          border-left: 1px solid  #e9e9e9; border-bottom: 1px solid #e9e9e9;
-          &:last-child { border-right: 0; }
-        } 
-      }
-    }
+    
+    
 
     .content-footer { 
       height: 40px; width: 100%;  display: flex; border-top: 1px solid var(--sv-color-split); 
@@ -294,8 +276,8 @@
     }
 
     .fileupload-block {
-              margin: 10px 10px 20px;
-             } 
+      margin: 10px 20px 20px; max-width: 1000px;
+    } 
 
     select {
       /* 1. 기본 스타일 제거 */
@@ -303,10 +285,8 @@
       -moz-appearance: none;    /* 파이어폭스 */
       appearance: none;
 
-      /* 2. 기존 IE 화살표 숨기기 (필요시) */
-      &::-ms-expand {
-        display: none;
-      }
+      /* 2. 기존 IE 화살표 숨기기 */
+      &::-ms-expand { display: none; }
 
       /* 3. 디자인 변경 */
       height: 28px;
@@ -335,8 +315,8 @@
 
   
 
-
-  }
+  } // survey
+}  // base
 
 
 
