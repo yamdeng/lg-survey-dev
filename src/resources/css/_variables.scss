@@ -19,7 +19,7 @@
 
   :root {
     --sv-color-split: $color-split;
-    --sv-color-primary: $color-primary;
+    --sv-color-primary: $color-primary !important;
     --sv-font-family-base: $font-family-base;
     --ag-header-font-family: $font-family-base;
   }

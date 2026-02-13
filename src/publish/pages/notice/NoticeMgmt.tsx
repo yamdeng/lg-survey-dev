@@ -113,6 +113,7 @@ const NoticeMgmt = () => {
                       <label htmlFor="fileupload">첨부파일</label>
                     </th>
                     <td colSpan={3}>
+                      {/* 첨부파일 블럭 - 컴포넌트화 필요 */}
                       <div className="fileupload-block">
                         <FlexBox justify="flex-end">
                           <button className="add">추가</button>
@@ -155,6 +156,7 @@ const NoticeMgmt = () => {
                           </tbody>
                         </table>
                       </div>
+                      {/* // 첨부파일 */}
                     </td>
                   </tr>
                 </tbody>

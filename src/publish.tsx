@@ -18,7 +18,6 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 // 프로젝트 import
 import '@/resources/css/index.scss';
-
 import PublishApp from './PublishApp.tsx';
 import './yupLocale';
 

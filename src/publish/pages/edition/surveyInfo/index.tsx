@@ -1,5 +1,5 @@
 import { AgGridReact } from 'ag-grid-react';
-import { Button, DatePicker } from 'antd';
+import { Button } from 'antd';
 import { useState } from 'react';
 
 import HeaderMenu from '@/publish/components/headerMenu';
@@ -43,15 +43,15 @@ const SurveyInfo = () => {
   // const [form] = Form.useForm();
 
   const [columns] = useState<any>([
-    { field: 'name1', headerName: '설문코드', width: 100 },
-    { field: 'name2', headerName: '구분', width: 120 },
+    { field: 'name1', headerName: '설문코드', width: 120, cellStyle: { textAlign: 'center' } },
+    { field: 'name2', headerName: '구분', width: 140, cellStyle: { textAlign: 'center' } },
     { field: 'name3', headerName: '설문유형', width: 120 },
-    { field: 'name4', headerName: '회사', width: 200 },
-    { field: 'name5', headerName: '설문명', width: 320 },
-    { field: 'name6', headerName: '대상년도', width: 90 },
-    { field: 'name7', headerName: '시작일자', width: 100 },
-    { field: 'name8', headerName: '종료일자', width: 100 },
-    { field: 'name9', headerName: '상태', width: 120 },
+    { field: 'name4', headerName: '회사', width: 220 },
+    { field: 'name5', headerName: '설문명', width: 400 },
+    { field: 'name6', headerName: '대상년도', width: 90, cellStyle: { textAlign: 'center' } },
+    { field: 'name7', headerName: '시작일자', width: 100, cellStyle: { textAlign: 'center' } },
+    { field: 'name8', headerName: '종료일자', width: 100, cellStyle: { textAlign: 'center' } },
+    { field: 'name9', headerName: '상태', width: 120, cellStyle: { textAlign: 'center' } },
   ]);
 
   // CheckBox Group 에서는 checked 속성도 각각 넘겨줘야 할것 같습니다.
@@ -159,7 +159,6 @@ const SurveyInfo = () => {
                     value="LG CNS"
                     label="회사명"
                     icon={<Building2 />}
-                    required
                     defaultValue="LG CNS"
                     id="iqCmpny"
                     name="iqCmpny"
@@ -177,7 +176,6 @@ const SurveyInfo = () => {
                     value="설문 생성"
                     label="처리상태"
                     icon={<FileInput />}
-                    required
                     defaultValue="설문 생성"
                     id="iqStatus"
                     name="iqStatus"
@@ -240,7 +238,7 @@ const SurveyInfo = () => {
                   <tbody>
                     <tr>
                       <th>
-                        <label htmlFor="year" className="required">
+                        <label htmlFor="year" type="text" className="required">
                           대상년도
                         </label>
                       </th>
@@ -249,7 +247,7 @@ const SurveyInfo = () => {
                         <AppTextInput name="year" value="2025" />
                       </td>
                       <th>
-                        <label htmlFor="survey" className="required">
+                        <label htmlFor="survey" type="text" className="required">
                           설문유형
                         </label>
                       </th>
@@ -269,7 +267,7 @@ const SurveyInfo = () => {
                     </tr>
                     <tr>
                       <th>
-                        <label htmlFor="code" className="required">
+                        <label htmlFor="code" type="text" className="required">
                           설문코드
                         </label>
                       </th>
@@ -277,7 +275,7 @@ const SurveyInfo = () => {
                         <AppTextInput id="code" name="code" value="2025W394" readOnly />
                       </td>
                       <th>
-                        <label htmlFor="survey" className="required">
+                        <label htmlFor="survey" type="text" className="required">
                           상위코드
                         </label>
                       </th>
@@ -297,7 +295,7 @@ const SurveyInfo = () => {
                     </tr>
                     <tr>
                       <th>
-                        <label htmlFor="test" className="required">
+                        <label htmlFor="test" type="text" className="required">
                           구분
                         </label>
                       </th>
@@ -316,7 +314,7 @@ const SurveyInfo = () => {
                         />
                       </td>
                       <th>
-                        <label htmlFor="surveyName" className="required">
+                        <label htmlFor="surveyName" type="text" className="required">
                           설문명
                         </label>
                       </th>
@@ -325,7 +323,7 @@ const SurveyInfo = () => {
                           id="surveyName"
                           name="surveyName"
                           value="설문 시연 테스트"
-                          width={360}
+                          width={'96%'}
                         />
                       </td>
                     </tr>

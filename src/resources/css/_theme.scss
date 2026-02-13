@@ -130,9 +130,9 @@
   // 테이블 기본 테마 - 정리중
   .table-basic {
       width: 100%; margin-top: 10px; margin-bottom: 10px;
-      border-top: 1px solid #8a8a8a; border-bottom: 2px solid #e7e7e7;
+      border-top: 2px solid #8a8a8a; border-bottom: 2px solid #e7e7e7;
       font-size: 14px; font-weight: 400; min-height: 38px; line-height: 1.2;
-      thead {
+      > thead {
         background-color: #f4f4f4;
         text-align: center;
         border-bottom: 1px solid #d5d5d5;
@@ -142,14 +142,17 @@
           td:last-child { border-right: 0; }
         }
       } 
-      tbody {
+      > tbody {
         tr {
           th, td { 
-           padding: 10px 10px 8px; position: relative; height: 32px;
+           padding: 6px 10px 5px; position: relative; height: 32px;
            border-left: 1px solid  #e9e9e9; border-bottom: 1px solid #e9e9e9;
-           > button { background-color: #ddd; color: #333333; cursor: pointer;
-                       &.del { &::before { content: "x"; color: #333; margin-right: 4px; 
-                                    position: relative; left: -4px; top: -1px;} }
+           > button { 
+             background-color: #ddd; color: #333333; cursor: pointer; 
+             padding: 4px 10px 4px 14px; border-radius: 4px;
+             &.del { 
+                &::before { content: "x"; color: #333; margin-right: 4px; position: relative; left: -4px; top: -1px;} 
+              }
              &:hover { background-color: #e5e5e5; }
            }
          } 
@@ -158,6 +161,40 @@
         }
       }
   } 
+
+  // 상세정보 공통 테이블
+  .modify-table {
+    width: 100%;
+    > tbody {
+      th { 
+        font-size: 14px; font-weight: 600;
+        padding: 10px 10px 10px 24px; text-align: left;
+        // background-color: #fafafb; 
+        background-color: #f7f7f7; 
+        border: 1px solid #d9d9d9; 
+        &[colSpan] { text-align: center; padding: 10px; }
+        label{ 
+          display: inline-block;
+          &[class="required"]::after { content: "*"; display: inline-block; 
+            margin-left: 2px; font-size: 12px; color: #484848;
+            position: relative; top: -2px;
+          }
+        }
+      }
+      td { 
+        font-size: 14px; font-weight: 400; min-height: 38px;
+        padding: 4px 10px; border: 1px solid #c9c9c9; 
+        > select { border: 1px solid #d9d9d9; border-radius: 3px; 
+                    padding: 4px 20px 4px 10px !important; height: 28px; }
+        > input[type="text"] { transition: .3s;
+          border: 1px solid #d9d9d9; border-radius: 3px; padding: 4px 2px 2px 8px; height: 30px; 
+          &[readOnly] { border-color: #fff !important; }
+          &:focus { border-color: #a50934; }
+        }
+          
+      } 
+    }
+  }
 
 }
 

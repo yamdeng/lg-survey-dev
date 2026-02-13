@@ -50,15 +50,15 @@ const QuestionInfo = () => {
   const [form] = Form.useForm();
 
   const [columns] = useState<any>([
-    { field: 'name', headerName: '페이지', width: 70, pinned: 'center' },
-    { field: 'name2', headerName: '순서', width: 60, pinned: 'center' },
-    { field: 'name3', headerName: '문항키', width: 98, pinned: 'center' },
-    { field: 'name4', headerName: '문항유형', width: 140, pinned: 'center' },
-    { field: 'name5', headerName: '언어', width: 100, pinned: 'center' },
-    { field: 'name6', headerName: '문항제목', width: 140 },
-    { field: 'name7', headerName: '문항내용', width: 380 },
-    { field: 'name8', headerName: '보기', width: 60, pinned: 'center' },
-    { field: 'name9', headerName: '보기내용', width: 380 },
+    { field: 'name', headerName: '페이지', width: 70, cellStyle: { textAlign: 'center' } },
+    { field: 'name2', headerName: '순서', width: 60, cellStyle: { textAlign: 'center' } },
+    { field: 'name3', headerName: '문항키', width: 98, cellStyle: { textAlign: 'center' } },
+    { field: 'name4', headerName: '문항유형', width: 140, cellStyle: { textAlign: 'center' } },
+    { field: 'name5', headerName: '언어', width: 100, cellStyle: { textAlign: 'center' } },
+    { field: 'name6', headerName: '문항제목', width: 160 },
+    { field: 'name7', headerName: '문항내용', width: 400 },
+    { field: 'name8', headerName: '보기', width: 60, cellStyle: { textAlign: 'center' } },
+    { field: 'name9', headerName: '보기내용', width: 400 },
   ]);
 
   const rowSelection = useMemo(() => {

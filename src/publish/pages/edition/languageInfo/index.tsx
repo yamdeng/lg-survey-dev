@@ -40,14 +40,14 @@ const LanguageInfo = () => {
   const [form] = Form.useForm();
 
   const [columns] = useState<any>([
-    { field: 'name', headerName: '설문코드', width: 150, align: 'center' },
+    { field: 'name', headerName: '설문코드', width: 150, cellStyle: { textAlign: 'center' } },
     { field: 'name2', headerName: '구분', width: 200 },
     { field: 'name3', headerName: '회사', width: 300 },
-    { field: 'name4', headerName: '설문명', width: 400 },
-    { field: 'name5', headerName: '대상년도', width: 100, align: 'center' },
-    { field: 'name6', headerName: '시작일자', width: 100, align: 'center' },
-    { field: 'name7', headerName: '종료일자', width: 100, align: 'center' },
-    { field: 'name8', headerName: '확정여부', width: 100, align: 'center' },
+    { field: 'name4', headerName: '설문명', width: 440 },
+    { field: 'name5', headerName: '대상년도', width: 100, cellStyle: { textAlign: 'center' } },
+    { field: 'name6', headerName: '시작일자', width: 110, cellStyle: { textAlign: 'center' } },
+    { field: 'name7', headerName: '종료일자', width: 110, cellStyle: { textAlign: 'center' } },
+    { field: 'name8', headerName: '확정여부', width: 120, cellStyle: { textAlign: 'center' } },
   ]);
 
   return (
