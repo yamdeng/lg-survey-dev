@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import HeaderMenu from '@/publish/components/headerMenu';
-import { Input, Select, Table, Form, Button } from 'antd';
 
 import { Home, Search, FilePenLine, ClipboardList, Paperclip } from 'lucide-react';
 
@@ -28,11 +27,7 @@ for (let index = 0; index < 10; index++) {
   });
 }
 
-const IconPaperclip = () => {};
-
 const Notice = () => {
-  const [form] = Form.useForm();
-
   const [columns] = useState<any>([
     {
       field: 'name1',
@@ -75,7 +70,7 @@ const Notice = () => {
 
           <div className="content-body">
             <div className="form-block border-none">
-              <Form form={form}>
+              <form>
                 <div className="form-inline justify-end">
                   <AppSelect
                     placeholder="제목+내용"
@@ -97,7 +92,7 @@ const Notice = () => {
                     hiddenSearchButton={false}
                   />
                 </div>
-              </Form>
+              </form>
             </div>
 
             <div className="grid-block">

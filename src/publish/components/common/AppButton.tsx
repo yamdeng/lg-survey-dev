@@ -17,7 +17,7 @@ import classNames from 'classnames';
 function AppButton(props) {
   const {
     id = CommonUtil.getUUID(),
-    theme = 'primary', // 'primary' | 'secondary'...;
+    theme = 'primary', // 'primary' | 'secondary' | 'basic'  | 'basic-outline'
     icon = '',
     size = 'middle',
     disabled = false,

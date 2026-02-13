@@ -1,12 +1,8 @@
 import { useState, useCallback, useMemo } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
-import { Button } from 'antd';
-
 import HeaderMenu from '@/publish/components/headerMenu';
-
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
-import { Form } from 'antd';
 
 import {
   Home,
@@ -43,8 +39,6 @@ for (let index = 0; index < 10; index++) {
 }
 
 const QuestionInfo = () => {
-  const [form] = Form.useForm();
-
   const [columns] = useState<any>([
     { field: 'name', headerName: '페이지', width: 70, cellStyle: { textAlign: 'center' } },
     { field: 'name2', headerName: '순서', width: 60, cellStyle: { textAlign: 'center' } },
@@ -88,7 +82,7 @@ const QuestionInfo = () => {
 
           <div className="content-body">
             <div className="form-block">
-              <Form form={form}>
+              <form>
                 <div className="form-inline">
                   <AppSelect
                     placeholder="년도"
@@ -189,7 +183,7 @@ const QuestionInfo = () => {
                 </div>
 
                 <AppButton icon={<Search size={18} />} value="조회" />
-              </Form>
+              </form>
             </div>
 
             <div className="grid-block">

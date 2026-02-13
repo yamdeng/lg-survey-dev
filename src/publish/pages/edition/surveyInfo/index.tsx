@@ -1,10 +1,9 @@
 import { AgGridReact } from 'ag-grid-react';
-import { Button } from 'antd';
 import { useState } from 'react';
 
 import HeaderMenu from '@/publish/components/headerMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
-import { Form } from 'antd';
+
 import {
   Home,
   Download,
@@ -134,7 +133,7 @@ const SurveyInfo = () => {
 
           <div className="content-body">
             <div className="form-block">
-              <Form>
+              <form>
                 <div className="form-inline">
                   <AppSelect
                     value="2026"
@@ -187,7 +186,7 @@ const SurveyInfo = () => {
                 </div>
 
                 <AppButton icon={<Search size={18} />} value="조회" />
-              </Form>
+              </form>
             </div>
 
             <div className="grid-block">

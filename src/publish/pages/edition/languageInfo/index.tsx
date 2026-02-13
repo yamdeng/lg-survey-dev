@@ -1,10 +1,8 @@
-import { Button } from 'antd';
 import { useState } from 'react';
 import { AgGridReact } from 'ag-grid-react';
 
 import HeaderMenu from '@/publish/components/headerMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
-import { Form } from 'antd';
 
 import {
   Home,
@@ -38,8 +36,6 @@ for (let index = 0; index < 10; index++) {
 }
 
 const LanguageInfo = () => {
-  const [form] = Form.useForm();
-
   const [columns] = useState<any>([
     { field: 'name', headerName: '설문코드', width: 150, cellStyle: { textAlign: 'center' } },
     { field: 'name2', headerName: '구분', width: 200 },
@@ -82,7 +78,7 @@ const LanguageInfo = () => {
 
           <div className="content-body">
             <div className="form-block">
-              <Form form={form}>
+              <form>
                 <div className="form-inline">
                   <AppSelect
                     placeholder="년도"
@@ -152,7 +148,7 @@ const LanguageInfo = () => {
                 </div>
 
                 <AppButton icon={<Search size={18} />} value="조회" />
-              </Form>
+              </form>
             </div>
 
             <div className="grid-block">

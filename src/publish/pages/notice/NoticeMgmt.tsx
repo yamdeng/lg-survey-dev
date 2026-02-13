@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import { AgGridReact } from 'ag-grid-react';
 import HeaderMenu from '@/publish/components/headerMenu';
-import { Form, Button } from 'antd';
 
 import { Home, Search, FilePenLine, Plus, X, Check } from 'lucide-react';
 
@@ -117,7 +114,12 @@ const NoticeMgmt = () => {
                       {/* 첨부파일 블럭 - 컴포넌트화 필요 */}
                       <div className="fileupload-block">
                         <FlexBox justify="flex-end">
-                          <button className="add">추가</button>
+                          <AppButton
+                            icon={<Plus size={17} />}
+                            value="추가"
+                            theme="basic"
+                            size="large"
+                          />
                         </FlexBox>
                         <table className="table-basic">
                           <colgroup>
@@ -137,21 +139,36 @@ const NoticeMgmt = () => {
                               <td align="center">1</td>
                               <td>오늘의 첨부 엑셀 파일.xls</td>
                               <td align="center">
-                                <button className="del">삭제</button>
+                                <AppButton
+                                  icon={<X size={13} />}
+                                  value="삭제"
+                                  theme="basic"
+                                  size="small"
+                                />
                               </td>
                             </tr>
                             <tr>
                               <td align="center">2</td>
                               <td>오늘의 첨부 엑셀 파일2.xls</td>
                               <td align="center">
-                                <button className="del">삭제</button>
+                                <AppButton
+                                  icon={<X size={13} />}
+                                  value="삭제"
+                                  theme="basic"
+                                  size="small"
+                                />
                               </td>
                             </tr>
                             <tr>
                               <td align="center"></td>
                               <td></td>
                               <td align="center">
-                                <button className="del">삭제</button>
+                                <AppButton
+                                  icon={<X size={13} />}
+                                  value="삭제"
+                                  theme="basic"
+                                  size="small"
+                                />
                               </td>
                             </tr>
                           </tbody>
