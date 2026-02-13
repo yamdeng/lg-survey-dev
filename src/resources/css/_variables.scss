@@ -8,24 +8,46 @@
   //   --sv-menu-collapsed-width: 60px !important;
   // }
 
-  /* Design Tokens */
-  $color-split: rgba(5, 5, 5, 0.06);
-  $color-primary: #a50934;
-  $font-family-base: 'LG EI Text', 'Noto Sans KR', sans-serif;
-  $font-family-title: 'LG EI Headline', 'Noto Sans KR', sans-serif;
-  $font-size-base: 14px;
-  $font-size-lg: 16px;
-  $font-size-sm: 12px;
+
 
   :root {
+    /* Design Tokens */
+    $color-split: rgba(5, 5, 5, 0.06);
+    $color-primary: #a50934;
+    $color-border: #d9d9d9;
+    $border-radius: 4px;
+    $font-family-base: 'LG EI Text', 'Noto Sans KR', sans-serif;
+    $font-family-title: 'LG EI Headline', 'Noto Sans KR', sans-serif;
+    $font-size-base: 14px;
+    $font-size-lg: 16px;
+    $font-size-sm: 12px;
+
     --sv-color-split: $color-split;
     --sv-color-primary: $color-primary !important;
+    --sv-color-border: $color-border !important;
+    --sv-border-radius: $border-radius;
+    // --sv-border-radius:;
+    // --sv-select-border-color: ;
+    // --sv-select-background-color: ;
+    // --sv-control-outline-width: ;
+    // --sv-select-active-outline-color: ;
+
     --sv-font-family-base: $font-family-base;
     --ag-header-font-family: $font-family-base;
+
+    // border-radius: var(--ant-select-border-radius);
+    // border-width: var(--ant-select-border-size);
+    // border-style: var(--sv-line-type);
+    // border-color: var(--ant-select-border-color);
+    // background: var(--ant-select-background-color);
+    // padding-inline: var(--ant-select-padding-horizontal);
+    // padding-block: var(--ant-select-padding-vertical);
   }
 
 }
 
+:where(.css-dev-only-do-not-override-akni31).ant-select.ant-select-outlined:not(.ant-select-disabled).ant-select-focused {}
+.ant-select-focused { box-shadow: none !important; }
 
 .css-var-_r_3h_.ant-menu-css-var {
 

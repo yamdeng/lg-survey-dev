@@ -150,12 +150,19 @@
 
     //Form Custom
     .form-input-outlined {
-      outline: 1px solid var(--sv-color-border); border-radius: var(--sv-border-radius); line-height: 32px; height: 32px;
+      // outline: 1px solid var(--sv-color-border); --> :root 적용 안됨
+      // border-radius: var(--sv-border-radius); 
+      outline: 1px solid #d9d9d9; 
+      border-radius: 4px; 
+      line-height: 32px; height: 32px;
+
       position: relative; display: flex; align-items: center; 
       font-size: 14px; line-height: 1.6;
       &:has(:focus) { outline-color: #b32549; }
+
       > input { line-height: 30px; color: #000000e0; width: 100%; padding: 0 24px 0 10px; }
       input::placeholder { color: #ccc; opacity: 1; }
+
       & + .icon-sch { 
         width: 26px; height: 26px; background-color: #fcfcfc;
         position: absolute; right: 4px; border-radius: 4px;
@@ -223,8 +230,8 @@
 
     .fileupload-block {
       margin: 10px 20px 20px; max-width: 1000px;
-      button { font-size: 14px;
-        background-color: #c7c7c7; color: #333333; cursor: pointer;  line-height: 18px;
+      button { font-size: 14px; transition: .3s;
+        background-color: #d8d8d8; color: #333333; cursor: pointer;  line-height: 18px;
         padding: 4px 20px 6px; border-radius: 4px; 
         &.del { font-size: 12px;
           &::before { content: "x"; font-size: 14px; color: #333; margin-right: 4px; position: relative; left: -4px; top: -1px;} 

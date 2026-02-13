@@ -92,14 +92,14 @@ function AppSearchInput(props) {
               }}
             ></button>
           )}
-        </div>
 
-        {hiddenSearchButton ? null : (
-          // icon-sch
-          <button type="button" className="icon-sch" onClick={search}>
-            <Search />
-          </button>
-        )}
+          {hiddenSearchButton ? null : (
+            // icon-sch
+            <button type="button" className="icon-sch" onClick={search}>
+              <Search />
+            </button>
+          )}
+        </div>
         <CommonInputError errorMessage={errorMessage} label={label} />
       </div>
     </>

@@ -15,9 +15,9 @@ export const customTheme: ThemeConfig = {
     colorLinkHover: '#bd1746',
     colorLinkActive: '#8b032a',
   },
-  cssVar: {
-    prefix: 'sv', // CSS 변수 접두사 설정
-  },
+  // cssVar: {
+  //   prefix: 'sv', // CSS 변수 접두사 설정
+  // },
 
   components: {
     Menu: {

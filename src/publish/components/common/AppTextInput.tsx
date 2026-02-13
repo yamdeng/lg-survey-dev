@@ -3,13 +3,11 @@ import classNames from 'classnames';
 import CommonInputError from './CommonInputError';
 
 /*
-
    #.<AppTextInput /> 전용 속성
     -value(string)
     -onChange : (string, event)
     -inputType(string) : 'number' | 'text' (생략시 기본 'text')
     -hiddenClearButton(boolean) : false
-
 */
 
 function AppTextInput(props) {
@@ -22,7 +20,8 @@ function AppTextInput(props) {
     placeholder = '',
     errorMessage,
     disabled = false,
-    style = {},
+    icon,
+    required,
     width,
     hiddenClearButton = false,
     inputType = 'text',
@@ -36,24 +35,33 @@ function AppTextInput(props) {
 
   return (
     <>
-      <input
-        {...rest}
-        id={id}
-        type={inputType}
-        style={{ width: width }}
-        className={applyClassName}
-        name={name}
-        value={value ? value : ''}
-        onChange={(event) => {
-          onChange(event.target.value, event);
-        }}
-        placeholder={placeholder}
-        disabled={disabled}
-      />
-      {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
-        <button className="btnclear" onClick={() => onChange('')}></button>
-      )}
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <div className="form-item">
+        {label && (
+          <label htmlFor={id}>
+            {icon} {label} {required && <strong>*</strong>}
+          </label>
+        )}
+        <div className="form-input-outlined">
+          <input
+            {...rest}
+            id={id}
+            type={inputType}
+            style={{ width: width }}
+            className={applyClassName}
+            name={name}
+            value={value ? value : ''}
+            onChange={(event) => {
+              onChange(event.target.value, event);
+            }}
+            placeholder={placeholder}
+            disabled={disabled}
+          />
+          {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
+            <button className="btnclear" onClick={() => onChange('')}></button>
+          )}
+        </div>
+        <CommonInputError errorMessage={errorMessage} label={label} />
+      </div>
     </>
   );
 }
