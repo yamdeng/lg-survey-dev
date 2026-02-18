@@ -39,7 +39,7 @@ function AppCheckbox(props) {
         />
         <span>{checkboxTitle ? checkboxTitle : label}</span>
       </label>
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

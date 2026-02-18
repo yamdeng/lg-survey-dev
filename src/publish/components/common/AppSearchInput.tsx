@@ -100,7 +100,7 @@ function AppSearchInput(props) {
             </button>
           )}
         </div>
-        <CommonInputError errorMessage={errorMessage} label={label} />
+        <CommonInputError errorMessage={errorMessage} />
       </div>
     </>
   );

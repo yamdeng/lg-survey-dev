@@ -5,7 +5,6 @@ import AppSearchInput from '@/components/common/AppSearchInput';
 import AppTextArea from '@/components/common/AppTextArea';
 import AppTextInput from '@/components/common/AppTextInput';
 import AppSelect from '@/components/common/AppSelect';
-import AppTreeSelect from '@/components/common/AppTreeSelect';
 import AppAutoComplete from '@/components/common/AppAutoComplete';
 import AppDatePicker from '@/components/common/AppDatePicker';
 import AppRangeDatePicker from '@/components/common/AppRangeDatePicker';
@@ -63,10 +62,6 @@ function PBasicInput() {
       <p style={pStyle}>
         AppSelect
         <AppSelect />
-      </p>
-      <p style={pStyle}>
-        AppTreeSelect
-        <AppTreeSelect />
       </p>
       <p style={pStyle}>
         AppAutoComplete

@@ -51,7 +51,7 @@ function AppRadioGroup(props) {
           );
         })}
       </div>
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

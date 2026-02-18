@@ -64,7 +64,7 @@ function AppCheckboxGroup(props) {
             </label>
           );
         })}
-        <CommonInputError errorMessage={errorMessage} label={label} />
+        <CommonInputError errorMessage={errorMessage} />
       </div>
     </>
   );

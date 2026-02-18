@@ -35,6 +35,8 @@ const AppDatePicker = (props) => {
     id = CommonUtil.getUUID(),
     name,
     label,
+    icon,
+    required,
     errorMessage,
     defaultValue = null,
     value = null,
@@ -130,45 +132,55 @@ const AppDatePicker = (props) => {
 
   return (
     <>
-      <DatePicker
-        className={applyClassName}
-        status={errorMessage ? 'error' : ''}
-        style={style}
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        onChange={(dayjsDate: any) => {
-          let valueString = dayjsDate ? dayjsDate.format(applyDateValueFormat) : '';
-          // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
-          if (pickerType === DATE_PICKER_TYPE_QUARTER) {
-            valueString = dayjsDate.format('YYYY-MM') + '-01';
-          }
-          onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
-        }}
-        picker={pickerType}
-        defaultValue={defaultValue}
-        value={applyValue}
-        format={applyDisplayFormat}
-        showTime={
-          showTime
-            ? {
-                format: applyTimeFormat,
-                hourStep: hourStep,
-                minuteStep: minuteStep,
-                secondStep: secondStep,
+      <div className="form-item">
+        {label && (
+          <label htmlFor={id}>
+            {icon ? icon : null} {label} {required && <strong>*</strong>}
+          </label>
+        )}
+
+        <div className="form-input-outlined">
+          <DatePicker
+            className={applyClassName}
+            status={errorMessage ? 'error' : ''}
+            style={style}
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            onChange={(dayjsDate: any) => {
+              let valueString = dayjsDate ? dayjsDate.format(applyDateValueFormat) : '';
+              // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
+              if (pickerType === DATE_PICKER_TYPE_QUARTER) {
+                valueString = dayjsDate.format('YYYY-MM') + '-01';
               }
-            : false
-        }
-        showNow={false}
-        needConfirm={needConfirm}
-        minDate={applyMinDate}
-        maxDate={applyMaxDate}
-        disabled={disabled}
-        disabledDate={disabledDate}
-        renderExtraFooter={showNow ? renderFooter : null}
-        {...rest}
-      />
-      <CommonInputError errorMessage={errorMessage} label={label} />
+              onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
+            }}
+            picker={pickerType}
+            defaultValue={defaultValue}
+            value={applyValue}
+            format={applyDisplayFormat}
+            showTime={
+              showTime
+                ? {
+                    format: applyTimeFormat,
+                    hourStep: hourStep,
+                    minuteStep: minuteStep,
+                    secondStep: secondStep,
+                  }
+                : false
+            }
+            showNow={false}
+            needConfirm={needConfirm}
+            minDate={applyMinDate}
+            maxDate={applyMaxDate}
+            disabled={disabled}
+            disabledDate={disabledDate}
+            renderExtraFooter={showNow ? renderFooter : null}
+            {...rest}
+          />
+        </div>
+        <CommonInputError errorMessage={errorMessage} />
+      </div>
     </>
   );
 };

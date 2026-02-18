@@ -15,6 +15,7 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 // 라이브러리 css import
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-tooltip/dist/react-tooltip.css';
+import 'react-quill/dist/quill.snow.css';
 
 // 프로젝트 import
 import '@/resources/css/index.scss';

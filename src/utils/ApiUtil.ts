@@ -3,7 +3,7 @@ import { useAppStore } from '@/stores/useAppStore';
 import { useUIStore } from '@/stores/useUIStore';
 import LoadingBar from '@/utils/LoadingBar';
 import axios from 'axios';
-import CommonUtil from './CommonUtil';
+import CommonUtil from '@/utils/CommonUtil';
 
 /*
 
@@ -11,8 +11,6 @@ import CommonUtil from './CommonUtil';
    -disableLoadingBar
    -applyOriginalResponse
    -byPassError
-   -errorMessageByDataProperty
-   -byPassApiAuthCheck
 
 */
 
@@ -24,8 +22,6 @@ const ApiUtil = axios.create({
   disableLoadingBar: false,
   applyOriginalResponse: false,
   byPassError: false,
-  errorMessageByDataProperty: false,
-  byPassApiAuthCheck: false,
 } as any);
 
 ApiUtil.defaults.timeout = 1000 * 120;
@@ -40,7 +36,7 @@ ApiUtil.interceptors.request.use(
       requestIdList.push(requestId);
     }
 
-    const { accessToken, handleBeforeAuthCheck } = useAppStore.getState();
+    const { accessToken } = useAppStore.getState();
     if (!useUIStore.getState().displayLoadingBar) {
       if (!config.disableLoadingBar) {
         LoadingBar.show();
@@ -48,12 +44,9 @@ ApiUtil.interceptors.request.use(
     }
 
     // TODO : 필요시 헤더에 인증 토큰값 반영
-    const AuthorizationValue = `${accessToken}`;
+    const AuthorizationValue = `Bearer ${accessToken}`;
     config.headers['Authorization'] = AuthorizationValue;
 
-    if (!config.byPassApiAuthCheck) {
-      await handleBeforeAuthCheck();
-    }
     return config;
   },
   async (error) => {
@@ -83,24 +76,13 @@ ApiUtil.interceptors.response.use(
     if (!response.config.disableLoadingBar && !requestIdList.length) {
       LoadingBar.hide();
     }
-    const responseData = response.data;
-    const responseHeader = response.headers;
-    if (!response.config.byPassError) {
-      // TODO : http 응답 코드가 정상일 경우 에러 처리를 해야하는 경우 반영(필요시 반영)
-      // ModalService.alert({ body: applyErrorMessage });
-      // return Promise.reject({
-      //   errorType: 'api',
-      //   message: applyErrorMessage,
-      //   config: response.config,
-      // });
-    }
     if (response.config.applyOriginalResponse) {
       return response;
     }
     return response.data;
   },
   async (error) => {
-    const { config, code } = error;
+    const { config } = error;
     if (config && config.requestId) {
       // requestId 삭제
       const deleteIndex = requestIdList.indexOf(config.requestId);
@@ -114,7 +96,11 @@ ApiUtil.interceptors.response.use(
     }
     const { handleUnauthorizedError, handleAccessDeniedError } = useAppStore.getState();
     const errorResponse = error.response || {};
+    const errorResponseData = errorResponse.data || {};
     const status = errorResponse.status;
+    if (config.byPassError) {
+      return errorResponse;
+    }
 
     // 인증 오류
     if (status === 401) {
@@ -125,16 +111,31 @@ ApiUtil.interceptors.response.use(
     // 403 에러
     if (status === 403) {
       // TODO : 403 error handle
-      handleAccessDeniedError();
+      handleAccessDeniedError(errorResponse);
       return Promise.reject(error);
     }
 
-    if (code && code === 'ECONNABORTED') {
-      ModalService.alert({ body: 'server api timeout error' });
-    } else {
-      // 그외의 오류는 일반적인 오류가 아니므로 테스트가 완료된 case에서는 나오면은 않되는 경우임
-      ModalService.alert({ body: status === 404 ? 'api not found' : 'server error' });
+    // 네트워크 에러
+    if (!errorResponse && error.message === 'Network Error') {
+      ModalService.alert({
+        title: '네트워크 오류',
+        body: '서버와 연결할 수 없습니다. 네트워크 상태를 확인해주세요.',
+      });
+      return Promise.reject(error);
     }
+
+    // 타임아웃 처리
+    if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
+      ModalService.alert({
+        title: '요청 시간 초과',
+        body: '서버 응답 시간이 너무 길어 요청이 취소되었습니다.',
+      });
+      return Promise.reject(error);
+    }
+
+    const { message } = errorResponseData;
+    // 그외의 오류는 일반적인 오류가 아니므로 테스트가 완료된 case에서는 나오면은 않되는 경우임
+    ModalService.alert({ title: 'API ERROR', body: message ? message : 'not message' });
 
     return Promise.reject(error);
   },

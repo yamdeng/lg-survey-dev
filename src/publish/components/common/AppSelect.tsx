@@ -112,7 +112,7 @@ function AppSelect(props) {
             labelRender={labelRender}
           ></Select>
         </div>
-        <CommonInputError errorMessage={errorMessage} label={label} />
+        <CommonInputError errorMessage={errorMessage} />
       </div>
     </>
   );

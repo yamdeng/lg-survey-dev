@@ -13,6 +13,8 @@ const AppRangeDatePicker = (props) => {
     id = CommonUtil.getUUID(),
     name,
     label,
+    required,
+    icon,
     errorMessage,
     defaultValue = [],
     value = [],
@@ -95,52 +97,61 @@ const AppRangeDatePicker = (props) => {
 
   return (
     <>
-      <RangePicker
-        className={applyClassName}
-        status={errorMessage ? 'error' : ''}
-        style={style}
-        id={{
-          start: id,
-        }}
-        name={name}
-        placeholder={placeholder}
-        onChange={(dayjsDateArray: any) => {
-          let valueStringArray = [];
-          let valueDateArray = [];
-          if (dayjsDateArray && dayjsDateArray.length) {
-            valueStringArray = dayjsDateArray.map((dayjsDate) => {
-              // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
-              if (pickerType === DATE_PICKER_TYPE_QUARTER) {
-                return dayjsDate.format('YYYY-MM') + '-01';
+      <div className="form-item">
+        {label && (
+          <label htmlFor={id}>
+            {icon ? icon : null} {label} {required && <strong>*</strong>}
+          </label>
+        )}
+        <div className="form-input-outlined">
+          <RangePicker
+            className={applyClassName}
+            status={errorMessage ? 'error' : ''}
+            style={style}
+            id={{
+              start: id,
+            }}
+            name={name}
+            placeholder={placeholder}
+            onChange={(dayjsDateArray: any) => {
+              let valueStringArray = [];
+              let valueDateArray = [];
+              if (dayjsDateArray && dayjsDateArray.length) {
+                valueStringArray = dayjsDateArray.map((dayjsDate) => {
+                  // quarter(분기) 타입일 경우에 각 월의 random값을 전달하고 있음
+                  if (pickerType === DATE_PICKER_TYPE_QUARTER) {
+                    return dayjsDate.format('YYYY-MM') + '-01';
+                  }
+                  return dayjsDate.format(applyDateValueFormat);
+                });
+                valueDateArray = dayjsDateArray.map((dayjsDate) => dayjsDate.toDate);
               }
-              return dayjsDate.format(applyDateValueFormat);
-            });
-            valueDateArray = dayjsDateArray.map((dayjsDate) => dayjsDate.toDate);
-          }
-          onChange(valueStringArray, valueDateArray);
-        }}
-        picker={pickerType}
-        defaultValue={defaultValue}
-        value={applyValue}
-        format={applyDisplayFormat}
-        showTime={
-          showTime
-            ? {
-                format: applyTimeFormat,
-                hourStep: hourStep,
-                minuteStep: minuteStep,
-                secondStep: secondStep,
-              }
-            : false
-        }
-        showNow={showNow}
-        needConfirm={needConfirm}
-        minDate={applyMinDate}
-        maxDate={applyMaxDate}
-        disabled={disabled}
-        disabledDate={disabledDate}
-      />
-      <CommonInputError errorMessage={errorMessage} label={label} />
+              onChange(valueStringArray, valueDateArray);
+            }}
+            picker={pickerType}
+            defaultValue={defaultValue}
+            value={applyValue}
+            format={applyDisplayFormat}
+            showTime={
+              showTime
+                ? {
+                    format: applyTimeFormat,
+                    hourStep: hourStep,
+                    minuteStep: minuteStep,
+                    secondStep: secondStep,
+                  }
+                : false
+            }
+            showNow={showNow}
+            needConfirm={needConfirm}
+            minDate={applyMinDate}
+            maxDate={applyMaxDate}
+            disabled={disabled}
+            disabledDate={disabledDate}
+          />
+        </div>
+        <CommonInputError errorMessage={errorMessage} />
+      </div>
     </>
   );
 };

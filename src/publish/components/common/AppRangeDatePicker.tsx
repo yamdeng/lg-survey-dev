@@ -142,7 +142,7 @@ const AppRangeDatePicker = (props) => {
         disabledDate={disabledDate}
         style={{ width: width }}
       />
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 };

@@ -33,6 +33,8 @@ function AppSelect(props) {
     errorMessage,
     disabled = false,
     style = { width: '100%' },
+    required = false,
+    icon,
     options = [],
     isMultiple = false,
     applyAllSelect = false,
@@ -48,7 +50,7 @@ function AppSelect(props) {
   } = props;
 
   const [isFocused, setIsFocused] = useState(false);
-  const [stateOptions, setStateOptions] = useState([]);
+  const [stateOptions, setStateOptions] = useState<any>([]);
 
   const handleFocus = () => {
     setIsFocused(true);
@@ -67,7 +69,7 @@ function AppSelect(props) {
   useEffect(() => {
     if (apiUrl) {
       ApiService.get(`${apiUrl}`).then((apiResult) => {
-        const data = apiResult.data;
+        const data = apiResult && Array.isArray(apiResult) ? apiResult : [];
         setStateOptions(data);
       });
     }
@@ -75,29 +77,38 @@ function AppSelect(props) {
 
   return (
     <>
-      <Select
-        {...rest}
-        mode={isMultiple ? 'multiple' : ''}
-        status={!isFocused && errorMessage ? 'error' : ''}
-        style={style}
-        className={applyClassName}
-        id={id}
-        name={name}
-        value={placeholder && !value ? undefined : value}
-        options={applyOptions}
-        placeholder={placeholder}
-        disabled={disabled}
-        onChange={onChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        fieldNames={{ label: labelKey, value: valueKey }}
-        showSearch={showSearch}
-        notFoundContent={null}
-        optionFilterProp={labelKey}
-        allowClear={allowClear}
-        labelRender={labelRender}
-      ></Select>
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <div className="form-item">
+        {label && (
+          <label htmlFor={id}>
+            {icon} {label} {required && <strong>*</strong>}
+          </label>
+        )}
+        <div className="form-select-outlined">
+          <Select
+            {...rest}
+            mode={isMultiple ? 'multiple' : ''}
+            status={!isFocused && errorMessage ? 'error' : ''}
+            style={style}
+            className={applyClassName}
+            id={id}
+            name={name}
+            value={placeholder && !value ? undefined : value}
+            options={applyOptions}
+            placeholder={placeholder}
+            disabled={disabled}
+            onChange={onChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            fieldNames={{ label: labelKey, value: valueKey }}
+            showSearch={showSearch}
+            notFoundContent={null}
+            optionFilterProp={labelKey}
+            allowClear={allowClear}
+            labelRender={labelRender}
+          ></Select>
+        </div>
+        <CommonInputError errorMessage={errorMessage} />
+      </div>
     </>
   );
 }

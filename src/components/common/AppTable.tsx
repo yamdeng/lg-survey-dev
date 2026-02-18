@@ -1,5 +1,6 @@
 import Config from '@/config/Config';
 import { AgGridReact } from 'ag-grid-react';
+import AppSelect from '@/components/common/AppSelect';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 // 컬럼 기본값 정보
@@ -38,8 +39,6 @@ const LoadingComponent = (props) => {
    -className(string) : 별도의 스타일 적용하기 위한 css 클래스명
    -rowData([]) : 테이블에 반영할 목록 data
    -columns([]) : 테이블에 반영할 헤더 컬럼 목록
-   -setColumns(function) : 동적 컬럼 변경시 변경된 정보를 즉시 반영하기 위한 함수
-   -customButtons([]) : 우측 상단에 추가할 버튼 목록
    -tableHeight(number) : 기본적으로 적용되어있는 테이블의 높이를 변경하고 싶을때 사용
    -noDataMessage(string) : 데이터가 존재하지 않을때 메시지(기본정책이 아닌 다른메시지로 표기하고 싶을때 사용)
    -displayTableLoading(boolean) : 내부 로딩바 반영하기 위한
@@ -52,12 +51,10 @@ const LoadingComponent = (props) => {
    -isRowSelectable(function) : 체크박스 선택이 가능한 filter 함수 정의
    -pageSize(number) : 페이징 사이즈
    -pageSizeList([]) : 페이징 사이즈(select options)
-   -gridTotalCountTemplate : total count 메시지 템플릿 적용을 위한
    -getGridRef(function) : 컴포넌트의 ref를 전달받고 싶을때 콜백 함수로 전달
    -applyAutoHeight(boolean) : agGrid의 domLayout 설정을 반영하기 위한 : 현재 사용 x
    -store : listSlice에 적용된 store(페이징 및 공통 처리를 반영하기 위한 zustand store를 props로 전달)
    -hiddenPagination(boolean) : 하단 페이징 hide 여부
-   -hiddenTableHeader(boolean) : 상단 헤더 영역 hide 여부
    -defaultColDef({}) : 기본 컬럼 정책을 override 하기 위한 설정
 
 */
@@ -91,9 +88,13 @@ function AppTable(props) {
   const applyDefaultColDef = { ...basicDefaultColDef, ...defaultColDef };
 
   // store
-  const { currentPage, prevPage, nextPage, displayPageIndexList = [] } = store || {};
-
-  // 컬럼 동적 셋팅 모달 open
+  const {
+    currentPage,
+    prevPage,
+    nextPage,
+    displayPageIndexList = [],
+    changePageSize,
+  } = store || {};
 
   // 선택 정책을 props에 전달받은 값을 기준으로 재반영
   const selection = useMemo(() => {
@@ -192,7 +193,9 @@ function AppTable(props) {
             event.preventDefault();
             store.goFirstPage();
           }}
-        ></a>
+        >
+          <span className="sr-only">이전</span>
+        </a>
         <a
           className="prev"
           href=""
@@ -201,7 +204,9 @@ function AppTable(props) {
             event.preventDefault();
             store.changeCurrentPage(prevPage);
           }}
-        ></a>
+        >
+          <span className="sr-only">이전</span>
+        </a>
         <span>
           {displayPageIndexList.map((pageIndex) => {
             let pageComponent = (
@@ -240,7 +245,9 @@ function AppTable(props) {
             event.preventDefault();
             store.changeCurrentPage(nextPage);
           }}
-        ></a>
+        >
+          <span className="sr-only">다음</span>
+        </a>
         <a
           className="last"
           href=""
@@ -249,7 +256,22 @@ function AppTable(props) {
             event.preventDefault();
             store.goLastPage();
           }}
-        ></a>
+        >
+          <span className="sr-only">다음</span>
+        </a>
+        <span>
+          <AppSelect
+            style={{ height: 30, width: 80, display: hiddenPagination || !store ? 'none' : '' }}
+            onChange={(size) => {
+              changePageSize(size);
+            }}
+            value={store ? store.pageSize : pageSize}
+            options={pageSizeList.map((size) => {
+              return { value: size, label: size };
+            })}
+            allowClear={false}
+          />
+        </span>
       </div>
     </>
   );

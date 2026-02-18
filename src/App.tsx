@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import reactLogo from '@/resources/images/react.svg';
-import viteLogo from '/vite.svg';
+import lgSymbol from '@/resources/images/LG-Symbol.jpg';
+import lgLogo from '/lg-logo.jpeg';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -10,15 +10,15 @@ function App() {
 
   return (
     <>
+      <h1>User</h1>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} alt="Vite logo" />
+        <a href="https://lg.com" target="_blank">
+          <img src={lgLogo} alt="lg logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} alt="React logo" />
+        <a href="https://lg.com" target="_blank">
+          <img src={lgSymbol} alt="lg symbol" />
         </a>
       </div>
-      <h1>Vite + React</h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>

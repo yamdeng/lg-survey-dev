@@ -8,7 +8,9 @@ function AppTimePicker(props) {
   const {
     id = CommonUtil.getUUID(),
     name,
+    required,
     label,
+    icon,
     placeholder = '',
     errorMessage,
     defaultValue = null,
@@ -45,29 +47,38 @@ function AppTimePicker(props) {
 
   return (
     <>
-      <TimePicker
-        {...props}
-        className={applyClassName}
-        status={errorMessage ? 'error' : ''}
-        style={style}
-        id={id}
-        name={name}
-        placeholder={placeholder}
-        onChange={(dayjsDate: any) => {
-          const valueString = dayjsDate ? dayjsDate.format(applyDateValueFormat) : '';
-          onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
-        }}
-        defaultValue={defaultValue}
-        value={applyValue}
-        format={applyDisplayFormat}
-        showNow={showNow}
-        needConfirm={needConfirm}
-        disabled={disabled}
-        minuteStep={minuteStep}
-        hourStep={hourStep}
-        secondStep={secondStep}
-      />
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <div className="form-item">
+        {label && (
+          <label htmlFor={id}>
+            {icon ? icon : null} {label} {required && <strong>*</strong>}
+          </label>
+        )}
+        <div className="form-input-outlined">
+          <TimePicker
+            {...props}
+            className={applyClassName}
+            status={errorMessage ? 'error' : ''}
+            style={style}
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            onChange={(dayjsDate: any) => {
+              const valueString = dayjsDate ? dayjsDate.format(applyDateValueFormat) : '';
+              onChange(valueString, dayjsDate ? dayjsDate.toDate() : null);
+            }}
+            defaultValue={defaultValue}
+            value={applyValue}
+            format={applyDisplayFormat}
+            showNow={showNow}
+            needConfirm={needConfirm}
+            disabled={disabled}
+            minuteStep={minuteStep}
+            hourStep={hourStep}
+            secondStep={secondStep}
+          />
+        </div>
+        <CommonInputError errorMessage={errorMessage} />
+      </div>
     </>
   );
 }

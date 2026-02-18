@@ -23,6 +23,8 @@ function AppTextInput(props) {
     errorMessage,
     disabled = false,
     style = {},
+    required = false,
+    icon = null,
     hiddenClearButton = false,
     inputType = 'text',
     ...rest
@@ -35,24 +37,33 @@ function AppTextInput(props) {
 
   return (
     <>
-      <input
-        {...rest}
-        id={id}
-        type={inputType}
-        style={style}
-        className={applyClassName}
-        name={name}
-        value={value ? value : ''}
-        onChange={(event) => {
-          onChange(event.target.value, event);
-        }}
-        placeholder={placeholder}
-        disabled={disabled}
-      />
-      {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
-        <button className="btnclear" onClick={() => onChange('')}></button>
-      )}
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <div className="form-item">
+        {label && (
+          <label htmlFor={id}>
+            {icon ? icon : null} {label} {required && <strong>*</strong>}
+          </label>
+        )}
+        <div className="form-input-outlined">
+          <input
+            {...rest}
+            id={id}
+            type={inputType}
+            style={style}
+            className={applyClassName}
+            name={name}
+            value={value ? value : ''}
+            onChange={(event) => {
+              onChange(event.target.value, event);
+            }}
+            placeholder={placeholder}
+            disabled={disabled}
+          />
+          {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
+            <button className="btnclear" onClick={() => onChange('')}></button>
+          )}
+        </div>
+        <CommonInputError errorMessage={errorMessage} />
+      </div>
     </>
   );
 }

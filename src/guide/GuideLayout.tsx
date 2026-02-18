@@ -2,12 +2,12 @@ import { Outlet } from 'react-router-dom';
 
 export default function GuideLayout() {
   return (
-    <div>
-      <p>TOP</p>
-      <div>
-        <Outlet />
+    <>
+      <div className="survey">
+        <div className="sv-content">
+          <Outlet />
+        </div>
       </div>
-      <p>BOTTOM</p>
-    </div>
+    </>
   );
 }

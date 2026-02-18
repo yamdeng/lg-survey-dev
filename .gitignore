@@ -27,3 +27,6 @@ dist-ssr
 # 퍼블 테스트 폴더(test, copy) 업데이트 제외
 src/publish/**/*copy*
 src/publish/**/*test*
+
+*.tsbuildinfo
+.vite/

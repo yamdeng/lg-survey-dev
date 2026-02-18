@@ -38,7 +38,7 @@ function AppTextArea(props) {
         // 기존 'app-form-input' 클래스가 필요하다면 추가
         className={errorMessage ? 'app-form-input error' : 'app-form-input'}
       />
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 }

@@ -36,6 +36,8 @@ function AppSearchInput(props) {
     errorMessage,
     disabled = false,
     style = {},
+    required = false,
+    icon = null,
     inputType = 'text',
     search = () => {},
     hiddenClearButton = false,
@@ -49,40 +51,47 @@ function AppSearchInput(props) {
 
   return (
     <>
-      <input
-        {...rest}
-        id={id}
-        type={inputType}
-        style={style}
-        className={applyClassName}
-        name={name}
-        value={value ? value : ''}
-        onChange={(event) => {
-          onChange(event.target.value, event);
-        }}
-        onKeyDown={(event) => {
-          if (event.key === 'Enter' && search) {
-            search();
-          }
-        }}
-        placeholder={placeholder}
-        disabled={disabled}
-      />
-      {hiddenClearButton || !value ? null : (
-        <button
-          className="sch-btnclear"
-          onClick={(event) => {
-            event.stopPropagation();
-            onChange('');
-          }}
-        ></button>
-      )}
-
-      {hiddenSearchButton ? null : (
-        // icon-sch
-        <button type="button" className="icon-sch" onClick={search}></button>
-      )}
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <div className="form-item">
+        {label && (
+          <label htmlFor={id}>
+            {icon ? icon : null} {label} {required && <strong>*</strong>}
+          </label>
+        )}
+        <div className="form-input-outlined">
+          <input
+            {...rest}
+            id={id}
+            type={inputType}
+            style={style}
+            className={applyClassName}
+            name={name}
+            value={value ? value : ''}
+            onChange={(event) => {
+              onChange(event.target.value, event);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' && search) {
+                search();
+              }
+            }}
+            placeholder={placeholder}
+            disabled={disabled}
+          />
+          {hiddenClearButton || !value ? null : (
+            <button
+              className="input-search"
+              onClick={(event) => {
+                event.stopPropagation();
+                onChange('');
+              }}
+            ></button>
+          )}
+          {hiddenSearchButton ? null : (
+            <button type="button" className="input-clear" onClick={search}></button>
+          )}
+        </div>
+        <CommonInputError errorMessage={errorMessage} />
+      </div>
     </>
   );
 }

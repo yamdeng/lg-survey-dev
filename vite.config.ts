@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, resolve(__dirname, './env'), '');
 
   const pluginList = [react(), tsconfigPaths()];
+  const enableProxyLog = env.ENABLE_PROXY_LOG && env.ENABLE_PROXY_LOG === 'true';
   const VITE_API_LOCAL_URL = env.VITE_API_LOCAL_URL;
   const VITE_API_URL = env.VITE_API_URL;
   const currentFolderPath = resolve(__dirname);
@@ -23,13 +24,48 @@ export default defineConfig(({ mode }) => {
     define: {
       __PROJECT_FOLDER_PATH: JSON.stringify(currentFolderPath),
     },
+    build: {
+      sourcemap: true,
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'index.html'),
+          admin: resolve(__dirname, 'admin.html'),
+        },
+      },
+    },
     base: '/',
     envDir: './env',
     plugins: pluginList,
     server: {
-      strictPort: false,
+      hmr: {
+        overlay: true, // 에러 발생 시 오버레이를 띄우도록 명시
+      },
       open: true,
-      host: '0.0.0.0'
+      proxy: {
+        '/api': {
+          target: VITE_API_URL,
+          changeOrigin: true,
+          configure: (proxy: any) => {
+            proxy.on('error', (err: any) => {
+              if (enableProxyLog) {
+                console.log('proxy error', err);
+              }
+            });
+            proxy.on('proxyReq', (proxyReq: any, req: { method: any; url: any }) => {
+              console.log('Sending Request to the Target:', req.method, req.url);
+              if (enableProxyLog) {
+                console.log('Sending Request to the Target:', req.method, req.url);
+              }
+            });
+            proxy.on('proxyRes', (proxyRes: { statusCode: any }, req: { url: any }) => {
+              console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+              if (enableProxyLog) {
+                console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+              }
+            });
+          }
+        },
+      }
     },
   };
 });

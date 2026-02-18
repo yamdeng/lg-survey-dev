@@ -62,7 +62,7 @@ function AppTextInput(props) {
             <button className="btnclear" onClick={() => onChange('')}></button>
           )}
         </div>
-        <CommonInputError errorMessage={errorMessage} label={label} />
+        <CommonInputError errorMessage={errorMessage} />
       </div>
     </>
   );

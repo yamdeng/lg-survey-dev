@@ -1,4 +1,4 @@
-const baseFilePath = '/src/components/guide/';
+const baseFilePath = '/src/guide/';
 const profileFolderPath = __PROJECT_FOLDER_PATH;
 const hrefBasePath = `vscode://file/${profileFolderPath}${baseFilePath}`;
 

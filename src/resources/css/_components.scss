@@ -62,3 +62,19 @@
   }
 
 }
+
+/*pagination*/
+.pagination{margin:2.0rem 0 0 0;text-align:center}
+.pagination .first{position:relative}
+.pagination .first:before{content:'';position:absolute;box-sizing:content-box;top:0%;left:0%;width:3.2rem;height:3.2rem;background:url(../images/pagination-first.svg)no-repeat center center;}
+.pagination .prev{position:relative}
+.pagination .prev:before{content:'';position:absolute;box-sizing:content-box;top:0%;left:0%;width:3.2rem;height:3.2rem;background: url(../images/arrow-left.svg)center center no-repeat;/* width:0.6rem;height:0.6rem;transform:translate(-50%, -50%) rotate(45deg);margin-left:0.2rem;border-left:0.1rem solid var(--color-neutral-60);border-bottom:0.1rem solid var(--color-neutral-60)*/}
+.pagination .first, .pagination .prev, .pagination .next, .pagination .last{display:inline-block;width:3.2rem;height:3.2rem;vertical-align:top}
+.pagination span{display:inline-block;margin:0 0.9rem}
+.pagination span a, .pagination span strong{display:inline-block;width:3.2rem;height:3.2rem;border-radius:99.9rem;text-align:center;color:var(--color-neutral-80);font-size:1.5rem;line-height:3.2rem}
+.pagination span strong{background-color:var(--color-lightblue-10);color:var(--color-darkblue-100)}
+.pagination .next{position:relative}
+.pagination .next:before{content:'';position:absolute;box-sizing:content-box;top:0%;left:0%;width:3.2rem;height:3.2rem;background:url(../images/arrow-right.svg)no-repeat center center/*top:50%;left:50%;width:0.6rem;height:0.6rem;transform:translate(-50%, -50%) rotate(45deg);margin-left:-0.2rem;border-right:0.1rem solid var(--color-neutral-60);border-top:0.1rem solid var(--color-neutral-60)*/}
+.pagination .last{position:relative}
+.pagination .last:before{content:'';position:absolute;box-sizing:content-box;top:0%;left:0%;width:3.2rem;height:3.2rem;background:url(../images/pagination-last.svg)no-repeat center center}
+.sr-only{position:absolute; z-index: -1;overflow:hidden;width:0.1rem;height:0.1rem;margin: 0 !important;font-size:0.1rem;line-height:2;opacity:0}

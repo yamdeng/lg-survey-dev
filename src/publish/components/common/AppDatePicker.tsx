@@ -168,7 +168,7 @@ const AppDatePicker = (props) => {
         renderExtraFooter={showNow ? renderFooter : null}
         {...rest}
       />
-      <CommonInputError errorMessage={errorMessage} label={label} />
+      <CommonInputError errorMessage={errorMessage} />
     </>
   );
 };

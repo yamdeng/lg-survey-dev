@@ -1,6 +1,7 @@
 import ToastService from '@/services/ToastService';
 import Config from '@/config/Config';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import AppButton from '@/components/common/AppButton';
 
 function GuideToastService() {
   const handleToastService = () => {
@@ -12,32 +13,29 @@ function GuideToastService() {
 
   return (
     <>
-      <div className="conts-title">
-        <h2>
-          ToastService :{' '}
-          <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `GuideToastService.tsx`}>
-            GuideToastService
-          </a>
-        </h2>
-      </div>
-      <div className="editbox">
-        <CopyToClipboard
-          text={'설명입니다요.'}
-          onCopy={() => ToastService.success('설명 클립보드 복사 완료')}
-        >
-          <div className="form-table">설명입니다요.</div>
-        </CopyToClipboard>
-        <div className="btn-area">
-          <button
-            type="button"
-            name="button"
-            className="btn-sm btn_text btn-darkblue-line"
-            onClick={handleToastService}
-          >
-            toast
-          </button>
+      <main className="content-main">
+        <div className="content-inner">
+          <div className="content-title">
+            <h3 className="title-text">
+              ToastService :{' '}
+              <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideToastService.tsx`}>
+                GuideToastService
+              </a>
+            </h3>
+          </div>
+          <div className="content-body">
+            <CopyToClipboard
+              text={'설명입니다요.'}
+              onCopy={() => ToastService.success('설명 클립보드 복사 완료')}
+            >
+              <div className="form-table">클립보드 사용법!</div>
+            </CopyToClipboard>
+            <div className="btn-area">
+              <AppButton onClick={handleToastService} value="toast" />
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
     </>
   );
 }

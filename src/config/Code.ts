@@ -16,6 +16,24 @@ Code.useYn = [
   },
 ];
 
+/*
+    게시글 검색 유형
+*/
+Code.boardSearchType = [
+  {
+    label: '전체',
+    value: '',
+  },
+  {
+    label: '제목',
+    value: 'title',
+  },
+  {
+    label: '내용',
+    value: 'content',
+  },
+];
+
 // 코드명 가져오기 : value 기준
 Code.getCodeLabelByValue = function (codeCategory, codeValue) {
   let codeLabel = null;

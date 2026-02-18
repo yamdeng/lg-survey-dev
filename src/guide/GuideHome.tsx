@@ -1,4 +1,4 @@
-import { DevRoutes, PublishRoutes } from '@/routes/GuideRoutes';
+import { PublishRoutes, DevRoutes, DevPatternRoutes } from '@/routes/GuideRoutes';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import CommonRouteTable from './CommonRouteTable';
@@ -46,6 +46,15 @@ function PublishHome() {
         checkedNewTab={checkedNewTab}
       />
     );
+  } else if (tabIndex === 3) {
+    contentComponent = (
+      <CommonRouteTable
+        moduleDirectoryPath="dev-pattern/"
+        pageList={DevPatternRoutes.list}
+        keyword={keyword}
+        checkedNewTab={checkedNewTab}
+      />
+    );
   }
 
   const changeKeyword = (event) => {
@@ -65,7 +74,10 @@ function PublishHome() {
           퍼블리싱
         </button>
         <button className={tabIndex === 2 ? 'active' : ''} onClick={() => changeTabIndex(2)}>
-          개발가이드
+          개발 공통 가이드
+        </button>
+        <button className={tabIndex === 3 ? 'active' : ''} onClick={() => changeTabIndex(3)}>
+          개발 패턴 가이드
         </button>
       </div>
       <div style={{ padding: 10, marginBottom: 10 }}>
