@@ -15,11 +15,11 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 // 라이브러리 css import
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-tooltip/dist/react-tooltip.css';
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.snow.css';
+import 'react-quill-new/dist/quill.bubble.css';
 
 // 프로젝트 import
 import '@/resources/css/index.scss';
-
 import App from './App.tsx';
 import './yupLocale';
 
