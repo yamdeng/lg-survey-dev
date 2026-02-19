@@ -4,6 +4,7 @@ import LoadingBar from '@/utils/LoadingBar';
 import { navigate } from '@/utils/navigation';
 import dayjs from 'dayjs';
 import { createStore } from 'zustand';
+import ApiUtil from '@/utils/ApiUtil';
 
 // 로컬 개발 여부 : 용도는 로컬개발화 sso 분기 처리를 하기위한 변수
 // const enableLocalDevelop =
@@ -105,8 +106,26 @@ export const useAppStore = createStore<any>((set, get) => ({
     // yamdeng TODO : ModalService 사용
   },
 
-  // TODO : 403 에러 처리
-  handleRefreshAndRetry: async () => {},
+  // TODO : refreshToken 처리
+  handleRefreshAndRetry: async (originalRequest, beforeRefreshToken) => {
+    const { setLoginToken, handleUnauthorizedError } = get();
+    try {
+      const apiResult: any = await ApiUtil.post(
+        '/api/v1/auth/refresh',
+        {
+          refreshToken: beforeRefreshToken,
+        },
+        {
+          byPassError: true,
+        } as any,
+      );
+      const { accessToken, refreshToken } = apiResult;
+      setLoginToken(accessToken, refreshToken);
+      return ApiUtil.request(originalRequest);
+    } catch {
+      handleUnauthorizedError();
+    }
+  },
 
   // TODO : 502, 503, 504(인프라성 장애)
   handleServiceInterrupt: () => {},

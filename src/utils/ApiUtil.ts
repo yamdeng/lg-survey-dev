@@ -94,18 +94,24 @@ ApiUtil.interceptors.response.use(
     if (!requestIdList.length) {
       LoadingBar.hide();
     }
-    const { handleUnauthorizedError, handleAccessDeniedError } = useAppStore.getState();
+    const { handleUnauthorizedError, handleAccessDeniedError, handleRefreshAndRetry } =
+      useAppStore.getState();
     const errorResponse = error.response || {};
     const errorResponseData = errorResponse.data || {};
+    const { message, code } = errorResponseData;
     const status = errorResponse.status;
     if (config.byPassError) {
       return errorResponse;
     }
 
-    // 인증 오류
+    // 인증 오류 : 만료토큰시 refresh 반영
     if (status === 401) {
-      handleUnauthorizedError(errorResponse);
-      return Promise.reject(error);
+      if (code === 'INVALID_TOKEN') {
+        const refreshToken = CommonUtil.getByLocalStorage('refreshToken');
+        return handleRefreshAndRetry(errorResponse, refreshToken);
+      } else {
+        handleUnauthorizedError();
+      }
     }
 
     // 403 에러
@@ -133,7 +139,6 @@ ApiUtil.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    const { message } = errorResponseData;
     // 그외의 오류는 일반적인 오류가 아니므로 테스트가 완료된 case에서는 나오면은 않되는 경우임
     ModalService.alert({ title: 'API ERROR', body: message ? message : 'not message' });
 
