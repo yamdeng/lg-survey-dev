@@ -122,7 +122,7 @@ ApiUtil.interceptors.response.use(
     }
 
     // 네트워크 에러
-    if (!errorResponse && error.message === 'Network Error') {
+    if (!error.response || error.message === 'Network Error') {
       ModalService.alert({
         title: '네트워크 오류',
         body: '서버와 연결할 수 없습니다. 네트워크 상태를 확인해주세요.',

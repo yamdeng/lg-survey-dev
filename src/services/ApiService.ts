@@ -8,8 +8,10 @@ import ApiUtil from '@/utils/ApiUtil';
 
 // api prefix uri : /api/v1
 const VITE_API_PREFIX = import.meta.env.VITE_API_PREFIX;
+const VITE_API_URL = import.meta.env.VITE_API_URL || '';
+// const VITE_API_URL = '';
 
-const prefixUrl = `${VITE_API_PREFIX}/`;
+const prefixUrl = `${VITE_API_URL}${VITE_API_PREFIX}/`;
 
 class ApiService {
   // http get method 요청

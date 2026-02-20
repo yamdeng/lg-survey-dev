@@ -11,14 +11,14 @@ export default defineConfig(({ mode }) => {
   const pluginList = [react(), tsconfigPaths()];
   const enableProxyLog = env.ENABLE_PROXY_LOG && env.ENABLE_PROXY_LOG === 'true';
   const VITE_API_LOCAL_URL = env.VITE_API_LOCAL_URL;
-  const VITE_API_URL = env.VITE_API_URL;
+  const VITE_LOCAL_API_URL = env.VITE_LOCAL_API_URL;
   const currentFolderPath = resolve(__dirname);
   console.log(`mode : ${mode}`);
   console.log(`currentFolderPath : ${currentFolderPath}`);
-  console.log(`loadEnv env VITE_API_URL : ${env.VITE_API_URL}`);
+  console.log(`loadEnv env VITE_LOCAL_API_URL : ${env.VITE_LOCAL_API_URL}`);
   console.log(`enableHttps : ${env.ENABLE_HTTPS}`);
   console.log(`VITE_API_LOCAL_URL : ${VITE_API_LOCAL_URL}`);
-  console.log(`VITE_API_URL : ${VITE_API_URL}`);
+  console.log(`VITE_LOCAL_API_URL : ${VITE_LOCAL_API_URL}`);
 
   return {
     define: {
@@ -29,7 +29,6 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'index.html'),
-          admin: resolve(__dirname, 'admin.html'),
         },
       },
     },
@@ -43,7 +42,7 @@ export default defineConfig(({ mode }) => {
       open: true,
       proxy: {
         '/api': {
-          target: VITE_API_URL,
+          target: VITE_LOCAL_API_URL,
           changeOrigin: true,
           configure: (proxy: any) => {
             proxy.on('error', (err: any) => {
