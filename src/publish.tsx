@@ -2,7 +2,8 @@ import 'dayjs/locale/en';
 import 'dayjs/locale/ko';
 import { setAutoFreeze } from 'immer';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
+import { Router } from '@/publish/Router';
+import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import ErrorBoundary from './components/ErrorBoundary.tsx';
 import { customTheme } from '@/publish/customTheme';
@@ -20,18 +21,15 @@ import 'react-quill-new/dist/quill.bubble.css';
 
 // 프로젝트 import
 import '@/resources/css/index.scss';
-import PublishApp from './PublishApp.tsx';
 import './yupLocale';
 
 setAutoFreeze(false);
 
-const AppComponent = <PublishApp />;
-const basename = '/';
-
 createRoot(document.getElementById('root')!).render(
-  <BrowserRouter basename={basename}>
-    <ErrorBoundary>
-      <ConfigProvider theme={customTheme}>{AppComponent}</ConfigProvider>
-    </ErrorBoundary>
-  </BrowserRouter>,
+  <ErrorBoundary>
+    {/* BrowserRouter 대신 RouterProvider를 사용해야 useMatches가 작동합니다 */}
+    <ConfigProvider theme={customTheme}>
+      <RouterProvider router={Router} />
+    </ConfigProvider>
+  </ErrorBoundary>,
 );

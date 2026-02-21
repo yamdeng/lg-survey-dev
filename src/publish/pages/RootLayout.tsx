@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import LoadingBarContainer from '@/components/layout/LoadingBarContainer';
 
+import { Outlet } from 'react-router-dom';
 import MenuList from '@/publish/components/MenuList';
 import SiderTop from '@/publish/components/siderTop';
-
 import Header from '@/publish/components/header';
 
-function PublishApp() {
+function RootLayout() {
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
   const toggleCollapsed = () => {
@@ -16,7 +16,6 @@ function PublishApp() {
   return (
     <>
       <div className="survey">
-        {/* 좌메뉴 */}
         <aside className={collapsed ? 'collapsed' : ''}>
           <div className="side-fixed">
             <SiderTop
@@ -27,11 +26,9 @@ function PublishApp() {
             <MenuList collapsed={collapsed} />
           </div>
         </aside>
-        {/* 메인 */}
         <div className="sv-content">
           <Header />
-          {/* 페이지 리스트 */}
-          {/* <PageList /> */}
+          <Outlet />
         </div>
       </div>
       <LoadingBarContainer />
@@ -39,4 +36,4 @@ function PublishApp() {
   );
 }
 
-export default PublishApp;
+export default RootLayout;

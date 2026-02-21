@@ -1,8 +1,7 @@
 import { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
-
-import HeaderMenu from '@/publish/components/headerMenu';
-import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 
 import {
   Home,
@@ -22,6 +21,7 @@ import AppSelect from '@/publish/components/common/AppSelect';
 
 const rowData: any[] = [];
 
+// 퍼블 화면 출력용 테스트
 for (let index = 0; index < 10; index++) {
   rowData.push({
     name: '12345678' + (index + 1),
@@ -34,6 +34,14 @@ for (let index = 0; index < 10; index++) {
     name8: '확정',
   });
 }
+
+const BreadcrumbsItem = ({ match }) => (
+  <React.Fragment>
+    <li className={match.isExact ? 'breadcrumb-active' : undefined}>
+      <Link to={match.url || ''}>{match.url}</Link>
+    </li>
+  </React.Fragment>
+);
 
 const LanguageInfo = () => {
   const [columns] = useState<any>([
@@ -48,153 +56,131 @@ const LanguageInfo = () => {
   ]);
 
   return (
-    <>
-      <header className="content-header">
-        <FlexBox className="content-inner" justify={'space-between'}>
-          <div className="bread-crumb">
-            <dl className="bread-crumb-list">
-              <dt>
-                <a href="/">
-                  <Home size={16} />
-                </a>
-              </dt>
-              <dd>
-                <a href="#">Edition</a>
-              </dd>
-              <dd>
-                <a href="#">Language Info</a>
-              </dd>
-            </dl>
-          </div>
-          <HeaderMenu />
-        </FlexBox>
-      </header>
-      <main className="content-main">
-        <div className="content-inner">
-          <div className="content-title">
-            <FilePenLine size={18} />
-            <h3 className="title-text">Language Info</h3>
-          </div>
+    <main className="content-main">
+      <div className="content-inner">
+        <div className="content-title">
+          <FilePenLine size={18} />
+          <h3 className="title-text">Language Info</h3>
+        </div>
 
-          <div className="content-body">
-            <div className="form-block">
-              <form>
-                <div className="form-inline">
-                  <AppSelect
-                    placeholder="년도"
-                    label="년도"
-                    icon={<CalendarDays />}
-                    required
-                    defaultValue="2026"
-                    id="iqYear"
-                    name="iqYear"
-                    width={80}
-                    options={[
-                      { label: '2021', value: '2021' },
-                      { label: '2022', value: '2022' },
-                      { label: '2023', value: '2023' },
-                      { label: '2024', value: '2024' },
-                      { label: '2025', value: '2025' },
-                      { label: '2026', value: '2026' },
-                    ]}
-                  />
-                  <AppSelect
-                    placeholder="회사명"
-                    label="회사명"
-                    icon={<Building2 />}
-                    required
-                    defaultValue="LG CNS"
-                    id="iqCmpny"
-                    name="iqCmpny"
-                    width={160}
-                    options={[
-                      { label: 'LG CNS', value: 'cp01' },
-                      { label: 'LG 전자', value: 'cp02' },
-                      { label: 'LG 123', value: 'cp03' },
-                      { label: 'LG 1234', value: 'cp04' },
-                      { label: 'LG 1235', value: 'cp05' },
-                      { label: 'LG 1236', value: 'cp06' },
-                    ]}
-                  />
-                  <AppSelect
-                    placeholder="처리상태"
-                    label="처리상태"
-                    icon={<FileInput />}
-                    required
-                    defaultValue="설문 생성"
-                    id="iqStatus"
-                    name="iqStatus"
-                    width={140}
-                    options={[
-                      { label: '설문 생성', value: '설문 생성' },
-                      { label: '설문 작성 중', value: '설문 작성 중' },
-                      { label: '설문 종료', value: '설문 종료' },
-                    ]}
-                  />
-                  <AppSelect
-                    placeholder="설문"
-                    label="설문"
-                    icon={<FilePen />}
-                    required
-                    defaultValue="설문조사"
-                    id="iqSurvey"
-                    name="iqSurvey"
-                    width={280}
-                    options={[
-                      { label: '2025 국내 사무직 설문조사', value: 'sv001' },
-                      { label: '2025 국외 사무직 설문조사', value: 'sv002' },
-                    ]}
-                  />
-                </div>
-
-                <AppButton icon={<Search size={18} />} value="조회" />
-              </form>
-            </div>
-
-            <div className="grid-block">
-              <div className="grid-block-header">
-                <div className="content-title">
-                  <ClipboardList size={18} />
-                  <h3 className="title-text">Language Info</h3>
-                </div>
-                <div className="btn-group-end">
-                  <AppButton icon={<Download size={14} />} size="small" value="" />
-                </div>
-              </div>
-
-              <div className="grid-block-body">
-                <div className="ag-grid">
-                  <div style={{ height: 400 }}>
-                    <AgGridReact
-                      rowModelType="clientSide"
-                      suppressMultiSort={true}
-                      domLayout={'normal'}
-                      rowData={rowData}
-                      columnDefs={columns}
-                      tooltipShowDelay={100}
-                      tooltipHideDelay={1000}
-                      tooltipMouseTrack={true}
-                      enableBrowserTooltips={false}
-                      headerHeight={40}
-                      // pagination={true} // 퍼블 페이징 화면출력 삭제
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="btn-group-end">
-                <AppButton
-                  icon={<Search size={20} />}
-                  size="large"
-                  theme="secondary"
-                  value="미리보기"
+        <div className="content-body">
+          <div className="form-block">
+            <form>
+              <div className="form-inline">
+                <AppSelect
+                  placeholder="년도"
+                  label="년도"
+                  icon={<CalendarDays />}
+                  required
+                  defaultValue="2026"
+                  id="iqYear"
+                  name="iqYear"
+                  width={80}
+                  options={[
+                    { label: '2021', value: '2021' },
+                    { label: '2022', value: '2022' },
+                    { label: '2023', value: '2023' },
+                    { label: '2024', value: '2024' },
+                    { label: '2025', value: '2025' },
+                    { label: '2026', value: '2026' },
+                  ]}
+                />
+                <AppSelect
+                  placeholder="회사명"
+                  label="회사명"
+                  icon={<Building2 />}
+                  required
+                  defaultValue="LG CNS"
+                  id="iqCmpny"
+                  name="iqCmpny"
+                  width={160}
+                  options={[
+                    { label: 'LG CNS', value: 'cp01' },
+                    { label: 'LG 전자', value: 'cp02' },
+                    { label: 'LG 123', value: 'cp03' },
+                    { label: 'LG 1234', value: 'cp04' },
+                    { label: 'LG 1235', value: 'cp05' },
+                    { label: 'LG 1236', value: 'cp06' },
+                  ]}
+                />
+                <AppSelect
+                  placeholder="처리상태"
+                  label="처리상태"
+                  icon={<FileInput />}
+                  required
+                  defaultValue="설문 생성"
+                  id="iqStatus"
+                  name="iqStatus"
+                  width={140}
+                  options={[
+                    { label: '설문 생성', value: '설문 생성' },
+                    { label: '설문 작성 중', value: '설문 작성 중' },
+                    { label: '설문 종료', value: '설문 종료' },
+                  ]}
+                />
+                <AppSelect
+                  placeholder="설문"
+                  label="설문"
+                  icon={<FilePen />}
+                  required
+                  defaultValue="설문조사"
+                  id="iqSurvey"
+                  name="iqSurvey"
+                  width={280}
+                  options={[
+                    { label: '2025 국내 사무직 설문조사', value: 'sv001' },
+                    { label: '2025 국외 사무직 설문조사', value: 'sv002' },
+                  ]}
                 />
               </div>
+
+              <AppButton icon={<Search size={18} />} value="조회" />
+            </form>
+          </div>
+
+          <div className="grid-block">
+            <div className="grid-block-header">
+              <div className="content-title">
+                <ClipboardList size={18} />
+                <h3 className="title-text">Language Info</h3>
+              </div>
+              <div className="btn-group-end">
+                <AppButton icon={<Download size={14} />} size="small" value="" />
+              </div>
+            </div>
+
+            <div className="grid-block-body">
+              <div className="ag-grid">
+                <div style={{ height: 400 }}>
+                  <AgGridReact
+                    rowModelType="clientSide"
+                    suppressMultiSort={true}
+                    domLayout={'normal'}
+                    rowData={rowData}
+                    columnDefs={columns}
+                    tooltipShowDelay={100}
+                    tooltipHideDelay={1000}
+                    tooltipMouseTrack={true}
+                    enableBrowserTooltips={false}
+                    headerHeight={40}
+                    // pagination={true} // 퍼블 페이징 화면출력 삭제
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="btn-group-end">
+              <AppButton
+                icon={<Search size={20} />}
+                size="large"
+                theme="secondary"
+                value="미리보기"
+              />
             </div>
           </div>
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 };
 

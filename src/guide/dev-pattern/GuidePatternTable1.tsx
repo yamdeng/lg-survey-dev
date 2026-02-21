@@ -1,4 +1,4 @@
-import HeaderMenu from '@/publish/components/headerMenu';
+import HeaderMenu from '@/publish/components/header/HeaderMenu';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
 import { useEffect, useState } from 'react';
 import { create } from 'zustand';

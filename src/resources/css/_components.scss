@@ -5,8 +5,30 @@
 
 
 
-
-
+  // 브래드스크럼 컴포넌트
+  .bread-crumb {
+    .bread-crumb-list { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 0; color: #555; font-size: 14px; }
+    .bread-crumb-list > dt {  
+      font-size: 15px;  
+      .lucide { font-size: inherit; width: 16px; position: relative; top: -1px; } 
+      & + dd:first-of-type {
+        padding-left: 8px;
+        &::before { display: none; }
+      }
+    } 
+    .bread-crumb-list > dd {  padding-left: 20px; position: relative; margin-bottom: 0; }
+    .bread-crumb-list > dd::before { content: ">"; position: absolute; left: 7px; top: 48%; transform: translateY(-50%); }
+    .bread-crumb-list > dd:last-of-type { font-weight: bold; }
+  }
+  // 헤더 로그인 마의페이지 컴포넌트
+  .header-menu { 
+    display: flex; align-items: center; 
+    :where(.css-dev-only-do-not-override-akni31).ant-btn.ant-btn-variant-link {
+        --ant-btn-color-base: var(--sv-color-link);
+        --ant-btn-color-hover: var(--sv-color-link-hover);
+        --ant-btn-color-active: var(--sv-color-link-active);
+    }
+  }
   
 
 

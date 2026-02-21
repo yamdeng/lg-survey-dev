@@ -1,147 +1,52 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useMemo } from 'react';
+import { Menu, type MenuProps } from 'antd';
+import { Link, useLocation } from 'react-router-dom';
+import { Router } from '@/publish/Router';
 
-// icons
-import {
-  CarryOutOutlined,
-  CopyOutlined,
-  DeploymentUnitOutlined,
-  DesktopOutlined,
-  FileDoneOutlined,
-  MailOutlined,
-  PartitionOutlined,
-  UnorderedListOutlined,
-  UsergroupAddOutlined,
-} from '@ant-design/icons';
-
-import { Menu } from 'antd';
-
-// 메뉴 리스트 - 퍼블 화면 확인용 임시
-import type { MenuProps } from 'antd';
-type MenuItem = Required<MenuProps>['items'][number];
-
-const items: MenuItem[] = [
-  {
-    key: '1',
-    icon: <DesktopOutlined />,
-    label: <Link to="/notice">Notice</Link>,
-    children: [
-      { key: '11', label: <Link to="/notice">Notice</Link> },
-      { key: '12', label: <Link to="/notice/modify">Notice 상세</Link> },
-    ],
-  },
-  {
-    key: '2',
-    icon: <CopyOutlined />,
-    label: 'Edition',
-    children: [
-      { key: '21', label: <Link to="/edition/surveyInfo">Survey info</Link> },
-      { key: '22', label: <Link to="/edition/languageInfo">Language info</Link> },
-    ],
-  },
-  {
-    key: '3',
-    icon: <UnorderedListOutlined />,
-    label: 'Question',
-    children: [
-      { key: '31', label: <Link to="/question/commonInfo">Common info</Link> },
-      { key: '32', label: <Link to="/question/questionInfo">Question info</Link> },
-    ],
-  },
-  {
-    key: '4',
-    icon: <UsergroupAddOutlined />,
-    label: 'Target',
-    children: [
-      { key: '41', label: <Link to="/targetInfo">Target info</Link> },
-      { key: '42', label: <Link to="/organizInfo">Organiz info</Link> },
-      { key: '43', label: <Link to="/organizerInfo">Organizer info</Link> },
-    ],
-  },
-  {
-    key: '5',
-    icon: <MailOutlined />,
-    label: 'Send Mail',
-    children: [
-      { key: '51', label: <Link to="/transferInfo">Transfer info</Link> },
-      { key: '52', label: <Link to="/mailTemplate">Mail template</Link> },
-      { key: '53', label: <Link to="/mailContentTemplate">Mail template content</Link> },
-      { key: '54', label: <Link to="/questionTemplate">Question template</Link> },
-    ],
-  },
-  {
-    key: '6',
-    icon: <FileDoneOutlined />,
-    label: 'Results Report',
-    children: [
-      { key: '61', label: <Link to="/response">Response status</Link> },
-      { key: '62', label: <Link to="/report">Report</Link> },
-      { key: '63', label: <Link to="/answerResult">Answer result</Link> },
-      { key: '64', label: <Link to="/choiceResult">Choice result</Link> },
-      { key: '65', label: <Link to="/analysisResult">Analysis result</Link> },
-      { key: '66', label: <Link to="/pastOrganization">Past organization</Link> },
-      { key: '67', label: <Link to="/orgNotReports">Organization not reports</Link> },
-      { key: '68', label: <Link to="/comparisonTable">Comparison table</Link> },
-    ],
-  },
-  {
-    key: '7',
-    icon: <CarryOutOutlined />,
-    label: 'Reaults',
-    children: [
-      { key: '71', label: <Link to="/manageResults">Manage Results</Link> },
-      { key: '72', label: <Link to="/resultsTemplates">Result Templates</Link> },
-      { key: '73', label: <Link to="/resultsTemplatesContent">Result Template Contents</Link> },
-      { key: '74', label: <Link to="/resultsQuestions">Results questions</Link> },
-    ],
-  },
-  {
-    key: '8',
-    icon: <PartitionOutlined />,
-    label: <Link to="/rawdata">Rawdata</Link>,
-  },
-  {
-    key: '9',
-    icon: <DeploymentUnitOutlined />,
-    label: 'System Manage',
-    children: [
-      { key: '91', label: <Link to="/codeGroup">Code Group</Link> },
-      { key: '92', label: <Link to="/CodeManage">Code manage</Link> },
-      { key: '93', label: <Link to="/factorManage">Factor manage</Link> },
-    ],
-  },
-];
-
+// 메뉴 리스트 - 퍼블 화면 확인용
 interface LevelKeysProps {
   key?: string;
   children?: LevelKeysProps[];
   collapsed?: boolean;
 }
 
-const getLevelKeys = (items1: LevelKeysProps[]) => {
-  const key: Record<string, number> = {};
-  const func = (items2: LevelKeysProps[], level = 1) => {
-    items2.forEach((item) => {
-      if (item.key) {
-        key[item.key] = level;
+// 1. 메뉴 계층 구조(Level)를 파악하는 함수
+const getLevelKeys = (items: any[]) => {
+  const keyMap: Record<string, number> = {};
+  const func = (nodes: any[], level = 1) => {
+    nodes.forEach((node) => {
+      if (node.key) {
+        keyMap[node.key] = level;
       }
-      if (item.children) {
-        func(item.children, level + 1);
+      if (node.children) {
+        func(node.children, level + 1);
       }
     });
   };
-  func(items1);
-  return key;
+  func(items);
+  return keyMap;
 };
 
-const levelKeys = getLevelKeys(items as LevelKeysProps[]);
+function MenuList({ collapsed }: { collapsed: boolean }) {
+  const location = useLocation();
 
-function MenuList({ collapsed }: ChildProps) {
-  const [stateOpenKeys, setStateOpenKeys] = useState(['1', '11']);
+  // 2. 메뉴 생성 함수 (useMemo로 메모이제이션)
+  const items = useMemo(() => {
+    // 1. Router.routes[0]은 RootLayout입니다.
+    // 2. 그 자식들(Notice, Edition, Question)부터 메뉴 리스트로 만듭니다.
+    const rootChildren = Router.routes[0]?.children || [];
+    // return getMenuItems(rootChildren, '/');
+    return getMenuItems(rootChildren || [], '/');
+  }, []);
+
+  // 3. LevelKeys 계산 (items 생성 이후에 수행)
+  const levelKeys = useMemo(() => getLevelKeys(items), [items]);
+
+  // 4. 아코디언 상태 관리
+  const [stateOpenKeys, setStateOpenKeys] = useState(['1']); // 초기값
 
   const onOpenChange: MenuProps['onOpenChange'] = (openKeys) => {
     const currentOpenKey = openKeys.find((key) => !stateOpenKeys.includes(key));
-    // open
     if (currentOpenKey !== undefined) {
       const repeatIndex = openKeys
         .filter((key) => key !== currentOpenKey)
@@ -149,28 +54,58 @@ function MenuList({ collapsed }: ChildProps) {
 
       setStateOpenKeys(
         openKeys
-          // remove repeat key
           .filter((_, index) => index !== repeatIndex)
-          // remove current level all child
           .filter((key) => levelKeys[key] <= levelKeys[currentOpenKey]),
       );
     } else {
-      // close
       setStateOpenKeys(openKeys);
     }
   };
 
+  // 3. 메뉴 생성 함수 (이 함수는 MenuList 컴포넌트 내부나 외부에 하나만 있으면 됩니다)
+  function getMenuItems(routes: any[], parentPath = '') {
+    return routes
+      .filter((route) => route.handle?.label) // Router 설정에 'label' 속성이 있어야만 보입니다.
+      .map((route) => {
+        const { handle, path, index, element, children } = route;
+        const currentPath = index ? '' : path || '';
+
+        const fullPath = `${parentPath}/${currentPath}`.replace(/\/+/g, '/');
+        const finalPath = fullPath.includes('undefined') ? parentPath : fullPath;
+
+        // 2. element가 있는지 확인 (이동 가능 여부)
+        const hasElement = Boolean(element);
+
+        const item: any = {
+          key: finalPath,
+          icon: handle.icon,
+          label: hasElement ? (
+            <Link to={finalPath}>{handle.label || handle.breadcrumbName}</Link>
+          ) : (
+            <span>{handle.label || handle.breadcrumbName}</span>
+          ),
+        };
+
+        // 자식 노드가 있고, 그 중 label이 있는 자식이 있을 경우에만 children 추가
+        if (route.children && route.children.some((c: any) => c.handle?.label)) {
+          item.children = route.children ? getMenuItems(route.children, finalPath) : undefined;
+        }
+
+        return item;
+      });
+  }
+
   return (
-    <>
-      <Menu
-        mode="inline"
-        defaultSelectedKeys={['1']}
-        openKeys={stateOpenKeys}
-        onOpenChange={onOpenChange}
-        inlineCollapsed={collapsed}
-        items={items}
-      />
-    </>
+    <Menu
+      mode="inline"
+      // 현재 URL 경로를 기반으로 자동 선택되도록 설정
+      selectedKeys={[location.pathname]}
+      defaultSelectedKeys={['1']}
+      openKeys={stateOpenKeys}
+      onOpenChange={onOpenChange}
+      inlineCollapsed={collapsed}
+      items={items}
+    />
   );
 }
 

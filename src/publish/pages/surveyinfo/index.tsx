@@ -4,7 +4,7 @@ import { AgGridReact } from 'ag-grid-react';
 
 // Form
 
-import HeaderMenu from '@/publish/components/headerMenu';
+import HeaderMenu from '@/publish/components/header/HeaderMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 import { Form } from 'antd';
 

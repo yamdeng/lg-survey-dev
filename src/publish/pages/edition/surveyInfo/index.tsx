@@ -1,7 +1,7 @@
 import { AgGridReact } from 'ag-grid-react';
 import { useState } from 'react';
 
-import HeaderMenu from '@/publish/components/headerMenu';
+import HeaderMenu from '@/publish/components/header/HeaderMenu';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 
 import {
@@ -103,263 +103,241 @@ const SurveyInfo = () => {
   ];
 
   return (
-    <>
-      <header className="content-header">
-        <FlexBox className="content-inner" justify={'space-between'}>
-          <div className="bread-crumb">
-            <dl className="bread-crumb-list">
-              <dt>
-                <a href="/">
-                  <Home size={16} />
-                </a>
-              </dt>
-              <dd>
-                <a href="#">Edition</a>
-              </dd>
-              <dd>
-                <a href="#">Survey Info</a>
-              </dd>
-            </dl>
-          </div>
-          <HeaderMenu />
-        </FlexBox>
-      </header>
-      <main className="content-main">
-        <div className="content-inner">
-          <div className="content-title">
-            <FilePenLine size={18} />
-            <h3 className="title-text">Survey Info</h3>
-          </div>
+    <main className="content-main">
+      <div className="content-inner">
+        <div className="content-title">
+          <FilePenLine size={18} />
+          <h3 className="title-text">Survey Info</h3>
+        </div>
 
-          <div className="content-body">
-            <div className="form-block">
-              <form>
-                <div className="form-inline">
-                  <AppSelect
-                    value="2026"
-                    label="년도"
-                    icon={<CalendarDays />}
-                    required
-                    defaultValue="2026"
-                    id="iqYear"
-                    name="iqYear"
-                    width={80}
-                    options={[
-                      { label: '2021', value: '2021' },
-                      { label: '2022', value: '2022' },
-                      { label: '2023', value: '2023' },
-                      { label: '2024', value: '2024' },
-                      { label: '2025', value: '2025' },
-                      { label: '2026', value: '2026' },
-                    ]}
-                  />
-                  <AppSelect
-                    value="cp01"
-                    label="회사명"
-                    icon={<Building2 />}
-                    id="iqCmpny"
-                    name="iqCmpny"
-                    width={200}
-                    options={[
-                      { label: 'LG CNS', value: 'cp01' },
-                      { label: 'LG 전자', value: 'cp02' },
-                      { label: 'LG 123', value: 'cp03' },
-                      { label: 'LG 1234', value: 'cp04' },
-                      { label: 'LG 1235', value: 'cp05' },
-                      { label: 'LG 글로벌 전략 개발원', value: 'cp06' },
-                    ]}
-                  />
-                  <AppSelect
-                    value="설문 생성"
-                    label="처리상태"
-                    icon={<FileInput />}
-                    defaultValue="설문 생성"
-                    id="iqStatus"
-                    name="iqStatus"
-                    width={140}
-                    options={[
-                      { label: '설문 생성', value: '설문 생성' },
-                      { label: '설문 작성 중', value: '설문 작성 중' },
-                      { label: '설문 종료', value: '설문 종료' },
-                    ]}
-                  />
-                </div>
-
-                <AppButton icon={<Search size={18} />} value="조회" />
-              </form>
-            </div>
-
-            <div className="grid-block">
-              <div className="grid-block-header">
-                <div className="content-title">
-                  <ClipboardList size={18} />
-                  <h3 className="title-text">Survey List</h3>
-                  {/* 게시판 전체 데이터 건수 */}
-                  <small className="num">( 113 )</small>
-                </div>
-                <div className="btn-group-end">
-                  <AppButton icon={<Download size={14} />} size="small" value="" />
-                </div>
+        <div className="content-body">
+          <div className="form-block">
+            <form>
+              <div className="form-inline">
+                <AppSelect
+                  value="2026"
+                  label="년도"
+                  icon={<CalendarDays />}
+                  required
+                  defaultValue="2026"
+                  id="iqYear"
+                  name="iqYear"
+                  width={80}
+                  options={[
+                    { label: '2021', value: '2021' },
+                    { label: '2022', value: '2022' },
+                    { label: '2023', value: '2023' },
+                    { label: '2024', value: '2024' },
+                    { label: '2025', value: '2025' },
+                    { label: '2026', value: '2026' },
+                  ]}
+                />
+                <AppSelect
+                  value="cp01"
+                  label="회사명"
+                  icon={<Building2 />}
+                  id="iqCmpny"
+                  name="iqCmpny"
+                  width={200}
+                  options={[
+                    { label: 'LG CNS', value: 'cp01' },
+                    { label: 'LG 전자', value: 'cp02' },
+                    { label: 'LG 123', value: 'cp03' },
+                    { label: 'LG 1234', value: 'cp04' },
+                    { label: 'LG 1235', value: 'cp05' },
+                    { label: 'LG 글로벌 전략 개발원', value: 'cp06' },
+                  ]}
+                />
+                <AppSelect
+                  value="설문 생성"
+                  label="처리상태"
+                  icon={<FileInput />}
+                  defaultValue="설문 생성"
+                  id="iqStatus"
+                  name="iqStatus"
+                  width={140}
+                  options={[
+                    { label: '설문 생성', value: '설문 생성' },
+                    { label: '설문 작성 중', value: '설문 작성 중' },
+                    { label: '설문 종료', value: '설문 종료' },
+                  ]}
+                />
               </div>
 
-              <div className="grid-block-body">
-                <div className="ag-grid">
-                  <div style={{ height: 300 }}>
-                    <AgGridReact
-                      rowModelType="clientSide"
-                      suppressMultiSort={true}
-                      domLayout={'normal'}
-                      rowData={rowData}
-                      columnDefs={columns}
-                      tooltipShowDelay={100}
-                      tooltipHideDelay={1000}
-                      tooltipMouseTrack={true}
-                      enableBrowserTooltips={false}
-                      headerHeight={40}
-                      // pagination={true} // 퍼블 페이징 화면출력 삭제
-                    />
-                  </div>
-                </div>
-              </div>
+              <AppButton icon={<Search size={18} />} value="조회" />
+            </form>
+          </div>
 
-              <div className="grid-block-modify">
-                <table className="modify-table">
-                  <colgroup>
-                    <col width="12%" />
-                    <col width="30%" />
-                    <col width="12%" />
-                    <col width="46%" />
-                  </colgroup>
-                  <tbody>
-                    <tr>
-                      <th>
-                        <label htmlFor="year" className="required">
-                          대상년도
-                        </label>
-                      </th>
-                      <td>
-                        <AppTextInput name="year" value="2025" />
-                      </td>
-                      <th>
-                        <label htmlFor="survey" className="required">
-                          설문유형
-                        </label>
-                      </th>
-                      <td>
-                        <AppSelect
-                          id="survey"
-                          width={274}
-                          value="LG WAY"
-                          // disabled={true}
-                          options={[
-                            { label: 'LG WAY 1', value: 'LG01' },
-                            { label: 'LG WAY 2', value: 'LG02' },
-                            { label: 'LG WAY 3', value: 'LG03' },
-                          ]}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <label htmlFor="code" className="required">
-                          설문코드
-                        </label>
-                      </th>
-                      <td>
-                        <AppTextInput id="code" name="code" value="2025W394" readOnly />
-                      </td>
-                      <th>
-                        <label htmlFor="survey" className="required">
-                          상위코드
-                        </label>
-                      </th>
-                      <td>
-                        <AppTextInput id="code2" name="code2" value="2025U0052" readOnly />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th colSpan={4}>
-                        <label htmlFor="comp">회 사</label>
-                      </th>
-                    </tr>
-                    <tr>
-                      <td colSpan={4}>
-                        <AppCheckboxGroup name="cmpnyCd" options={CompanyOptions} />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <label htmlFor="test" className="required">
-                          구분
-                        </label>
-                      </th>
-                      <td>
-                        <AppSelect
-                          id="classify"
-                          width={274}
-                          value="국내 사무직"
-                          // disabled={true}
-                          options={[
-                            { label: '국내 사무직', value: 'LG01' },
-                            { label: '국외 사무직', value: 'LG02' },
-                            { label: '국내 현장직', value: 'LG03' },
-                            { label: '국외 현장직', value: 'LG04' },
-                          ]}
-                        />
-                      </td>
-                      <th>
-                        <label htmlFor="surveyName" className="required">
-                          설문명
-                        </label>
-                      </th>
-                      <td>
-                        <AppTextInput
-                          id="surveyName"
-                          name="surveyName"
-                          value="설문 시연 테스트"
-                          width={'96%'}
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>
-                        <label htmlFor="svdate" className="required">
-                          설문 일자
-                        </label>
-                      </th>
-                      <td>
-                        <AppRangeDatePicker
-                          id="svdate"
-                          name="svdate"
-                          defaultValue="20151125"
-                          width={274}
-                        />
-                      </td>
-                      <th>
-                        <label htmlFor="svdate2" className="required">
-                          결과조회 일자
-                        </label>
-                      </th>
-                      <td>
-                        <AppRangeDatePicker
-                          id="svdate2"
-                          name="svdate2"
-                          defaultValue="20151225"
-                          width={274}
-                        />
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+          <div className="grid-block">
+            <div className="grid-block-header">
+              <div className="content-title">
+                <ClipboardList size={18} />
+                <h3 className="title-text">Survey List</h3>
+                {/* 게시판 전체 데이터 건수 */}
+                <small className="num">( 113 )</small>
               </div>
               <div className="btn-group-end">
-                <AppButton icon={<Plus size={20} />} size="large" value="신규" />
+                <AppButton icon={<Download size={14} />} size="small" value="" />
               </div>
+            </div>
+
+            <div className="grid-block-body">
+              <div className="ag-grid">
+                <div style={{ height: 300 }}>
+                  <AgGridReact
+                    rowModelType="clientSide"
+                    suppressMultiSort={true}
+                    domLayout={'normal'}
+                    rowData={rowData}
+                    columnDefs={columns}
+                    tooltipShowDelay={100}
+                    tooltipHideDelay={1000}
+                    tooltipMouseTrack={true}
+                    enableBrowserTooltips={false}
+                    headerHeight={40}
+                    // pagination={true} // 퍼블 페이징 화면출력 삭제
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="grid-block-modify">
+              <table className="modify-table">
+                <colgroup>
+                  <col width="12%" />
+                  <col width="30%" />
+                  <col width="12%" />
+                  <col width="46%" />
+                </colgroup>
+                <tbody>
+                  <tr>
+                    <th>
+                      <label htmlFor="year" className="required">
+                        대상년도
+                      </label>
+                    </th>
+                    <td>
+                      <AppTextInput name="year" value="2025" />
+                    </td>
+                    <th>
+                      <label htmlFor="survey" className="required">
+                        설문유형
+                      </label>
+                    </th>
+                    <td>
+                      <AppSelect
+                        id="survey"
+                        width={274}
+                        value="LG WAY"
+                        // disabled={true}
+                        options={[
+                          { label: 'LG WAY 1', value: 'LG01' },
+                          { label: 'LG WAY 2', value: 'LG02' },
+                          { label: 'LG WAY 3', value: 'LG03' },
+                        ]}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <label htmlFor="code" className="required">
+                        설문코드
+                      </label>
+                    </th>
+                    <td>
+                      <AppTextInput id="code" name="code" value="2025W394" readOnly />
+                    </td>
+                    <th>
+                      <label htmlFor="survey" className="required">
+                        상위코드
+                      </label>
+                    </th>
+                    <td>
+                      <AppTextInput id="code2" name="code2" value="2025U0052" readOnly />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th colSpan={4}>
+                      <label htmlFor="comp">회 사</label>
+                    </th>
+                  </tr>
+                  <tr>
+                    <td colSpan={4}>
+                      <AppCheckboxGroup name="cmpnyCd" options={CompanyOptions} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <label htmlFor="test" className="required">
+                        구분
+                      </label>
+                    </th>
+                    <td>
+                      <AppSelect
+                        id="classify"
+                        width={274}
+                        value="국내 사무직"
+                        // disabled={true}
+                        options={[
+                          { label: '국내 사무직', value: 'LG01' },
+                          { label: '국외 사무직', value: 'LG02' },
+                          { label: '국내 현장직', value: 'LG03' },
+                          { label: '국외 현장직', value: 'LG04' },
+                        ]}
+                      />
+                    </td>
+                    <th>
+                      <label htmlFor="surveyName" className="required">
+                        설문명
+                      </label>
+                    </th>
+                    <td>
+                      <AppTextInput
+                        id="surveyName"
+                        name="surveyName"
+                        value="설문 시연 테스트"
+                        width={'96%'}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>
+                      <label htmlFor="svdate" className="required">
+                        설문 일자
+                      </label>
+                    </th>
+                    <td>
+                      <AppRangeDatePicker
+                        id="svdate"
+                        name="svdate"
+                        defaultValue="20151125"
+                        width={274}
+                      />
+                    </td>
+                    <th>
+                      <label htmlFor="svdate2" className="required">
+                        결과조회 일자
+                      </label>
+                    </th>
+                    <td>
+                      <AppRangeDatePicker
+                        id="svdate2"
+                        name="svdate2"
+                        defaultValue="20151225"
+                        width={274}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="btn-group-end">
+              <AppButton icon={<Plus size={20} />} size="large" value="신규" />
             </div>
           </div>
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 };
 
