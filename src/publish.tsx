@@ -27,7 +27,6 @@ setAutoFreeze(false);
 
 createRoot(document.getElementById('root')!).render(
   <ErrorBoundary>
-    {/* BrowserRouter 대신 RouterProvider를 사용해야 useMatches가 작동합니다 */}
     <ConfigProvider theme={customTheme}>
       <RouterProvider router={Router} />
     </ConfigProvider>
