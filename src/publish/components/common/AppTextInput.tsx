@@ -18,7 +18,7 @@ function AppTextInput(props) {
     value,
     onChange,
     placeholder = '',
-    errorMessage,
+    errorMessage = '*필수 입력!',
     disabled = false,
     icon,
     required,
@@ -56,7 +56,7 @@ function AppTextInput(props) {
             }}
             placeholder={placeholder}
             disabled={disabled}
-            readOnly={readOnly} // 퍼블 : TextInput-인풋만 readonly 속성 추가 했습니다. - as is 속성 그대로 옮김
+            readOnly={readOnly} // 퍼블 : readonly 속성 추가
           />
           {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
             <button className="btnclear" onClick={() => onChange('')}></button>

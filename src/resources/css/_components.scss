@@ -64,6 +64,39 @@
     min-height: 38px;
     max-height: 50px;
   }
+  .form-block {
+    .error-text {
+      position: absolute; right: 0; top: -36px;
+      color: var(--sv-color-primary);
+      padding: 7px 8px 6px;
+      border-radius: 5px;
+      z-index: 1;
+      background-color: rgb(255, 240, 242);
+      font-size: 14px;
+      display: none;
+    }
+  }
+  .modify-table {
+    .form-item { 
+      display: flex; align-items: center; position: relative;
+      .error-text { opacity: 1; transition: .3s; }
+      .form-input-outlined:has(:focus) + .error-text { opacity: 0; }
+    }
+
+    .error-text {
+      font-size: 14px;
+      position: absolute; right: 0;
+      color: var(--sv-color-primary);
+      // border: 1px solid var(--sv-color-primary);
+      padding: 7px 8px 6px;
+      border-radius: 5px;
+      z-index: 1;
+      // width: 100%; height: 100%;
+      background-color: rgb(255, 240, 242);
+      // background-color: rgba(255, 240, 255, 1);
+      // box-shadow: 1px 2px 5px #ddd;
+    }
+  }
 
   .ant-form-item {
     margin: 0;

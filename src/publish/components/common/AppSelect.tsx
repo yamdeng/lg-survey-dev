@@ -33,7 +33,7 @@ function AppSelect(props) {
     defaultValue,
     onChange,
     placeholder = '',
-    errorMessage,
+    errorMessage = '*필수 선택!',
     disabled = false,
     required = false,
     // style = { width: '100%' },
