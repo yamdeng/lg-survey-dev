@@ -1,8 +1,8 @@
 function CommonInputError(props) {
-  const { errorMessage } = props;
+  const { errorMessage, error } = props;
   return (
     <>
-      <span className="error-text" style={{ display: errorMessage ? '' : 'none' }}>
+      <span className="error-text" style={{ display: error ? '' : 'none' }}>
         {errorMessage}
       </span>
     </>

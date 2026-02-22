@@ -3,7 +3,7 @@ import CommonUtil from '@/utils/CommonUtil';
 import { Select } from 'antd';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import CommonInputError from '@/components/common/CommonInputError';
+import CommonInputError from './CommonInputError';
 
 /*
 
@@ -33,7 +33,8 @@ function AppSelect(props) {
     defaultValue,
     onChange,
     placeholder = '',
-    errorMessage = '*필수 선택!',
+    errorMessage = '*필수 선택 항목입니다.', // 에러메시지 기본값 추가
+    error = false, //  에러 유무 속성 추가
     disabled = false,
     required = false,
     // style = { width: '100%' },
@@ -112,7 +113,7 @@ function AppSelect(props) {
             labelRender={labelRender}
           ></Select>
         </div>
-        <CommonInputError errorMessage={errorMessage} />
+        <CommonInputError errorMessage={errorMessage} error={error} />
       </div>
     </>
   );

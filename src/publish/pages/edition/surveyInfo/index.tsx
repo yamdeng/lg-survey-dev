@@ -135,6 +135,7 @@ const SurveyInfo = () => {
                 <AppSelect
                   value="cp01"
                   label="회사명"
+                  error={true}
                   icon={<Building2 />}
                   id="iqCmpny"
                   name="iqCmpny"
@@ -217,7 +218,12 @@ const SurveyInfo = () => {
                       </label>
                     </th>
                     <td>
-                      <AppTextInput name="year" value="2025" />
+                      <AppTextInput
+                        name="year"
+                        value="2025"
+                        errorMessage="년도 필수 입력!"
+                        error={true}
+                      />
                     </td>
                     <th>
                       <label htmlFor="survey" className="required">
@@ -229,7 +235,7 @@ const SurveyInfo = () => {
                         id="survey"
                         width={274}
                         value="LG WAY"
-                        // disabled={true}
+                        error={true}
                         options={[
                           { label: 'LG WAY 1', value: 'LG01' },
                           { label: 'LG WAY 2', value: 'LG02' },

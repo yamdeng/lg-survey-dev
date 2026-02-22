@@ -18,7 +18,8 @@ function AppTextInput(props) {
     value,
     onChange,
     placeholder = '',
-    errorMessage = '*필수 입력!',
+    errorMessage = '*필수 입력 항목입니다.', // 에러메시지 기본값 추가하면 좋을것 같습니다
+    error = false, //  에러 유무 속성 추가
     disabled = false,
     icon,
     required,
@@ -62,7 +63,7 @@ function AppTextInput(props) {
             <button className="btnclear" onClick={() => onChange('')}></button>
           )}
         </div>
-        <CommonInputError errorMessage={errorMessage} />
+        <CommonInputError errorMessage={errorMessage} error={error} />
       </div>
     </>
   );
