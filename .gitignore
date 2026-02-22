@@ -30,3 +30,4 @@ src/publish/**/*test*
 
 *.tsbuildinfo
 .vite/
+server/target/*
