@@ -146,4 +146,4 @@ ApiUtil.interceptors.response.use(
   },
 );
 
-export default ApiUtil;
+export default ApiUtil as any;

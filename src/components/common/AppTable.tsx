@@ -1,6 +1,5 @@
 import Config from '@/config/Config';
 import { AgGridReact } from 'ag-grid-react';
-import AppSelect from '@/components/common/AppSelect';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 // 컬럼 기본값 정보
@@ -58,6 +57,28 @@ const LoadingComponent = (props) => {
    -defaultColDef({}) : 기본 컬럼 정책을 override 하기 위한 설정
 
 */
+
+const convertColumns = (columns) => {
+  const searchRowSpanColumn = columns.find((columnInfo) => columnInfo.enableRowSpan);
+  const result = columns.map((columnInfo) => {
+    if (columnInfo.enableRowSpan) {
+      // rowSpan 적용
+      columnInfo.rowSpan = (params) => {
+        const rowspanCount = params.data.rowSpanGroupCount ? params.data.rowSpanGroupCount : 1;
+        return rowspanCount;
+      };
+      columnInfo.cellClassRules = {
+        'cell-span': (params) => params.data.rowSpanGroupCount && params.data.rowSpanGroupCount > 1,
+      };
+    }
+    if (searchRowSpanColumn) {
+      columnInfo.sortable = false;
+    }
+    return columnInfo;
+  });
+  return result;
+};
+
 function AppTable(props) {
   const gridRef = useRef<any>(null);
   const {
@@ -87,22 +108,16 @@ function AppTable(props) {
 
   const applyDefaultColDef = { ...basicDefaultColDef, ...defaultColDef };
 
-  // store
-  const {
-    currentPage,
-    prevPage,
-    nextPage,
-    displayPageIndexList = [],
-    changePageSize,
-  } = store || {};
-
   // 선택 정책을 props에 전달받은 값을 기준으로 재반영
   const selection = useMemo(() => {
     if (enableCheckBox) {
       return {
-        mode: rowSelectMode,
+        mode: rowSelectMode, // 'multiRow'
+        checkboxes: true, // 체크박스 생성
+        headerCheckbox: true, // 헤더 체크박스 생성
         hideDisabledCheckboxes: hideDisabledCheckboxes,
         isRowSelectable: isRowSelectable,
+        enableClickSelection: true, // 👈 행이나 체크박스 클릭 시 선택 활성화
       };
     }
     return null;
@@ -111,7 +126,7 @@ function AppTable(props) {
   const searchRowSpanIndex = columns.findIndex((info) => info.enableRowSpan);
 
   // columns convert 작업
-  const applyColumns = columns;
+  const applyColumns = convertColumns(columns);
 
   const loadingOverlayComponent = useMemo(() => {
     return LoadingComponent;
@@ -139,6 +154,12 @@ function AppTable(props) {
     }
   }, [displayTableLoading]);
 
+  useEffect(() => {
+    if (gridRef?.current?.api) {
+      gridRef.current.api.paginationGoToFirstPage();
+    }
+  }, [props.rowData]); // 데이터가 바뀔 때마다 1페이지로!
+
   return (
     <>
       <div
@@ -160,10 +181,10 @@ function AppTable(props) {
           onSelectionChanged={onSelectionChanged}
           onRowDoubleClicked={handleRowDoubleClick}
           onRowClicked={handleRowSingleClick}
-          selection={selection}
+          rowSelection={selection}
           paginationPageSize={store ? store.pageSize : pageSize}
           paginationPageSizeSelector={pageSizeList}
-          pagination={false}
+          pagination={hiddenPagination ? false : true}
           suppressRowTransform={searchRowSpanIndex !== -1 ? true : false}
           defaultColDef={applyDefaultColDef}
           tooltipShowDelay={100}
@@ -182,96 +203,6 @@ function AppTable(props) {
             }
           }}
         />
-      </div>
-
-      <div className="pagination" style={{ display: hiddenPagination ? 'none' : '' }}>
-        <a
-          className="first"
-          href=""
-          style={{ display: prevPage ? '' : 'none' }}
-          onClick={(event) => {
-            event.preventDefault();
-            store.goFirstPage();
-          }}
-        >
-          <span className="sr-only">이전</span>
-        </a>
-        <a
-          className="prev"
-          href=""
-          style={{ display: prevPage ? '' : 'none' }}
-          onClick={(event) => {
-            event.preventDefault();
-            store.changeCurrentPage(prevPage);
-          }}
-        >
-          <span className="sr-only">이전</span>
-        </a>
-        <span>
-          {displayPageIndexList.map((pageIndex) => {
-            let pageComponent = (
-              <a
-                href=""
-                key={pageIndex}
-                onClick={(event) => {
-                  event.preventDefault();
-                  store.changeCurrentPage(pageIndex);
-                }}
-              >
-                {pageIndex}
-              </a>
-            );
-            if (pageIndex === currentPage) {
-              pageComponent = (
-                <strong
-                  title="현재페이지"
-                  key={pageIndex}
-                  onClick={() => {
-                    store.changeCurrentPage(pageIndex);
-                  }}
-                >
-                  {pageIndex}
-                </strong>
-              );
-            }
-            return pageComponent;
-          })}
-        </span>
-        <a
-          className="next"
-          href=""
-          style={{ display: nextPage ? '' : 'none' }}
-          onClick={(event) => {
-            event.preventDefault();
-            store.changeCurrentPage(nextPage);
-          }}
-        >
-          <span className="sr-only">다음</span>
-        </a>
-        <a
-          className="last"
-          href=""
-          style={{ display: nextPage ? '' : 'none' }}
-          onClick={(event) => {
-            event.preventDefault();
-            store.goLastPage();
-          }}
-        >
-          <span className="sr-only">다음</span>
-        </a>
-        <span>
-          <AppSelect
-            style={{ height: 30, width: 80, display: hiddenPagination || !store ? 'none' : '' }}
-            onChange={(size) => {
-              changePageSize(size);
-            }}
-            value={store ? store.pageSize : pageSize}
-            options={pageSizeList.map((size) => {
-              return { value: size, label: size };
-            })}
-            allowClear={false}
-          />
-        </span>
       </div>
     </>
   );

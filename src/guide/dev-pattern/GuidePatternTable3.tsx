@@ -1,5 +1,6 @@
 import HeaderMenu from '@/publish/components/header/HeaderMenu';
 import { useEffect, useState } from 'react';
+import { useImmer } from 'use-immer'; // useImmer 임포트
 
 import { FilePenLine, Home } from 'lucide-react';
 
@@ -8,51 +9,23 @@ import AppSelect from '@/components/common/AppSelect';
 import AppTable from '@/components/common/AppTable';
 import Code from '@/config/Code';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
-import { useGuidePatternListStore } from '@/guide/stores/useGuidePatternListStore';
+import ApiService from '@/services/ApiService';
 
-function GuidePatternTable1() {
-  const listStore = useGuidePatternListStore();
-
+function GuidePatternTable3() {
   const [columns] = useState<any>([
-    {
-      field: 'boardKey',
-      headerName: '게시판 키',
-      width: 100,
-    },
-    {
-      field: 'boardType',
-      headerName: '게시판 유형',
-      width: 120,
-    },
+    { field: 'boardKey', headerName: '게시판 키', width: 100 },
+    { field: 'boardType', headerName: '게시판 유형', width: 120 },
     {
       field: 'boardTitle',
       headerName: '게시판 제목',
       minWidth: 200,
-      flex: 1, // 남은 공간을 모두 차지하도록 설정
+      flex: 1,
       cellStyle: { fontWeight: 'bold' },
     },
-    {
-      field: 'boardContent',
-      headerName: '내용',
-      hide: true, // 목록에서는 숨김 처리 (상세 페이지용 데이터)
-    },
-    {
-      field: 'useYn',
-      headerName: '사용 여부',
-      width: 100,
-      cellStyle: { textAlign: 'center' },
-    },
-    {
-      field: 'mainYn',
-      headerName: '메인 노출',
-      width: 100,
-      cellStyle: { textAlign: 'center' },
-    },
-    {
-      field: 'boardAuthType',
-      headerName: '권한 유형',
-      width: 120,
-    },
+    { field: 'boardContent', headerName: '내용', hide: true },
+    { field: 'useYn', headerName: '사용 여부', width: 100, cellStyle: { textAlign: 'center' } },
+    { field: 'mainYn', headerName: '메인 노출', width: 100, cellStyle: { textAlign: 'center' } },
+    { field: 'boardAuthType', headerName: '권한 유형', width: 120 },
     {
       field: 'securityLevel',
       headerName: '보안 레벨',
@@ -61,14 +34,33 @@ function GuidePatternTable1() {
     },
   ]);
 
-  const { enterSearch, searchParam, changeSearchInput, list, clear } = listStore;
+  // useState 대신 useImmer 사용
+  const [searchParam, setSearchParam] = useImmer<any>({
+    searchType: '',
+    searchWord: '',
+  });
+
+  // 테이블 리스트도 Immer로 관리 (추후 특정 행 수정 시 용이)
+  const [list, setList] = useImmer<any[]>([]);
+
   const { searchType, searchWord } = searchParam;
+
+  // Immer를 사용한 가독성 좋은 상태 변경
+  const changeSearchInput = (inputName: string, inputValue: any) => {
+    setSearchParam((draft) => {
+      draft[inputName] = inputValue;
+    });
+  };
+
+  const enterSearch = async () => {
+    const apiResult = await ApiService.get('notices', searchParam);
+    // Immer의 setter는 일반 값을 넣어도 잘 작동하며,
+    // 필요시 setList(draft => { return apiResult }) 형태로도 가능합니다.
+    setList(apiResult);
+  };
 
   useEffect(() => {
     enterSearch();
-    return () => {
-      clear();
-    };
   }, []);
 
   return (
@@ -98,17 +90,14 @@ function GuidePatternTable1() {
           </div>
           <div className="content-body">
             <div className="form-block border-none">
-              <form>
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div className="form-inline justify-end">
                   <AppSelect
                     placeholder="제목+내용"
-                    // defaultValue="opt-3" // defaultValue 기본값 입력시 에러남
                     style={{ width: 140 }}
                     options={Code.boardSearchType}
                     value={searchType}
-                    onChange={(value) => {
-                      changeSearchInput('searchType', value);
-                    }}
+                    onChange={(value) => changeSearchInput('searchType', value)}
                   />
                   <AppSearchInput
                     placeholder="검색하세요"
@@ -116,9 +105,7 @@ function GuidePatternTable1() {
                     hiddenSearchButton={false}
                     search={enterSearch}
                     value={searchWord}
-                    onChange={(value) => {
-                      changeSearchInput('searchWord', value);
-                    }}
+                    onChange={(value) => changeSearchInput('searchWord', value)}
                   />
                 </div>
               </form>
@@ -127,7 +114,7 @@ function GuidePatternTable1() {
             <div className="grid-block">
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <AppTable rowData={list} columns={columns} store={listStore} rowKey="boardKey" />
+                  <AppTable columns={columns} rowData={list} rowKey="boardKey" />
                 </div>
               </div>
             </div>
@@ -137,4 +124,5 @@ function GuidePatternTable1() {
     </>
   );
 }
-export default GuidePatternTable1;
+
+export default GuidePatternTable3;

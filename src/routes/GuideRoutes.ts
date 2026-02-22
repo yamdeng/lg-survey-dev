@@ -31,10 +31,16 @@ import GuideAppAutoComplete from '@/guide/dev/GuideAppAutoComplete';
 /* guide common table component */
 import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
 import GuideTableCase2 from '@/guide/dev/GuideTableCase2';
+import GuideTableCase3 from '@/guide/dev/GuideTableCase3';
+import GuideTableCase4 from '@/guide/dev/GuideTableCase4';
 
 /* 개발 패턴 component */
 import GuidePatternTable1 from '@/guide/dev-pattern/GuidePatternTable1';
+import GuidePatternTable2 from '@/guide/dev-pattern/GuidePatternTable2';
+import GuidePatternTable3 from '@/guide/dev-pattern/GuidePatternTable3';
+import GuidePatternTable4 from '@/guide/dev-pattern/GuidePatternTable4';
 import GuidePatternForm1 from '@/guide/dev-pattern/GuidePatternForm1';
+import GuidePatternStoreForm from '@/guide/dev-pattern/GuidePatternStoreForm';
 import GuidePatternDetail1 from '@/guide/dev-pattern/GuidePatternDetail1';
 
 /* 퍼블리싱 가이드 */
@@ -228,6 +234,20 @@ export const DevRoutes = {
       description: '',
       success: false,
     },
+    {
+      title: 'table-case3',
+      Component: GuideTableCase3,
+      path: 'GuideTableCase3',
+      description: '',
+      success: false,
+    },
+    {
+      title: 'table-case4',
+      Component: GuideTableCase4,
+      path: 'GuideTableCase4',
+      description: '',
+      success: false,
+    },
   ],
 };
 
@@ -242,16 +262,56 @@ export const DevPatternRoutes = {
       success: false,
     },
     {
-      title: '게시글 폼 등록1',
+      title: 'table 검색2',
+      Component: GuidePatternTable2,
+      path: 'GuidePatternTable2',
+      description: '',
+      success: false,
+    },
+    {
+      title: 'table 검색3',
+      Component: GuidePatternTable3,
+      path: 'GuidePatternTable3',
+      description: '',
+      success: false,
+    },
+    {
+      title: 'table 검색4',
+      Component: GuidePatternTable4,
+      path: 'GuidePatternTable4',
+      description: '',
+      success: false,
+    },
+    {
+      title: '게시글 폼1',
       Component: GuidePatternForm1,
       path: 'GuidePatternForm1',
       description: '',
       success: false,
     },
     {
+      title: '게시글 폼(등록)',
+      Component: GuidePatternStoreForm,
+      fileName: 'GuidePatternStoreForm',
+      path: 'notices/add',
+      description: '',
+      success: false,
+    },
+    {
+      title: '게시글 폼(수정)',
+      Component: GuidePatternStoreForm,
+      fileName: 'GuidePatternStoreForm',
+      path: 'notices/:detailId/edit',
+      realPath: 'notices/1/edit',
+      description: '',
+      success: false,
+    },
+    {
       title: '게시글 상세 1',
       Component: GuidePatternDetail1,
-      path: 'GuidePatternDetail1',
+      fileName: 'GuidePatternDetail1',
+      path: 'notices/:detailId',
+      realPath: 'notices/1',
       description: '',
       success: false,
     },

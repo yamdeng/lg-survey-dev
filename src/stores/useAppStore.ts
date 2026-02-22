@@ -5,6 +5,7 @@ import { navigate } from '@/utils/navigation';
 import dayjs from 'dayjs';
 import { createStore } from 'zustand';
 import ApiUtil from '@/utils/ApiUtil';
+import _ from 'lodash';
 
 // 로컬 개발 여부 : 용도는 로컬개발화 sso 분기 처리를 하기위한 변수
 // const enableLocalDevelop =
@@ -36,12 +37,20 @@ export const useAppStore = createStore<any>((set, get) => ({
   // TODO : 화면 최초 render전에 필요한 초기정보들을 전부 get 해옴 : 완료시 isInitComplete 값을 true로 바꾸고 true로 바뀐 시점에 사용자에게 보여지는 화면이 render됨
   initApp: async () => {
     LoadingBar.show();
-    const { getProfile } = get();
+    // const { getProfile } = get();
 
     try {
-      await getProfile();
+      // await getProfile();
+
+      const initDataApiResult = await ApiService.get('initData', null, {
+        disableLoadingBar: true,
+      });
+      const codeAllList = initDataApiResult.codes || [];
+      const codeAllMap = _.groupBy(codeAllList, 'cdGrp');
       set({
         isInitComplete: true,
+        codeAllList: codeAllList,
+        codeAllMap: codeAllMap,
       });
     } catch (e) {
       console.log(e);
@@ -110,7 +119,7 @@ export const useAppStore = createStore<any>((set, get) => ({
   handleRefreshAndRetry: async (originalRequest, beforeRefreshToken) => {
     const { setLoginToken, handleUnauthorizedError } = get();
     try {
-      const apiResult: any = await ApiUtil.post(
+      const apiResult = await ApiUtil.post(
         '/api/v1/auth/refresh',
         {
           refreshToken: beforeRefreshToken,

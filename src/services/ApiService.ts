@@ -15,7 +15,7 @@ const prefixUrl = `${VITE_API_URL}${VITE_API_PREFIX}/`;
 
 class ApiService {
   // http get method 요청
-  async get(apiPath, params?: any, config?: any) {
+  async get(apiPath, params?: any, config?: any): Promise<any> {
     config = config || {};
     config.params = params;
     // await ApiUtil.get(`${prefixUrl}common/health`, { byPassError: true } as any);
@@ -23,30 +23,30 @@ class ApiService {
   }
 
   // http post method 요청
-  async post(apiPath, body?: any, config?: any) {
+  async post(apiPath, body?: any, config?: any): Promise<any> {
     body = body || {};
     return ApiUtil.post(prefixUrl + apiPath, body, config);
   }
 
   // http put method 요청
-  async put(apiPath, body?: any, config?: any) {
+  async put(apiPath, body?: any, config?: any): Promise<any> {
     body = body || {};
     return ApiUtil.put(prefixUrl + apiPath, body, config);
   }
 
   // http patch method 요청
-  async patch(apiPath, body?: any, config?: any) {
+  async patch(apiPath, body?: any, config?: any): Promise<any> {
     body = body || {};
     return ApiUtil.patch(prefixUrl + apiPath, body, config);
   }
 
   // http delete method 요청
-  async delete(apiPath, config?: any) {
+  async delete(apiPath, config?: any): Promise<any> {
     return ApiUtil.delete(prefixUrl + apiPath, config);
   }
 
   // file upload
-  async fileUpload(formData: any, params: any, onUploadProgress = null) {
+  async fileUpload(formData: any, params: any, onUploadProgress = null): Promise<any> {
     return ApiUtil.post(prefixUrl + `common-file/upload`, formData, {
       params: params,
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -56,7 +56,12 @@ class ApiService {
   }
 
   // file upload : uri을 받아서 처리
-  async fileUploadByUrl(uploadUri: string, formData: any, params: any, onUploadProgress = null) {
+  async fileUploadByUrl(
+    uploadUri: string,
+    formData: any,
+    params: any,
+    onUploadProgress = null,
+  ): Promise<any> {
     return ApiUtil.post(prefixUrl + uploadUri, formData, {
       params: params,
       headers: { 'Content-Type': 'multipart/form-data' },

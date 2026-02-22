@@ -34,6 +34,24 @@ Code.boardSearchType = [
   },
 ];
 
+/*
+    게시글 유형
+*/
+Code.boardType = [
+  {
+    label: '공지사항',
+    value: 'notice',
+  },
+  {
+    label: '일반',
+    value: 'normal',
+  },
+  {
+    label: '이미지',
+    value: 'image',
+  },
+];
+
 // 코드명 가져오기 : value 기준
 Code.getCodeLabelByValue = function (codeCategory, codeValue) {
   let codeLabel = null;

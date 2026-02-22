@@ -8,11 +8,9 @@ import AppSelect from '@/components/common/AppSelect';
 import AppTable from '@/components/common/AppTable';
 import Code from '@/config/Code';
 import FlexBox from '@/publish/components/wrapperItem/FlexBox';
-import { useGuidePatternListStore } from '@/guide/stores/useGuidePatternListStore';
+import ApiService from '@/services/ApiService';
 
-function GuidePatternTable1() {
-  const listStore = useGuidePatternListStore();
-
+function GuidePatternTable2() {
   const [columns] = useState<any>([
     {
       field: 'boardKey',
@@ -61,14 +59,25 @@ function GuidePatternTable1() {
     },
   ]);
 
-  const { enterSearch, searchParam, changeSearchInput, list, clear } = listStore;
+  const [searchParam, setSearchParam] = useState<any>({});
+  const [list, setList] = useState<any>({});
+
   const { searchType, searchWord } = searchParam;
+
+  const changeSearchInput = (inputName: string, inputValue: any) => {
+    setSearchParam((prev: any) => ({
+      ...prev,
+      [inputName]: inputValue,
+    }));
+  };
+
+  const enterSearch = async () => {
+    const apiResult = await ApiService.get('notices', searchParam);
+    setList(apiResult);
+  };
 
   useEffect(() => {
     enterSearch();
-    return () => {
-      clear();
-    };
   }, []);
 
   return (
@@ -127,7 +136,7 @@ function GuidePatternTable1() {
             <div className="grid-block">
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <AppTable rowData={list} columns={columns} store={listStore} rowKey="boardKey" />
+                  <AppTable columns={columns} rowData={list} rowKey="boardKey" />
                 </div>
               </div>
             </div>
@@ -137,4 +146,4 @@ function GuidePatternTable1() {
     </>
   );
 }
-export default GuidePatternTable1;
+export default GuidePatternTable2;

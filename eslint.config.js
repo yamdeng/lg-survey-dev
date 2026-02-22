@@ -59,6 +59,7 @@ export default defineConfig([
 
       // 특수 타입 허용 설정 ({})
       '@typescript-eslint/no-empty-object-type': 'off', // 최신 TS-ESLint 대응
+      'react-hooks/set-state-in-effect': 'off',
     },
   },
   // 2. 마지막에 Prettier 설정을 추가하여 충돌 방지

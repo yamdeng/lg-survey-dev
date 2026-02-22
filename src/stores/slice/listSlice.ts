@@ -6,6 +6,7 @@ import ModalService from '@/services/ModalService';
 import { navigate } from '@/utils/navigation';
 
 export const listBaseState = {
+  gridApi: null,
   beforeApiParam: {},
   displayTableLoading: false,
   list: [],
@@ -31,6 +32,10 @@ export const createListSlice = (set, get) => ({
 
   changeToSelectedRowKeys: (keys) => {
     set({ selectedRowKeys: keys });
+  },
+
+  getGridRef: (gridRef) => {
+    set({ gridApi: gridRef.api });
   },
 
   goFirstPage() {
@@ -141,19 +146,18 @@ export const createListSlice = (set, get) => ({
       getCustomSearchParam,
       setTotalCount,
       listApiMethod,
-      disablePaging,
       convertList,
       searchAfterAction,
     } = get();
     const applyListApiMethod = listApiMethod || 'get';
     const apiParam = getCustomSearchParam ? getCustomSearchParam() : getSearchParam();
-    const apiResult: any = await ApiService[applyListApiMethod](listApiPath, apiParam, {
+    const apiResult = await ApiService[applyListApiMethod](listApiPath, apiParam, {
       disableLoadingBar: false,
     });
-    const data = apiResult.data;
-    const list = disablePaging ? data : data.list;
+
+    const list = apiResult || [];
     const applyList = convertList ? convertList(list) : list;
-    const totalCount = disablePaging && list ? list.length : data.total;
+    const totalCount = list.length;
     setTotalCount(totalCount);
     set({ list: applyList || [], selectedRowKeys: [] });
     if (searchAfterAction) {
@@ -162,7 +166,10 @@ export const createListSlice = (set, get) => ({
   },
 
   enterSearch: () => {
-    set({ currentPage: 1 });
+    const { gridApi } = get();
+    if (gridApi) {
+      gridApi.paginationGoToFirstPage();
+    }
     get().search();
   },
 

@@ -27,6 +27,7 @@ function AppTextInput(props) {
     icon = null,
     hiddenClearButton = false,
     inputType = 'text',
+    readOnly,
     ...rest
   } = props;
 
@@ -57,6 +58,7 @@ function AppTextInput(props) {
             }}
             placeholder={placeholder}
             disabled={disabled}
+            readOnly={readOnly}
           />
           {disabled || inputType === 'number' || hiddenClearButton || !value ? null : (
             <button className="btnclear" onClick={() => onChange('')}></button>

@@ -22,7 +22,7 @@ function CommonRouteTable({ moduleDirectoryPath, keyword, checkedNewTab, pageLis
         </thead>
         <tbody>
           {list.map((menuInfo) => {
-            const { title, path, fileName, description, success } = menuInfo;
+            const { title, path, realPath, fileName, description, success } = menuInfo;
             const componentName = fileName || path;
             const hrefString =
               Config.hrefBasePath + moduleDirectoryPath + componentName + Config.reactFileExtension;
@@ -57,7 +57,10 @@ function CommonRouteTable({ moduleDirectoryPath, keyword, checkedNewTab, pageLis
                     href={''}
                     onClick={(event) => {
                       event.preventDefault();
-                      movePage(`${moduleDirectoryPath}${path}`, checkedNewTab);
+                      movePage(
+                        `${moduleDirectoryPath}${realPath ? realPath : path}`,
+                        checkedNewTab,
+                      );
                     }}
                     dangerouslySetInnerHTML={{
                       __html: ReactUtil.replaceHighlightMarkup(title, keyword),

@@ -107,7 +107,8 @@ export const createFormSliceYup = (set, get) => ({
     }
 
     if (firstErrorMessage && !disableValidateToast) {
-      ToastService.warn(`${firstErrorMessage}(${firstErrorLabel})`);
+      ToastService.warn(`${firstErrorMessage}`);
+      console.log('firstErrorLabel : ' + firstErrorLabel);
     }
 
     if (firstErrorFieldKey) {
@@ -200,8 +201,8 @@ export const createFormSliceYup = (set, get) => ({
   getDetail: async (id) => {
     const { formApiPath, convertDetail, getDetailUrl } = get();
     const detailUrl = getDetailUrl ? getDetailUrl(id) : `${formApiPath}/${id}`;
-    const response: any = await ApiService.get(detailUrl);
-    const detailInfo = response.data;
+    const apiResult = await ApiService.get(detailUrl);
+    const detailInfo = apiResult;
     const applyDetailInfo = convertDetail ? convertDetail(detailInfo) : detailInfo;
     set({
       detailInfo: applyDetailInfo,

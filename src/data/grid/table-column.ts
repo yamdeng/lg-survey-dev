@@ -62,7 +62,7 @@ export const testColumnInfos: any = testColumnKeyList.map((keyName) => {
   return {
     field: keyName,
     headerName: _.capitalize(keyName),
-  };
+  } as any;
 });
 
 export const testSimpleColumnInfos: any[] = testSimpleColumnKeyList.map((keyName) => {
