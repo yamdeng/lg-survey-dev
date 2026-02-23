@@ -29,12 +29,10 @@ function AppSelect(props) {
     label,
     icon,
     value,
-    readonly,
     defaultValue,
     onChange,
     placeholder = '',
-    errorMessage = '*필수 선택 항목입니다.', // 에러메시지 기본값 추가
-    error = false, //  에러 유무 속성 추가
+    error,
     disabled = false,
     required = false,
     // style = { width: '100%' },
@@ -91,7 +89,7 @@ function AppSelect(props) {
           <Select
             {...rest}
             mode={isMultiple ? 'multiple' : ''}
-            status={!isFocused && errorMessage ? 'error' : ''}
+            status={!isFocused && error ? 'error' : ''}
             style={{ width: width }}
             className={applyClassName}
             id={id}
@@ -113,7 +111,7 @@ function AppSelect(props) {
             labelRender={labelRender}
           ></Select>
         </div>
-        <CommonInputError errorMessage={errorMessage} error={error} />
+        {/* <CommonInputError errorMessage={errorMessage} /> */}
       </div>
     </>
   );

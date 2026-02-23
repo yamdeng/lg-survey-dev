@@ -147,7 +147,7 @@
       &:has(:focus) { outline-color: #b32549; }
       &:has(input[readonly]) { outline-color: #fff !important; }
 
-      > input { line-height: 30px; color: #000000e0; width: 100%; padding: 0 24px 0 10px; }
+      > input { line-height: 30px; color: inherit; width: 100%; padding: 0 24px 0 10px; }
       input::placeholder { color: #ccc; opacity: 1; }
 
       & + .icon-sch { 

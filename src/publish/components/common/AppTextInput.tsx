@@ -1,6 +1,6 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
-import CommonInputError from './CommonInputError';
+// import CommonInputError from './CommonInputError';
 
 /*
    #.<AppTextInput /> 전용 속성
@@ -18,8 +18,8 @@ function AppTextInput(props) {
     value,
     onChange,
     placeholder = '',
-    errorMessage = '*필수 입력 항목입니다.', // 에러메시지 기본값 추가하면 좋을것 같습니다
-    error = false, //  에러 유무 속성 추가
+    // errorMessage,
+    error = false,
     disabled = false,
     icon,
     required,
@@ -31,7 +31,7 @@ function AppTextInput(props) {
   } = props;
 
   const applyClassName = classNames('app-form-input', {
-    error: errorMessage,
+    error: error,
     active: true,
   });
 
@@ -63,7 +63,8 @@ function AppTextInput(props) {
             <button className="btnclear" onClick={() => onChange('')}></button>
           )}
         </div>
-        <CommonInputError errorMessage={errorMessage} error={error} />
+        {/* 에러시 className .error 추가로 변경 */}
+        {/* <CommonInputError errorMessage={errorMessage} error={error} /> */}
       </div>
     </>
   );

@@ -79,8 +79,11 @@
   .modify-table {
     .form-item { 
       display: flex; align-items: center; position: relative;
-      .error-text { opacity: 1; transition: .3s; }
-      .form-input-outlined:has(:focus) + .error-text { opacity: 0; }
+      // .error-text { opacity: 1; transition: .3s; }
+      // .form-input-outlined:has(:focus) + .error-text { opacity: 0; }
+      .form-input-outlined:has(.app-form-input.error) { 
+        outline-color: var(--sv-color-error); color: var(--sv-color-error);
+      }
     }
 
     .error-text {
