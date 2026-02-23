@@ -51,6 +51,7 @@ const NoticeMgmt = () => {
                 <tr>
                   <td colSpan={4}>
                     <div className="textEdit">
+                      {/* 에디터 기본 height -> 400px */}
                       <AppTextEditor />
                     </div>
                   </td>
