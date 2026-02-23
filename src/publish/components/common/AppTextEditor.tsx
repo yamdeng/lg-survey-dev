@@ -10,7 +10,7 @@ Quill.register('modules/imageResize', ImageResize);
 function AppTextEditor(props) {
   const {
     isViewMode = false,
-    height = 400,
+    height,
     value,
     errorMessage,
     onChange,
