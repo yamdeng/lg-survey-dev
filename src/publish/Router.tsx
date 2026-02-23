@@ -79,8 +79,8 @@ export const Router = createBrowserRouter([
             path: 'surveyInfo',
             element: <SurveyInfo />, // 2-1 설문 관리
             handle: {
-              breadcrumbName: 'Survey info',
-              label: 'Survey info',
+              breadcrumbName: 'Survey Info',
+              label: 'Survey Info',
               key: '21',
             },
           },
@@ -88,8 +88,8 @@ export const Router = createBrowserRouter([
             path: 'languageInfo',
             element: <LanguageInfo />, // 2-2 언어 관리
             handle: {
-              breadcrumbName: 'Language info',
-              label: 'Language info',
+              breadcrumbName: 'Language Info',
+              label: 'Language Info',
               key: '22',
             },
           },
@@ -108,17 +108,17 @@ export const Router = createBrowserRouter([
             path: 'commonInfo',
             element: <CommonInfo />, // 3-1 일반 관리
             handle: {
-              breadcrumbName: 'Common info',
-              label: 'Common info',
+              breadcrumbName: 'Common Info',
+              label: 'Common Info',
               key: '31',
             },
           },
           {
-            path: 'questioninfo',
+            path: 'questionInfo',
             element: <QuestionInfo />, // 3-2 문항 관리
             handle: {
-              breadcrumbName: 'Question info',
-              label: 'Question info',
+              breadcrumbName: 'Question Info',
+              label: 'Question Info',
               key: '32',
             },
           },

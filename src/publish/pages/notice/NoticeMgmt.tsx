@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import HeaderMenu from '@/publish/components/header/HeaderMenu';
 
 import { Home, Search, FilePenLine, Plus, X, Check } from 'lucide-react';
@@ -7,6 +8,9 @@ import FlexBox from '@/publish/components/wrapperItem/FlexBox';
 import AppButton from '@/publish/components/common/AppButton';
 import AppSelect from '@/publish/components/common/AppSelect';
 import AppTextInput from '@/publish/components/common/AppTextInput';
+import AppTextEditor from '@/components/common/AppTextEditor';
+
+import 'react-quill-new/dist/quill.snow.css';
 
 const NoticeMgmt = () => {
   return (
@@ -47,14 +51,7 @@ const NoticeMgmt = () => {
                 <tr>
                   <td colSpan={4}>
                     <div className="textEdit">
-                      <br />
-                      <br />
-                      -- 텍스트 에디터 --
-                      <p>최대 3000자 까지 쓸 수 있습니다.</p>
-                      <br />
-                      <br />
-                      <br />
-                      <br />
+                      <AppTextEditor />
                     </div>
                   </td>
                 </tr>

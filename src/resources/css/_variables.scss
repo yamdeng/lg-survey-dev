@@ -7,7 +7,8 @@
     $black: #000000;
     $color-split: rgba(5, 5, 5, 0.06);
     $color-primary: #a50934;
-    $color-error: #ff4d4f;
+    $color-error: #ff4d4f; 
+    $color-error-bg: #fdf8f9;
     $color-border: #d9d9d9;
     $border-radius: 4px;
     $font-family-base: 'LG EI Text', 'Noto Sans KR', sans-serif;
@@ -22,6 +23,7 @@
     --sv-color-split: #{$color-split};
     --sv-color-primary: #{$color-primary} !important;
     --sv-color-error: #{$color-error} !important;
+    --sv-color-error-bg: #{$color-error-bg} !important;
     --sv-color-border: #{$color-border} !important;
     --sv-border-radius: #{$border-radius};
     --sv-border-radius: #{$border-radius};
