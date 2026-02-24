@@ -4,11 +4,11 @@ import {
   House,
   Laptop,
   Files,
-  FileText,
+  ListChecks,
   UsersRound,
   Mail,
   FileChartLine,
-  FileInput,
+  ClipboardList,
   Database,
   Network,
 } from 'lucide-react';
@@ -140,7 +140,7 @@ export const Router = createBrowserRouter([
         handle: {
           breadcrumbName: '문항관리',
           label: '문항관리', // 3. 문항 관리
-          icon: <FileText />,
+          icon: <ListChecks />,
           key: '3',
         },
         children: [
@@ -337,7 +337,7 @@ export const Router = createBrowserRouter([
         handle: {
           breadcrumbName: '결과 관리',
           label: '결과 관리', // 7. Results Manage
-          icon: <FileInput />,
+          icon: <ClipboardList />,
           key: '7',
         },
         children: [

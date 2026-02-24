@@ -7,6 +7,8 @@
     $black: #000000;
     $color-split: rgba(5, 5, 5, 0.06);
     $color-primary: #a50934;
+    $color-secondary: #3641AF;
+    $color-active: #00C8B3;
     $color-error: #ff4d4f; 
     $color-error-bg: #fdf8f9;
     $color-border: #d9d9d9;
@@ -21,10 +23,12 @@
     --color-white: #{$white};
     --color-black: #{$black};
     --sv-color-split: #{$color-split};
-    --sv-color-primary: #{$color-primary} !important;
-    --sv-color-error: #{$color-error} !important;
-    --sv-color-error-bg: #{$color-error-bg} !important;
-    --sv-color-border: #{$color-border} !important;
+    --sv-color-primary: #{$color-primary};
+    --sv-color-secondary: #{$color-secondary};
+    --sv-color-secondary: #{$color-secondary};
+    --sv-color-error: #{$color-error};
+    --sv-color-error-bg: #{$color-error-bg};
+    --sv-color-border: #{$color-border};
     --sv-border-radius: #{$border-radius};
     --sv-border-radius: #{$border-radius};
     --sv-select-border-color: #{$color-border};
@@ -36,6 +40,17 @@
     --sv-font-family-base: #{$font-family-base};
     --ag-header-font-family: #{$font-family-base};
 
+    // form
+    .ant-select-outlined {}
+    .ant-select-css-var {
+      // --ant-select-active-outline-color
+      // --ant-select-border-color: var(--sv-color-secondary) !important;
+      --ant-select-hover-border-color: var(--sv-color-secondary) !important;
+      --ant-select-active-border-color: var(--sv-color-secondary) !important;
+    }
+    .ant-select.ant-select-outlined:not(.ant-select-disabled).ant-select-focused {
+      box-shadow: none !important;
+    }
     /* */ // border-radius: var(--ant-select-border-radius);
     // border-width: var(--ant-select-border-size);
     // border-style: var(--sv-line-type);
