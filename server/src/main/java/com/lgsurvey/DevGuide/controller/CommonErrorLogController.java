@@ -1,5 +1,6 @@
 package com.lgsurvey.DevGuide.controller;
 
+import com.lgsurvey.DevGuide.constants.CommonConstants;
 import com.lgsurvey.DevGuide.utils.ResponseUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +30,7 @@ public class CommonErrorLogController {
       @RequestParam(value = "pageSize", required = false, defaultValue = "50") int pageSize,
       @ModelAttribute CommonErrorLogDto paramDto) {
 
-    PageHelper.startPage(pageNum, pageSize);
-    PageInfo<CommonErrorLogDto> pageList = commonErrorLogService.selectErrorLogList(paramDto);
-
-    return ResponseUtil.createSuccessResponse(pageList);
+    return ResponseUtil.createSuccessResponse(commonErrorLogService.selectErrorLogList(paramDto));
   }
 
   @Operation(summary = "에러 로그 상세 조회", description = "에러 로그 상세 조회 API")
@@ -49,6 +47,7 @@ public class CommonErrorLogController {
   public ResponseEntity<?> insertErrorLog(
       @Valid @RequestBody CommonErrorLogDto reqDto) {
 
+    reqDto.setLogKindCode(CommonConstants.LOG_TYPE_FRONT);
     commonErrorLogService.insertErrorLog(reqDto);
     return ResponseUtil.createSuccessResponse();
   }

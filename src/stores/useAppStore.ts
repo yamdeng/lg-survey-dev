@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { createStore } from 'zustand';
 import ApiUtil from '@/utils/ApiUtil';
 import _ from 'lodash';
+import ModalService from '@/services/ModalService';
 
 // 로컬 개발 여부 : 용도는 로컬개발화 sso 분기 처리를 하기위한 변수
 // const enableLocalDevelop =
@@ -104,18 +105,18 @@ export const useAppStore = createStore<any>((set, get) => ({
     return success;
   },
 
-  // 400: 요청 오류 (파라미터 잘못됨 등)
-  handleBadRequestError: (serverError) => {
-    // API에서 내려준 에러 메시지나 기본 메시지 노출
-    console.error(serverError);
-  },
-
-  // TODO : 401 에러 처리
+  // 401 에러 처리 : 로그인으로 이동
   handleUnauthorizedError: () => {
-    // yamdeng TODO : ModalService 사용
+    ModalService.alert({
+      title: '인증 정보 오류',
+      body: '인증정보가 존재하지 않습니다.\n로그인 페이지로 이동됩니다.',
+      ok: () => {
+        navigate('/login');
+      },
+    });
   },
 
-  // TODO : refreshToken 처리
+  // refresh token 처리
   handleRefreshAndRetry: async (originalRequest, beforeRefreshToken) => {
     const { setLoginToken, handleUnauthorizedError } = get();
     try {
@@ -136,44 +137,11 @@ export const useAppStore = createStore<any>((set, get) => ({
     }
   },
 
-  // TODO : 502, 503, 504(인프라성 장애)
-  handleServiceInterrupt: () => {},
-
-  // TODO : 50X 에러 전체를 받아서 판단
-  handleGlobalServerError: (status: number) => {
-    if ([502, 503, 504].includes(status)) {
-      // 인프라 문제 담당 함수 호출
-      get().handleServiceInterrupt(status);
-    } else {
-      // 그 외 서버 오류 담당 함수 호출
-      get().handleServerError(status);
-    }
+  // 403 권한 없을 경우 처리
+  handleAccessDeniedError: async () => {
+    navigate('/not-auth');
   },
 
-  // TODO : 모든 api에서 사전 권한 체크용 api 호출(필요시 사용)
-  handleBeforeAuthCheck: async () => {
-    return true;
-  },
-
-  handleGlobalError: (status: number, message?: string) => {
-    switch (status) {
-      case 401:
-        get().handleUnauthorizedError();
-        break;
-      case 403:
-        get().handleForbiddenError();
-        break;
-      case 400:
-        get().handleBadRequestError(message);
-        break;
-      case 502:
-      case 504:
-        get().handleGatewayError();
-        break;
-      default: // 500 등 기타 처리
-    }
-  },
-
-  // TODO : 로그아웃 처리
+  // TODO : 로그아웃 URL 수정
   logout: () => {},
 }));

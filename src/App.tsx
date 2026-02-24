@@ -1,31 +1,54 @@
-import { useState } from 'react';
-import lgSymbol from '@/resources/images/LG-Symbol.jpg';
-import lgLogo from '/lg-logo.jpeg';
+import AlertModalContainer from '@/components/layout/AlertModalContainer';
+import LoadingBarContainer from '@/components/layout/LoadingBarContainer';
+import { useStore } from 'zustand';
+import { useAppStore } from '@/stores/useAppStore';
+import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import Config from '@/config/Config';
+import Logger from '@/utils/Logger';
+import CommonUtil from '@/utils/CommonUtil';
 
-function App() {
-  const [count, setCount] = useState(0);
+function App({ children }) {
+  const pathname = window.location.pathname;
 
-  const aaaa = 'sss';
-  console.log(aaaa);
+  const { isInitComplete, initApp } = useStore(useAppStore, (state) => state);
+
+  useEffect(() => {
+    Logger.info(`appVersion : :${Config.appVersion}`);
+
+    // javascript core error handle
+    window.onerror = CommonUtil.handleGlobalError;
+
+    // promise error catch
+    const handleUnhandledrejection = CommonUtil.handleGlobalUnhandledRejection;
+
+    window.addEventListener('unhandledrejection', handleUnhandledrejection);
+
+    if (!location.pathname.endsWith('/login')) {
+      initApp();
+    }
+
+    return () => {
+      window.removeEventListener('unhandledrejection', handleUnhandledrejection);
+    };
+  }, []);
+
+  // 1. 로그인 페이지는 초기화 여부와 상관없이 즉시 노출
+  if (pathname === '/login') {
+    return <>{children}</>;
+  }
+
+  // 2. 그 외 모든 페이지는 초기화가 완료될 때까지 로딩 표시
+  if (!isInitComplete) {
+    return <LoadingBarContainer />;
+  }
 
   return (
     <>
-      <h1>User</h1>
-      <div>
-        <a href="https://lg.com" target="_blank">
-          <img src={lgLogo} alt="lg logo" />
-        </a>
-        <a href="https://lg.com" target="_blank">
-          <img src={lgSymbol} alt="lg symbol" />
-        </a>
-      </div>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p>Click on the Vite and React logos to learn more</p>
+      {children}
+      <ToastContainer autoClose={3000} hideProgressBar={true} position="top-center" />
+      <LoadingBarContainer />
+      <AlertModalContainer />
     </>
   );
 }

@@ -1,6 +1,7 @@
 package com.lgsurvey.DevGuide.controller;
 
 import com.lgsurvey.DevGuide.dto.NoticeBoardDto;
+import com.lgsurvey.DevGuide.dto.response.NoticeBoardResponseDto;
 import com.lgsurvey.DevGuide.service.NoticeBoardService;
 import com.lgsurvey.DevGuide.utils.ResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +33,7 @@ public class NoticeBoardController {
       @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
       @ModelAttribute NoticeBoardDto paramDto) {
 
-    List<NoticeBoardDto> result = noticeBoardService.selectNoticeList(paramDto);
+    List<NoticeBoardResponseDto> result = noticeBoardService.selectNoticeList(paramDto);
 
     return ResponseUtil.createSuccessResponse(result);
   }
@@ -43,7 +44,7 @@ public class NoticeBoardController {
   @Operation(summary = "공지사항 상세 조회", description = "공지사항 상세 조회 API")
   @GetMapping("/notices/{boardKey}")
   public ResponseEntity<?> selectNoticeDetail(
-      @PathVariable(value = "boardKey", required = true) String boardKey) {
+          @PathVariable(required = true) String boardKey) {
 
     NoticeBoardDto result = noticeBoardService.selectNoticeDetail(boardKey);
     return ResponseUtil.createSuccessResponse(result);

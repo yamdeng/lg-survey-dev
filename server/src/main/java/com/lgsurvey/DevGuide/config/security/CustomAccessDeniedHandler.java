@@ -29,7 +29,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     log.error("No Authorities", accessDeniedException);
 
     ErrorResponseDto errorResponseDto =
-        new ErrorResponseDto(HttpStatus.FORBIDDEN.value(), accessDeniedException.getMessage(),
+        new ErrorResponseDto(HttpStatus.FORBIDDEN.toString(), accessDeniedException.getMessage(),
             LocalDateTime.now());
 
     String responseBody = objectMapper.writeValueAsString(errorResponseDto);

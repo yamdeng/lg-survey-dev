@@ -45,11 +45,7 @@ public class CommonFileController {
 
     CommonFileDto paramDto = new CommonFileDto();
 
-    // Page 조회
-    PageHelper.startPage(pageNum, pageSize);
-    PageInfo<CommonFileDto> pageList = commonFileService.selectFileList(paramDto);
-
-    return ResponseUtil.createSuccessResponse(pageList);
+    return ResponseUtil.createSuccessResponse(commonFileService.selectFileList(paramDto));
   }
 
   @Operation(summary = "공통 파일 등록", description = "공통 파일 등록 API")

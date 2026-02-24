@@ -1,18 +1,17 @@
 package com.lgsurvey.DevGuide.controller;
 
-import com.lgsurvey.DevGuide.utils.ResponseUtil;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lgsurvey.DevGuide.dto.CommonUserDto;
 import com.lgsurvey.DevGuide.service.CommonUserService;
-
+import com.lgsurvey.DevGuide.utils.ResponseUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "사용자관리", description = "사용자관리 API")
 @Slf4j
@@ -30,8 +29,7 @@ public class CommonUserController {
       @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
       @ModelAttribute CommonUserDto paramDto) {
 
-    PageHelper.startPage(pageNum, pageSize);
-    PageInfo<CommonUserDto> pageList = commonUserService.selectUserList(paramDto);
+    List<CommonUserDto> pageList = commonUserService.selectUserList(paramDto);
 
     return ResponseUtil.createSuccessResponse(pageList);
   }

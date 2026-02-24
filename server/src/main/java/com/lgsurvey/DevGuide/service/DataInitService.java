@@ -27,10 +27,7 @@ public class DataInitService extends AbstractCommonDaoService implements Command
 
   private static final String SYSTEM_ID = "system";
 
-  private static final String USER_PASSWORD = "survey124";
-
-  private final CommonGroupCodeService commonGroupCodeService;
-  private final CommonCodeService commonCodeService;
+  private static final String USER_PASSWORD = "survey1234";
 
   private final ObjectMapper objectMapper;
   private final CommonDeptService commonDeptService;

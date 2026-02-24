@@ -77,7 +77,8 @@ CREATE TABLE common_user
     user_comment  VARCHAR(4000) NULL,
     email         VARCHAR(50) NULL,
     mobile_tel    VARCHAR(20) NULL,
-    birth_date    TIMESTAMP NULL,
+    birth_date    DATE NULL,
+    start_time    TIME,
     use_yn        CHAR(1) NULL,
     user_password VARCHAR(4000) NULL,
     user_type     CHAR(1) NULL,
@@ -152,7 +153,7 @@ CREATE TABLE common_error_log
     log_key       VARCHAR(255)                        NOT NULL,
     user_key      VARCHAR(255) NULL,
     log_kind_code VARCHAR(50) NULL,
-    error_message VARCHAR(4000)                       NOT NULL,
+    error_message TEXT                       NOT NULL,
     reg_date      TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT common_error_log_pk PRIMARY KEY (log_key)
 );

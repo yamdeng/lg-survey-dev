@@ -20,54 +20,51 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value = "/api/v1")
 public class CommonDeptController {
 
-  private final CommonDeptService commonDeptService;
+    private final CommonDeptService commonDeptService;
 
-  @Operation(summary = "부서 목록 조회", description = "부서 목록 조회 API")
-  @GetMapping("/dept")
-  public ResponseEntity<?> selectDeptList(
-      @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
-      @RequestParam(value = "pageSize", required = false, defaultValue = "1000") int pageSize,
-      @ModelAttribute CommonDeptDto paramDto) {
+    @Operation(summary = "부서 목록 조회", description = "부서 목록 조회 API")
+    @GetMapping("/dept")
+    public ResponseEntity<?> selectDeptList(
+            @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+            @RequestParam(value = "pageSize", required = false, defaultValue = "1000") int pageSize,
+            @ModelAttribute CommonDeptDto paramDto) {
 
-    PageHelper.startPage(pageNum, pageSize);
-    PageInfo<CommonDeptDto> pageList = commonDeptService.selectDeptList(paramDto);
+        return ResponseUtil.createSuccessResponse(commonDeptService.selectDeptList(paramDto));
+    }
 
-    return ResponseUtil.createSuccessResponse(pageList);
-  }
+    @Operation(summary = "부서 상세 조회", description = "부서 상세 조회 API")
+    @GetMapping("/dept/{deptKey}")
+    public ResponseEntity<?> selectDeptDetail(
+            @PathVariable(value = "deptKey", required = true) String deptKey) {
 
-  @Operation(summary = "부서 상세 조회", description = "부서 상세 조회 API")
-  @GetMapping("/dept/{deptKey}")
-  public ResponseEntity<?> selectDeptDetail(
-      @PathVariable(value = "deptKey", required = true) String deptKey) {
+        CommonDeptDto result = commonDeptService.selectDeptDetail(deptKey);
+        return ResponseUtil.createSuccessResponse(result);
+    }
 
-    CommonDeptDto result = commonDeptService.selectDeptDetail(deptKey);
-    return ResponseUtil.createSuccessResponse(result);
-  }
+    @Operation(summary = "부서 등록", description = "부서 등록 API")
+    @PostMapping(value = "/dept")
+    public ResponseEntity<?> createDept(
+            @Valid @RequestBody CommonDeptDto reqDto) {
 
-  @Operation(summary = "부서 등록", description = "부서 등록 API")
-  @PostMapping(value = "/dept")
-  public ResponseEntity<?> createDept(
-      @Valid @RequestBody CommonDeptDto reqDto) {
+        CommonDeptDto result = commonDeptService.createDept(reqDto);
+        return ResponseUtil.createSuccessResponse(result);
+    }
 
-    CommonDeptDto result = commonDeptService.createDept(reqDto);
-    return ResponseUtil.createSuccessResponse(result);
-  }
+    @Operation(summary = "부서 수정", description = "부서 수정 API")
+    @PutMapping(value = "/dept")
+    public ResponseEntity<?> updateDept(
+            @Valid @RequestBody CommonDeptDto reqDto) {
 
-  @Operation(summary = "부서 수정", description = "부서 수정 API")
-  @PutMapping(value = "/dept")
-  public ResponseEntity<?> updateDept(
-      @Valid @RequestBody CommonDeptDto reqDto) {
+        commonDeptService.updateDept(reqDto);
+        return ResponseUtil.createSuccessResponse();
+    }
 
-    commonDeptService.updateDept(reqDto);
-    return ResponseUtil.createSuccessResponse();
-  }
+    @Operation(summary = "부서 삭제", description = "부서 삭제 API")
+    @DeleteMapping(value = "/dept/{deptKey}")
+    public ResponseEntity<?> deleteDept(
+            @PathVariable(value = "deptKey", required = true) String deptKey) {
 
-  @Operation(summary = "부서 삭제", description = "부서 삭제 API")
-  @DeleteMapping(value = "/dept/{deptKey}")
-  public ResponseEntity<?> deleteDept(
-      @PathVariable(value = "deptKey", required = true) String deptKey) {
-
-    commonDeptService.deleteDept(deptKey);
-    return ResponseUtil.createSuccessResponse();
-  }
+        commonDeptService.deleteDept(deptKey);
+        return ResponseUtil.createSuccessResponse();
+    }
 }

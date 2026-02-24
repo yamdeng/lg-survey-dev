@@ -43,7 +43,6 @@ ApiUtil.interceptors.request.use(
       }
     }
 
-    // TODO : 필요시 헤더에 인증 토큰값 반영
     const AuthorizationValue = `Bearer ${accessToken}`;
     config.headers['Authorization'] = AuthorizationValue;
 
@@ -116,7 +115,6 @@ ApiUtil.interceptors.response.use(
 
     // 403 에러
     if (status === 403) {
-      // TODO : 403 error handle
       handleAccessDeniedError(errorResponse);
       return Promise.reject(error);
     }

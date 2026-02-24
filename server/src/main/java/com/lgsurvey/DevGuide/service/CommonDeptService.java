@@ -17,7 +17,7 @@ public interface CommonDeptService {
   /**
    * 부서 목록 조회 (상위 부서명 포함)
    */
-  PageInfo<CommonDeptDto> selectDeptList(CommonDeptDto paramDto);
+  List<CommonDeptDto> selectDeptList(CommonDeptDto paramDto);
 
   /**
    * 특정 상위 부서 하위의 부서 리스트 조회

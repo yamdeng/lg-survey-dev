@@ -94,10 +94,22 @@ public class CodeController {
   public ResponseEntity<?> selectCommonCodeListByGroupCode(
       @PathVariable(value = "groupCode", required = true) String groupCode) {
 
-    List<CommonCodeDto> result =
+    List<CommonCodeDto> list =
         commonCodeService.selectCommonCodeListByGroupCode(groupCode);
 
-    return ResponseUtil.createSuccessResponse(result);
+    List<CommonCodeResponseDto> commonCodeResponseDtoList = new ArrayList<>();
+
+    list.forEach(commonCodeDto -> {
+      CommonCodeResponseDto commonCodeResponseDto = modelMapper.map(commonCodeDto, CommonCodeResponseDto.class);
+      commonCodeResponseDto.setCdGrp(commonCodeDto.getGroupCode());
+      commonCodeResponseDto.setCd(commonCodeDto.getCode());
+      commonCodeResponseDto.setCdNm(commonCodeDto.getCodeName());
+      commonCodeResponseDto.setCdDesc(commonCodeDto.getDescription());
+      commonCodeResponseDto.setSortOrd(commonCodeDto.getSortIndex());
+      commonCodeResponseDtoList.add(commonCodeResponseDto);
+    });
+
+    return ResponseUtil.createSuccessResponse(commonCodeResponseDtoList);
   }
 
 
@@ -112,7 +124,14 @@ public class CodeController {
       @PathVariable(value = "groupCode", required = true) String groupCode,
       @PathVariable(value = "id", required = true) String id) {
 
-    CommonCodeDto result = commonCodeService.selectCommonCode(groupCode, id);
+    CommonCodeDto commonCodeDto = commonCodeService.selectCommonCode(groupCode, id);
+
+    CommonCodeResponseDto result = modelMapper.map(commonCodeDto, CommonCodeResponseDto.class);
+    result.setCdGrp(commonCodeDto.getGroupCode());
+    result.setCd(commonCodeDto.getCode());
+    result.setCdNm(commonCodeDto.getCodeName());
+    result.setCdDesc(commonCodeDto.getDescription());
+    result.setSortOrd(commonCodeDto.getSortIndex());
 
     return ResponseUtil.createSuccessResponse(result);
   }

@@ -26,7 +26,7 @@
         <include refid="CommonUser.modUserJoinTable"/>
     </sql>
 
-    <select id="selectList" parameterType="com.lgsurvey.DevGuide.dto.NoticeBoardDto"
+    <select id="selectList" parameterType="com.lgsurvey.DevGuide.dto.response.NoticeBoardResponseDto"
             resultType="com.lgsurvey.DevGuide.dto.NoticeBoardDto">
         SELECT
             <include refid="selectColumn"/>
@@ -57,7 +57,7 @@
         <include refid="Common.basicOrderBy"/>
     </select>
 
-    <select id="selectDetail" parameterType="String" resultType="com.lgsurvey.DevGuide.dto.NoticeBoardDto">
+    <select id="selectDetail" parameterType="String" resultType="com.lgsurvey.DevGuide.dto.response.NoticeBoardResponseDto">
         SELECT
         <include refid="selectColumn"/>
         FROM notice_board board

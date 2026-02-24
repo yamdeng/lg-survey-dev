@@ -2,6 +2,7 @@ package com.lgsurvey.DevGuide.service;
 
 import com.github.pagehelper.PageInfo;
 import com.lgsurvey.DevGuide.dto.NoticeBoardDto;
+import com.lgsurvey.DevGuide.dto.response.NoticeBoardResponseDto;
 
 import java.util.List;
 
@@ -15,23 +16,23 @@ public interface NoticeBoardService {
    * @param boardKey 게시판 키
    * @return 공지사항 상세 정보
    */
-  NoticeBoardDto selectNoticeDetail(String boardKey);
+  NoticeBoardResponseDto selectNoticeDetail(String boardKey);
 
   /**
    * 공지사항 목록 조회 (검색 및 페이징 포함)
    * @param paramDto 검색 조건 및 페이징 파라미터
    * @return 페이징 처리된 공지사항 목록
    */
-  PageInfo<NoticeBoardDto> selectNoticeListByPage(NoticeBoardDto paramDto);
+  PageInfo<NoticeBoardResponseDto> selectNoticeListByPage(NoticeBoardDto paramDto);
 
-  List<NoticeBoardDto> selectNoticeList(NoticeBoardDto paramDto);
+  List<NoticeBoardResponseDto> selectNoticeList(NoticeBoardDto paramDto);
 
   /**
    * 공지사항 등록
    * @param dto 등록 정보
    * @return 등록된 공지사항 상세 정보
    */
-  NoticeBoardDto createNotice(NoticeBoardDto dto);
+  NoticeBoardResponseDto createNotice(NoticeBoardDto dto);
 
   /**
    * 공지사항 수정

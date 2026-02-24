@@ -21,9 +21,8 @@ public class CommonDeptServiceImpl extends AbstractCommonDaoService implements C
   /**
    * 부서 목록 조회 (상위 부서명 포함)
    */
-  public PageInfo<CommonDeptDto> selectDeptList(CommonDeptDto paramDto) {
-    List<CommonDeptDto> resultList = commonSqlDao.selectList("CommonDept.selectList", paramDto);
-    return PageInfo.of(resultList);
+  public List<CommonDeptDto> selectDeptList(CommonDeptDto paramDto) {
+    return commonSqlDao.selectList("CommonDept.selectList", paramDto);
   }
 
   /**

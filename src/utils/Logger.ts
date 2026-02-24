@@ -1,6 +1,7 @@
 import { useUIStore } from '@/stores/useUIStore';
 import Config from '@/config/Config';
 import dayjs from 'dayjs';
+import ApiService from '@/services/ApiService';
 
 const Logger = {
   debug: function (message) {
@@ -32,6 +33,9 @@ const Logger = {
         errorDoc.beforeRouteUrl = beforePath || '';
         errorDoc.userAgent = navigator.userAgent || '';
         errorDoc.message = applyMessage.substr(0, 2500);
+        ApiService.post('error-log', {
+          errorMessage: JSON.stringify(errorDoc),
+        });
       } catch (e) {
         console.error(`Logger error : ${e}`);
       }

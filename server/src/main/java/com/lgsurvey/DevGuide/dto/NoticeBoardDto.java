@@ -8,6 +8,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString(callSuper = true)
@@ -41,5 +43,11 @@ public class NoticeBoardDto extends CommonDto {
 
   @Schema(description = "보안 레벨")
   private String securityLevel;
+
+  @Schema(description = "신규 파일첨부 목록")
+  private List<String> addFileKeyList;
+
+  @Schema(description = "삭제할 파일첨부 키 목록")
+  private List<String> deleteFileKeyList;
 
 }

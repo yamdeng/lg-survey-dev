@@ -47,7 +47,7 @@ public class SecurityConfig {
 
     // 권한 규칙 작성
     http.authorizeHttpRequests(authorize -> authorize.requestMatchers(AUTH_WHITELIST).permitAll()
-        .requestMatchers("/aaa/api/**").authenticated().anyRequest().permitAll());
+        .requestMatchers("/api/v1/**").authenticated().anyRequest().permitAll());
 
     http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 

@@ -8,7 +8,9 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -43,9 +45,15 @@ public class CommonUserDto extends CommonDto {
   @Schema(description = "휴대폰 번호")
   private String mobileTel;
 
-  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-  @Schema(description = "생년월일")
-  private LocalDateTime birthDate;
+  // 2. 생년월일 (날짜만)
+  @JsonFormat(pattern = "yyyy-MM-dd")
+  @Schema(description = "생년월일", example = "1995-05-15")
+  private LocalDate birthDate;
+
+  // 3. 업무 시작 시간 등 (시간만)
+  @JsonFormat(pattern = "HH:mm:ss")
+  @Schema(description = "출근시간", example = "09:00:00")
+  private LocalTime startTime;
 
   @Schema(description = "사용 여부 (Y/N)")
   private String useYn;

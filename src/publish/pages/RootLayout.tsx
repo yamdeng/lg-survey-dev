@@ -28,7 +28,7 @@ function RootLayout() {
         </aside>
         <div className="sv-content">
           <Header />
-          <Outlet />
+          {/* <Outlet /> */}
         </div>
       </div>
       <LoadingBarContainer />

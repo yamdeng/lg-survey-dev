@@ -26,7 +26,7 @@ public interface CommonFileService {
    * @param paramDto 검색 조건 및 페이징 파라미터
    * @return 페이징 처리된 파일 목록
    */
-  PageInfo<CommonFileDto> selectFileList(CommonFileDto paramDto);
+  List<CommonFileDto> selectFileList(CommonFileDto paramDto);
 
   /**
    * 파일 메타데이터 등록

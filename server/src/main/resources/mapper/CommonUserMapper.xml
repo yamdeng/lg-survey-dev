@@ -75,6 +75,12 @@
         WHERE user_key = #{userKey}
     </select>
 
+    <select id="selectDetailByUserId" parameterType="String" resultType="com.lgsurvey.DevGuide.dto.CommonUserDto">
+        SELECT *
+        FROM common_user
+        WHERE user_id = #{userId}
+    </select>
+
     <insert id="insert" parameterType="com.lgsurvey.DevGuide.dto.CommonUserDto">
         INSERT INTO common_user (user_key, dept_key, position_key, user_id, user_name,
                                  user_name_en, user_comment, email, mobile_tel, birth_date,

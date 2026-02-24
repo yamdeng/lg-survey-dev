@@ -3,6 +3,8 @@ package com.lgsurvey.DevGuide.service;
 import com.github.pagehelper.PageInfo;
 import com.lgsurvey.DevGuide.dto.CommonErrorLogDto;
 
+import java.util.List;
+
 /**
  * 에러 로그 관리 서비스 인터페이스
  */
@@ -20,7 +22,7 @@ public interface CommonErrorLogService {
    * @param paramDto 검색 조건 및 페이징 파라미터
    * @return 페이징 처리된 에러 로그 목록
    */
-  PageInfo<CommonErrorLogDto> selectErrorLogList(CommonErrorLogDto paramDto);
+  List<CommonErrorLogDto> selectErrorLogList(CommonErrorLogDto paramDto);
 
   /**
    * 에러 로그 등록 (로그 기록)
