@@ -1,0 +1,104 @@
+@layer reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+    margin: 0;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  body {
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    // place-items: center;
+    min-width: 320px;
+    scroll-behavior: smooth;
+  }
+  ul, ol, dl, dt, dd {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+  a:hover {
+    color: inherit;
+  }
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  input, button, textarea, select {
+    font: inherit;
+    border: none;
+    outline: none;
+    background: none;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  ::selection {
+    // background-color: var(--color-primary-light, #e6f7ff);
+    color: var(--color-primary, #1890ff);
+  }
+
+  /* Standard syntax (most modern browsers) */
+  ::placeholder {
+    color: #ccc;
+  }
+
+  /* Chrome, Opera, Safari */
+  ::-webkit-input-placeholder {
+    color: #ccc;
+  }
+
+  /* Firefox 19+ */
+  ::-moz-placeholder {
+    color: #ccc;
+  }
+
+  /* Edge 12-18 and Internet Explorer 10+ */
+  :-ms-input-placeholder {
+    color: #ccc;
+  }
+
+  /* Firefox 18- (older versions) */
+  :-moz-placeholder {
+    color: #ccc;
+  }
+
+  html.color-blind-mode {
+    @apply invert;
+  }
+
+  html.gray-mode {
+    @apply grayscale;
+  }
+
+  body {
+    font-family: "LG EI Text", system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: normal;
+
+    
+  } 
+
+  h1 {
+    font-family: "LG EI Headline", Helvetica, Arial, sans-serif; font-weight: 600;
+  } 
+
+  // 스크롤바 커스텀
+  // ::-webkit-scrollbar { width: 14px; height: 14px; }
+  // ::-webkit-scrollbar-thumb { outline: none; border-radius: 10px; border: 4px solid transparent; box-shadow: inset 6px 6px 0 rgba(34, 34, 34, 0.15); }
+  // ::-webkit-scrollbar-thumb:hover { border: 4px solid transparent; box-shadow: inset 6px 6px 0 rgba(34, 34, 34, 0.3); }
+  // ::-webkit-scrollbar-track { box-shadow: none; background-color: transparent; }
+
+}

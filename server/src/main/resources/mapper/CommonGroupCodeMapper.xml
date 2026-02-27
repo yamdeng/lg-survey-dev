@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommonGroupCode">
+
+    <sql id="selectColumn">
+        grp.group_code,
+        grp.group_name,
+        grp.use_yn,
+        grp.description,
+        grp.reg_date,
+        grp.mod_date,
+        grp.reg_user_key,
+        grp.mod_user_key
+    </sql>
+
+    <select id="selectList" parameterType="com.lgsurvey.DevGuide.dto.CommonGroupCodeDto"
+            resultType="com.lgsurvey.DevGuide.dto.CommonGroupCodeDto">
+        SELECT
+        <include refid="selectColumn"/>
+        FROM common_group_code grp
+        WHERE 1=1
+        <if test="groupCode != null and groupCode != ''">
+            AND grp.group_code LIKE '%' || #{groupCode} || '%'
+        </if>
+        <if test="groupName != null and groupName != ''">
+            AND grp.group_name LIKE '%' || #{groupName} || '%'
+        </if>
+        <if test="useYn != null and useYn != ''">
+            AND grp.use_yn = #{useYn}
+        </if>
+        <include refid="Common.basicOrderBy"/>
+    </select>
+
+    <select id="selectDetail" parameterType="String" resultType="com.lgsurvey.DevGuide.dto.CommonGroupCodeDto">
+        SELECT
+        <include refid="selectColumn"/>
+        FROM common_group_code grp
+        WHERE grp.group_code = #{groupCode}
+    </select>
+
+    <insert id="insert" parameterType="com.lgsurvey.DevGuide.dto.CommonGroupCodeDto">
+        INSERT INTO common_group_code (group_code,
+                                       group_name,
+                                       use_yn,
+                                       description,
+                                       reg_date,
+                                       mod_date,
+                                       reg_user_key,
+                                       mod_user_key)
+        VALUES (#{groupCode},
+                #{groupName},
+                #{useYn},
+                #{description},
+                CURRENT_TIMESTAMP,
+                CURRENT_TIMESTAMP,
+                #{regUserKey},
+                #{regUserKey})
+    </insert>
+
+    <update id="update" parameterType="com.lgsurvey.DevGuide.dto.CommonGroupCodeDto">
+        UPDATE common_group_code
+        <set>
+            <if test="groupName != null">group_name = #{groupName},</if>
+            <if test="useYn != null">use_yn = #{useYn},</if>
+            <if test="description != null">description = #{description},</if>
+            mod_date = CURRENT_TIMESTAMP,
+            mod_user_key = #{modUserKey}
+        </set>
+        WHERE group_code = #{groupCode}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE
+        FROM common_group_code
+        WHERE group_code = #{groupCode}
+    </delete>
+
+</mapper>

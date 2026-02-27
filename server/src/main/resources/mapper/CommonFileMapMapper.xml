@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CommonFileMap">
+
+    <select id="selectList" parameterType="map" resultType="com.lgsurvey.DevGuide.dto.CommonFileMapDto">
+        SELECT
+        <include refid="CommonFile.selectColumn"/>,
+        m.ref_key,
+        m.ref_type,
+        m.sort_index
+        FROM common_file file
+        INNER JOIN common_file_map m ON file.file_key = m.file_key
+        WHERE m.ref_key = #{refKey}
+        <if test="refType != null and refType != ''">
+            AND m.ref_type = #{refType}
+        </if>
+        ORDER BY m.sort_index ASC, file.reg_date DESC
+    </select>
+
+    <insert id="insert" parameterType="com.lgsurvey.DevGuide.dto.CommonFileMapDto">
+        INSERT INTO common_file_map (file_key,
+                                     ref_key,
+                                     ref_type,
+                                     sort_index,
+                                     reg_date)
+        VALUES (#{fileKey},
+                #{refKey},
+                #{refType},
+                #{sortIndex},
+                CURRENT_TIMESTAMP)
+    </insert>
+
+    <delete id="delete" parameterType="com.lgsurvey.DevGuide.dto.CommonFileMapDto">
+        DELETE FROM common_file_map
+        WHERE ref_key = #{refKey}
+        <if test="refType != null and refType != ''">
+            AND ref_type = #{refType}
+        </if>
+        <if test="fileKey != null and fileKey != ''">
+            AND file_key = #{fileKey}
+        </if>
+
+    </delete>
+
+    <select id="selectMaxSortIndex" parameterType="string" resultType="java.lang.Integer">
+        SELECT MAX(m.sort_index)
+        FROM common_file_map m
+        WHERE m.ref_key = #{refKey}
+    </select>
+
+</mapper>
