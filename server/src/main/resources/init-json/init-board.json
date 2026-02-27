@@ -1,0 +1,284 @@
+[
+  {
+    "boardKey": "1",
+    "boardType": "notice",
+    "boardTitle": "시스템 점검 안내 (정기)",
+    "boardContent": "안정적인 서비스를 위해 시스템 정기 점검이 진행될 예정입니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardKey": "2",
+    "boardType": "notice",
+    "boardTitle": "개인정보 처리방침 개정 안내",
+    "boardContent": "개정된 개인정보 처리방침 내용을 확인해 주시기 바랍니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardKey": "3",
+    "boardType": "normal",
+    "boardTitle": "신규 기능 업데이트 소식",
+    "boardContent": "사용자 편의를 위한 대시보드 기능이 업데이트 되었습니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "2"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "이달의 우수 설문 사례 이미지",
+    "boardContent": "<img src='/upload/sample.jpg'> 우수 사례를 공유합니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "USER",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "[중요] 보안 강화 패치 적용 안내",
+    "boardContent": "계정 보안을 위해 2차 인증 설정이 의무화됩니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "10"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "이용 약관 변경 공지",
+    "boardContent": "2026년도 이용 약관이 변경되었습니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "서비스 만족도 조사 결과",
+    "boardContent": "지난달 진행된 만족도 조사 결과를 발표합니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "3"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "연간 통계 보고서 그래픽",
+    "boardContent": "그래프로 보는 연간 성장 지표입니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "5"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "서버 리소스 확장 작업 공지",
+    "boardContent": "클라우드 서버 확장 작업으로 일시적인 지연이 발생할 수 있습니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "15"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "개발자 가이드 수정 안내",
+    "boardContent": "API 연동 가이드 문서가 최신 버전으로 갱신되었습니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "4"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "신규 템플릿 디자인 배포",
+    "boardContent": "설문조사 폼 디자인 5종이 추가되었습니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ALL",
+    "securityLevel": "2"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "신규 관리자 임명 공지",
+    "boardContent": "운영팀 신규 관리자 명단입니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "20"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "FAQ 베스트 질문 모음",
+    "boardContent": "가장 자주 묻는 질문 10가지를 정리했습니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "시스템 장애 복구 완료 보고",
+    "boardContent": "오전 중 발생한 네트워크 장애가 정상 복구되었습니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "마케팅 프로모션 배너 이미지",
+    "boardContent": "이벤트 홍보용 배너 리소스입니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "USER",
+    "securityLevel": "3"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "비밀번호 정기 변경 안내",
+    "boardContent": "안전을 위해 3개월마다 비밀번호를 변경해 주세요.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "2"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "모바일 앱 출시 예고",
+    "boardContent": "기다리시던 전용 모바일 앱이 곧 출시됩니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "협력사 데이터 연동 매뉴얼",
+    "boardContent": "협력사를 위한 데이터 전송 API 명세서입니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "18"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "현장 투표 스케치 사진",
+    "boardContent": "오프라인 투표 현장의 생생한 사진입니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "6"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "고객센터 운영시간 변경",
+    "boardContent": "동절기 고객센터 운영시간이 단축됩니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "신규 위젯 설정 방법",
+    "boardContent": "개인화 위젯을 배치하는 상세 방법입니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "7"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "데이터 백업 정책 공지",
+    "boardContent": "모든 데이터는 일 단위로 스토리지에 백업됩니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "12"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "사용자 매뉴얼 인포그래픽",
+    "boardContent": "한눈에 보는 사용법 인포그래픽입니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ALL",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "플랫폼 접근 권한 개정",
+    "boardContent": "레벨에 따른 메뉴 접근 권한이 세분화되었습니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "21"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "오류 제보 이벤트 당첨자 발표",
+    "boardContent": "적극적으로 제보해주신 당첨자 5분 축하드립니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "USER",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "UI/UX 개선을 위한 설문",
+    "boardContent": "더 나은 환경을 위해 의견을 들려주세요.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "USER",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "로고 가이드라인 배포",
+    "boardContent": "공식 로고 및 CI 가이드라인 이미지입니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ALL",
+    "securityLevel": "8"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "API 사용량 초과 안내",
+    "boardContent": "일일 쿼리 제한량을 초과한 계정에 대한 안내입니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "14"
+  },
+  {
+    "boardType": "normal",
+    "boardTitle": "검색 엔진 성능 향상 공지",
+    "boardContent": "게시글 검색 속도가 이전보다 50% 향상되었습니다.",
+    "useYn": "Y",
+    "mainYn": "N",
+    "boardAuthType": "ALL",
+    "securityLevel": "3"
+  },
+  {
+    "boardType": "image",
+    "boardTitle": "신규 테마 다크모드 적용 스크린샷",
+    "boardContent": "다크모드 적용 화면을 미리 확인해 보세요.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "USER",
+    "securityLevel": "1"
+  },
+  {
+    "boardType": "notice",
+    "boardTitle": "연말 결산 시스템 가동 안내",
+    "boardContent": "연말 정산을 위한 통계 시스템이 오픈되었습니다.",
+    "useYn": "Y",
+    "mainYn": "Y",
+    "boardAuthType": "ADMIN",
+    "securityLevel": "19"
+  }
+]
