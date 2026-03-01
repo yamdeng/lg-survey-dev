@@ -2,6 +2,12 @@
 
 @layer reset, base, design-system, components, utilities;
 
+// 라이브러리 CSS를 SCSS에서 import
+@import "react-quill-new/dist/quill.bubble.css";
+@import "react-quill-new/dist/quill.snow.css";
+@import "react-toastify/dist/ReactToastify.css";
+@import "react-tooltip/dist/react-tooltip.css";
+
 @import "antd/dist/reset.css" layer(reset);
 @import "./_reset.scss" layer(reset);
 
