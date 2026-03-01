@@ -150,9 +150,10 @@ public class DataInitService extends AbstractCommonDaoService implements Command
         .upperDeptKey(CommonConfig.treeRootKey).useYn("N").sortIndex(2).build());
 
     // 시스템 사용자 add
-    CommonUserDto systemUserDto = CommonUserDto.builder().userKey(SYSTEM_ID).userId(SYSTEM_ID).deptKey("SYSTEM")
-        .authorCd(CommonConstants.AUTHOR_CD_ADMIN).userPassword(encodedPassword).userName("시스템관리자")
-        .positionKey("P99").useYn("Y").build();
+    CommonUserDto systemUserDto =
+        CommonUserDto.builder().userKey(SYSTEM_ID).userId(SYSTEM_ID).deptKey("SYSTEM")
+            .authorCd(CommonConstants.AUTHOR_CD_ADMIN).userPassword(encodedPassword)
+            .userName("시스템관리자").positionKey("P99").useYn("Y").build();
     commonUserService.createUser(systemUserDto);
 
     String topUserKey = CommonUtil.generateKey();
@@ -188,6 +189,15 @@ public class DataInitService extends AbstractCommonDaoService implements Command
           CommonDeptDto.builder().deptKey(deptKey).deptName("전략기획실" + index).upperDeptKey("TOP")
               .useYn("Y").sortIndex(index + 1).build());
 
+      // 3depth 부서
+      for (int subDeptIndex = 1; subDeptIndex <= 10; subDeptIndex++) {
+        String subDeptKey = deptKey + "_" + subDeptIndex;
+        commonDeptService.createDept(
+            CommonDeptDto.builder().deptKey(subDeptKey).deptName("(하위) 전략기획실" + index).upperDeptKey(deptKey)
+                .useYn("Y").sortIndex(subDeptIndex + 1).build());
+      }
+
+      // 사용자
       for (int subIndex = 1; subIndex <= 100; subIndex++) {
         String subUserKey = CommonUtil.generateKey();
         commonUserService.createUser(

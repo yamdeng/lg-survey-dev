@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>true</withJansi>
+        <encoder>
+            <Pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%thread]%cyan( %logger{10}) - %msg%n</Pattern>
+        </encoder>
+    </appender>
+    <appender name="JSONOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+            <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter"/>
+            <timestampFormat>yyyy-MM-dd HH:mm:ss.SSS</timestampFormat>
+            <appendLineSeparator>true</appendLineSeparator>
+            <includeContextName>false</includeContextName>
+        </layout>
+    </appender>
+    <springProfile name="default,local">
+        <root level="info">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+    <springProfile name="dev,stg,prd">
+        <root level="info">
+            <!--appender-ref ref="JSONOUT"/-->
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+    <logger name="log4j2" level="OFF"/>
+
+    <logger name="jdbc.sqltiming" level="INFO"/>
+
+    <logger name="sql" level="OFF"/>
+    <logger name="jdbc" level="OFF"/>
+    <logger name="web" level="INFO"/>
+    <logger name="org.mybatis" level="WARN"/>
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+    <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="ERROR"/>
+    <logger name="org.springframework.boot.actuate.endpoint.web.servlet.WebMvcEndpointHandlerMapping" level="ERROR"/>
+    <logger name="org.postgresql.Driver" level="OFF"/>
+    <logger name="org.postgresql.jdbc.PgConnection" level="OFF"/>
+    <logger name="org.postgresql.core.v3.ConnectionFactoryImpl" level="OFF"/>
+    <logger name="io.swagger.v3.core.converter.ModelConverterContextImpl" level="OFF"/>
+    <logger name="org.springframework.security.web.FilterChainProxy" level="OFF"/>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor" level="OFF"/>
+</configuration>

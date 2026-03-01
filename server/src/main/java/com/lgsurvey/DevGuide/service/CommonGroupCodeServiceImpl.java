@@ -1,10 +1,10 @@
 package com.lgsurvey.DevGuide.service;
 
-import com.github.pagehelper.PageInfo;
 import com.lgsurvey.DevGuide.common.AbstractCommonDaoService;
 import com.lgsurvey.DevGuide.dto.CommonGroupCodeDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -21,9 +21,8 @@ public class CommonGroupCodeServiceImpl extends AbstractCommonDaoService impleme
   /**
    * 그룹 코드 목록 조회 (페이징 포함)
    */
-  public PageInfo<CommonGroupCodeDto> selectGroupCodeList(CommonGroupCodeDto paramDto) {
-    List<CommonGroupCodeDto> resultList = commonSqlDao.selectList("CommonGroupCode.selectList", paramDto);
-    return PageInfo.of(resultList);
+  public List<CommonGroupCodeDto> selectGroupCodeList(CommonGroupCodeDto paramDto) {
+    return commonSqlDao.selectList("CommonGroupCode.selectList", paramDto);
   }
 
   /**

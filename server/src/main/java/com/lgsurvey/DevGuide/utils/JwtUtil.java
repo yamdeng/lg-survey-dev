@@ -4,6 +4,7 @@ import com.lgsurvey.DevGuide.dto.SessionDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -110,6 +111,21 @@ public class JwtUtil {
     return parseClaims(token).get("userKey", String.class);
   }
 
+  public boolean validateToken(String token, HttpServletRequest request) {
+    try {
+      Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+      return true;
+    } catch (ExpiredJwtException e) {
+      log.error("Expired JWT Token");
+      // 토큰이 만료된 경우 request에 표식 남김
+      request.setAttribute("exception", "TOKEN_EXPIRED");
+    } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
+      log.error("Invalid JWT Token");
+      // 토큰 자체가 잘못된 경우 (위조, 파손 등)
+      request.setAttribute("exception", "INVALID_TOKEN");
+    }
+    return false;
+  }
 
   /**
    * JWT 검증

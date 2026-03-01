@@ -1,11 +1,16 @@
 package com.lgsurvey.DevGuide.controller;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.lgsurvey.DevGuide.dto.*;
 import com.lgsurvey.DevGuide.dto.response.CommonCodeResponseDto;
 import com.lgsurvey.DevGuide.service.CommonCodeService;
+import com.lgsurvey.DevGuide.service.CommonDeptService;
 import com.lgsurvey.DevGuide.service.CommonService;
 import com.lgsurvey.DevGuide.service.CommonUserService;
+import com.lgsurvey.DevGuide.utils.CommonConfig;
+import com.lgsurvey.DevGuide.utils.JsonUtil;
 import com.lgsurvey.DevGuide.utils.ResponseUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -21,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -32,7 +38,11 @@ public class CommonController {
 
   private final CommonUserService commonUserService;
 
+  private final CommonDeptService commonDeptService;
+
   private final ModelMapper modelMapper;
+
+  private final ObjectMapper objectMapper;
 
   private final CommonService commonService;
 
@@ -100,5 +110,25 @@ public class CommonController {
     return ResponseUtil.createSuccessResponse(response);
   }
 
+  @GetMapping("/dept-tree")
+  public ResponseEntity<?> getDeptTree(@RequestParam(value = "isTree", required = false, defaultValue = "Y") String isTree) {
+
+    List<CommonDeptDto> deptList =
+        commonDeptService.selectDeptList(new CommonDeptDto());
+
+    List<?> convertDeptList = deptList.stream().map(listDto -> {
+      return objectMapper.convertValue(listDto, new TypeReference<Map<String, Object>>() {
+      });
+    }).collect(Collectors.toList());
+
+    if("Y".equals(isTree)) {
+      List<Map<String, Object>> treeConvertResult =
+          JsonUtil.convertorTreeMap(convertDeptList,
+              CommonConfig.treeRootKey, "deptKey", "upperDeptKey", "deptName", "sortIndex");
+      return ResponseUtil.createSuccessResponse(treeConvertResult);
+    } else {
+      return ResponseUtil.createSuccessResponse(deptList);
+    }
+  }
 
 }

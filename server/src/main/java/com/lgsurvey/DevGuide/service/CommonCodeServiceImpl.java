@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lgsurvey.DevGuide.common.AbstractCommonDaoService;
 import com.lgsurvey.DevGuide.dto.CommonCodeDto;
+import com.lgsurvey.DevGuide.exception.ResourceNotFoundException;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,7 +24,9 @@ public class CommonCodeServiceImpl extends AbstractCommonDaoService implements C
    */
   public CommonCodeDto selectCommonCode(String groupCode, String code) {
     CommonCodeDto param = CommonCodeDto.builder().groupCode(groupCode).code(code).build();
-    return commonSqlDao.selectOne("CommonCode.selectDetail", param);
+    CommonCodeDto result = commonSqlDao.selectOne("CommonCode.selectDetail", param);
+    return Optional.ofNullable(result)
+            .orElseThrow(() -> new ResourceNotFoundException("존재하지 않는 코드입니다. Key: " + code));
   }
 
   /**

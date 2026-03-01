@@ -61,32 +61,7 @@ public class CodeController {
       commonCodeResponseDtoList.add(commonCodeResponseDto);
     });
 
-    return ResponseUtil.createSuccessResponse(PageInfo.of(commonCodeResponseDtoList));
-  }
-
-  @Operation(summary = "공통 코드 목록 조회2", description = "공통 코드 목록 조회 API2")
-  @GetMapping("/common/code2")
-  public ResponseEntity<?> selectCommonCodeList(
-      @PageableDefault(page = 1, size = 1000, sort = "regDate", direction = Sort.Direction.DESC)
-      Pageable pageable,
-      @ModelAttribute CommonCodeDto paramDto) {
-
-    // 표준 Spec에서는 Pageable 객체 안에 page와 size 정보가 모두 포함되어 있습니다.
-    PageInfo<CommonCodeDto> pageList = commonCodeService.selectCommonCodeList(pageable, paramDto);
-
-    return ResponseUtil.createSuccessResponse(pageList);
-  }
-
-  @Operation(summary = "공통 코드 목록 조회3", description = "공통 코드 목록 조회 API3")
-  @GetMapping("/common/code3")
-  public ResponseEntity<?> selectCommonCodeList2(
-      @PageableDefault(page = 0, size = 10) Pageable pageable, // Pageable은 0부터 시작이 표준입니다.
-      @ModelAttribute CommonCodeDto paramDto) {
-
-    Page<CommonCodeDto> page = commonCodeService.selectCommonCodeList2(pageable, paramDto);
-
-    // Page 객체 자체를 반환하면 content, totalPages, totalElements 등이 포함된 표준 JSON이 나갑니다.
-    return ResponseUtil.createSuccessResponse(page);
+    return ResponseUtil.createSuccessResponse(commonCodeResponseDtoList);
   }
 
   @Operation(summary = "공통 코드 목록 조회(groupCode 기준)", description = "공통 코드 목록 조회(groupCode 기준) API")
@@ -119,7 +94,7 @@ public class CodeController {
    *
    */
   @Operation(summary = "공통 코드 상세 조회", description = "공통 코드 상세 조회 API")
-  @GetMapping("/common/code/{groupCode}/{id}")
+  @GetMapping("/common/codes/{groupCode}/{id}")
   public ResponseEntity<?> selectCommonCode(
       @PathVariable(value = "groupCode", required = true) String groupCode,
       @PathVariable(value = "id", required = true) String id) {
@@ -142,7 +117,7 @@ public class CodeController {
    *
    */
   @Operation(summary = "공통 코드 등록", description = "공통 코드 등록 API")
-  @PostMapping(value = "/common/code/{groupCode}")
+  @PostMapping(value = "/common/codes/{groupCode}")
   public ResponseEntity<?> createCommonCode(
       @PathVariable(value = "groupCode", required = true) String groupCode,
       @Valid @RequestBody(required = true) CommonCodeDto reqDto) {
@@ -157,7 +132,7 @@ public class CodeController {
    *
    */
   @Operation(summary = "공통 코드 수정", description = "공통 코드 수정 API")
-  @PutMapping(value = "/common/code/{groupCode}/{id}")
+  @PutMapping(value = "/common/codes/{groupCode}/{id}")
   public ResponseEntity<?> updateCommonCode(
       @PathVariable(value = "groupCode", required = true) String groupCode,
       @PathVariable(value = "id", required = true) String id,
@@ -175,7 +150,7 @@ public class CodeController {
    *
    */
   @Operation(summary = "공통 코드 삭제", description = "공통 코드 삭제 API")
-  @DeleteMapping(value = "/common/code/{groupCode}/{id}")
+  @DeleteMapping(value = "/common/codes/{groupCode}/{id}")
   public ResponseEntity<?> deleteCommonCode(
       @PathVariable(value = "groupCode", required = true) String groupCode,
       @PathVariable(value = "id", required = true) String id) {
@@ -183,6 +158,34 @@ public class CodeController {
     commonCodeService.deleteCommonCode(groupCode, id);
 
     return ResponseUtil.createSuccessResponse();
+  }
+
+
+
+  /* 아래는 불필요 */
+  @Operation(summary = "공통 코드 목록 조회2", description = "공통 코드 목록 조회 API2")
+  @GetMapping("/common/code2")
+  public ResponseEntity<?> selectCommonCodeList(
+          @PageableDefault(page = 1, size = 1000, sort = "regDate", direction = Sort.Direction.DESC)
+          Pageable pageable,
+          @ModelAttribute CommonCodeDto paramDto) {
+
+    // 표준 Spec에서는 Pageable 객체 안에 page와 size 정보가 모두 포함되어 있습니다.
+    PageInfo<CommonCodeDto> pageList = commonCodeService.selectCommonCodeList(pageable, paramDto);
+
+    return ResponseUtil.createSuccessResponse(pageList);
+  }
+
+  @Operation(summary = "공통 코드 목록 조회3", description = "공통 코드 목록 조회 API3")
+  @GetMapping("/common/code3")
+  public ResponseEntity<?> selectCommonCodeList2(
+          @PageableDefault(page = 0, size = 10) Pageable pageable, // Pageable은 0부터 시작이 표준입니다.
+          @ModelAttribute CommonCodeDto paramDto) {
+
+    Page<CommonCodeDto> page = commonCodeService.selectCommonCodeList2(pageable, paramDto);
+
+    // Page 객체 자체를 반환하면 content, totalPages, totalElements 등이 포함된 표준 JSON이 나갑니다.
+    return ResponseUtil.createSuccessResponse(page);
   }
 
 }

@@ -61,7 +61,7 @@ public class CommonConstants {
 
   // // /api/v1/simpleMap1, /api/v1/simpleMap2, simpleDto, simpleListDto, pagedListDto, error/403, error/401, error/400, error/etc
   public static final String[] AUTH_WHITELIST =
-      {"/api/v1/auth/login", "/api/v1/error-log", "/api/v1/health", "/h2-console/**", "-file/**",
+      {"/api/v1/auth/login", "/api/v1/auth/logout", "/api/v1/auth/refresh", "/api/v1/error-log", "/api/v1/health", "/h2-console/**", "-file/**",
           "/api/v1/simpleMap1", "/api/v1/simpleMap2", "/api/v1/simpleDto", "/api/v1/simpleListDto",
           "/api/v1/pagedListDto", "/api/v1/error/403", "/api/v1/error/401", "/api/v1/error/400",
           "/api/v1/error/etc", "/api/v1/initData", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html",

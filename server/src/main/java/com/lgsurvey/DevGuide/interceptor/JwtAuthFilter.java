@@ -46,7 +46,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     if (token != null && !"".equals(token)) {
 
       // JWT 유효성 검증
-      if (jwtUtil.validateToken(token)) {
+      if (jwtUtil.validateToken(token, request)) {
 
         // TODO : redis, db에서 조회할지 체크 필요
         SessionDto sessionDto = jwtUtil.getSessionDtoByAccessToken(token);

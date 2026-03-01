@@ -1,7 +1,8 @@
 package com.lgsurvey.DevGuide.service;
 
-import com.github.pagehelper.PageInfo;
 import com.lgsurvey.DevGuide.dto.CommonGroupCodeDto;
+
+import java.util.List;
 
 /**
  * 공통 그룹 코드 관리 서비스 인터페이스
@@ -20,7 +21,7 @@ public interface CommonGroupCodeService {
    * @param paramDto 검색 조건 및 페이징 파라미터
    * @return 페이징 처리된 그룹 코드 목록
    */
-  PageInfo<CommonGroupCodeDto> selectGroupCodeList(CommonGroupCodeDto paramDto);
+  List<CommonGroupCodeDto> selectGroupCodeList(CommonGroupCodeDto paramDto);
 
   /**
    * 그룹 코드 생성

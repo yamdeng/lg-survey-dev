@@ -45,18 +45,19 @@ public class CommonUserController {
 
   @Operation(summary = "사용자 등록", description = "사용자 등록 API")
   @PostMapping(value = "/user")
-  public ResponseEntity<?> createUser(
-      @Valid @RequestBody CommonUserDto reqDto) {
+  public ResponseEntity<?> createUser(@Valid @RequestBody CommonUserDto reqDto) {
 
     CommonUserDto result = commonUserService.createUser(reqDto);
     return ResponseUtil.createSuccessResponse(result);
   }
 
   @Operation(summary = "사용자 수정", description = "사용자 수정 API")
-  @PutMapping(value = "/user")
+  @PutMapping(value = "/user/{userKey}")
   public ResponseEntity<?> updateUser(
+      @PathVariable(value = "userKey", required = true) String userKey,
       @Valid @RequestBody CommonUserDto reqDto) {
 
+    reqDto.setUserKey(userKey);
     commonUserService.updateUser(reqDto);
     return ResponseUtil.createSuccessResponse();
   }
