@@ -90,7 +90,6 @@ const MenuList = () => {
 
     if (parentKeys.length > 0) {
       // 기존에 열려있던 키들과 합치거나, 아코디언을 유지하려면 새로 세팅
-      // 중복 제거를 위해 Set 사용 권장
       const nextKeys = Array.from(new Set([...selectedMenuKeys, ...parentKeys]));
       changeSelectedMenuKeys(nextKeys);
     }

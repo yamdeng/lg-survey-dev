@@ -12,8 +12,6 @@ const Config = {
   defaultGridPageSize: 10,
   defaultPageSizeList: [10, 20, 50, 100],
   defaultGridTotalCountTemplate: '{0}',
-  refreshTokenKey: 'Refresh-Token',
-  refreshTokenExpiredKey: 'Refresh-Token-Expired-At',
 };
 
 export default Config;

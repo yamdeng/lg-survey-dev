@@ -4,7 +4,7 @@ import { Database } from 'lucide-react';
 export const menuList = [
   {
     menuTitle: '공지사항',
-    menuPath: '/notices',
+    menuPath: '/notices2',
     icon: <Database />,
   },
   {
@@ -12,11 +12,7 @@ export const menuList = [
     icon: <Database />,
     children: [
       {
-        menuTitle: '공지사항2',
-        menuPath: '/notices',
-      },
-      {
-        menuTitle: '일반 게시판',
+        menuTitle: '공지사항(게시판)',
         menuPath: '/notices',
       },
     ],
@@ -32,6 +28,20 @@ export const menuList = [
       {
         menuTitle: '일반 문항관리',
         menuPath: '/questions/normal',
+      },
+    ],
+  },
+  {
+    menuTitle: '시스템관리',
+    icon: <Database />,
+    children: [
+      {
+        menuTitle: '코드관리',
+        menuPath: '/system/codes',
+      },
+      {
+        menuTitle: '사용자관리',
+        menuPath: '/system/users',
       },
     ],
   },
