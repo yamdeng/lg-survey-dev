@@ -54,6 +54,24 @@
         <if test="securityLevel != null and securityLevel != ''">
             AND board.security_level = #{securityLevel}
         </if>
+        <if test="searchWord != null and searchWord != ''">
+            AND (
+            <choose>
+                <when test="searchType == 'boardTitle'">
+                    board.board_title LIKE '%' || #{searchWord} || '%'
+                </when>
+
+                <when test="searchType == 'boardContent'">
+                    board.board_content LIKE '%' || #{searchWord} || '%'
+                </when>
+
+                <otherwise>
+                    board.board_title LIKE '%' || #{searchWord} || '%'
+                    OR board.board_content LIKE '%' || #{searchWord} || '%'
+                </otherwise>
+            </choose>
+            )
+        </if>
         <include refid="Common.basicOrderBy"/>
     </select>
 

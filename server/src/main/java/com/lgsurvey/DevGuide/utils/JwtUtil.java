@@ -118,7 +118,7 @@ public class JwtUtil {
     } catch (ExpiredJwtException e) {
       log.error("Expired JWT Token");
       // 토큰이 만료된 경우 request에 표식 남김
-      request.setAttribute("exception", "TOKEN_EXPIRED");
+      request.setAttribute("exception", "EXPIRED_TOKEN");
     } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
       log.error("Invalid JWT Token");
       // 토큰 자체가 잘못된 경우 (위조, 파손 등)
