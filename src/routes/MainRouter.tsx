@@ -16,12 +16,10 @@ import CommonQuestionList from '@/pages/questions/CommonQuestionList';
 import NormalQuestionList from '@/pages/questions/NormalQuestionList';
 
 import CodeList from '@/pages/codes/CodeList';
-import CodeForm from '@/pages/codes/CodeForm';
-import CodeDetail from '@/pages/codes/CodeDetail';
 
-import UserList from '@/pages/users/UserList';
-import UserForm from '@/pages/users/UserForm';
-import UserDetail from '@/pages/users/UserDetail';
+// import UserList from '@/pages/users/UserList';
+// import UserForm from '@/pages/users/UserForm';
+// import UserDetail from '@/pages/users/UserDetail';
 
 /* 에러*/
 import NotFound from '@/pages/errors/NotFound';
@@ -55,6 +53,23 @@ export const Router = createBrowserRouter([
       {
         path: 'not-access',
         element: <NotAccessError />,
+      },
+      {
+        path: 'system',
+        handle: { breadcrumbName: '시스템관리' },
+        children: [
+          {
+            path: 'codes',
+            handle: { breadcrumbName: '코드관리', isLink: true },
+            children: [
+              {
+                index: true,
+                element: <CodeList />,
+                handle: { isLink: true },
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'notices',

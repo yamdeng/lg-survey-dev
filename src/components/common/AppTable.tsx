@@ -110,9 +110,9 @@ function AppTable(props) {
 
   // table 선택 변경시 props로 전달받은 handleRowSelect 재전달
   const onSelectionChanged = useCallback(() => {
-    const selectedRows = gridRef.current.api.getSelectedRows();
-    return handleRowSelect(selectedRows);
-  }, [handleRowSelect]);
+    const selectedRows = gridRef.current.api.getSelectedRows() || [];
+    return handleRowSelect(rowSelectMode === 'singleRow' ? selectedRows[0] : selectedRows);
+  }, [handleRowSelect, rowSelectMode]);
 
   useEffect(() => {
     if (gridRef && gridRef.current && gridRef.current.api) {
