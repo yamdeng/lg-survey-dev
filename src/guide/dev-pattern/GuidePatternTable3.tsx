@@ -1,31 +1,72 @@
-import HeaderMenu from '@/publish/components/header/HeaderMenu';
 import { useEffect, useState } from 'react';
-import { useImmer } from 'use-immer'; // useImmer 임포트
 
-import { FilePenLine, Home } from 'lucide-react';
-
+import AppButton from '@/components/common/AppButton';
+import AppCodeSelect from '@/components/common/AppCodeSelect';
 import AppSearchInput from '@/components/common/AppSearchInput';
+import AppDatePicker from '@/components/common/AppDatePicker';
+import AppCheckbox from '@/components/common/AppCheckbox';
+import AppRangeDatePicker from '@/components/common/AppRangeDatePicker';
 import AppSelect from '@/components/common/AppSelect';
 import AppTable from '@/components/common/AppTable';
-import Code from '@/config/Code';
-import FlexBox from '@/publish/components/wrapperItem/FlexBox';
-import ApiService from '@/services/ApiService';
+import { FilePenLine, Search, CalendarDays } from 'lucide-react';
+
+import { useGuidePatternListStore } from '@/guide/stores/useGuidePatternListStore';
 
 function GuidePatternTable3() {
+  const {
+    search,
+    searchParam,
+    changeSearchInput,
+    changeSearchType,
+    displayTableLoading,
+    initSearchInput,
+    list,
+    clear,
+    searchParamErrors,
+  } = useGuidePatternListStore();
+
+  const { searchType, searchWord, boardType, startDate, rangeDate, useYn } = searchParam;
+
   const [columns] = useState<any>([
-    { field: 'boardKey', headerName: '게시판 키', width: 100 },
-    { field: 'boardType', headerName: '게시판 유형', width: 120 },
+    {
+      field: 'boardKey',
+      headerName: '게시판 키',
+      width: 100,
+    },
+    {
+      field: 'boardType',
+      headerName: '게시판 유형',
+      width: 120,
+    },
     {
       field: 'boardTitle',
       headerName: '게시판 제목',
       minWidth: 200,
-      flex: 1,
+      flex: 1, // 남은 공간을 모두 차지하도록 설정
       cellStyle: { fontWeight: 'bold' },
     },
-    { field: 'boardContent', headerName: '내용', hide: true },
-    { field: 'useYn', headerName: '사용 여부', width: 100, cellStyle: { textAlign: 'center' } },
-    { field: 'mainYn', headerName: '메인 노출', width: 100, cellStyle: { textAlign: 'center' } },
-    { field: 'boardAuthType', headerName: '권한 유형', width: 120 },
+    {
+      field: 'boardContent',
+      headerName: '내용',
+      hide: true, // 목록에서는 숨김 처리 (상세 페이지용 데이터)
+    },
+    {
+      field: 'useYn',
+      headerName: '사용 여부',
+      width: 100,
+      cellStyle: { textAlign: 'center' },
+    },
+    {
+      field: 'mainYn',
+      headerName: '메인 노출',
+      width: 100,
+      cellStyle: { textAlign: 'center' },
+    },
+    {
+      field: 'boardAuthType',
+      headerName: '권한 유형',
+      width: 120,
+    },
     {
       field: 'securityLevel',
       headerName: '보안 레벨',
@@ -34,87 +75,100 @@ function GuidePatternTable3() {
     },
   ]);
 
-  // useState 대신 useImmer 사용
-  const [searchParam, setSearchParam] = useImmer<any>({
-    searchType: '',
-    searchWord: '',
-  });
-
-  // 테이블 리스트도 Immer로 관리 (추후 특정 행 수정 시 용이)
-  const [list, setList] = useImmer<any[]>([]);
-
-  const { searchType, searchWord } = searchParam;
-
-  // Immer를 사용한 가독성 좋은 상태 변경
-  const changeSearchInput = (inputName: string, inputValue: any) => {
-    setSearchParam((draft) => {
-      draft[inputName] = inputValue;
-    });
-  };
-
-  const enterSearch = async () => {
-    const apiResult = await ApiService.get('notices', searchParam);
-    // Immer의 setter는 일반 값을 넣어도 잘 작동하며,
-    // 필요시 setList(draft => { return apiResult }) 형태로도 가능합니다.
-    setList(apiResult);
-  };
-
   useEffect(() => {
-    enterSearch();
+    // search();
+    return () => {
+      clear();
+    };
   }, []);
 
   return (
     <>
-      <header className="content-header">
-        <FlexBox className="content-inner" justify={'space-between'}>
-          <div className="bread-crumb">
-            <dl className="bread-crumb-list">
-              <dt>
-                <a href="/">
-                  <Home size={16} />
-                </a>
-              </dt>
-              <dd>
-                <a href="#">Notice</a>
-              </dd>
-            </dl>
-          </div>
-          <HeaderMenu />
-        </FlexBox>
-      </header>
       <main className="content-main">
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">Notice</h3>
+            <h3 className="title-text">목록 개발 패턴1(store)</h3>
           </div>
           <div className="content-body">
             <div className="form-block border-none">
-              <form onSubmit={(e) => e.preventDefault()}>
+              <form>
                 <div className="form-inline justify-end">
+                  <AppCodeSelect
+                    label="유형"
+                    required
+                    icon={<CalendarDays />}
+                    style={{ width: 150 }}
+                    codeGrpId="BOARD_TYPE"
+                    value={boardType}
+                    onChange={(value) => {
+                      changeSearchInput('boardType', value);
+                    }}
+                    errorMessage={searchParamErrors['boardType']}
+                  />
                   <AppSelect
-                    placeholder="제목+내용"
-                    style={{ width: 140 }}
-                    options={Code.boardSearchType}
+                    style={{ width: 150 }}
+                    allValue=""
+                    allLabel="전체"
+                    applyAllSelect
+                    options={[
+                      { label: '제목', value: 'boardTitle' },
+                      { label: '내용', value: 'boardContent' },
+                    ]}
                     value={searchType}
-                    onChange={(value) => changeSearchInput('searchType', value)}
+                    onChange={(value) => {
+                      changeSearchType(value);
+                    }}
+                    disabled={boardType === 'normal' ? true : false}
+                  />
+                  <AppDatePicker
+                    onChange={(value) => {
+                      changeSearchInput('startDate', value);
+                    }}
+                    value={startDate}
+                    pickerType="date"
+                  />
+
+                  <AppRangeDatePicker
+                    onChange={(value) => {
+                      changeSearchInput('rangeDate', value);
+                    }}
+                    value={rangeDate}
+                    pickerType="date"
+                  />
+                  <AppCheckbox
+                    style={{ marginLeft: 5 }}
+                    label="AppCheckbox"
+                    checkboxTitle="사용여부"
+                    value={useYn === 'Y' ? true : false}
+                    onChange={(checked) => {
+                      changeSearchInput('useYn', checked ? 'Y' : 'N');
+                    }}
                   />
                   <AppSearchInput
                     placeholder="검색하세요"
                     style={{ width: 400 }}
-                    hiddenSearchButton={false}
-                    search={enterSearch}
                     value={searchWord}
-                    onChange={(value) => changeSearchInput('searchWord', value)}
+                    onChange={(value) => {
+                      changeSearchInput('searchWord', value);
+                    }}
+                    search={search}
                   />
+                  <AppButton
+                    style={{ marginLeft: 10 }}
+                    icon={<Search size={18} />}
+                    value="조회"
+                    onClick={search}
+                  />
+
+                  <AppButton style={{ marginLeft: 10 }} value="초기화" onClick={initSearchInput} />
                 </div>
               </form>
             </div>
-
             <div className="grid-block">
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <AppTable columns={columns} rowData={list} rowKey="boardKey" />
+                  <AppTable rowData={list} columns={columns} isLoading={displayTableLoading} />
                 </div>
               </div>
             </div>
@@ -124,5 +178,4 @@ function GuidePatternTable3() {
     </>
   );
 }
-
 export default GuidePatternTable3;

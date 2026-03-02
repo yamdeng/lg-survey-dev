@@ -201,6 +201,10 @@ export const guideMenuList = [
             menuTitle: 'table 검색2(immer)',
             menuPath: '/guides/dev-pattern/GuidePatternTable2',
           },
+          {
+            menuTitle: 'table 검색3',
+            menuPath: '/guides/dev-pattern/GuidePatternTable3',
+          },
         ],
       },
       {
