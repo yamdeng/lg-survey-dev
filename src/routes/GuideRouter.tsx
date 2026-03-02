@@ -58,6 +58,7 @@ import GuideTableUseStore2 from '@/guide/dev/table/GuideTableUseStore2';
 
 /* 개발 패턴 component */
 import GuidePatternTable1 from '@/guide/dev-pattern/GuidePatternTable1';
+import GuidePatternTable2 from '@/guide/dev-pattern/GuidePatternTable2';
 // import GuidePatternTable2 from '@/guide/dev-pattern/GuidePatternTable2';
 // import GuidePatternTable3 from '@/guide/dev-pattern/GuidePatternTable3';
 // import GuidePatternTable4 from '@/guide/dev-pattern/GuidePatternTable4';
@@ -283,10 +284,17 @@ export const GuideRouter = [
       },
       {
         path: 'dev-pattern',
+        handle: { breadcrumbName: '개발 패턴 가이드' },
         children: [
           {
             path: 'GuidePatternTable1',
             element: <GuidePatternTable1 />,
+            handle: { breadcrumbName: '목록 개발 패턴1' },
+          },
+          {
+            path: 'GuidePatternTable2',
+            element: <GuidePatternTable2 />,
+            handle: { breadcrumbName: '목록 개발 패턴2' },
           },
         ],
       },

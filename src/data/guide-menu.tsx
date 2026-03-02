@@ -194,8 +194,12 @@ export const guideMenuList = [
         menuTitle: '개발 패턴 가이드',
         children: [
           {
-            menuTitle: 'table 검색1',
+            menuTitle: 'table 검색1(store)',
             menuPath: '/guides/dev-pattern/GuidePatternTable1',
+          },
+          {
+            menuTitle: 'table 검색2(immer)',
+            menuPath: '/guides/dev-pattern/GuidePatternTable2',
           },
         ],
       },

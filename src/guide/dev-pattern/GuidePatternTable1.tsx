@@ -1,17 +1,27 @@
-import HeaderMenu from '@/publish/components/header/HeaderMenu';
 import { useEffect, useState } from 'react';
 
-import { FilePenLine, Home } from 'lucide-react';
-
+import AppButton from '@/components/common/AppButton';
+import AppCodeSelect from '@/components/common/AppCodeSelect';
 import AppSearchInput from '@/components/common/AppSearchInput';
 import AppSelect from '@/components/common/AppSelect';
 import AppTable from '@/components/common/AppTable';
-import Code from '@/config/Code';
-import FlexBox from '@/publish/components/wrapperItem/FlexBox';
+import { FilePenLine, Search, CalendarDays } from 'lucide-react';
+
 import { useGuidePatternListStore } from '@/guide/stores/useGuidePatternListStore';
 
 function GuidePatternTable1() {
-  const listStore = useGuidePatternListStore();
+  const {
+    search,
+    searchParam,
+    changeSearchInput,
+    displayTableLoading,
+    initSearchInput,
+    list,
+    clear,
+    searchParamErrors,
+  } = useGuidePatternListStore();
+
+  const { searchType, searchWord, boardType } = searchParam;
 
   const [columns] = useState<any>([
     {
@@ -61,11 +71,8 @@ function GuidePatternTable1() {
     },
   ]);
 
-  const { enterSearch, searchParam, changeSearchInput, list, clear } = listStore;
-  const { searchType, searchWord } = searchParam;
-
   useEffect(() => {
-    enterSearch();
+    // search();
     return () => {
       clear();
     };
@@ -73,38 +80,37 @@ function GuidePatternTable1() {
 
   return (
     <>
-      <header className="content-header">
-        <FlexBox className="content-inner" justify={'space-between'}>
-          <div className="bread-crumb">
-            <dl className="bread-crumb-list">
-              <dt>
-                <a href="/">
-                  <Home size={16} />
-                </a>
-              </dt>
-              <dd>
-                <a href="#">Notice</a>
-              </dd>
-            </dl>
-          </div>
-          <HeaderMenu />
-        </FlexBox>
-      </header>
       <main className="content-main">
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">Notice</h3>
+            <h3 className="title-text">목록 개발 패턴1(store)</h3>
           </div>
           <div className="content-body">
             <div className="form-block border-none">
               <form>
                 <div className="form-inline justify-end">
+                  <AppCodeSelect
+                    label="유형"
+                    required
+                    icon={<CalendarDays />}
+                    style={{ width: 150 }}
+                    codeGrpId="BOARD_TYPE"
+                    value={boardType}
+                    onChange={(value) => {
+                      changeSearchInput('boardType', value);
+                    }}
+                    errorMessage={searchParamErrors['boardType']}
+                  />
                   <AppSelect
-                    placeholder="제목+내용"
-                    // defaultValue="opt-3" // defaultValue 기본값 입력시 에러남
-                    style={{ width: 140 }}
-                    options={Code.boardSearchType}
+                    style={{ width: 150 }}
+                    allValue=""
+                    allLabel="전체"
+                    applyAllSelect
+                    options={[
+                      { label: '제목', value: 'boardTitle' },
+                      { label: '내용', value: 'boardContent' },
+                    ]}
                     value={searchType}
                     onChange={(value) => {
                       changeSearchInput('searchType', value);
@@ -113,21 +119,26 @@ function GuidePatternTable1() {
                   <AppSearchInput
                     placeholder="검색하세요"
                     style={{ width: 400 }}
-                    hiddenSearchButton={false}
-                    search={enterSearch}
                     value={searchWord}
                     onChange={(value) => {
                       changeSearchInput('searchWord', value);
                     }}
+                    search={search}
                   />
+                  <AppButton
+                    style={{ marginLeft: 10 }}
+                    icon={<Search size={18} />}
+                    value="조회"
+                    onClick={search}
+                  />
+                  <AppButton style={{ marginLeft: 10 }} value="초기화" onClick={initSearchInput} />
                 </div>
               </form>
             </div>
-
             <div className="grid-block">
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <AppTable rowData={list} columns={columns} store={listStore} rowKey="boardKey" />
+                  <AppTable rowData={list} columns={columns} isLoading={displayTableLoading} />
                 </div>
               </div>
             </div>

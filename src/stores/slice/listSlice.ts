@@ -21,6 +21,8 @@ export const listBaseState = {
   searchParam: {},
   sortParam: {},
   selectedRowKeys: [],
+  searchParamErrors: {},
+  isDirty: false,
 };
 
 export const createListSlice = (set, get) => ({
@@ -148,20 +150,35 @@ export const createListSlice = (set, get) => ({
       listApiMethod,
       convertList,
       searchAfterAction,
+      searchParam,
+      yupSearchFormSchema,
     } = get();
+    if (yupSearchFormSchema) {
+      const validateResult = await CommonUtil.validateYupForm(yupSearchFormSchema, searchParam);
+      const { success, errors } = validateResult;
+      if (!success) {
+        set({ searchParamErrors: errors });
+        return;
+      }
+    }
+    set({ displayTableLoading: true, searchParamErrors: {} });
     const applyListApiMethod = listApiMethod || 'get';
     const apiParam = getCustomSearchParam ? getCustomSearchParam() : getSearchParam();
-    const apiResult = await ApiService[applyListApiMethod](listApiPath, apiParam, {
-      disableLoadingBar: false,
-    });
+    try {
+      const apiResult = await ApiService[applyListApiMethod](listApiPath, apiParam, {
+        disableLoadingBar: false,
+      });
 
-    const list = apiResult || [];
-    const applyList = convertList ? convertList(list) : list;
-    const totalCount = list.length;
-    setTotalCount(totalCount);
-    set({ list: applyList || [], selectedRowKeys: [] });
-    if (searchAfterAction) {
-      searchAfterAction();
+      const list = apiResult || [];
+      const applyList = convertList ? convertList(list) : list;
+      const totalCount = list.length;
+      setTotalCount(totalCount);
+      set({ list: applyList || [], selectedRowKeys: [] });
+      if (searchAfterAction) {
+        searchAfterAction();
+      }
+    } finally {
+      set({ displayTableLoading: false });
     }
   },
 

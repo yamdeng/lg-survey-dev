@@ -1,16 +1,68 @@
-import HeaderMenu from '@/publish/components/header/HeaderMenu';
-import { useEffect, useState } from 'react';
-
-import { FilePenLine, Home } from 'lucide-react';
-
+import { useEffect, useState, useCallback } from 'react';
+import { useImmer } from 'use-immer'; // use-immer 임포트
+import AppButton from '@/components/common/AppButton';
+import AppCodeSelect from '@/components/common/AppCodeSelect';
 import AppSearchInput from '@/components/common/AppSearchInput';
 import AppSelect from '@/components/common/AppSelect';
 import AppTable from '@/components/common/AppTable';
-import Code from '@/config/Code';
-import FlexBox from '@/publish/components/wrapperItem/FlexBox';
+import { FilePenLine, Search } from 'lucide-react';
 import ApiService from '@/services/ApiService';
+import CommonUtil from '@/utils/CommonUtil';
+import * as yup from 'yup';
+
+const initSearchParam = {
+  searchWord: '',
+  searchType: 'boardTitle',
+  boardType: 'notice',
+};
+
+const yupSearchFormSchema = yup.object().shape({
+  boardType: yup.string().required(),
+});
 
 function GuidePatternTable2() {
+  const [searchParam, setSearchParam] = useImmer({ ...initSearchParam });
+  const [searchParamErrors, setSearchParamErrors] = useImmer({});
+  const [list, setList] = useState([]);
+  const [displayTableLoading, setDisplayTableLoading] = useState(false);
+
+  const { searchType, searchWord, boardType } = searchParam;
+
+  const search = useCallback(async () => {
+    if (yupSearchFormSchema) {
+      const validateResult = await CommonUtil.validateYupForm(yupSearchFormSchema, searchParam);
+      const { success, errors } = validateResult;
+      if (!success) {
+        setSearchParamErrors(errors);
+        return;
+      }
+    }
+
+    setSearchParamErrors({});
+    setDisplayTableLoading(true);
+    try {
+      const apiResult = await ApiService.get('notices', searchParam);
+      const list = apiResult || [];
+      setList(list);
+    } finally {
+      setDisplayTableLoading(false);
+    }
+  }, [searchParam]);
+
+  const changeSearchInput = useCallback(
+    (key, value) => {
+      setSearchParam((draft) => {
+        draft[key] = value;
+      });
+    },
+    [setSearchParam],
+  );
+
+  // 3. 검색 조건 초기화 함수
+  const initSearchInput = useCallback(() => {
+    setSearchParam(initSearchParam);
+  }, [setSearchParam]);
+
   const [columns] = useState<any>([
     {
       field: 'boardKey',
@@ -59,91 +111,75 @@ function GuidePatternTable2() {
     },
   ]);
 
-  const [searchParam, setSearchParam] = useState<any>({});
-  const [list, setList] = useState<any>({});
-
-  const { searchType, searchWord } = searchParam;
-
-  const changeSearchInput = (inputName: string, inputValue: any) => {
-    setSearchParam((prev: any) => ({
-      ...prev,
-      [inputName]: inputValue,
-    }));
-  };
-
-  const enterSearch = async () => {
-    const apiResult = await ApiService.get('notices', searchParam);
-    setList(apiResult);
-  };
-
   useEffect(() => {
-    enterSearch();
+    search();
   }, []);
 
   return (
-    <>
-      <header className="content-header">
-        <FlexBox className="content-inner" justify={'space-between'}>
-          <div className="bread-crumb">
-            <dl className="bread-crumb-list">
-              <dt>
-                <a href="/">
-                  <Home size={16} />
-                </a>
-              </dt>
-              <dd>
-                <a href="#">Notice</a>
-              </dd>
-            </dl>
+    <main className="content-main">
+      <div className="content-inner">
+        <div className="content-title">
+          <FilePenLine size={18} />
+          <h3 className="title-text">목록 개발 패턴2 (useImmer)</h3>
+        </div>
+        <div className="content-body">
+          <div className="form-block border-none">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                search();
+              }}
+            >
+              <div className="form-inline justify-end">
+                <AppCodeSelect
+                  label="유형"
+                  required
+                  style={{ width: 150 }}
+                  codeGrpId="BOARD_TYPE"
+                  value={boardType}
+                  onChange={(value) => changeSearchInput('boardType', value)}
+                  errorMessage={searchParamErrors['boardType']}
+                />
+                <AppSelect
+                  style={{ width: 150 }}
+                  allValue=""
+                  allLabel="전체"
+                  applyAllSelect
+                  options={[
+                    { label: '제목', value: 'boardTitle' },
+                    { label: '내용', value: 'boardContent' },
+                  ]}
+                  value={searchType}
+                  onChange={(value) => changeSearchInput('searchType', value)}
+                />
+                <AppSearchInput
+                  placeholder="검색하세요"
+                  style={{ width: 400 }}
+                  value={searchWord}
+                  onChange={(value) => changeSearchInput('searchWord', value)}
+                  search={search}
+                />
+                <AppButton
+                  style={{ marginLeft: 10 }}
+                  icon={<Search size={18} />}
+                  value="조회"
+                  onClick={search}
+                />
+                <AppButton style={{ marginLeft: 10 }} value="초기화" onClick={initSearchInput} />
+              </div>
+            </form>
           </div>
-          <HeaderMenu />
-        </FlexBox>
-      </header>
-      <main className="content-main">
-        <div className="content-inner">
-          <div className="content-title">
-            <FilePenLine size={18} />
-            <h3 className="title-text">Notice</h3>
-          </div>
-          <div className="content-body">
-            <div className="form-block border-none">
-              <form>
-                <div className="form-inline justify-end">
-                  <AppSelect
-                    placeholder="제목+내용"
-                    // defaultValue="opt-3" // defaultValue 기본값 입력시 에러남
-                    style={{ width: 140 }}
-                    options={Code.boardSearchType}
-                    value={searchType}
-                    onChange={(value) => {
-                      changeSearchInput('searchType', value);
-                    }}
-                  />
-                  <AppSearchInput
-                    placeholder="검색하세요"
-                    style={{ width: 400 }}
-                    hiddenSearchButton={false}
-                    search={enterSearch}
-                    value={searchWord}
-                    onChange={(value) => {
-                      changeSearchInput('searchWord', value);
-                    }}
-                  />
-                </div>
-              </form>
-            </div>
-
-            <div className="grid-block">
-              <div className="grid-block-body">
-                <div className="ag-grid">
-                  <AppTable columns={columns} rowData={list} rowKey="boardKey" />
-                </div>
+          <div className="grid-block">
+            <div className="grid-block-body">
+              <div className="ag-grid">
+                <AppTable rowData={list} columns={columns} isLoading={displayTableLoading} />
               </div>
             </div>
           </div>
         </div>
-      </main>
-    </>
+      </div>
+    </main>
   );
 }
+
 export default GuidePatternTable2;
