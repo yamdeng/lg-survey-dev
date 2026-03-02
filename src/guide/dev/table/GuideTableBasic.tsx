@@ -8,6 +8,7 @@ import AppButton from '@/components/common/AppButton';
 function GuideTableBasic() {
   const gridApiRef = useRef<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hiddenPagination, setHiddenPagination] = useState(false);
   const [rowData, setRowData] = useState(getAllData());
   const columns = testColumnInfos;
 
@@ -18,6 +19,12 @@ function GuideTableBasic() {
 
   const handleButtonClick = () => {
     setRowData([]);
+  };
+
+  const togglePagination = () => {
+    setHiddenPagination((prev) => {
+      return !prev;
+    });
   };
 
   useEffect(() => {
@@ -45,7 +52,12 @@ function GuideTableBasic() {
             <div className="form-block border-none">
               <form>
                 <div className="form-inline justify-end">
-                  <AppButton value="데이터 비우기" onClick={handleButtonClick} />
+                  <AppButton
+                    value="데이터 비우기"
+                    onClick={handleButtonClick}
+                    style={{ marginRight: 10 }}
+                  />
+                  <AppButton value="페이징토글" onClick={togglePagination} />
                 </div>
               </form>
             </div>
@@ -59,6 +71,7 @@ function GuideTableBasic() {
                     columns={columns}
                     onGridReady={onGridReady}
                     displayTableLoading={isLoading}
+                    hiddenPagination={hiddenPagination}
                   />
                 </div>
               </div>

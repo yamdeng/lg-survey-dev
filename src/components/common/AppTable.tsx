@@ -80,7 +80,6 @@ function AppTable(props) {
     applyAutoHeight,
     store = null,
     hiddenPagination,
-    readOnlyEdit = true,
     defaultColDef = {},
     ...rest
   } = props;
@@ -174,7 +173,6 @@ function AppTable(props) {
           tooltipHideDelay={1000}
           tooltipMouseTrack={true}
           enableBrowserTooltips={false}
-          readOnlyEdit={readOnlyEdit}
           loading={displayTableLoading ? true : false}
           onGridReady={(params) => {
             if (getGridRef) {
