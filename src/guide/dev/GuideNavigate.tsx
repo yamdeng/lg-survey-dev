@@ -22,12 +22,12 @@ function GuideNavigate() {
           <div className="content-body">
             <AppButton
               style={customButtonStyle}
-              onClick={() => navigate('/dev/GuideApiService')}
+              onClick={() => navigate('/guides/dev/GuideToastService')}
               value="react-router-dom의 navigate 사용법"
             />
             <AppButton
               style={customButtonStyle}
-              onClick={() => globalNavigate('/dev/GuideApiService')}
+              onClick={() => globalNavigate('/guides/dev/GuideLoadingBar')}
               value="공통 유틸 navigate"
             />
           </div>

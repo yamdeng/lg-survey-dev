@@ -2,6 +2,7 @@ import { guideMenuList } from '@/data/guide-menu';
 import { Database } from 'lucide-react';
 
 export const menuList = [
+  ...guideMenuList,
   {
     menuTitle: '공지사항',
     menuPath: '/notices2',
@@ -45,7 +46,6 @@ export const menuList = [
       },
     ],
   },
-  ...guideMenuList,
 ];
 
 export const getMenuListByProfileInfo = (profile) => {

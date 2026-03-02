@@ -1,9 +1,9 @@
+import { ToastContainer } from 'react-toastify';
 import AlertModalContainer from '@/components/layout/AlertModalContainer';
 import LoadingBarContainer from '@/components/layout/LoadingBarContainer';
 import { useStore } from 'zustand';
 import { useAppStore } from '@/stores/useAppStore';
 import { useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
 import Config from '@/config/Config';
 import Logger from '@/utils/Logger';
 import CommonUtil from '@/utils/CommonUtil';

@@ -24,7 +24,6 @@ import UserForm from '@/pages/users/UserForm';
 import UserDetail from '@/pages/users/UserDetail';
 
 /* 에러*/
-import FrontCommonError from '@/pages/errors/FrontCommonError';
 import NotFound from '@/pages/errors/NotFound';
 import NotAccessError from '@/pages/errors/NotAccessError';
 
@@ -39,7 +38,6 @@ export const Router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
-    errorElement: <FrontCommonError />,
     handle: { breadcrumbName: 'Home', icon: <House />, isLink: true },
     children: [
       {

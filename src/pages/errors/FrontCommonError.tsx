@@ -19,7 +19,7 @@ const FrontCommonError = () => {
       componentStack: error?.componentStack, // React Router가 제공하는 정보
     };
 
-    Logger.error(errorObject);
+    Logger.info(errorObject);
   }, [error]);
 
   const handleGoHome = () => {

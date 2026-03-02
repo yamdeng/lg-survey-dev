@@ -1,21 +1,33 @@
-import { Laptop } from 'lucide-react';
+import { SquareCode } from 'lucide-react';
 
 /* 가이드 전용 메뉴 */
 export const guideMenuList = [
   {
     menuTitle: '개발 가이드',
-    icon: <Laptop />,
+    icon: <SquareCode />,
     children: [
       {
         menuTitle: '공통 가이드',
         children: [
           {
-            menuTitle: 'navigate',
+            menuTitle: '네비게이션',
             menuPath: '/guides/dev/GuideNavigate',
           },
           {
-            menuTitle: 'toast service',
+            menuTitle: '토스트',
             menuPath: '/guides/dev/GuideToastService',
+          },
+          {
+            menuTitle: '로딩바',
+            menuPath: '/guides/dev/GuideLoadingBar',
+          },
+          {
+            menuTitle: '에러 case',
+            menuPath: '/guides/dev/GuideError',
+          },
+          {
+            menuTitle: 'ApiService',
+            menuPath: '/guides/dev/GuideApiService',
           },
         ],
       },

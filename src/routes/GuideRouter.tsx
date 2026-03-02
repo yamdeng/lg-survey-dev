@@ -10,11 +10,12 @@ import PAlertConfirmModal from '@/guide/publish/PAlertConfirmModal';
 /* dev 관련 가이드 컴포넌트 import */
 import GuideNavigate from '@/guide/dev/GuideNavigate';
 import GuideToastService from '@/guide/dev/GuideToastService';
+import GuideLoadingBar from '@/guide/dev/GuideLoadingBar';
+import GuideError from '@/guide/dev/GuideError';
 import GuideApiService from '@/guide/dev/GuideApiService';
 import GuideAlertConfirmModal from '@/guide/dev/GuideAlertConfirmModal';
 import GuideModalService from '@/guide/dev/GuideModalService';
 import GuideCookie from '@/guide/dev/GuideCookie';
-import GuideError from '@/guide/dev/GuideError';
 
 /* guide common component */
 import GuideAppTextInput from '@/guide/dev/GuideAppTextInput';
@@ -60,6 +61,22 @@ export const GuideRouter = [
           {
             path: 'GuideToastService',
             element: <GuideToastService />,
+            handle: { breadcrumbName: '토스트서비스' },
+          },
+          {
+            path: 'GuideLoadingBar',
+            element: <GuideLoadingBar />,
+            handle: { breadcrumbName: '로딩바' },
+          },
+          {
+            path: 'GuideError',
+            element: <GuideError />,
+            handle: { breadcrumbName: '에러 case' },
+          },
+          {
+            path: 'GuideApiService',
+            element: <GuideApiService />,
+            handle: { breadcrumbName: 'ApiService' },
           },
         ],
       },
