@@ -21,6 +21,7 @@ function AppCheckbox(props) {
     errorMessage,
     disabled = false,
     checkboxTitle = '',
+    style = {},
   } = props;
   const applyClassName = classNames('app-form-input', { error: errorMessage });
 
@@ -28,6 +29,7 @@ function AppCheckbox(props) {
     <>
       <label key={label} id={id}>
         <input
+          style={style}
           type="checkbox"
           className={applyClassName}
           name={name}

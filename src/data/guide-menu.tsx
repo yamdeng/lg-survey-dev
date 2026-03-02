@@ -232,6 +232,9 @@ export const guideMenuList = [
           },
         ],
       },
+      {
+        menuTitle: '추가 개발 가이드',
+      },
     ],
   },
 ];

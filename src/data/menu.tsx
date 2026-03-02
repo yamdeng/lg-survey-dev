@@ -4,16 +4,11 @@ import { Database } from 'lucide-react';
 export const menuList = [
   ...guideMenuList,
   {
-    menuTitle: '공지사항',
-    menuPath: '/notices2',
-    icon: <Database />,
-  },
-  {
     menuTitle: '게시판',
     icon: <Database />,
     children: [
       {
-        menuTitle: '공지사항(게시판)',
+        menuTitle: '공지사항',
         menuPath: '/notices',
       },
     ],

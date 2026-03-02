@@ -3,12 +3,14 @@ import classNames from 'classnames';
 import ImageResize from 'quill-image-resize-module-react';
 import { useMemo } from 'react';
 import ReactQuill, { Quill } from 'react-quill-new';
+import CommonUtil from '@/utils/CommonUtil';
 
 // Quill에 이미지 리사이즈 모듈 등록
 Quill.register('modules/imageResize', ImageResize);
 
 function AppTextEditor(props) {
   const {
+    id = CommonUtil.getUUID(),
     isViewMode = false,
     height = 400,
     value,
@@ -59,7 +61,7 @@ function AppTextEditor(props) {
 
   return (
     <>
-      <div className={applyClassName} style={{ minHeight: isViewMode ? 'auto' : height }}>
+      <div className={applyClassName} style={{ minHeight: isViewMode ? 'auto' : height }} id={id}>
         <ReactQuill
           style={{ height: isViewMode ? 'auto' : '100%' }}
           theme={isViewMode ? 'bubble' : 'snow'}

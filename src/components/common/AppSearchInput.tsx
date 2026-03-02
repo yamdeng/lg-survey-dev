@@ -1,6 +1,7 @@
 import CommonUtil from '@/utils/CommonUtil';
 import classNames from 'classnames';
 import CommonInputError from './CommonInputError';
+import { Search } from 'lucide-react';
 
 /*
 
@@ -87,7 +88,9 @@ function AppSearchInput(props) {
             ></button>
           )}
           {hiddenSearchButton ? null : (
-            <button type="button" className="input-clear" onClick={search}></button>
+            <button type="button" className="icon-sch" onClick={search}>
+              <Search />
+            </button>
           )}
         </div>
         <CommonInputError errorMessage={errorMessage} />
