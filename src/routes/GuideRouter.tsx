@@ -32,8 +32,7 @@ import GuideAppRangeDatePicker2 from '@/guide/dev/GuideAppRangeDatePicker2';
 /* immer, zustand, yup */
 import GuideImmer1 from '@/guide/dev/GuideImmer1';
 import GuideImmer2 from '@/guide/dev/GuideImmer2';
-import GuideFirstStore from '@/guide/dev/store/GuideFirstStore';
-import GuideSecondStore from '@/guide/dev/store/GuideSecondStore';
+import GuideZustandStoreCommunication from '@/guide/dev/store/GuideZustandStoreCommunication';
 import GuideZustandCreateFunction from '@/guide/dev/store/GuideZustandCreateFunction';
 import GuideZustandCreateStoreFunction from '@/guide/dev/store/GuideZustandCreateStoreFunction';
 import GuideZustandNestedPropsUpdate from '@/guide/dev/store/GuideZustandNestedPropsUpdate';
@@ -165,16 +164,6 @@ export const GuideRouter = [
             handle: { breadcrumbName: 'immer 라이브러리 list case' },
           },
           {
-            path: 'GuideFirstStore',
-            element: <GuideFirstStore />,
-            handle: { breadcrumbName: 'store 예시 첫번째' },
-          },
-          {
-            path: 'GuideSecondStore',
-            element: <GuideSecondStore />,
-            handle: { breadcrumbName: 'store 예시 두번째' },
-          },
-          {
             path: 'GuideZustandCreateFunction',
             element: <GuideZustandCreateFunction />,
             handle: { breadcrumbName: 'zustand create' },
@@ -198,6 +187,11 @@ export const GuideRouter = [
             path: 'GuideZustandImmerMiddleware',
             element: <GuideZustandImmerMiddleware />,
             handle: { breadcrumbName: 'zustand + immer middleware' },
+          },
+          {
+            path: 'GuideZustandStoreCommunication',
+            element: <GuideZustandStoreCommunication />,
+            handle: { breadcrumbName: 'store 간의 소통 방법' },
           },
         ],
       },

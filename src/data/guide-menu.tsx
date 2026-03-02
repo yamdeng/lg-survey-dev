@@ -100,14 +100,6 @@ export const guideMenuList = [
             menuPath: '/guides/dev/GuideImmer2',
           },
           {
-            menuTitle: 'store 첫번째 예시',
-            menuPath: '/guides/dev/GuideFirstStore',
-          },
-          {
-            menuTitle: 'store 두번째 예시',
-            menuPath: '/guides/dev/GuideSecondStore',
-          },
-          {
             menuTitle: 'zustand create',
             menuPath: '/guides/dev/GuideZustandCreateFunction',
           },
@@ -126,6 +118,10 @@ export const guideMenuList = [
           {
             menuTitle: 'zustand + immer middleware',
             menuPath: '/guides/dev/GuideZustandImmerMiddleware',
+          },
+          {
+            menuTitle: 'store 간의 소통 방법',
+            menuPath: '/guides/dev/GuideZustandStoreCommunication',
           },
         ],
       },
