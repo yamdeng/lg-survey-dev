@@ -9,6 +9,7 @@ const basicDefaultColDef = {
   wrapText: false,
   autoHeight: true,
   minWidth: 100,
+  cellDataType: false,
 };
 
 /*
@@ -99,7 +100,7 @@ function AppTable(props) {
         enableClickSelection: true,
       };
     }
-    return {};
+    return undefined;
   }, [enableCheckBox, rowSelectMode, hideDisabledCheckboxes, isRowSelectable]);
 
   const searchRowSpanIndex = columns.findIndex((info) => info.enableRowSpan);
@@ -157,8 +158,6 @@ function AppTable(props) {
           {...rest}
           ref={gridRef}
           rowModelType="clientSide"
-          suppressServerSideSorting={true}
-          suppressMultiSort={true}
           domLayout={applyAutoHeight ? 'autoHeight' : 'normal'}
           rowData={rowData}
           columnDefs={applyColumns}
