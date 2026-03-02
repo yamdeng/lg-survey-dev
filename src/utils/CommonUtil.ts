@@ -244,6 +244,7 @@ const getUUID = () => {
 const validateYupForm = async (yupFormSchema, formValue) => {
   let success = true;
   let firstErrorFieldKey = '';
+  let firstErrorMessage = '';
   const errors = {};
   try {
     await yupFormSchema.validate(formValue, { abortEarly: false });
@@ -254,11 +255,14 @@ const validateYupForm = async (yupFormSchema, formValue) => {
     firstErrorFieldKey = yupErrors[0].path;
     const groupErrorInfo = _.groupBy(yupErrors, 'path');
     const errorKeys = Object.keys(groupErrorInfo);
-    errorKeys.forEach((errorKey) => {
+    errorKeys.forEach((errorKey, index) => {
       errors[errorKey] = groupErrorInfo[errorKey][0].message;
+      if (index === 0) {
+        firstErrorMessage = errors[errorKey];
+      }
     });
   }
-  return { success, firstErrorFieldKey, errors };
+  return { success, firstErrorFieldKey, firstErrorMessage, errors };
 };
 
 const getNowByServerTime = (dateType = 'dateTime') => {

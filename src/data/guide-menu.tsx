@@ -205,6 +205,14 @@ export const guideMenuList = [
             menuTitle: 'table 검색3',
             menuPath: '/guides/dev-pattern/GuidePatternTable3',
           },
+          {
+            menuTitle: 'form case 1 (store)',
+            menuPath: '/guides/dev-pattern/GuidePatternForm1',
+          },
+          {
+            menuTitle: 'form case 2 (immer)',
+            menuPath: '/guides/dev-pattern/GuidePatternForm2',
+          },
         ],
       },
       {

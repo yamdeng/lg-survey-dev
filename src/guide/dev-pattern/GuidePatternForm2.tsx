@@ -4,28 +4,88 @@ import AppSelect from '@/components/common/AppSelect';
 import AppTextEditor from '@/components/common/AppTextEditor';
 import AppTextInput from '@/components/common/AppTextInput';
 import Code from '@/config/Code';
-import { useGuidePatternFormStore } from '@/guide/stores/useGuidePatternFormStore';
+import CommonUtil from '@/utils/CommonUtil';
 import { Check, FilePenLine } from 'lucide-react';
-import { useEffect } from 'react';
+import { useState } from 'react';
+import { useImmer } from 'use-immer';
+import * as yup from 'yup';
+import ToastService from '@/services/ToastService';
 
-const GuidePatternForm1 = () => {
+/* yup validation */
+const yupFormSchema = yup.object({
+  boardTitle: yup.string().required('게시판 제목을 입력해주세요.'),
+  boardType: yup.string().required('게시판 유형을 선택해주세요.'),
+  boardContent: yup.string().required('내용을 입력해주세요'), // 목록에서 숨김 처리되나 상세 데이터용
+  useYn: yup.string().default('Y'),
+  mainYn: yup.string().default('N'),
+  boardAuthType: yup.string().nullable(),
+  securityLevel: yup
+    .number()
+    .transform((value) => (isNaN(value) ? null : value))
+    .nullable(), // 숫자형 대응
+});
+
+/* formValue 초기값 */
+const initFormValue = {
+  boardTitle: '',
+  boardType: 'notice',
+  boardContent: '',
+  useYn: 'Y', // 사용 여부 기본값 Y
+  mainYn: 'N', // 메인 노출 기본값 N
+  boardAuthType: 'ALL',
+  securityLevel: '1', // 숫자 필드는 null 혹은 기본값 설정
+};
+
+const GuidePatternForm2 = () => {
   /* formStore state input 변수 */
-  const { errors, changeInput, changeBoardType, formValue, save } = useGuidePatternFormStore();
 
-  const {
-    boardType,
-    boardTitle,
-    boardContent,
-    useYn,
-    mainYn,
-    boardAuthType,
-    securityLevel,
-    clear,
-  } = formValue;
+  const [formValue, setFormValue] = useImmer({ ...initFormValue });
+  const [errors, setErrors] = useState<any>({});
 
-  useEffect(() => {
-    return clear;
-  }, []);
+  const { boardType, boardTitle, boardContent, useYn, mainYn, boardAuthType, securityLevel } =
+    formValue;
+
+  const changeInput = async (inputName: string, inputValue: any) => {
+    setFormValue((draft) => {
+      draft[inputName] = inputValue;
+    });
+
+    try {
+      await yupFormSchema.validateAt(inputName, {
+        ...formValue,
+        [inputName]: inputValue,
+      });
+
+      setErrors((prevErrors: any) => ({
+        ...prevErrors,
+        [inputName]: null,
+      }));
+    } catch (error: any) {
+      setErrors((prevErrors: any) => ({
+        ...prevErrors,
+        [inputName]: error.message,
+      }));
+    }
+  };
+
+  const save = async () => {
+    const validateResult = await CommonUtil.validateYupForm(yupFormSchema, formValue);
+    const { success, firstErrorFieldKey, firstErrorMessage, errors } = validateResult;
+    const applyFirstErrorFieldKey = firstErrorFieldKey;
+    const firstInputDom = document.getElementById(applyFirstErrorFieldKey);
+    const firstEditorDom: any = document.querySelector(`#${applyFirstErrorFieldKey} .ql-editor`);
+    if (!success) {
+      setErrors(errors);
+      if (firstEditorDom) {
+        setTimeout(() => {
+          firstEditorDom.focus();
+        }, 10);
+      } else if (firstInputDom) {
+        firstInputDom.focus();
+      }
+      ToastService.warn(`${firstErrorMessage}`);
+    }
+  };
 
   return (
     <main className="content-main">
@@ -70,7 +130,7 @@ const GuidePatternForm1 = () => {
                       options={Code.boardType}
                       style={{ width: 250 }}
                       value={boardType}
-                      onChange={(value) => changeBoardType(value)}
+                      onChange={(value) => changeInput('boardType', value)}
                       errorMessage={errors.boardType}
                       required
                     />
@@ -102,7 +162,6 @@ const GuidePatternForm1 = () => {
                       onChange={(value) => changeInput('useYn', value)}
                       errorMessage={errors.useYn}
                       required
-                      disabled={boardType === 'normal' ? true : false}
                     />
                   </td>
                   <th>
@@ -163,4 +222,4 @@ const GuidePatternForm1 = () => {
   );
 };
 
-export default GuidePatternForm1;
+export default GuidePatternForm2;

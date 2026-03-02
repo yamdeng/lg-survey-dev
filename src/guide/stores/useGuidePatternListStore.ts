@@ -16,7 +16,7 @@ const initSearchParam = {
   searchWord: '',
   searchType: '',
   boardType: '',
-  startDate: todayString,
+  workDate: todayString,
   rangeDate: [
     CommonUtil.calculateDate(todayString, 'YYYY-MM-DD', DATE_PICKER_TYPE_MONTH, -1),
     todayString,
@@ -39,6 +39,17 @@ export const useGuidePatternListStore = create<any>((set, get) => ({
   /* TODO : 검색에서 사용할 input 선언 및 초기화 반영 */
   searchParam: {
     ...initSearchParam,
+  },
+
+  // api 호출 파라미터 convert
+  getSearchParam: () => {
+    const { searchParam } = get();
+    const { rangeDate } = searchParam;
+    const applySearchParam = { ...searchParam };
+    delete applySearchParam.rangeDate;
+    applySearchParam.startDate = rangeDate[0];
+    applySearchParam.endDate = rangeDate[1];
+    return applySearchParam;
   },
 
   changeSearchType: (inputValue) => {

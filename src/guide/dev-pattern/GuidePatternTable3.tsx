@@ -34,7 +34,7 @@ function GuidePatternTable3() {
     gridApiRef.current = event.api;
   }, []);
 
-  const { searchType, searchWord, boardType, startDate, rangeDate, useYn } = searchParam;
+  const { searchType, searchWord, boardType, workDate, rangeDate, useYn } = searchParam;
 
   const [columns] = useState<any>([
     {
@@ -143,9 +143,9 @@ function GuidePatternTable3() {
                   />
                   <AppDatePicker
                     onChange={(value) => {
-                      changeSearchInput('startDate', value);
+                      changeSearchInput('workDate', value);
                     }}
-                    value={startDate}
+                    value={workDate}
                     pickerType="date"
                   />
 
