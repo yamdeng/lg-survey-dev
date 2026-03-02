@@ -53,7 +53,7 @@ export const Router = createBrowserRouter([
         element: <NotFound />,
       },
       {
-        path: 'errors',
+        path: 'not-access',
         element: <NotAccessError />,
       },
       {

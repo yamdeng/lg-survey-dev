@@ -23,7 +23,7 @@ function GuideLoadingBar() {
             </h3>
           </div>
           <div className="content-body">
-            <div className="btn-group-start">
+            <div className="btn-group">
               <AppButton onClick={handleClick} value="로딩바 show" />
             </div>
           </div>

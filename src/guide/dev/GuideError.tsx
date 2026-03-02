@@ -1,6 +1,7 @@
 import ApiService from '@/services/ApiService';
 import Config from '@/config/Config';
 import AppButton from '@/components/common/AppButton';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const errorTestFunction = () => {
@@ -9,8 +10,9 @@ const errorTestFunction = () => {
 };
 
 function GuideError() {
-  const [testObject, setTestObject] = useState<any>({});
+  const navigate = useNavigate();
 
+  const [testObject, setTestObject] = useState<any>({});
   const [testArray, setTestArray] = useState([]);
 
   // 1.render 직전에 스크립트 오류
@@ -36,6 +38,16 @@ function GuideError() {
   // 5.일반 promise 에서 에러 발생시키기
   const promiseError = () => {
     return Promise.reject({ message: 'test1111' });
+  };
+
+  // 6.권한오류
+  const apiAccessErrorTest = async () => {
+    await ApiService.get('error/403');
+  };
+
+  // 7.페이지없음
+  const notFoundError = () => {
+    navigate('/asdasd/asdasdasd');
   };
 
   const customButtonStyle = { marginBottom: 10 };
@@ -78,6 +90,8 @@ function GuideError() {
               style={customButtonStyle}
               value="5.일반 promise 에서 에러 발생시키기"
             />
+            <AppButton onClick={apiAccessErrorTest} style={customButtonStyle} value="6.권한오류" />
+            <AppButton onClick={notFoundError} style={customButtonStyle} value="7.페이지없음" />
           </div>
           <p>{testObject.aaa}</p>
           <p>

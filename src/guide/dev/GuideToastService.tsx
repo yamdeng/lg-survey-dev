@@ -30,7 +30,7 @@ function GuideToastService() {
             >
               <div>클립보드 사용법!</div>
             </CopyToClipboard>
-            <div className="btn-group-start">
+            <div className="btn-group">
               <AppButton onClick={handleToastService} value="toast" />
             </div>
           </div>

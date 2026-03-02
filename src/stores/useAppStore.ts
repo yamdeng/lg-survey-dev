@@ -131,7 +131,7 @@ export const useAppStore = createStore<any>((set, get) => ({
 
   // 403 권한 없을 경우 처리
   handleAccessDeniedError: async () => {
-    globalNavigate('/not-auth', { replace: true });
+    globalNavigate('/not-access', { replace: true });
   },
 
   logout: () => {

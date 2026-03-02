@@ -70,7 +70,7 @@ class ErrorBoundary extends React.Component<any, any> {
                 <div className="error-box">
                   <p>오류가 발생하였습니다.</p>
                   <p>다시 시도해 주세요.</p>
-                  <div className="button-group">
+                  <div className="btn-group">
                     <AppButton onClick={this.goHome} value="Home" />
                   </div>
                 </div>

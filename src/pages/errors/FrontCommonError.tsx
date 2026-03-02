@@ -41,7 +41,7 @@ const FrontCommonError = () => {
           : '서비스 이용에 불편을 드려 죄송합니다.'}
       </p>
 
-      <div className="button-group">
+      <div className="btn-group">
         <AppButton onClick={handleGoHome} value="Home" />
         <AppButton onClick={handleRefresh} value="다시 시도" />
       </div>
