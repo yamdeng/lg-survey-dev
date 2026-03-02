@@ -36,6 +36,9 @@ import GuideFirstStore from '@/guide/dev/store/GuideFirstStore';
 import GuideSecondStore from '@/guide/dev/store/GuideSecondStore';
 import GuideZustandCreateFunction from '@/guide/dev/store/GuideZustandCreateFunction';
 import GuideZustandCreateStoreFunction from '@/guide/dev/store/GuideZustandCreateStoreFunction';
+import GuideZustandNestedPropsUpdate from '@/guide/dev/store/GuideZustandNestedPropsUpdate';
+import GuideZustandImmer from '@/guide/dev/store/GuideZustandImmer';
+import GuideZustandImmerMiddleware from '@/guide/dev/store/GuideZustandImmerMiddleware';
 
 /* guide common table component */
 // import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
@@ -180,6 +183,21 @@ export const GuideRouter = [
             path: 'GuideZustandCreateStoreFunction',
             element: <GuideZustandCreateStoreFunction />,
             handle: { breadcrumbName: 'zustand createStore' },
+          },
+          {
+            path: 'GuideZustandNestedPropsUpdate',
+            element: <GuideZustandNestedPropsUpdate />,
+            handle: { breadcrumbName: 'zustand 내부 속성 변경 방법' },
+          },
+          {
+            path: 'GuideZustandImmer',
+            element: <GuideZustandImmer />,
+            handle: { breadcrumbName: 'zustand + immer' },
+          },
+          {
+            path: 'GuideZustandImmerMiddleware',
+            element: <GuideZustandImmerMiddleware />,
+            handle: { breadcrumbName: 'zustand + immer middleware' },
           },
         ],
       },

@@ -115,6 +115,18 @@ export const guideMenuList = [
             menuTitle: 'zustand createStore',
             menuPath: '/guides/dev/GuideZustandCreateStoreFunction',
           },
+          {
+            menuTitle: 'zustand 내부 속성 변경 방법 예시',
+            menuPath: '/guides/dev/GuideZustandNestedPropsUpdate',
+          },
+          {
+            menuTitle: 'zustand + immer',
+            menuPath: '/guides/dev/GuideZustandImmer',
+          },
+          {
+            menuTitle: 'zustand + immer middleware',
+            menuPath: '/guides/dev/GuideZustandImmerMiddleware',
+          },
         ],
       },
       {
