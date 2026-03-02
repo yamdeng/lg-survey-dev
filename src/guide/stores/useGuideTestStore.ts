@@ -8,7 +8,7 @@ import { create } from 'zustand';
 */
 
 // 기본 state를 정의 : reset 하기 위한
-const basicState = { profile: null, name: '안용성', age: 10 };
+const basicState = { profile: { name: 'P안용성', age: 43 }, name: '안용성', age: 10 };
 
 const useStore = create<any>((set, get) => ({
   ...basicState,

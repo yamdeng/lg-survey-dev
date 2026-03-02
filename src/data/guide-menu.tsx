@@ -123,6 +123,14 @@ export const guideMenuList = [
             menuTitle: 'store 간의 소통 방법',
             menuPath: '/guides/dev/GuideZustandStoreCommunication',
           },
+          {
+            menuTitle: 'zustand slice 예시1',
+            menuPath: '/guides/dev/GuideZustandSliceCase1',
+          },
+          {
+            menuTitle: 'zustand slice 예시2',
+            menuPath: '/guides/dev/GuideZustandSliceCase2',
+          },
         ],
       },
       {

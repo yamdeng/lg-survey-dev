@@ -32,12 +32,14 @@ import GuideAppRangeDatePicker2 from '@/guide/dev/GuideAppRangeDatePicker2';
 /* immer, zustand, yup */
 import GuideImmer1 from '@/guide/dev/GuideImmer1';
 import GuideImmer2 from '@/guide/dev/GuideImmer2';
-import GuideZustandStoreCommunication from '@/guide/dev/store/GuideZustandStoreCommunication';
 import GuideZustandCreateFunction from '@/guide/dev/store/GuideZustandCreateFunction';
 import GuideZustandCreateStoreFunction from '@/guide/dev/store/GuideZustandCreateStoreFunction';
 import GuideZustandNestedPropsUpdate from '@/guide/dev/store/GuideZustandNestedPropsUpdate';
 import GuideZustandImmer from '@/guide/dev/store/GuideZustandImmer';
 import GuideZustandImmerMiddleware from '@/guide/dev/store/GuideZustandImmerMiddleware';
+import GuideZustandStoreCommunication from '@/guide/dev/store/GuideZustandStoreCommunication';
+import GuideZustandSliceCase1 from '@/guide/dev/store/GuideZustandSliceCase1';
+import GuideZustandSliceCase2 from '@/guide/dev/store/GuideZustandSliceCase2';
 
 /* guide common table component */
 // import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
@@ -192,6 +194,16 @@ export const GuideRouter = [
             path: 'GuideZustandStoreCommunication',
             element: <GuideZustandStoreCommunication />,
             handle: { breadcrumbName: 'store 간의 소통 방법' },
+          },
+          {
+            path: 'GuideZustandSliceCase1',
+            element: <GuideZustandSliceCase1 />,
+            handle: { breadcrumbName: 'zustand slice 예시1' },
+          },
+          {
+            path: 'GuideZustandSliceCase2',
+            element: <GuideZustandSliceCase2 />,
+            handle: { breadcrumbName: 'zustand slice 예시2' },
           },
         ],
       },
