@@ -150,6 +150,15 @@ export const guideMenuList = [
         ],
       },
       {
+        menuTitle: 'table',
+        children: [
+          {
+            menuTitle: 'table basic',
+            menuPath: '/guides/dev/GuideTableBasic',
+          },
+        ],
+      },
+      {
         menuTitle: '개발 패턴 가이드',
         children: [
           {

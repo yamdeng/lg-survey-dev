@@ -46,6 +46,7 @@ import GuideYupCase2 from '@/guide/dev/GuideYupCase2';
 import GuideYupCase3 from '@/guide/dev/GuideYupCase3';
 
 /* guide common table component */
+import GuideTableBasic from '@/guide/dev/table/GuideTableBasic';
 // import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
 // import GuideTableCase2 from '@/guide/dev/GuideTableCase2';
 // import GuideTableCase3 from '@/guide/dev/GuideTableCase3';
@@ -228,6 +229,11 @@ export const GuideRouter = [
             path: 'GuideYupCase3',
             element: <GuideYupCase3 />,
             handle: { breadcrumbName: 'yup 예시3' },
+          },
+          {
+            path: 'GuideTableBasic',
+            element: <GuideTableBasic />,
+            handle: { breadcrumbName: 'table-basic' },
           },
         ],
       },

@@ -15,8 +15,8 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.3.0",
-    "ag-grid-community": "^35.0.1",
-    "ag-grid-react": "^35.0.1",
+    "ag-grid-community": "^35.1.0",
+    "ag-grid-react": "^35.1.0",
     "antd": "^6.2.3",
     "axios": "^1.13.4",
     "classnames": "^2.5.1",
