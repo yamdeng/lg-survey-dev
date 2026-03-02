@@ -18,7 +18,7 @@ function GuideTableOnlySingleSelect() {
         <div className="content-inner">
           <div className="content-title">
             <h3 className="title-text">
-              테이블 선택(only 싱글) :{' '}
+              테이블 선택(only 싱글), row style :{' '}
               <a
                 style={{ fontSize: 20 }}
                 href={Config.hrefBasePath + `dev/table/GuideTableOnlySingleSelect.tsx`}

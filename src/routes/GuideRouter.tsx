@@ -51,11 +51,10 @@ import GuideTableClick from '@/guide/dev/table/GuideTableClick';
 import GuideTableOnlySingleSelect from '@/guide/dev/table/GuideTableOnlySingleSelect';
 import GuideTableSelect from '@/guide/dev/table/GuideTableSelect';
 import GuideTableSeletable from '@/guide/dev/table/GuideTableSeletable';
-
-// import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
-// import GuideTableCase2 from '@/guide/dev/GuideTableCase2';
-// import GuideTableCase3 from '@/guide/dev/GuideTableCase3';
-// import GuideTableCase4 from '@/guide/dev/GuideTableCase4';
+import GuideTableCodeLabel from '@/guide/dev/table/GuideTableCodeLabel';
+import GuideTableButton from '@/guide/dev/table/GuideTableButton';
+import GuideTableUseStore1 from '@/guide/dev/table/GuideTableUseStore1';
+import GuideTableUseStore2 from '@/guide/dev/table/GuideTableUseStore2';
 
 /* 개발 패턴 component */
 import GuidePatternTable1 from '@/guide/dev-pattern/GuidePatternTable1';
@@ -259,6 +258,26 @@ export const GuideRouter = [
             path: 'GuideTableSeletable',
             element: <GuideTableSeletable />,
             handle: { breadcrumbName: 'table-selectable' },
+          },
+          {
+            path: 'GuideTableCodeLabel',
+            element: <GuideTableCodeLabel />,
+            handle: { breadcrumbName: 'table-code-use' },
+          },
+          {
+            path: 'GuideTableButton',
+            element: <GuideTableButton />,
+            handle: { breadcrumbName: 'table-button' },
+          },
+          {
+            path: 'GuideTableUseStore1',
+            element: <GuideTableUseStore1 />,
+            handle: { breadcrumbName: 'table-store 상세 연동 1' },
+          },
+          {
+            path: 'GuideTableUseStore2',
+            element: <GuideTableUseStore2 />,
+            handle: { breadcrumbName: 'table-store 상세 연동 2' },
           },
         ],
       },

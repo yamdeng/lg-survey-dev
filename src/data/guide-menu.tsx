@@ -172,6 +172,22 @@ export const guideMenuList = [
             menuTitle: 'table selectable',
             menuPath: '/guides/dev/GuideTableSeletable',
           },
+          {
+            menuTitle: 'table-code-use',
+            menuPath: '/guides/dev/GuideTableCodeLabel',
+          },
+          {
+            menuTitle: 'table-button',
+            menuPath: '/guides/dev/GuideTableButton',
+          },
+          {
+            menuTitle: 'table-store-use1',
+            menuPath: '/guides/dev/GuideTableUseStore1',
+          },
+          {
+            menuTitle: 'table-store-use2',
+            menuPath: '/guides/dev/GuideTableUseStore2',
+          },
         ],
       },
       {
