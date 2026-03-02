@@ -10,6 +10,10 @@ export const guideMenuList = [
         menuTitle: '공통 가이드',
         children: [
           {
+            menuTitle: '버튼',
+            menuPath: '/guides/dev/GuideButton',
+          },
+          {
             menuTitle: '네비게이션',
             menuPath: '/guides/dev/GuideNavigate',
           },

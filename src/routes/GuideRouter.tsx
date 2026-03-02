@@ -8,6 +8,7 @@ import PLoadingBar from '@/guide/publish/PLoadingBar';
 import PAlertConfirmModal from '@/guide/publish/PAlertConfirmModal';
 
 /* dev 관련 가이드 컴포넌트 import */
+import GuideButton from '@/guide/dev/GuideButton';
 import GuideNavigate from '@/guide/dev/GuideNavigate';
 import GuideToastService from '@/guide/dev/GuideToastService';
 import GuideLoadingBar from '@/guide/dev/GuideLoadingBar';
@@ -68,6 +69,11 @@ export const GuideRouter = [
         path: 'dev',
         handle: { breadcrumbName: '공통 가이드' },
         children: [
+          {
+            path: 'GuideButton',
+            element: <GuideButton />,
+            handle: { breadcrumbName: '버튼' },
+          },
           {
             path: 'GuideNavigate',
             element: <GuideNavigate />,
