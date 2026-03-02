@@ -207,7 +207,7 @@ export const createListSlice = (set, get) => ({
 
   goAddPage: () => {
     const { baseRoutePath } = get();
-    globalNavigate(`${baseRoutePath}/add/edit`);
+    globalNavigate(`${baseRoutePath}/add`);
   },
 
   addRow: () =>

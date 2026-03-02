@@ -115,9 +115,15 @@ export const createFormSliceYup = (set, get) => ({
       success = false;
       const applyFormName = formName ? formName : '';
       const applyFirstErrorFieldKey = applyFormName + firstErrorFieldKey;
+      const firstInputDom = document.getElementById(applyFirstErrorFieldKey);
+      const firstEditorDom: any = document.querySelector(`#${applyFirstErrorFieldKey} .ql-editor`);
       try {
-        if (document.getElementById(applyFirstErrorFieldKey)) {
-          document.getElementById(applyFirstErrorFieldKey).focus();
+        if (firstEditorDom) {
+          setTimeout(() => {
+            firstEditorDom.focus();
+          }, 10);
+        } else if (firstInputDom) {
+          firstInputDom.focus();
         }
       } catch (e) {
         // 로그를 찍을 필요가 없는 에러 catch
@@ -227,7 +233,7 @@ export const createFormSliceYup = (set, get) => ({
     });
   },
 
-  goFormPage: () => {
+  goEditPage: () => {
     const { formDetailId, baseRoutePath } = get();
     globalNavigate(`${baseRoutePath}/${formDetailId}/edit`);
   },

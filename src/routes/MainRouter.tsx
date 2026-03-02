@@ -57,19 +57,8 @@ export const Router = createBrowserRouter([
         element: <NotAccessError />,
       },
       {
-        path: 'notices2',
-        handle: { breadcrumbName: '공지사항2' },
-        children: [
-          {
-            index: true,
-            element: <NoticeList />,
-            handle: { isLink: true },
-          },
-        ],
-      },
-      {
         path: 'notices',
-        handle: { breadcrumbName: '공지사항' },
+        handle: { breadcrumbName: '공지사항', isLink: true },
         children: [
           {
             index: true,
@@ -82,7 +71,7 @@ export const Router = createBrowserRouter([
             handle: { breadcrumbName: '등록' },
           },
           {
-            path: ':id',
+            path: ':detailId',
             // 상세보기와 수정하기를 한 그룹으로 묶고 싶을 때 중첩 가능
             children: [
               {
