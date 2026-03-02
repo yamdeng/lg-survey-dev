@@ -1,4 +1,3 @@
-import AppButton from '@/components/common/AppButton';
 import AppTable from '@/components/common/AppTable';
 import Config from '@/config/Config';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
@@ -114,7 +113,7 @@ function HasChildrenCheckComponent(props) {
   return <span>{expandedComponent}</span>;
 }
 
-function GuideTableCase3() {
+function GuideTableUseStore2() {
   const state = SysMessageListStore();
   const { list } = state;
   const [columns] = useState([
@@ -137,22 +136,20 @@ function GuideTableCase3() {
         <div className="content-inner">
           <div className="content-title">
             <h3 className="title-text">
-              테이블 case(store 주입하여 처리)
-              <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideTableCase3.tsx`}>
-                GuideTableCase3
+              테이블 store 연동 case 2 :{' '}
+              <a
+                style={{ fontSize: 20 }}
+                href={Config.hrefBasePath + `dev/table/GuideTableUseStore2.tsx`}
+              >
+                GuideTableUseStore2
               </a>
             </h3>
           </div>
           <div className="content-body">
             <div className="grid-block">
-              <div className="grid-block-header">
-                <div className="btn-group-end">
-                  <AppButton size="small" value="조회" />
-                </div>
-              </div>
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <AppTable rowData={list} columns={columns} />
+                  <AppTable rowData={list} columns={columns} hiddenPagination />
                 </div>
               </div>
             </div>
@@ -162,4 +159,4 @@ function GuideTableCase3() {
     </>
   );
 }
-export default GuideTableCase3;
+export default GuideTableUseStore2;

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import AppCheckbox from '@/components/common/AppCheckbox';
 import AppTable from '@/components/common/AppTable';
 import Config from '@/config/Config';
@@ -81,10 +80,10 @@ function AuditorListComponent(props) {
   );
 }
 
-function GuideTableCase1() {
+function GuideTableUseStore1() {
   const state = GuideTableCase1ListStore();
   const { list, toggleExpand, expanded } = state;
-  const [columns] = useState([
+  const columns = [
     { field: 'name', headerName: '이름' },
     { field: 'reportTitle', headerName: '보고서명' },
     {
@@ -96,7 +95,7 @@ function GuideTableCase1() {
         expanded: GuideTableCase1ListStore.getState().expanded,
       },
     },
-  ]);
+  ];
 
   return (
     <>
@@ -104,27 +103,40 @@ function GuideTableCase1() {
         <div className="content-inner">
           <div className="content-title">
             <h3 className="title-text">
-              테이블 case1(펼치기/닫기)
-              <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideTableCase1.tsx`}>
-                GuideTableCase1
+              테이블 store 연동 case (펼치기/닫기) :{' '}
+              <a
+                style={{ fontSize: 20 }}
+                href={Config.hrefBasePath + `dev/table/GuideTableUseStore1.tsx`}
+              >
+                GuideTableUseStore1
               </a>
             </h3>
           </div>
-          <p>
-            <AppCheckbox
-              label="펼치기/닫기"
-              value={expanded}
-              onChange={(value) => {
-                toggleExpand(value);
-              }}
-            />
-          </p>
           <div className="content-body">
-            <AppTable rowData={list} columns={columns} />
+            <div className="form-block border-none">
+              <form>
+                <div className="form-inline justify-end">
+                  <AppCheckbox
+                    label="펼치기/닫기"
+                    value={expanded}
+                    onChange={(value) => {
+                      toggleExpand(value);
+                    }}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="grid-block">
+              <div className="grid-block-body">
+                <div className="ag-grid">
+                  <AppTable rowData={list} columns={columns} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
     </>
   );
 }
-export default GuideTableCase1;
+export default GuideTableUseStore1;

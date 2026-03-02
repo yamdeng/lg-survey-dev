@@ -3,7 +3,7 @@ import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
 import ToastService from '@/services/ToastService';
 import ModalService from '@/services/ModalService';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 
 export const listBaseState = {
   gridApi: null,
@@ -21,6 +21,8 @@ export const listBaseState = {
   searchParam: {},
   sortParam: {},
   selectedRowKeys: [],
+  searchParamErrors: {},
+  isDirty: false,
 };
 
 export const createListSlice = (set, get) => ({
@@ -36,6 +38,18 @@ export const createListSlice = (set, get) => ({
 
   getGridRef: (gridRef) => {
     set({ gridApi: gridRef.api });
+  },
+
+  downloadCSV: () => {
+    const { gridApi } = get();
+    const params = {
+      fileName: '목록내보내기.csv', // 파일명 설정
+      columnSeparator: ',', // 구분자 (기본값 ,)
+      suppressQuotes: false, // 값에 따옴표 붙이기 여부
+    };
+    if (gridApi && gridApi.exportDataAsCsv) {
+      gridApi.exportDataAsCsv(params);
+    }
   },
 
   goFirstPage() {
@@ -148,20 +162,35 @@ export const createListSlice = (set, get) => ({
       listApiMethod,
       convertList,
       searchAfterAction,
+      searchParam,
+      yupSearchFormSchema,
     } = get();
+    if (yupSearchFormSchema) {
+      const validateResult = await CommonUtil.validateYupForm(yupSearchFormSchema, searchParam);
+      const { success, errors } = validateResult;
+      if (!success) {
+        set({ searchParamErrors: errors });
+        return;
+      }
+    }
+    set({ displayTableLoading: true, searchParamErrors: {} });
     const applyListApiMethod = listApiMethod || 'get';
     const apiParam = getCustomSearchParam ? getCustomSearchParam() : getSearchParam();
-    const apiResult = await ApiService[applyListApiMethod](listApiPath, apiParam, {
-      disableLoadingBar: false,
-    });
+    try {
+      const apiResult = await ApiService[applyListApiMethod](listApiPath, apiParam, {
+        disableLoadingBar: false,
+      });
 
-    const list = apiResult || [];
-    const applyList = convertList ? convertList(list) : list;
-    const totalCount = list.length;
-    setTotalCount(totalCount);
-    set({ list: applyList || [], selectedRowKeys: [] });
-    if (searchAfterAction) {
-      searchAfterAction();
+      const list = apiResult || [];
+      const applyList = convertList ? convertList(list) : list;
+      const totalCount = list.length;
+      setTotalCount(totalCount);
+      set({ list: applyList || [], selectedRowKeys: [] });
+      if (searchAfterAction) {
+        searchAfterAction();
+      }
+    } finally {
+      set({ displayTableLoading: false });
     }
   },
 
@@ -197,17 +226,17 @@ export const createListSlice = (set, get) => ({
 
   goDetailPage: (detailId) => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}/${detailId}`);
+    globalNavigate(`${baseRoutePath}/${detailId}`);
   },
 
   goEditPage: (detailId) => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}/${detailId}/edit`);
+    globalNavigate(`${baseRoutePath}/${detailId}/edit`);
   },
 
   goAddPage: () => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}/add/edit`);
+    globalNavigate(`${baseRoutePath}/add`);
   },
 
   addRow: () =>

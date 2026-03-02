@@ -28,9 +28,9 @@ function GuideToastService() {
               text={'설명입니다요.'}
               onCopy={() => ToastService.success('설명 클립보드 복사 완료')}
             >
-              <div className="form-table">클립보드 사용법!</div>
+              <div>클립보드 사용법!</div>
             </CopyToClipboard>
-            <div className="btn-area">
+            <div className="btn-group">
               <AppButton onClick={handleToastService} value="toast" />
             </div>
           </div>

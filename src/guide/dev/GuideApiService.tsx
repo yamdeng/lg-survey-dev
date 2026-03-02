@@ -23,6 +23,11 @@ function GuideApiService() {
     console.log(`apiResult : ${JSON.stringify(apiResult)}`);
   };
 
+  const apiError = async () => {
+    const errorInfo = await ApiService.get('error/etc');
+    console.log(`errorInfo : ${errorInfo}`);
+  };
+
   const byPassError = async () => {
     const errorInfo = await ApiService.get('error/etc', null, {
       byPassError: true,
@@ -60,6 +65,7 @@ function GuideApiService() {
               style={customButtonStyle}
               value="applyOriginalResponse"
             />
+            <AppButton onClick={apiError} style={customButtonStyle} value="apiError" />
             <AppButton onClick={byPassError} style={customButtonStyle} value="byPassError" />
           </div>
         </div>

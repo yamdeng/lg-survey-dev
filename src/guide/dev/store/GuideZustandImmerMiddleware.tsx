@@ -1,0 +1,129 @@
+import Config from '@/config/Config';
+import { create } from 'zustand';
+import { immer } from 'zustand/middleware/immer';
+
+/*
+
+  zustand immer middleware 예시
+
+*/
+const profileInitailState = {
+  name: 'ays',
+  authList: ['R', 'W'],
+  deptInfo: {
+    asName: 'asDevelop',
+    name: 'develop',
+  },
+};
+
+const initailState = {
+  rootName: 'yamdeng',
+  profile: profileInitailState,
+};
+
+const useTestStore = create<any>()(
+  immer((set, get) => ({
+    ...initailState,
+
+    writeLog: (fnName) => {
+      console.log(`call function name : ${fnName}`);
+      const profile = get().profile;
+      console.log(`profile.name : ${profile.name}`);
+    },
+
+    changeProfileName: (newName) => {
+      set((state) => {
+        state.profile.name = newName + 'good';
+      });
+      get().writeLog('changeProfileName');
+    },
+
+    changeProfileDeptName: (newDeptName) =>
+      set((state) => {
+        state.profile.deptInfo.name = newDeptName + 'good';
+      }),
+
+    changeRootName: (name) => {
+      set((state) => {
+        state.rootName = name + ' > root';
+      });
+      get().writeLog('changeProfileName');
+    },
+
+    clearStoreByInitData: () =>
+      set((state) => {
+        state.profile = profileInitailState;
+      }),
+  })),
+);
+
+function GuideZustandImmerMiddleware() {
+  const {
+    profile,
+    rootName,
+    changeProfileName,
+    changeProfileDeptName,
+    changeRootName,
+    clearStore,
+    clearStoreByInitData,
+  } = useTestStore();
+
+  console.log(clearStore);
+  console.log(clearStoreByInitData);
+
+  return (
+    <>
+      <main className="content-main">
+        <div className="content-inner">
+          <div className="content-title">
+            <h3 className="title-text">
+              zustand + immer middleware :{' '}
+              <a
+                style={{ fontSize: 20 }}
+                href={Config.hrefBasePath + `dev/store/GuideZustandImmerMiddleware.tsx`}
+              >
+                GuideZustandImmerMiddleware
+              </a>
+            </h3>
+          </div>
+          <div className="content-body">
+            <p>profile : {JSON.stringify(profile)}</p>
+            <p>rootName : {rootName}</p>
+            <div>
+              <p>
+                <button
+                  className="app-btn primary small"
+                  onClick={() => changeProfileName('안용성2')}
+                >
+                  changeProfileName
+                </button>
+              </p>
+              <p>
+                <button
+                  className="app-btn primary small"
+                  onClick={() => changeProfileDeptName('develop')}
+                >
+                  changeProfileDeptName
+                </button>
+              </p>
+              <p>
+                <button
+                  className="app-btn primary small"
+                  onClick={() => changeRootName('yamdeng2')}
+                >
+                  changeRootName
+                </button>
+              </p>
+              <p>
+                <button className="app-btn primary small" onClick={() => clearStoreByInitData()}>
+                  clearStoreByInitData
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
+export default GuideZustandImmerMiddleware;

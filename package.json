@@ -6,17 +6,15 @@
   "scripts": {
     "dev": "vite --port 8082",
     "dev:publish": "vite --port 9082 --mode publish",
-    "dev:guidedev": "cross-env NODE_ENV=development vite --port 9102 --mode guidedev",
     "build": "tsc -b && vite build",
     "build:pass": "vite build",
-    "build:guidedev": "vite build --mode guidedev",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@faker-js/faker": "^10.3.0",
-    "ag-grid-community": "^35.0.1",
-    "ag-grid-react": "^35.0.1",
+    "ag-grid-community": "^35.1.0",
+    "ag-grid-react": "^35.1.0",
     "antd": "^6.2.3",
     "axios": "^1.13.4",
     "classnames": "^2.5.1",

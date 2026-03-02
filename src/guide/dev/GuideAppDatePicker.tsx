@@ -41,6 +41,9 @@ function GuideAppDatePicker() {
   // 'YYYY' format 유형 사용 방법
   const [yearPickerTypeValue, setYearPickerTypeValue] = useState('2023');
 
+  // valueFormat, displayFormat 기본 사용법
+  const [formatDateValue, setFormatDateValue] = useState('20240804');
+
   // value, onChange 예시 : 첫번째 값은 '문자열날짜값', 두번째 값은 Date 객체
   const changeFirstDatePickerValue = (valueString, valueDate) => {
     console.log(`changeFirstDatePickerValue valueString : ${valueString}`);
@@ -90,6 +93,13 @@ function GuideAppDatePicker() {
     setYearPickerTypeValue(valueString);
   };
 
+  // valueFormat, displayFormat 예시
+  const changeFormatDatePickerValue = (valueString, valueDate) => {
+    console.log(`changeFormatDatePickerValue valueString : ${valueString}`);
+    console.log(`changeFormatDatePickerValue valueDate : ${valueDate}`);
+    setFormatDateValue(valueString);
+  };
+
   return (
     <>
       <main className="content-main">
@@ -103,7 +113,7 @@ function GuideAppDatePicker() {
             </h3>
           </div>
           <div className="content-body">
-            <h3>value, onChange, showNow : {firstDateValue}</h3>
+            <h5>value, onChange, showNow : {firstDateValue}</h5>
             <div>
               <AppDatePicker
                 label="test"
@@ -115,7 +125,7 @@ function GuideAppDatePicker() {
               />
             </div>
             <hr className="line"></hr>
-            <h3>picker type date(기본값) : {datePickerTypeValue} </h3>
+            <h5>picker type date(기본값) : {datePickerTypeValue} </h5>
             <div>
               <AppDatePicker
                 onChange={changeDatePickerTypeValue}
@@ -123,7 +133,8 @@ function GuideAppDatePicker() {
                 pickerType="date"
               />
             </div>
-            <h3>picker type : dateTime : {dateTimePickerTypeValue} </h3>
+            <hr className="line"></hr>
+            <h5>picker type : dateTime : {dateTimePickerTypeValue} </h5>
             <div>
               <AppDatePicker
                 onChange={changeDateTimePickerTypeValue}
@@ -132,7 +143,8 @@ function GuideAppDatePicker() {
                 secondStep={10}
               />
             </div>
-            <h3>picker type : dateTime(분만 표기) : {dateTimePickerType2Value} </h3>
+            <hr className="line"></hr>
+            <h5>picker type : dateTime(분만 표기) : {dateTimePickerType2Value} </h5>
             <div>
               <AppDatePicker
                 onChange={changeDateTimePickerType2Value}
@@ -141,7 +153,8 @@ function GuideAppDatePicker() {
                 excludeSecondsTime
               />
             </div>
-            <h3>picker type date(기본값) : {datePickerTypeValue} </h3>
+            <hr className="line"></hr>
+            <h5>picker type date(기본값) : {datePickerTypeValue} </h5>
             <div>
               <AppDatePicker
                 onChange={changeDatePickerTypeValue}
@@ -149,10 +162,11 @@ function GuideAppDatePicker() {
                 pickerType={DATE_PICKER_TYPE_DATE}
               />
             </div>
-            <h3>
+            <hr className="line"></hr>
+            <h5>
               picker type quater : {quaterPickerTypeValue}(
               {CommonUtil.convertDateToQuarterValueString(quaterPickerTypeValue)}){' '}
-            </h3>
+            </h5>
             <div>
               <AppDatePicker
                 onChange={changeQuaterPickerTypeValue}
@@ -160,7 +174,8 @@ function GuideAppDatePicker() {
                 pickerType={DATE_PICKER_TYPE_QUARTER}
               />
             </div>
-            <h3>picker type month : {quaterPickerTypeValue}</h3>
+            <hr className="line"></hr>
+            <h5>picker type month : {quaterPickerTypeValue}</h5>
             <div>
               <AppDatePicker
                 onChange={changeMonthPickerTypeValue}
@@ -168,12 +183,25 @@ function GuideAppDatePicker() {
                 pickerType={DATE_PICKER_TYPE_MONTH}
               />
             </div>
-            <h3>picker type year : {yearPickerTypeValue}</h3>
+            <hr className="line"></hr>
+            <h5>picker type year : {yearPickerTypeValue}</h5>
             <div>
               <AppDatePicker
                 onChange={changeYearPickerTypeValue}
                 value={yearPickerTypeValue}
                 pickerType={DATE_PICKER_TYPE_YEAR}
+              />
+            </div>
+            <hr className="line"></hr>
+            <h5>valueFormat, displayForamt : {formatDateValue}</h5>
+            <div>
+              <AppDatePicker
+                label="format-test"
+                required
+                onChange={changeFormatDatePickerValue}
+                value={formatDateValue}
+                valueFormat="YYYYMMDD"
+                displayFormat="YYYY.MM.DD"
               />
             </div>
           </div>

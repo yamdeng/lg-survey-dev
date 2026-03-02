@@ -9,7 +9,7 @@ import { useAppStore } from '@/stores/useAppStore';
 import { useUIStore } from '@/stores/useUIStore';
 import { AxiosError } from 'axios';
 import dayjs from 'dayjs';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 import _ from 'lodash';
 import { nanoid } from 'nanoid';
 import { Cookies } from 'react-cookie';
@@ -244,6 +244,7 @@ const getUUID = () => {
 const validateYupForm = async (yupFormSchema, formValue) => {
   let success = true;
   let firstErrorFieldKey = '';
+  let firstErrorMessage = '';
   const errors = {};
   try {
     await yupFormSchema.validate(formValue, { abortEarly: false });
@@ -254,11 +255,14 @@ const validateYupForm = async (yupFormSchema, formValue) => {
     firstErrorFieldKey = yupErrors[0].path;
     const groupErrorInfo = _.groupBy(yupErrors, 'path');
     const errorKeys = Object.keys(groupErrorInfo);
-    errorKeys.forEach((errorKey) => {
+    errorKeys.forEach((errorKey, index) => {
       errors[errorKey] = groupErrorInfo[errorKey][0].message;
+      if (index === 0) {
+        firstErrorMessage = errors[errorKey];
+      }
     });
   }
-  return { success, firstErrorFieldKey, errors };
+  return { success, firstErrorFieldKey, firstErrorMessage, errors };
 };
 
 const getNowByServerTime = (dateType = 'dateTime') => {
@@ -666,7 +670,7 @@ const convertToQueryParams = (params) => {
 };
 
 const goPage = (routeUri) => {
-  navigate(`${routeUri}`);
+  globalNavigate(`${routeUri}`);
 };
 
 const findTreeNodeByKey = (nodes, key, keyName) => {

@@ -45,7 +45,7 @@ function AppCodeSelect(props) {
     if (codeGrpId) {
       if (isRemote) {
         ApiService.get(`common/codes/${codeGrpId}`).then((apiResult) => {
-          const data = apiResult.data;
+          const data = apiResult;
           const result = convertOptions(data);
           setOptions(result);
         });

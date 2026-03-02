@@ -1,3 +1,5 @@
+import ModalService from '@/services/ModalService';
+import ToastService from '@/services/ToastService';
 import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
 import * as yup from 'yup';
 import { create } from 'zustand';
@@ -6,7 +8,7 @@ import { create } from 'zustand';
 const yupFormSchema = yup.object({
   boardTitle: yup.string().required('게시판 제목을 입력해주세요.'),
   boardType: yup.string().required('게시판 유형을 선택해주세요.'),
-  boardContent: yup.string().nullable(), // 목록에서 숨김 처리되나 상세 데이터용
+  boardContent: yup.string().required('내용을 입력해주세요'), // 목록에서 숨김 처리되나 상세 데이터용
   useYn: yup.string().default('Y'),
   mainYn: yup.string().default('N'),
   boardAuthType: yup.string().nullable(),
@@ -32,7 +34,7 @@ const initFormData = {
   ...formBaseState,
 
   formApiPath: 'notices',
-  baseRoutePath: 'dev-pattern/GuidePatternTable1',
+  baseRoutePath: '/notices',
   formName: '',
   formValue: {
     ...initFormValue,
@@ -46,6 +48,27 @@ export const useGuidePatternFormStore = create<any>((set, get) => ({
   ...initFormData,
 
   yupFormSchema: yupFormSchema,
+
+  changeBoardType: (inputValue) => {
+    const { changeInput } = get();
+    changeInput('boardType', inputValue);
+    changeInput('mainYn', 'Y');
+  },
+
+  save: async () => {
+    const { validate, customValidate } = get();
+    const applyValidate = customValidate ? customValidate : validate;
+    const { isValid } = await applyValidate();
+    if (isValid) {
+      ModalService.confirm({
+        body: '저장하시겠습니까?',
+        ok: async () => {
+          await set({ isDirty: false });
+          ToastService.success('저장되었습니다.');
+        },
+      });
+    }
+  },
 
   clear: () => {
     set({ ...formBaseState, formValue: { ...initFormValue } });
