@@ -91,22 +91,31 @@ function GuideZustandImmerMiddleware() {
             <p>rootName : {rootName}</p>
             <div>
               <p>
-                <button className="button" onClick={() => changeProfileName('안용성2')}>
+                <button
+                  className="app-btn primary small"
+                  onClick={() => changeProfileName('안용성2')}
+                >
                   changeProfileName
                 </button>
               </p>
               <p>
-                <button className="button" onClick={() => changeProfileDeptName('develop')}>
+                <button
+                  className="app-btn primary small"
+                  onClick={() => changeProfileDeptName('develop')}
+                >
                   changeProfileDeptName
                 </button>
               </p>
               <p>
-                <button className="button" onClick={() => changeRootName('yamdeng2')}>
+                <button
+                  className="app-btn primary small"
+                  onClick={() => changeRootName('yamdeng2')}
+                >
                   changeRootName
                 </button>
               </p>
               <p>
-                <button className="button" onClick={() => clearStoreByInitData()}>
+                <button className="app-btn primary small" onClick={() => clearStoreByInitData()}>
                   clearStoreByInitData
                 </button>
               </p>

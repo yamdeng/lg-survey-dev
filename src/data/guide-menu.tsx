@@ -131,6 +131,18 @@ export const guideMenuList = [
             menuTitle: 'zustand slice 예시2',
             menuPath: '/guides/dev/GuideZustandSliceCase2',
           },
+          {
+            menuTitle: 'yup 예시1',
+            menuPath: '/guides/dev/GuideYupCase1',
+          },
+          {
+            menuTitle: 'yup 예시2',
+            menuPath: '/guides/dev/GuideYupCase2',
+          },
+          {
+            menuTitle: 'yup 예시3',
+            menuPath: '/guides/dev/GuideYupCase3',
+          },
         ],
       },
       {

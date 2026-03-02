@@ -55,24 +55,24 @@ function GuideImmer1() {
         <div className="content-inner">
           <div className="content-title">
             <h3 className="title-text">
-              로딩바 :{' '}
+              immer 라이브러리 object case :{' '}
               <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideImmer1.tsx`}>
                 GuideImmer1
               </a>
             </h3>
           </div>
           <div className="content-body">
-            <p>
-              <button className="button" onClick={changeAddressZipCode}>
+            <div className="btn-group">
+              <button className="app-btn primary small" onClick={changeAddressZipCode}>
                 zipcode 변경
               </button>{' '}
-              <button className="button" onClick={addChildren}>
+              <button className="app-btn primary small" onClick={addChildren}>
                 add children
               </button>{' '}
-              <button className="button" onClick={changeChildrenNameAll}>
+              <button className="app-btn primary small" onClick={changeChildrenNameAll}>
                 자식이름 전체변경
               </button>
-            </p>
+            </div>
             <div>
               <p>name : {testObject.name}</p>
               <p>address.si : {testObject.address.si}</p>
@@ -83,10 +83,11 @@ function GuideImmer1() {
                 {testObject.children.map((info) => {
                   const { name, description } = info;
                   return (
-                    <li key={name}>
+                    <li key={name} style={{ marginBottom: 10 }}>
                       {name} : {description}{' '}
                       <button
-                        className="button button-small"
+                        style={{ display: 'inline' }}
+                        className="app-btn primary small"
                         onClick={() => deleteChildrenByName(name)}
                       >
                         삭제

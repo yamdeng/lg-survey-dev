@@ -11,12 +11,12 @@ function SecondStoreTest() {
         <p>name : {name}</p>
         <p>age : {age}</p>
         <p>
-          <button className="button" onClick={() => changeName('ays333')}>
+          <button className="app-btn primary small" onClick={() => changeName('ays333')}>
             changeName
           </button>
         </p>
         <p>
-          <button className="button" onClick={() => changeAge(28)}>
+          <button className="app-btn primary small" onClick={() => changeAge(28)}>
             changeAge
           </button>
         </p>

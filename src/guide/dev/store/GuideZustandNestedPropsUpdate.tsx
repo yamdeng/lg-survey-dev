@@ -65,15 +65,18 @@ function GuideZustandNestedPropsUpdate() {
             <p>deptInfo : {profile.deptInfo.name}</p>
             <p>authList : {profile.authList}</p>
             <div>
-              <button className="button" onClick={() => changeProfileName('ays777')}>
+              <button className="app-btn primary small" onClick={() => changeProfileName('ays777')}>
                 changeProfileName
               </button>
               <br />
-              <button className="button" onClick={() => changeProfileDeptName('ower')}>
+              <button
+                className="app-btn primary small"
+                onClick={() => changeProfileDeptName('ower')}
+              >
                 changeProfileDeptName
               </button>
               <br />
-              <button className="button" onClick={() => addAuthList('D')}>
+              <button className="app-btn primary small" onClick={() => addAuthList('D')}>
                 addAuthList
               </button>
             </div>

@@ -92,16 +92,16 @@ function GuideImmer2() {
         <div className="content-inner">
           <div className="content-title">
             <h3 className="title-text">
-              로딩바 :{' '}
-              <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideImmer1.tsx`}>
-                GuideImmer1
+              immer 라이브러리 list case :{' '}
+              <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideImmer2.tsx`}>
+                GuideImmer2
               </a>
             </h3>
           </div>
           <div className="content-body">
             <div>
               <p>
-                <button className="button" onClick={addList}>
+                <button className="app-btn primary small" onClick={addList}>
                   add
                 </button>
               </p>
@@ -111,23 +111,30 @@ function GuideImmer2() {
                   return (
                     <li key={info.name}>
                       {name} / selected : {isRowSelected + ''}{' '}
-                      <button className="button button-small" onClick={() => toggleSelected(index)}>
+                      <button
+                        className="app-btn primary small"
+                        style={{ display: 'inline' }}
+                        onClick={() => toggleSelected(index)}
+                      >
                         toggle selected
                       </button>{' '}
                       <button
-                        className="button button-small"
+                        className="app-btn primary small"
+                        style={{ display: 'inline' }}
                         onClick={() => toggleSelectedAll(index)}
                       >
                         하나만 반영 selected
                       </button>{' '}
                       <button
-                        className="button button-small"
+                        className="app-btn primary small"
+                        style={{ display: 'inline' }}
                         onClick={() => changeAddressZipCode(index, '000')}
                       >
                         zipCode 변경
                       </button>{' '}
                       <button
-                        className="button button-small"
+                        className="app-btn primary small"
+                        style={{ display: 'inline' }}
                         onClick={() => deleteListByIndex(index)}
                       >
                         삭제

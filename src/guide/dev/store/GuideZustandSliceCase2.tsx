@@ -44,22 +44,22 @@ function GuideZustandSliceCase2() {
             <p>pageSize {pageSize}</p>
             <p>list {JSON.stringify(list)}</p>
             <p>
-              <button className="button" onClick={() => changeCurrentPage(2)}>
+              <button className="app-btn primary small" onClick={() => changeCurrentPage(2)}>
                 changeCurrentPage
               </button>
             </p>
             <p>
-              <button className="button" onClick={() => changePageSize(50)}>
+              <button className="app-btn primary small" onClick={() => changePageSize(50)}>
                 changePageSize
               </button>
             </p>
             <p>
-              <button className="button" onClick={search}>
+              <button className="app-btn primary small" onClick={search}>
                 saerch
               </button>
             </p>
             <p>
-              <button className="button" onClick={clearStore}>
+              <button className="app-btn primary small" onClick={clearStore}>
                 clearStore
               </button>
             </p>

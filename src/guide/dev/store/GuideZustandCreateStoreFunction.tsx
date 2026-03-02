@@ -16,7 +16,7 @@ const Profile = memo(function Profile() {
   return (
     <div>
       <p>profile : {profile ? JSON.stringify(profile) : 'not profile'}</p>
-      <button className="button" onClick={() => changeProfile({ name: '안용성3' })}>
+      <button className="app-btn primary small" onClick={() => changeProfile({ name: '안용성3' })}>
         changeProfile : Profile 컴포넌트 안
       </button>
     </div>
@@ -83,21 +83,28 @@ function GuideZustandCreateStoreFunction() {
             <p>name : {name}</p>
             <Name name={name} />
             <Profile />
+            <br />
             <div>
-              <button className="button" onClick={() => changeName('안용성2')}>
+              <button className="app-btn primary small" onClick={() => changeName('안용성2')}>
                 changeName
               </button>
               <br />
-              <button className="button" onClick={() => changeProfile({ name: '안용성7' })}>
+              <button
+                className="app-btn primary small"
+                onClick={() => changeProfile({ name: '안용성7' })}
+              >
                 changeProfile : Profile 컴포넌트 밖
               </button>
-              <button className="button" onClick={() => clearStore()}>
+              <br />
+              <button className="app-btn primary small" onClick={() => clearStore()}>
                 clearStore
               </button>
-              <button className="button" onClick={() => clearStore2()}>
+              <br />
+              <button className="app-btn primary small" onClick={() => clearStore2()}>
                 clearStore2
               </button>
-              <button className="button" onClick={() => setStateExample()}>
+              <br />
+              <button className="app-btn primary small" onClick={() => setStateExample()}>
                 setStateExample
               </button>
             </div>

@@ -11,12 +11,12 @@ function FirstStoreTest() {
         <p>name : {name}</p>
         <p>age : {age}</p>
         <p>
-          <button className="button" onClick={() => changeName('ays2')}>
+          <button className="app-btn primary small" onClick={() => changeName('ays2')}>
             changeName
           </button>
         </p>
         <p>
-          <button className="button" onClick={() => changeAge(28)}>
+          <button className="app-btn primary small" onClick={() => changeAge(28)}>
             changeAge
           </button>
         </p>

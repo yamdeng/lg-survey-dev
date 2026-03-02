@@ -40,6 +40,9 @@ import GuideZustandImmerMiddleware from '@/guide/dev/store/GuideZustandImmerMidd
 import GuideZustandStoreCommunication from '@/guide/dev/store/GuideZustandStoreCommunication';
 import GuideZustandSliceCase1 from '@/guide/dev/store/GuideZustandSliceCase1';
 import GuideZustandSliceCase2 from '@/guide/dev/store/GuideZustandSliceCase2';
+import GuideYupCase1 from '@/guide/dev/GuideYupCase1';
+import GuideYupCase2 from '@/guide/dev/GuideYupCase2';
+import GuideYupCase3 from '@/guide/dev/GuideYupCase3';
 
 /* guide common table component */
 // import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
@@ -204,6 +207,21 @@ export const GuideRouter = [
             path: 'GuideZustandSliceCase2',
             element: <GuideZustandSliceCase2 />,
             handle: { breadcrumbName: 'zustand slice 예시2' },
+          },
+          {
+            path: 'GuideYupCase1',
+            element: <GuideYupCase1 />,
+            handle: { breadcrumbName: 'yup 예시1' },
+          },
+          {
+            path: 'GuideYupCase2',
+            element: <GuideYupCase2 />,
+            handle: { breadcrumbName: 'yup 예시2' },
+          },
+          {
+            path: 'GuideYupCase3',
+            element: <GuideYupCase3 />,
+            handle: { breadcrumbName: 'yup 예시3' },
           },
         ],
       },
