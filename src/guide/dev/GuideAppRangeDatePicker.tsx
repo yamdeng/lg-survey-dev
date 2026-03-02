@@ -114,7 +114,7 @@ function GuideAppRangeDatePicker() {
             </h3>
           </div>
           <div className="content-body">
-            <h3>value, onChange, showNow : {_.toString(firstDateValue)}</h3>
+            <h5>value, onChange, showNow : {_.toString(firstDateValue)}</h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeFirstDatePickerValue}
@@ -122,7 +122,8 @@ function GuideAppRangeDatePicker() {
                 showNow={false}
               />
             </div>
-            <h3>picker type date(기본값) : {_.toString(datePickerTypeValue)} </h3>
+            <hr className="line"></hr>
+            <h5>picker type date(기본값) : {_.toString(datePickerTypeValue)} </h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeDatePickerTypeValue}
@@ -130,7 +131,8 @@ function GuideAppRangeDatePicker() {
                 pickerType="date"
               />
             </div>
-            <h3>picker type : dateTime : {_.toString(dateTimePickerTypeValue)} </h3>
+            <hr className="line"></hr>
+            <h5>picker type : dateTime : {_.toString(dateTimePickerTypeValue)} </h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeDateTimePickerTypeValue}
@@ -139,7 +141,8 @@ function GuideAppRangeDatePicker() {
                 secondStep={10}
               />
             </div>
-            <h3>picker type : dateTime(분만 표기) : {_.toString(dateTimePickerType2Value)} </h3>
+            <hr className="line"></hr>
+            <h5>picker type : dateTime(분만 표기) : {_.toString(dateTimePickerType2Value)} </h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeDateTimePickerType2Value}
@@ -148,7 +151,8 @@ function GuideAppRangeDatePicker() {
                 excludeSecondsTime
               />
             </div>
-            <h3>picker type date(기본값) : {_.toString(datePickerTypeValue)} </h3>
+            <hr className="line"></hr>
+            <h5>picker type date(기본값) : {_.toString(datePickerTypeValue)} </h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeDatePickerTypeValue}
@@ -156,10 +160,11 @@ function GuideAppRangeDatePicker() {
                 pickerType={DATE_PICKER_TYPE_DATE}
               />
             </div>
-            <h3>
+            <hr className="line"></hr>
+            <h5>
               picker type quater : {_.toString(quaterPickerTypeValue)}(
               {_.toString(CommonUtil.convertDateToQuarterValueString(quaterPickerTypeValue))}){' '}
-            </h3>
+            </h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeQuaterPickerTypeValue}
@@ -167,7 +172,8 @@ function GuideAppRangeDatePicker() {
                 pickerType={DATE_PICKER_TYPE_QUARTER}
               />
             </div>
-            <h3>picker type month : {_.toString(monthPickerTypeValue)}</h3>
+            <hr className="line"></hr>
+            <h5>picker type month : {_.toString(monthPickerTypeValue)}</h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeMonthPickerTypeValue}
@@ -175,7 +181,8 @@ function GuideAppRangeDatePicker() {
                 pickerType={DATE_PICKER_TYPE_MONTH}
               />
             </div>
-            <h3>picker type year : {_.toString(yearPickerTypeValue)}</h3>
+            <hr className="line"></hr>
+            <h5>picker type year : {_.toString(yearPickerTypeValue)}</h5>
             <div>
               <AppRangeDatePicker
                 onChange={changeYearPickerTypeValue}

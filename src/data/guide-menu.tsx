@@ -29,6 +29,63 @@ export const guideMenuList = [
             menuTitle: 'ApiService',
             menuPath: '/guides/dev/GuideApiService',
           },
+          {
+            menuTitle: 'alert, confirm 모달',
+            menuPath: '/guides/dev/GuideAlertConfirmModal',
+          },
+          {
+            menuTitle: 'ModalService',
+            menuPath: '/guides/dev/GuideModalService',
+          },
+          {
+            menuTitle: 'CodeService',
+            menuPath: '/guides/dev/GuideCodeService',
+          },
+        ],
+      },
+      {
+        menuTitle: 'input 가이드',
+        children: [
+          {
+            menuTitle: 'textinput, searchinput',
+            menuPath: '/guides/dev/GuideAppTextInput',
+          },
+          {
+            menuTitle: 'editor',
+            menuPath: '/guides/dev/GuideAppTextEditor',
+          },
+          {
+            menuTitle: 'checkbox, radio',
+            menuPath: '/guides/dev/GuideAppCheckbox',
+          },
+          {
+            menuTitle: 'select',
+            menuPath: '/guides/dev/GuideAppSelect',
+          },
+          {
+            menuTitle: 'code-select',
+            menuPath: '/guides/dev/GuideAppCodeSelect',
+          },
+          {
+            menuTitle: 'date-picker',
+            menuPath: '/guides/dev/GuideAppDatePicker',
+          },
+          {
+            menuTitle: 'date-picker2',
+            menuPath: '/guides/dev/GuideAppDatePicker2',
+          },
+          {
+            menuTitle: 'time-picker',
+            menuPath: '/guides/dev/GuideAppTimePicker',
+          },
+          {
+            menuTitle: 'date-range-picker',
+            menuPath: '/guides/dev/GuideAppRangeDatePicker',
+          },
+          {
+            menuTitle: 'date-range-picker2',
+            menuPath: '/guides/dev/GuideAppRangeDatePicker2',
+          },
         ],
       },
       {

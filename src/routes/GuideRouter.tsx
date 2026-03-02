@@ -15,19 +15,19 @@ import GuideError from '@/guide/dev/GuideError';
 import GuideApiService from '@/guide/dev/GuideApiService';
 import GuideAlertConfirmModal from '@/guide/dev/GuideAlertConfirmModal';
 import GuideModalService from '@/guide/dev/GuideModalService';
-import GuideCookie from '@/guide/dev/GuideCookie';
+import GuideCodeService from '@/guide/dev/GuideCodeService';
 
 /* guide common component */
 import GuideAppTextInput from '@/guide/dev/GuideAppTextInput';
 import GuideAppTextEditor from '@/guide/dev/GuideAppTextEditor';
 import GuideAppCheckbox from '@/guide/dev/GuideAppCheckbox';
 import GuideAppSelect from '@/guide/dev/GuideAppSelect';
+import GuideAppCodeSelect from '@/guide/dev/GuideAppCodeSelect';
 import GuideAppDatePicker from '@/guide/dev/GuideAppDatePicker';
 import GuideAppDatePicker2 from '@/guide/dev/GuideAppDatePicker2';
 import GuideAppTimePicker from '@/guide/dev/GuideAppTimePicker';
 import GuideAppRangeDatePicker from '@/guide/dev/GuideAppRangeDatePicker';
 import GuideAppRangeDatePicker2 from '@/guide/dev/GuideAppRangeDatePicker2';
-import GuideAppAutoComplete from '@/guide/dev/GuideAppAutoComplete';
 
 /* guide common table component */
 import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
@@ -77,6 +77,71 @@ export const GuideRouter = [
             path: 'GuideApiService',
             element: <GuideApiService />,
             handle: { breadcrumbName: 'ApiService' },
+          },
+          {
+            path: 'GuideAlertConfirmModal',
+            element: <GuideAlertConfirmModal />,
+            handle: { breadcrumbName: 'alert, confirm 모달' },
+          },
+          {
+            path: 'GuideModalService',
+            element: <GuideModalService />,
+            handle: { breadcrumbName: 'ModalService' },
+          },
+          {
+            path: 'GuideCodeService',
+            element: <GuideCodeService />,
+            handle: { breadcrumbName: 'CodeService' },
+          },
+          {
+            path: 'GuideAppTextInput',
+            element: <GuideAppTextInput />,
+            handle: { breadcrumbName: 'textinput, searchinput' },
+          },
+          {
+            path: 'GuideAppTextEditor',
+            element: <GuideAppTextEditor />,
+            handle: { breadcrumbName: 'editor' },
+          },
+          {
+            path: 'GuideAppCheckbox',
+            element: <GuideAppCheckbox />,
+            handle: { breadcrumbName: 'checkbox, radio' },
+          },
+          {
+            path: 'GuideAppSelect',
+            element: <GuideAppSelect />,
+            handle: { breadcrumbName: 'select' },
+          },
+          {
+            path: 'GuideAppCodeSelect',
+            element: <GuideAppCodeSelect />,
+            handle: { breadcrumbName: 'code-select' },
+          },
+          {
+            path: 'GuideAppDatePicker',
+            element: <GuideAppDatePicker />,
+            handle: { breadcrumbName: 'date-picker' },
+          },
+          {
+            path: 'GuideAppDatePicker2',
+            element: <GuideAppDatePicker2 />,
+            handle: { breadcrumbName: 'date-picker2' },
+          },
+          {
+            path: 'GuideAppTimePicker',
+            element: <GuideAppTimePicker />,
+            handle: { breadcrumbName: 'time-picker' },
+          },
+          {
+            path: 'GuideAppRangeDatePicker',
+            element: <GuideAppRangeDatePicker />,
+            handle: { breadcrumbName: 'date-range-picker' },
+          },
+          {
+            path: 'GuideAppRangeDatePicker2',
+            element: <GuideAppRangeDatePicker2 />,
+            handle: { breadcrumbName: 'date-range-picker2' },
           },
         ],
       },

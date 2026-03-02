@@ -67,9 +67,9 @@ function GuideAppSelect() {
         <div className="content-inner">
           <div className="content-title">
             <h3 className="title-text">
-              AppSelect, AppCodeSelect :{' '}
-              <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideAppCodeSelect.tsx`}>
-                GuideAppCodeSelect
+              AppSelect :{' '}
+              <a style={{ fontSize: 20 }} href={Config.hrefBasePath + `dev/GuideAppSelect.tsx`}>
+                GuideAppSelect
               </a>
             </h3>
           </div>
@@ -87,7 +87,7 @@ function GuideAppSelect() {
             <hr className="line"></hr>
             <div>
               <AppSelect
-                label="AppSelect(multiple), Code.ts"
+                label="AppSelect(multiple)"
                 isMultiple
                 value={multipleSelectValue}
                 options={basicOptions}
@@ -96,12 +96,15 @@ function GuideAppSelect() {
                 }}
               />
             </div>
+            <hr className="line"></hr>
             <div>
               <AppSelect
                 label="AppSelect labelKey, valueKey"
                 isMultiple
                 value={labelTestMultipleSelectValue}
-                options={basicOptions}
+                options={customOptions}
+                labelKey="userName"
+                valueKey="userId"
                 onChange={(value) => {
                   setLabelTestMultipleSelectValue(value);
                 }}
@@ -128,12 +131,12 @@ function GuideAppSelect() {
               <AppSelect
                 label="AppSelect apiUrl"
                 applyAllSelect
-                apiUrl={`common/code/USER_LEVEL`}
+                apiUrl={`common/codes/USER_LEVEL`}
                 allValue=""
                 allLabel="전체"
                 value={apiTestSingleSelectValue}
-                labelKey="codeName"
-                valueKey="code"
+                labelKey="cdNm"
+                valueKey="cd"
                 onChange={(value) => {
                   setApiTestSingleSelectValue(value);
                 }}

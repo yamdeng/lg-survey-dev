@@ -66,7 +66,8 @@ function GuideAppDatePicker2() {
           </div>
           <div className="content-body">
             <AppButton onClick={toggleDisabled} value="disabled toggle" />
-            <h3>max, min (date 유형) : {datePickerTypeValue} </h3>
+            <hr className="line"></hr>
+            <h5>max, min (date 유형) : {datePickerTypeValue} </h5>
             <div>
               <AppDatePicker
                 onChange={changeDatePickerTypeValue}
@@ -78,7 +79,7 @@ function GuideAppDatePicker2() {
               />
             </div>
             <hr className="line"></hr>
-            <h3>max, min (month 유형) : {datePickerTypeValue} </h3>
+            <h5>max, min (month 유형) : {datePickerTypeValue} </h5>
             <div>
               <AppDatePicker
                 onChange={changeMonthPickerTypeValue}
@@ -89,7 +90,8 @@ function GuideAppDatePicker2() {
                 disabled={disabled}
               />
             </div>
-            <h3>holiday 제거 : {datePickerTypeValue} </h3>
+            <hr className="line"></hr>
+            <h5>holiday 제거 : {datePickerTypeValue} </h5>
             <div>
               <AppDatePicker
                 onChange={changeDatePickerTypeValue}
@@ -98,7 +100,8 @@ function GuideAppDatePicker2() {
                 disabledHoiloday
               />
             </div>
-            <h3>disabledDates 전달하기 : {datePickerTypeValue} </h3>
+            <hr className="line"></hr>
+            <h5>disabledDates 전달하기 : {datePickerTypeValue} </h5>
             <div>
               <AppDatePicker
                 onChange={changeDatePickerTypeValue}

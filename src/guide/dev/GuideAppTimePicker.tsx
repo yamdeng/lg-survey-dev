@@ -46,7 +46,7 @@ function GuideAppTimePicker() {
             </h3>
           </div>
           <div className="content-body">
-            <h3>value, onChange, showNow : {firstTimeValue}</h3>
+            <h5>value, onChange, showNow : {firstTimeValue}</h5>
             <div>
               <AppTimePikcer
                 onChange={changeFirstTimePickerValue}
@@ -56,7 +56,7 @@ function GuideAppTimePicker() {
               />
             </div>
             <hr className="line"></hr>
-            <h3>interval : {minuteTimeValue}</h3>
+            <h5>interval : {minuteTimeValue}</h5>
             <div>
               <AppTimePikcer
                 onChange={changeMinuteTimePickerValue}
