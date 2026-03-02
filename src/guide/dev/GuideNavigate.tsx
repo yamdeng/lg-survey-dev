@@ -1,10 +1,10 @@
 import Config from '@/config/Config';
 import AppButton from '@/components/common/AppButton';
 import { useNavigate } from 'react-router-dom';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 
 function GuideNavigate() {
-  const routerNavigate = useNavigate();
+  const navigate = useNavigate();
 
   const customButtonStyle = { marginBottom: 10 };
   return (
@@ -22,12 +22,12 @@ function GuideNavigate() {
           <div className="content-body">
             <AppButton
               style={customButtonStyle}
-              onClick={() => routerNavigate('/dev/GuideApiService')}
+              onClick={() => navigate('/dev/GuideApiService')}
               value="react-router-dom의 navigate 사용법"
             />
             <AppButton
               style={customButtonStyle}
-              onClick={() => navigate('/dev/GuideApiService')}
+              onClick={() => globalNavigate('/dev/GuideApiService')}
               value="공통 유틸 navigate"
             />
           </div>

@@ -3,7 +3,7 @@ import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
 import ToastService from '@/services/ToastService';
 import ModalService from '@/services/ModalService';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 
 export const listBaseState = {
   gridApi: null,
@@ -197,17 +197,17 @@ export const createListSlice = (set, get) => ({
 
   goDetailPage: (detailId) => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}/${detailId}`);
+    globalNavigate(`${baseRoutePath}/${detailId}`);
   },
 
   goEditPage: (detailId) => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}/${detailId}/edit`);
+    globalNavigate(`${baseRoutePath}/${detailId}/edit`);
   },
 
   goAddPage: () => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}/add/edit`);
+    globalNavigate(`${baseRoutePath}/add/edit`);
   },
 
   addRow: () =>

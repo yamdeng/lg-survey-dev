@@ -4,7 +4,7 @@ import ToastService from '@/services/ToastService';
 import _ from 'lodash';
 import { produce } from 'immer';
 import { FORM_TYPE_ADD, FORM_TYPE_UPDATE } from '@/config/CommonConstant';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 
 /*
 
@@ -229,7 +229,7 @@ export const createFormSliceYup = (set, get) => ({
 
   goFormPage: () => {
     const { formDetailId, baseRoutePath } = get();
-    navigate(`${baseRoutePath}/${formDetailId}/edit`);
+    globalNavigate(`${baseRoutePath}/${formDetailId}/edit`);
   },
 
   setErrors: (newErrors) => {
@@ -247,12 +247,12 @@ export const createFormSliceYup = (set, get) => ({
 
   removeAfterNavigation: () => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}`, { replace: true });
+    globalNavigate(`${baseRoutePath}`, { replace: true });
   },
 
   cancel: () => {
     const { baseRoutePath } = get();
-    navigate(`${baseRoutePath}`);
+    globalNavigate(`${baseRoutePath}`);
   },
 
   clear: () => {

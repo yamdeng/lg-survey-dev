@@ -1,5 +1,5 @@
 import { createStore } from 'zustand';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 
 export const useUIStore = createStore<any>((set, get) => ({
   displayLoadingBar: false,
@@ -43,6 +43,6 @@ export const useUIStore = createStore<any>((set, get) => ({
   },
 
   goHome: () => {
-    navigate('/');
+    globalNavigate('/');
   },
 }));
