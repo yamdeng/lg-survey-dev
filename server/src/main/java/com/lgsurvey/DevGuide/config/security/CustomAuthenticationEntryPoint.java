@@ -35,8 +35,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     String errorCode = "UNAUTHORIZED"; // 기본값
     String message = "인증에 실패하였습니다.";
 
-    if ("TOKEN_EXPIRED".equals(exception)) {
-      errorCode = "TOKEN_EXPIRED";
+    if ("EXPIRED_TOKEN".equals(exception)) {
+      errorCode = "EXPIRED_TOKEN";
       message = "토큰이 만료되었습니다.";
     } else if ("INVALID_TOKEN".equals(exception)) {
       errorCode = "INVALID_TOKEN";
