@@ -35,10 +35,17 @@ function App({ children }) {
 
   // 1. 로그인 페이지는 초기화 여부와 상관없이 즉시 노출
   if (pathname === '/login') {
-    return <>{children}</>;
+    return (
+      <>
+        {children}
+        <ToastContainer autoClose={3000} hideProgressBar={true} position="top-center" />
+        <LoadingBarContainer />
+        <AlertModalContainer />
+      </>
+    );
   }
 
-  // 2. 그 외 모든 페이지는 초기화가 완료될 때까지 로딩 표시
+  // 초기화가 완료될 때까지 로딩 표시
   if (!isInitComplete) {
     return <LoadingBarContainer />;
   }

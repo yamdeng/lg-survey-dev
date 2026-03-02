@@ -15,7 +15,6 @@ import CommonUtil from '@/utils/CommonUtil';
 */
 
 const requestIdList = [];
-// const enableLocalDevelop = import.meta.env.VITE_LOCAL_DEVELOP && import.meta.env.VITE_LOCAL_DEVELOP === 'true';
 
 const ApiUtil = axios.create({
   headers: { 'Content-Type': 'application/json' },
@@ -105,11 +104,12 @@ ApiUtil.interceptors.response.use(
 
     // 인증 오류 : 만료토큰시 refresh 반영
     if (status === 401) {
-      if (code === 'INVALID_TOKEN') {
+      if (code === 'EXPIRED_TOKEN') {
         const refreshToken = CommonUtil.getByLocalStorage('refreshToken');
-        return handleRefreshAndRetry(errorResponse, refreshToken);
+        return await handleRefreshAndRetry(config, refreshToken);
       } else {
         handleUnauthorizedError();
+        return Promise.reject(error);
       }
     }
 

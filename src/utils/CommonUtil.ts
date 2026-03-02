@@ -9,7 +9,7 @@ import { useAppStore } from '@/stores/useAppStore';
 import { useUIStore } from '@/stores/useUIStore';
 import { AxiosError } from 'axios';
 import dayjs from 'dayjs';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 import _ from 'lodash';
 import { nanoid } from 'nanoid';
 import { Cookies } from 'react-cookie';
@@ -666,7 +666,7 @@ const convertToQueryParams = (params) => {
 };
 
 const goPage = (routeUri) => {
-  navigate(`${routeUri}`);
+  globalNavigate(`${routeUri}`);
 };
 
 const findTreeNodeByKey = (nodes, key, keyName) => {

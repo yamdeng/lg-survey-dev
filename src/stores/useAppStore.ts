@@ -1,28 +1,22 @@
 import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
 import LoadingBar from '@/utils/LoadingBar';
-import { navigate } from '@/utils/navigation';
+import { globalNavigate } from '@/utils/navigation';
 import dayjs from 'dayjs';
 import { createStore } from 'zustand';
 import ApiUtil from '@/utils/ApiUtil';
 import _ from 'lodash';
 import ModalService from '@/services/ModalService';
 
-// 로컬 개발 여부 : 용도는 로컬개발화 sso 분기 처리를 하기위한 변수
-// const enableLocalDevelop =
-//   import.meta.env.VITE_LOCAL_DEVELOP && import.meta.env.VITE_LOCAL_DEVELOP === 'true';
-
 export const useAppStore = createStore<any>((set, get) => ({
   accessToken: localStorage.getItem('accessToken') || '', // 인증토큰
   refreshToken: localStorage.getItem('refreshToken') || '', // 리프레쉬토큰
-  isAuthError: false, // 인증실패 여부 : 로컬 개발일 경우에만 사용
 
   profile: null,
   isInitComplete: false,
   codeAllList: [],
   codeAllMap: {},
 
-  // TODO : 로그인 정책 나오면 반영
   setLoginToken: (accessToken, refreshToken) => {
     CommonUtil.saveInfoToLocalStorage('accessToken', accessToken);
     CommonUtil.saveInfoToLocalStorage('refreshToken', refreshToken);
@@ -38,10 +32,10 @@ export const useAppStore = createStore<any>((set, get) => ({
   // TODO : 화면 최초 render전에 필요한 초기정보들을 전부 get 해옴 : 완료시 isInitComplete 값을 true로 바꾸고 true로 바뀐 시점에 사용자에게 보여지는 화면이 render됨
   initApp: async () => {
     LoadingBar.show();
-    // const { getProfile } = get();
+    const { getProfile } = get();
 
     try {
-      // await getProfile();
+      await getProfile();
 
       const initDataApiResult = await ApiService.get('initData', null, {
         disableLoadingBar: true,
@@ -69,9 +63,12 @@ export const useAppStore = createStore<any>((set, get) => ({
       if (logoutBeforePathName && logoutBeforePathName !== '/') {
         // okta에서 받은 url path가 존재하지 않거나 루트 경로일 경우에만 직전 url 체크해서 이동시킴
         if (!firstPathName || firstPathName === '/') {
-          navigate(logoutBeforePathName);
+          globalNavigate(logoutBeforePathName, { replace: true });
         }
       }
+      set({
+        isInitComplete: true,
+      });
       CommonUtil.removeToLocalStorage('logoutBeforePathName');
     }
   },
@@ -111,7 +108,7 @@ export const useAppStore = createStore<any>((set, get) => ({
       title: '인증 정보 오류',
       body: '인증정보가 존재하지 않습니다.\n로그인 페이지로 이동됩니다.',
       ok: () => {
-        navigate('/login');
+        globalNavigate('/login', { replace: true });
       },
     });
   },
@@ -120,28 +117,33 @@ export const useAppStore = createStore<any>((set, get) => ({
   handleRefreshAndRetry: async (originalRequest, beforeRefreshToken) => {
     const { setLoginToken, handleUnauthorizedError } = get();
     try {
-      const apiResult = await ApiUtil.post(
-        '/api/v1/auth/refresh',
-        {
-          refreshToken: beforeRefreshToken,
-        },
-        {
-          byPassError: true,
-        } as any,
-      );
+      const apiResult = await ApiUtil.post('/api/v1/auth/refresh', {
+        refreshToken: beforeRefreshToken,
+      });
       const { accessToken, refreshToken } = apiResult;
       setLoginToken(accessToken, refreshToken);
       return ApiUtil.request(originalRequest);
     } catch {
       handleUnauthorizedError();
+      return Promise.resolve();
     }
   },
 
   // 403 권한 없을 경우 처리
   handleAccessDeniedError: async () => {
-    navigate('/not-auth');
+    globalNavigate('/not-auth', { replace: true });
   },
 
-  // TODO : 로그아웃 URL 수정
-  logout: () => {},
+  logout: () => {
+    ModalService.confirm({
+      body: '로그아웃하시겠습니까?',
+      ok: async () => {
+        set({ accessToken: null, refreshToken: null });
+        CommonUtil.removeToLocalStorage('accessToken');
+        CommonUtil.removeToLocalStorage('refreshToken');
+        CommonUtil.removeToLocalStorage('logoutBeforePathName');
+        location.href = '/login';
+      },
+    });
+  },
 }));
