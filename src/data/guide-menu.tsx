@@ -89,6 +89,35 @@ export const guideMenuList = [
         ],
       },
       {
+        menuTitle: 'immer, zustand, yup',
+        children: [
+          {
+            menuTitle: 'immer 라이브러리 object case',
+            menuPath: '/guides/dev/GuideImmer1',
+          },
+          {
+            menuTitle: 'immer 라이브러리 list case',
+            menuPath: '/guides/dev/GuideImmer2',
+          },
+          {
+            menuTitle: 'store 첫번째 예시',
+            menuPath: '/guides/dev/GuideFirstStore',
+          },
+          {
+            menuTitle: 'store 두번째 예시',
+            menuPath: '/guides/dev/GuideSecondStore',
+          },
+          {
+            menuTitle: 'zustand create',
+            menuPath: '/guides/dev/GuideZustandCreateFunction',
+          },
+          {
+            menuTitle: 'zustand createStore',
+            menuPath: '/guides/dev/GuideZustandCreateStoreFunction',
+          },
+        ],
+      },
+      {
         menuTitle: '개발 패턴 가이드',
         children: [
           {

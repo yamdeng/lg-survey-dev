@@ -29,20 +29,28 @@ import GuideAppTimePicker from '@/guide/dev/GuideAppTimePicker';
 import GuideAppRangeDatePicker from '@/guide/dev/GuideAppRangeDatePicker';
 import GuideAppRangeDatePicker2 from '@/guide/dev/GuideAppRangeDatePicker2';
 
+/* immer, zustand, yup */
+import GuideImmer1 from '@/guide/dev/GuideImmer1';
+import GuideImmer2 from '@/guide/dev/GuideImmer2';
+import GuideFirstStore from '@/guide/dev/store/GuideFirstStore';
+import GuideSecondStore from '@/guide/dev/store/GuideSecondStore';
+import GuideZustandCreateFunction from '@/guide/dev/store/GuideZustandCreateFunction';
+import GuideZustandCreateStoreFunction from '@/guide/dev/store/GuideZustandCreateStoreFunction';
+
 /* guide common table component */
-import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
-import GuideTableCase2 from '@/guide/dev/GuideTableCase2';
-import GuideTableCase3 from '@/guide/dev/GuideTableCase3';
-import GuideTableCase4 from '@/guide/dev/GuideTableCase4';
+// import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
+// import GuideTableCase2 from '@/guide/dev/GuideTableCase2';
+// import GuideTableCase3 from '@/guide/dev/GuideTableCase3';
+// import GuideTableCase4 from '@/guide/dev/GuideTableCase4';
 
 /* 개발 패턴 component */
 import GuidePatternTable1 from '@/guide/dev-pattern/GuidePatternTable1';
-import GuidePatternTable2 from '@/guide/dev-pattern/GuidePatternTable2';
-import GuidePatternTable3 from '@/guide/dev-pattern/GuidePatternTable3';
-import GuidePatternTable4 from '@/guide/dev-pattern/GuidePatternTable4';
-import GuidePatternForm1 from '@/guide/dev-pattern/GuidePatternForm1';
-import GuidePatternStoreForm from '@/guide/dev-pattern/GuidePatternStoreForm';
-import GuidePatternDetail1 from '@/guide/dev-pattern/GuidePatternDetail1';
+// import GuidePatternTable2 from '@/guide/dev-pattern/GuidePatternTable2';
+// import GuidePatternTable3 from '@/guide/dev-pattern/GuidePatternTable3';
+// import GuidePatternTable4 from '@/guide/dev-pattern/GuidePatternTable4';
+// import GuidePatternForm1 from '@/guide/dev-pattern/GuidePatternForm1';
+// import GuidePatternStoreForm from '@/guide/dev-pattern/GuidePatternStoreForm';
+// import GuidePatternDetail1 from '@/guide/dev-pattern/GuidePatternDetail1';
 
 export const GuideRouter = [
   {
@@ -142,6 +150,36 @@ export const GuideRouter = [
             path: 'GuideAppRangeDatePicker2',
             element: <GuideAppRangeDatePicker2 />,
             handle: { breadcrumbName: 'date-range-picker2' },
+          },
+          {
+            path: 'GuideImmer1',
+            element: <GuideImmer1 />,
+            handle: { breadcrumbName: 'immer 라이브러리 object case' },
+          },
+          {
+            path: 'GuideImmer2',
+            element: <GuideImmer2 />,
+            handle: { breadcrumbName: 'immer 라이브러리 list case' },
+          },
+          {
+            path: 'GuideFirstStore',
+            element: <GuideFirstStore />,
+            handle: { breadcrumbName: 'store 예시 첫번째' },
+          },
+          {
+            path: 'GuideSecondStore',
+            element: <GuideSecondStore />,
+            handle: { breadcrumbName: 'store 예시 두번째' },
+          },
+          {
+            path: 'GuideZustandCreateFunction',
+            element: <GuideZustandCreateFunction />,
+            handle: { breadcrumbName: 'zustand create' },
+          },
+          {
+            path: 'GuideZustandCreateStoreFunction',
+            element: <GuideZustandCreateStoreFunction />,
+            handle: { breadcrumbName: 'zustand createStore' },
           },
         ],
       },
