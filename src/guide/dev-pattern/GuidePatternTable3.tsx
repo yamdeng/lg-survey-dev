@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 import AppButton from '@/components/common/AppButton';
 import AppCodeSelect from '@/components/common/AppCodeSelect';
@@ -8,11 +8,14 @@ import AppCheckbox from '@/components/common/AppCheckbox';
 import AppRangeDatePicker from '@/components/common/AppRangeDatePicker';
 import AppSelect from '@/components/common/AppSelect';
 import AppTable from '@/components/common/AppTable';
-import { FilePenLine, Search, CalendarDays } from 'lucide-react';
+import { FilePenLine, Search, CalendarDays, ClipboardList, Download } from 'lucide-react';
 
 import { useGuidePatternListStore } from '@/guide/stores/useGuidePatternListStore';
 
 function GuidePatternTable3() {
+  const gridApiRef = useRef<any>(null);
+
+  const store = useGuidePatternListStore();
   const {
     search,
     searchParam,
@@ -23,7 +26,13 @@ function GuidePatternTable3() {
     list,
     clear,
     searchParamErrors,
-  } = useGuidePatternListStore();
+    downloadCSV,
+  } = store;
+
+  const getGridRef = useCallback((event) => {
+    // 외부에서 api 인스턴스를 직접 사용하고 싶을 경우에 사용
+    gridApiRef.current = event.api;
+  }, []);
 
   const { searchType, searchWord, boardType, startDate, rangeDate, useYn } = searchParam;
 
@@ -74,6 +83,17 @@ function GuidePatternTable3() {
       cellStyle: { textAlign: 'center' },
     },
   ]);
+
+  const download = () => {
+    const params = {
+      fileName: '목록내보내기.csv', // 파일명 설정
+      columnSeparator: ',', // 구분자 (기본값 ,)
+      suppressQuotes: false, // 값에 따옴표 붙이기 여부
+    };
+
+    // AG Grid API 호출
+    gridApiRef.current?.exportDataAsCsv(params);
+  };
 
   useEffect(() => {
     // search();
@@ -166,9 +186,27 @@ function GuidePatternTable3() {
               </form>
             </div>
             <div className="grid-block">
+              <div className="grid-block-header">
+                <div className="content-title">
+                  <ClipboardList size={18} />
+                  <h3 className="title-text">목록</h3>
+                  {/* 게시판 전체 데이터 건수 */}
+                  <small className="num">( {list.length} )</small>
+                </div>
+                <div className="btn-group-end">
+                  <AppButton icon={<Download size={14} />} size="small" onClick={download} />
+                  <AppButton icon={<Download size={14} />} size="small" onClick={downloadCSV} />
+                </div>
+              </div>
               <div className="grid-block-body">
                 <div className="ag-grid">
-                  <AppTable rowData={list} columns={columns} isLoading={displayTableLoading} />
+                  <AppTable
+                    rowData={list}
+                    columns={columns}
+                    isLoading={displayTableLoading}
+                    getGridRef={getGridRef}
+                    store={store}
+                  />
                 </div>
               </div>
             </div>

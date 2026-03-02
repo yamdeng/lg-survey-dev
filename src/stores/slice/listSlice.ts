@@ -40,6 +40,18 @@ export const createListSlice = (set, get) => ({
     set({ gridApi: gridRef.api });
   },
 
+  downloadCSV: () => {
+    const { gridApi } = get();
+    const params = {
+      fileName: '목록내보내기.csv', // 파일명 설정
+      columnSeparator: ',', // 구분자 (기본값 ,)
+      suppressQuotes: false, // 값에 따옴표 붙이기 여부
+    };
+    if (gridApi && gridApi.exportDataAsCsv) {
+      gridApi.exportDataAsCsv(params);
+    }
+  },
+
   goFirstPage() {
     const { prevPage } = get();
     if (prevPage) {

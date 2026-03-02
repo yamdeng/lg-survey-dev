@@ -180,6 +180,9 @@ function AppTable(props) {
             if (getGridRef) {
               getGridRef(params);
             }
+            if (store && store.getGridRef) {
+              store.getGridRef(params);
+            }
           }}
         />
       </div>

@@ -21,7 +21,7 @@ const initSearchParam = {
     CommonUtil.calculateDate(todayString, 'YYYY-MM-DD', DATE_PICKER_TYPE_MONTH, -1),
     todayString,
   ],
-  useYn: 'N',
+  useYn: 'Y',
 };
 
 const yupSearchFormSchema = yup.object().shape({
