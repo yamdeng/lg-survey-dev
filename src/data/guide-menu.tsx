@@ -156,6 +156,22 @@ export const guideMenuList = [
             menuTitle: 'table basic',
             menuPath: '/guides/dev/GuideTableBasic',
           },
+          {
+            menuTitle: 'table click',
+            menuPath: '/guides/dev/GuideTableClick',
+          },
+          {
+            menuTitle: 'table select(only single)',
+            menuPath: '/guides/dev/GuideTableOnlySingleSelect',
+          },
+          {
+            menuTitle: 'table select',
+            menuPath: '/guides/dev/GuideTableSelect',
+          },
+          {
+            menuTitle: 'table selectable',
+            menuPath: '/guides/dev/GuideTableSeletable',
+          },
         ],
       },
       {

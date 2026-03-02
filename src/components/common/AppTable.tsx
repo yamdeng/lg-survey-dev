@@ -70,7 +70,7 @@ function AppTable(props) {
     handleRowDoubleClick,
     handleRowSingleClick,
     handleRowSelect = () => {},
-    rowSelectMode = 'multiple',
+    rowSelectMode = '',
     enableCheckBox = false,
     hideDisabledCheckboxes = false,
     isRowSelectable = () => true,
@@ -89,14 +89,17 @@ function AppTable(props) {
   // 선택 정책을 props에 전달받은 값을 기준으로 재반영
   const selection = useMemo(() => {
     // 체크박스 사용 여부와 상관없이 기본 객체 구조를 유지하는 것이 안전합니다.
-    return {
-      mode: enableCheckBox ? rowSelectMode : 'single', // 'multiple' 또는 'single'
-      checkboxes: enableCheckBox,
-      headerCheckbox: enableCheckBox,
-      hideDisabledCheckboxes: hideDisabledCheckboxes,
-      isRowSelectable: isRowSelectable,
-      enableClickSelection: true,
-    };
+    if (rowSelectMode) {
+      return {
+        mode: rowSelectMode, // 'multiRow' 또는 'singleRow'
+        checkboxes: enableCheckBox,
+        headerCheckbox: enableCheckBox,
+        hideDisabledCheckboxes: hideDisabledCheckboxes,
+        isRowSelectable: isRowSelectable,
+        enableClickSelection: true,
+      };
+    }
+    return {};
   }, [enableCheckBox, rowSelectMode, hideDisabledCheckboxes, isRowSelectable]);
 
   const searchRowSpanIndex = columns.findIndex((info) => info.enableRowSpan);

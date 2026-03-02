@@ -47,6 +47,11 @@ import GuideYupCase3 from '@/guide/dev/GuideYupCase3';
 
 /* guide common table component */
 import GuideTableBasic from '@/guide/dev/table/GuideTableBasic';
+import GuideTableClick from '@/guide/dev/table/GuideTableClick';
+import GuideTableOnlySingleSelect from '@/guide/dev/table/GuideTableOnlySingleSelect';
+import GuideTableSelect from '@/guide/dev/table/GuideTableSelect';
+import GuideTableSeletable from '@/guide/dev/table/GuideTableSeletable';
+
 // import GuideTableCase1 from '@/guide/dev/GuideTableCase1';
 // import GuideTableCase2 from '@/guide/dev/GuideTableCase2';
 // import GuideTableCase3 from '@/guide/dev/GuideTableCase3';
@@ -234,6 +239,26 @@ export const GuideRouter = [
             path: 'GuideTableBasic',
             element: <GuideTableBasic />,
             handle: { breadcrumbName: 'table-basic' },
+          },
+          {
+            path: 'GuideTableClick',
+            element: <GuideTableClick />,
+            handle: { breadcrumbName: 'table-click' },
+          },
+          {
+            path: 'GuideTableOnlySingleSelect',
+            element: <GuideTableOnlySingleSelect />,
+            handle: { breadcrumbName: 'table select(only single)' },
+          },
+          {
+            path: 'GuideTableSelect',
+            element: <GuideTableSelect />,
+            handle: { breadcrumbName: 'table-select' },
+          },
+          {
+            path: 'GuideTableSeletable',
+            element: <GuideTableSeletable />,
+            handle: { breadcrumbName: 'table-selectable' },
           },
         ],
       },
