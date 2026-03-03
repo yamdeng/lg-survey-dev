@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import AppButton from '@/components/common/AppButton';
 import AppTextEditor from '@/components/common/AppTextEditor';
 import Code from '@/config/Code';
-import FlexBox from '@/components/common/ui/FlexBox';
 import CodeService from '@/services/CodeService';
-import { Check, FilePenLine, Plus, X } from 'lucide-react';
+import { Check, FilePenLine, X } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
+import CommonUtil from '@/utils/CommonUtil';
 import { useNoticeFormStore } from './useNoticeFormStore';
 
 const NoticeDetail = () => {
@@ -14,7 +14,7 @@ const NoticeDetail = () => {
   const { detailId } = useParams();
 
   /* formStore state input 변수 */
-  const { getDetail, detailInfo, clear, goEditPage } = useNoticeFormStore();
+  const { getDetail, detailInfo, clear, goEditPage, fileList } = useNoticeFormStore();
 
   const {
     boardKey,
@@ -108,64 +108,35 @@ const NoticeDetail = () => {
                   <td colSpan={3}>
                     {/* 첨부파일 블럭 - 컴포넌트화 필요 */}
                     <div className="fileupload-block">
-                      <FlexBox justify="flex-end">
-                        <AppButton
-                          icon={<Plus size={17} />}
-                          value="추가"
-                          theme="basic"
-                          size="large"
-                        />
-                      </FlexBox>
                       <table className="table-basic">
                         <colgroup>
-                          <col width="5%" />
-                          <col width="80%" />
-                          <col width="15%" />
+                          <col width="10%" />
+                          <col width="90%" />
                         </colgroup>
                         <thead>
                           <tr>
                             <td align="center"></td>
                             <td>파일명</td>
-                            <td>삭제</td>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td align="center">1</td>
-                            <td>오늘의 첨부 엑셀 파일.xls</td>
-                            <td align="center">
-                              <AppButton
-                                icon={<X size={13} />}
-                                value="삭제"
-                                theme="basic"
-                                size="small"
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="center">2</td>
-                            <td>오늘의 첨부 엑셀 파일2.xls</td>
-                            <td align="center">
-                              <AppButton
-                                icon={<X size={13} />}
-                                value="삭제"
-                                theme="basic"
-                                size="small"
-                              />
-                            </td>
-                          </tr>
-                          <tr>
-                            <td align="center"></td>
-                            <td></td>
-                            <td align="center">
-                              <AppButton
-                                icon={<X size={13} />}
-                                value="삭제"
-                                theme="basic"
-                                size="small"
-                              />
-                            </td>
-                          </tr>
+                          {fileList.map((fileInfo, index) => {
+                            const { oriFilename, fileKey } = fileInfo;
+                            return (
+                              <tr>
+                                <td align="center">{index + 1}</td>
+                                <td
+                                  onClick={() =>
+                                    CommonUtil.downloadFile(
+                                      `/api/v1/common-file/${fileKey}/download`,
+                                    )
+                                  }
+                                >
+                                  {oriFilename}
+                                </td>
+                              </tr>
+                            );
+                          })}
                         </tbody>
                       </table>
                     </div>

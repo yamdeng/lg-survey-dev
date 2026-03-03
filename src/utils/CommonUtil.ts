@@ -690,7 +690,7 @@ const findTreeNodeByKey = (nodes, key, keyName) => {
 const downloadFile = (url, existParameter = false) => {
   const { accessToken } = useAppStore.getState();
   window.open(
-    `${url}${existParameter ? '&' : '?'}AuthorizationOrbiswork=${encodeURIComponent(accessToken)}}`,
+    `${url}${existParameter ? '&' : '?'}Authorization=${encodeURIComponent(accessToken)}}`,
   );
 };
 

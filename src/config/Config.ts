@@ -12,6 +12,7 @@ const Config = {
   defaultGridPageSize: 10,
   defaultPageSizeList: [10, 20, 50, 100],
   defaultGridTotalCountTemplate: '{0}',
+  fileUploadMaxSizeMb: 20,
 };
 
 export default Config;

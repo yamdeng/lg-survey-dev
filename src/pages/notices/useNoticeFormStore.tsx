@@ -1,6 +1,7 @@
 import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
 import * as yup from 'yup';
 import { create } from 'zustand';
+import { produce } from 'immer';
 
 /* yup validation */
 const yupFormSchema = yup.object({
@@ -37,6 +38,9 @@ const initFormData = {
   formValue: {
     ...initFormValue,
   },
+  fileList: [],
+  addFileKeyList: [],
+  deleteFileKeyList: [],
 };
 
 /* zustand store 생성 */
@@ -47,7 +51,63 @@ export const useNoticeFormStore = create<any>((set, get) => ({
 
   yupFormSchema: yupFormSchema,
 
+  getApiParam: () => {
+    const { formValue, addFileKeyList, deleteFileKeyList } = get();
+    const apiParam = { ...formValue };
+    apiParam.addFileKeyList = addFileKeyList;
+    apiParam.deleteFileKeyList = deleteFileKeyList;
+    return apiParam;
+  },
+
+  convertDetail: (detailInfo) => {
+    const fileList = detailInfo.fileList;
+    if (fileList && fileList.length) {
+      set({ fileList: fileList });
+    }
+    return detailInfo;
+  },
+
+  // 파일 추가
+  addFileList: (newFileList) => {
+    if (!newFileList || newFileList.length === 0) return;
+
+    set(
+      produce((draft: any) => {
+        // 기존 fileList 배열 뒤에 새로운 파일들을 붙입니다.
+        draft.fileList.push(...newFileList);
+
+        // 서버 전송용 신규 파일 키 리스트에 추가
+        const newKeys = newFileList.map((file) => file.fileKey);
+        draft.addFileKeyList.push(...newKeys);
+      }),
+    );
+  },
+
+  // 파일 삭제
+  deleteFile: (fileKey) => {
+    set(
+      produce((draft: any) => {
+        // 1) 화면 표시용 리스트에서 제거
+        const index = draft.fileList.findIndex((file) => file.fileKey === fileKey);
+        if (index !== -1) {
+          draft.fileList.splice(index, 1);
+        }
+
+        // 2) 만약 방금 추가(addFileKeyList)했던 파일이라면 해당 리스트에서도 제거 (변심 취소)
+        const addIdx = draft.addFileKeyList.indexOf(fileKey);
+        if (addIdx !== -1) {
+          draft.addFileKeyList.splice(addIdx, 1);
+        } else {
+          // 3) 기존에 저장되어 있던 파일이라면 삭제 리스트(deleteFileKeyList)에 추가
+          if (!draft.deleteFileKeyList.includes(fileKey)) {
+            draft.deleteFileKeyList.push(fileKey);
+          }
+        }
+      }),
+    );
+  },
+
   clear: () => {
-    set({ ...formBaseState, formValue: { ...initFormValue } });
+    set({ ...formBaseState, formValue: { ...initFormValue }, fileList: [] });
   },
 }));
