@@ -1,12 +1,13 @@
 import AppTable from '@/components/common/AppTable';
 import Config from '@/config/Config';
-import { getAllData } from '@/data/grid/example-data-new';
+import { getAllData, getPageData } from '@/data/grid/example-data-new';
 import { testColumnInfos } from '@/data/grid/table-column';
 import { useState } from 'react';
 import AppRadioGroup from '@/components/common/AppRadioGroup';
+import AppButton from '@/components/common/AppButton';
 
 function GuideTableSelect() {
-  const [rowData] = useState(getAllData());
+  const [rowData, setRawData] = useState(getAllData());
   const [rowSelectMode, setRowSelectMode] = useState('multiRow'); // singleRow, multiRow
   const columns = testColumnInfos;
 
@@ -40,6 +41,13 @@ function GuideTableSelect() {
                     ]}
                     value={rowSelectMode}
                     onChange={(value) => setRowSelectMode(value)}
+                  />
+                  <AppButton
+                    value="데이터리셋"
+                    onClick={() => {
+                      setRawData(getPageData(1, 20));
+                    }}
+                    style={{ marginLeft: 10 }}
                   />
                 </div>
               </form>

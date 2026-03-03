@@ -9,7 +9,7 @@ const LeftMenu = () => {
   const displayLeftMenu = useStore(useUIStore, (state) => state.displayLeftMenu);
   const toggleLeftMenu = useStore(useUIStore, (state) => state.toggleLeftMenu);
   return (
-    <aside className={displayLeftMenu ? 'collapsed' : ''} style={{ width: 250 }}>
+    <aside className={displayLeftMenu ? 'collapsed' : ''}>
       <div className="side-fixed">
         <div className="side-top">
           <AppButton

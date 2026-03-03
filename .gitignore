@@ -31,3 +31,5 @@ src/publish/**/*test*
 *.tsbuildinfo
 .vite/
 server/target/*
+
+!docs/.env.development.local
