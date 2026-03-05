@@ -16,10 +16,16 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
   },
-  "npm.packageManager": "yarn",
+  "npm.packageManager": "npm",
   "search.exclude": {
-    ".history/**": true,
-    "**/.history": true
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/.history": true,
+    ".history/**": true
+  },
+  "files.exclude": {
+    "**/node_modules": true
   },
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
