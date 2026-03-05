@@ -1,40 +1,51 @@
-import { useState } from 'react';
+import { useStore } from 'zustand';
+import { useAppStore } from '@/stores/useAppStore';
+import { useEffect } from 'react';
+import Config from '@/config/Config';
+import Logger from '@/utils/Logger';
+import CommonUtil from '@/utils/CommonUtil';
+
+import { ToastContainer } from 'react-toastify';
+import AlertModalContainer from '@/components/layout/AlertModalContainer';
 import LoadingBarContainer from '@/components/layout/LoadingBarContainer';
 
-import MenuList from '@/publish/components/MenuList';
-import SiderTop from '@/publish/components/siderTop';
+function PublishApp({ children }) {
+  const pathname = window.location.pathname;
 
-import Header from '@/publish/components/header';
+  const { isInitComplete, initApp } = useStore(useAppStore, (state) => state);
 
-function PublishApp() {
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+  useEffect(() => {
+    Logger.info(`appVersion : :${Config.appVersion}`);
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+    // javascript core error handle
+    window.onerror = CommonUtil.handleGlobalError;
+
+    // promise error catch
+    const handleUnhandledrejection = CommonUtil.handleGlobalUnhandledRejection;
+
+    window.addEventListener('unhandledrejection', handleUnhandledrejection);
+
+    if (!location.pathname.endsWith('/login')) {
+      initApp();
+    }
+
+    return () => {
+      window.removeEventListener('unhandledrejection', handleUnhandledrejection);
+    };
+  }, []);
+
+  // 초기화가 완료될 때까지 로딩 표시
+  if (!isInitComplete) {
+    return <LoadingBarContainer />;
+  }
 
   return (
     <>
-      <div className="survey">
-        {/* 좌메뉴 */}
-        <aside className={collapsed ? 'collapsed' : ''}>
-          <div className="side-fixed">
-            <SiderTop
-              collapsed={collapsed}
-              setCollapsed={setCollapsed}
-              toggleCollapsed={toggleCollapsed}
-            />
-            <MenuList collapsed={collapsed} />
-          </div>
-        </aside>
-        {/* 메인 */}
-        <div className="sv-content">
-          <Header />
-          {/* 페이지 리스트 */}
-          {/* <PageList /> */}
-        </div>
-      </div>
+      {/* <RouterProvider router={Router} /> */}
+      {children}
+      <ToastContainer autoClose={3000} hideProgressBar={true} position="top-center" />
       <LoadingBarContainer />
+      <AlertModalContainer />
     </>
   );
 }

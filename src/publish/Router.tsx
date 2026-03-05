@@ -4,11 +4,11 @@ import {
   House,
   Laptop,
   Files,
-  ListChecks,
+  FileText,
   UsersRound,
   Mail,
   FileChartLine,
-  ClipboardList,
+  FileInput,
   Database,
   Network,
 } from 'lucide-react';
@@ -21,6 +21,7 @@ import NoticeMgmt from '@/publish/pages/notice/NoticeMgmt';
 
 import LanguageInfo from '@/publish/pages/edition/languageInfo';
 import SurveyInfo from '@/publish/pages/edition/surveyInfo';
+// import SurveyInfoModal from '@/publish/pages/edition/surveyInfo/SurveyInfoModal';
 
 import CommonInfo from '@/publish/pages/question/commonInfo';
 import QuestionInfo from '@/publish/pages/question/questionInfo';
@@ -125,6 +126,15 @@ export const Router = createBrowserRouter([
             },
           },
           {
+            path: 'surveyInfoModal',
+            // element: <SurveyInfoModal />, // 2-1 설문 관리 test
+            handle: {
+              breadcrumbName: '모달 테이블 테스트',
+              label: '모달 테이블 테스트',
+              key: '21',
+            },
+          },
+          {
             path: 'languageInfo',
             element: <LanguageInfo />, // 2-2 언어 관리
             handle: {
@@ -140,7 +150,7 @@ export const Router = createBrowserRouter([
         handle: {
           breadcrumbName: '문항관리',
           label: '문항관리', // 3. 문항 관리
-          icon: <ListChecks />,
+          icon: <FileText />,
           key: '3',
         },
         children: [
@@ -337,7 +347,7 @@ export const Router = createBrowserRouter([
         handle: {
           breadcrumbName: '결과 관리',
           label: '결과 관리', // 7. Results Manage
-          icon: <ClipboardList />,
+          icon: <FileInput />,
           key: '7',
         },
         children: [
