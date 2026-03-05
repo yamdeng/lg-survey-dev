@@ -12,7 +12,7 @@ function GuideTableBasic() {
   const [rowData, setRowData] = useState(getAllData());
   const columns = testColumnInfos;
 
-  const onGridReady = (event) => {
+  const getGridRef = (event) => {
     // 외부에서 api 인스턴스를 직접 사용하고 싶을 경우에 사용
     gridApiRef.current = event.api;
   };
@@ -69,7 +69,7 @@ function GuideTableBasic() {
                     pageSize={50}
                     rowData={rowData}
                     columns={columns}
-                    onGridReady={onGridReady}
+                    getGridRef={getGridRef}
                     displayTableLoading={isLoading}
                     hiddenPagination={hiddenPagination}
                   />

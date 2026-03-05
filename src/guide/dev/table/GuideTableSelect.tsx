@@ -36,8 +36,8 @@ function GuideTableSelect() {
                 <div className="form-inline justify-start">
                   <AppRadioGroup
                     options={[
-                      { value: 'multiRow', label: '싱글' },
-                      { value: 'singleRow', label: '멀티' },
+                      { value: 'singleRow', label: '싱글' },
+                      { value: 'multiRow', label: '멀티' },
                     ]}
                     value={rowSelectMode}
                     onChange={(value) => setRowSelectMode(value)}

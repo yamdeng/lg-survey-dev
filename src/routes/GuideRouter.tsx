@@ -55,6 +55,8 @@ import GuideTableCodeLabel from '@/guide/dev/table/GuideTableCodeLabel';
 import GuideTableButton from '@/guide/dev/table/GuideTableButton';
 import GuideTableUseStore1 from '@/guide/dev/table/GuideTableUseStore1';
 import GuideTableUseStore2 from '@/guide/dev/table/GuideTableUseStore2';
+import GuideTableBatchBasic from '@/guide/dev/table/GuideTableBatchBasic';
+import GuideTableBatchBasic2 from '@/guide/dev/table/GuideTableBatchBasic2';
 
 /* 개발 패턴 component */
 import GuidePatternTable1 from '@/guide/dev-pattern/GuidePatternTable1';
@@ -277,6 +279,16 @@ export const GuideRouter = [
             path: 'GuideTableUseStore2',
             element: <GuideTableUseStore2 />,
             handle: { breadcrumbName: 'table-store 상세 연동 2' },
+          },
+          {
+            path: 'GuideTableBatchBasic',
+            element: <GuideTableBatchBasic />,
+            handle: { breadcrumbName: 'table-batch basic 1' },
+          },
+          {
+            path: 'GuideTableBatchBasic2',
+            element: <GuideTableBatchBasic2 />,
+            handle: { breadcrumbName: 'table-batch basic 2' },
           },
         ],
       },

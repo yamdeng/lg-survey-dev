@@ -38,7 +38,7 @@ const basicDefaultColDef = {
 
 */
 
-const convertColumns = (columns) => {
+const convertColumns = (columns, editable) => {
   const searchRowSpanColumn = columns.find((columnInfo) => columnInfo.enableRowSpan);
   const result = columns.map((columnInfo) => {
     if (columnInfo.enableRowSpan) {
@@ -53,6 +53,9 @@ const convertColumns = (columns) => {
     }
     if (searchRowSpanColumn) {
       columnInfo.sortable = false;
+    }
+    if (!editable) {
+      columnInfo.editable = false;
     }
     return columnInfo;
   });
@@ -82,6 +85,7 @@ function AppTable(props) {
     store = null,
     hiddenPagination,
     defaultColDef = {},
+    editable = false,
     ...rest
   } = props;
 
@@ -106,7 +110,7 @@ function AppTable(props) {
   const searchRowSpanIndex = columns.findIndex((info) => info.enableRowSpan);
 
   // columns convert 작업
-  const applyColumns = convertColumns(columns);
+  const applyColumns = convertColumns(columns, editable);
 
   // table 선택 변경시 props로 전달받은 handleRowSelect 재전달
   const onSelectionChanged = useCallback(() => {

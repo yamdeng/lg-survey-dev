@@ -188,6 +188,14 @@ export const guideMenuList = [
             menuTitle: 'table-store-use2',
             menuPath: '/guides/dev/GuideTableUseStore2',
           },
+          {
+            menuTitle: 'table-batch-basic',
+            menuPath: '/guides/dev/GuideTableBatchBasic',
+          },
+          {
+            menuTitle: 'table-batch-basic2',
+            menuPath: '/guides/dev/GuideTableBatchBasic2',
+          },
         ],
       },
       {
