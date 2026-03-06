@@ -150,6 +150,15 @@ export const guideMenuList = [
         ],
       },
       {
+        menuTitle: 'modal',
+        children: [
+          {
+            menuTitle: 'modal basic',
+            menuPath: '/guides/dev/GuideFormModal',
+          },
+        ],
+      },
+      {
         menuTitle: 'table',
         children: [
           {

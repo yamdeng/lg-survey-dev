@@ -58,6 +58,9 @@ import GuideTableUseStore2 from '@/guide/dev/table/GuideTableUseStore2';
 import GuideTableBatchBasic from '@/guide/dev/table/GuideTableBatchBasic';
 import GuideTableBatchBasic2 from '@/guide/dev/table/GuideTableBatchBasic2';
 
+/* 모달 */
+import GuideFormModal from '@/guide/dev/modal/GuideFormModal';
+
 /* 개발 패턴 component */
 import GuidePatternTable1 from '@/guide/dev-pattern/GuidePatternTable1';
 import GuidePatternTable2 from '@/guide/dev-pattern/GuidePatternTable2';
@@ -289,6 +292,11 @@ export const GuideRouter = [
             path: 'GuideTableBatchBasic2',
             element: <GuideTableBatchBasic2 />,
             handle: { breadcrumbName: 'table-batch basic 2' },
+          },
+          {
+            path: 'GuideFormModal',
+            element: <GuideFormModal />,
+            handle: { breadcrumbName: 'modal basic' },
           },
         ],
       },
