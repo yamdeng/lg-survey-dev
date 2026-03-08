@@ -246,6 +246,10 @@ export const guideMenuList = [
             menuTitle: '테이블 batch 패턴 2',
             menuPath: '/guides/dev-pattern/GuidePatternTableBatch2',
           },
+          {
+            menuTitle: '테이블 batch 패턴 3',
+            menuPath: '/guides/dev-pattern/GuidePatternTableBatch3',
+          },
         ],
       },
       {
