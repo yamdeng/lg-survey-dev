@@ -3,7 +3,8 @@ import AppTable from '@/components/common/AppTable';
 import CodeLabelComponent from '@/components/common/CodeLabelComponent';
 import Config from '@/config/Config';
 import CodeService from '@/services/CodeService';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import AppCheckbox from '@/components/common/AppCheckbox';
 
 /*
 
@@ -17,10 +18,18 @@ import { useRef } from 'react';
 function GuideTableBatchBasic2() {
   const gridApiRef = useRef<any>(null);
 
+  const [singleClicked, setSingleClicked] = useState(false);
+  const [focusSaved, setFocusSaved] = useState(false);
+
   const codeOptions = CodeService.getOptions('USER_LEVEL');
   const codeColumnData = Object.fromEntries(codeOptions.map((item) => [item.value, item.label]));
 
   const columns = [
+    {
+      field: 'dataTestId',
+      headerName: 'ID',
+      editable: false,
+    },
     {
       field: 'name',
       headerName: '이름',
@@ -199,6 +208,18 @@ function GuideTableBatchBasic2() {
             <div className="form-block border-none">
               <form>
                 <div className="form-inline justify-start">
+                  <AppCheckbox
+                    style={{ marginLeft: 10 }}
+                    label="싱글클릭으로편집"
+                    value={singleClicked}
+                    onChange={(value) => setSingleClicked(value)}
+                  />
+                  <AppCheckbox
+                    style={{ marginLeft: 10 }}
+                    label="포커스이동시 데이터반영"
+                    value={focusSaved}
+                    onChange={(value) => setFocusSaved(value)}
+                  />
                   <AppButton value="저장" onClick={save} style={{ marginRight: 10 }} />
                 </div>
               </form>
@@ -214,9 +235,14 @@ function GuideTableBatchBasic2() {
                     columns={columns}
                     editable={true}
                     hiddenPagination
-                    singleClickEdit={true}
-                    stopEditingWhenCellsLoseFocus={true}
+                    singleClickEdit={singleClicked}
+                    stopEditingWhenCellsLoseFocus={focusSaved}
                     onCellValueChanged={onCellValueChanged}
+                    onCellDoubleClicked={(params: any) => {
+                      if (params.colDef.field === 'dataTestId') {
+                        alert('상세 페이지로 이동! : ' + params.data.dataTestId);
+                      }
+                    }}
                   />
                 </div>
               </div>

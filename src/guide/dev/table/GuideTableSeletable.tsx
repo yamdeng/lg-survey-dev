@@ -12,7 +12,7 @@ function GuideTableSeletable() {
   const [hideDisabledCheckboxes, setHideDisabledCheckboxes] = useState(true);
   const columns = testColumnInfos;
 
-  const defaultColDef = { sortable: false, minWidth: 200 };
+  const defaultColDef = { sortable: false, minWidth: 100, suppressMovable: true };
 
   const handleRowSelect = (selectedInfo) => {
     console.log(`handleRowSelect selectedInfo : ${selectedInfo}`);

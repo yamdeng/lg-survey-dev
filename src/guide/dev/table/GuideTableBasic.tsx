@@ -4,6 +4,7 @@ import AppTable from '@/components/common/AppTable';
 import { getAllData } from '@/data/grid/example-data-new';
 import { testColumnInfos } from '@/data/grid/table-column';
 import AppButton from '@/components/common/AppButton';
+import AppCheckbox from '@/components/common/AppCheckbox';
 
 function GuideTableBasic() {
   const gridApiRef = useRef<any>(null);
@@ -19,12 +20,6 @@ function GuideTableBasic() {
 
   const handleButtonClick = () => {
     setRowData([]);
-  };
-
-  const togglePagination = () => {
-    setHiddenPagination((prev) => {
-      return !prev;
-    });
   };
 
   useEffect(() => {
@@ -57,7 +52,12 @@ function GuideTableBasic() {
                     onClick={handleButtonClick}
                     style={{ marginRight: 10 }}
                   />
-                  <AppButton value="페이징토글" onClick={togglePagination} />
+                  <AppCheckbox
+                    style={{ marginLeft: 10 }}
+                    label="페이징숨기기"
+                    value={hiddenPagination}
+                    onChange={(value) => setHiddenPagination(value)}
+                  />
                 </div>
               </form>
             </div>

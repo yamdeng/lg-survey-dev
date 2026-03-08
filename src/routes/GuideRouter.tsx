@@ -57,6 +57,7 @@ import GuideTableUseStore1 from '@/guide/dev/table/GuideTableUseStore1';
 import GuideTableUseStore2 from '@/guide/dev/table/GuideTableUseStore2';
 import GuideTableBatchBasic from '@/guide/dev/table/GuideTableBatchBasic';
 import GuideTableBatchBasic2 from '@/guide/dev/table/GuideTableBatchBasic2';
+import GuideTableBatchAddDelete from '@/guide/dev/table/GuideTableBatchAddDelete';
 
 /* 모달 */
 import GuideFormModal from '@/guide/dev/modal/GuideFormModal';
@@ -292,6 +293,11 @@ export const GuideRouter = [
             path: 'GuideTableBatchBasic2',
             element: <GuideTableBatchBasic2 />,
             handle: { breadcrumbName: 'table-batch basic 2' },
+          },
+          {
+            path: 'GuideTableBatchAddDelete',
+            element: <GuideTableBatchAddDelete />,
+            handle: { breadcrumbName: 'table batch 행추가/삭제' },
           },
           {
             path: 'GuideFormModal',

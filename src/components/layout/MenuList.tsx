@@ -1,4 +1,5 @@
 import { useMemo, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'; // 1. useLocation 추가
 import { getMenuListByProfileInfo } from '@/data/menu';
 import { useAppStore } from '@/stores/useAppStore';
 import { useUIStore } from '@/stores/useUIStore';
@@ -9,73 +10,62 @@ import { useStore } from 'zustand';
 const convertMenuList = (menuList) => {
   return menuList.map((menuInfo) => {
     const { menuTitle, children, icon, menuPath } = menuInfo;
-    const menuItem = {
-      key: menuPath ? `${menuTitle}-${menuPath}` : menuTitle,
-      label: (
-        <span
-          onClick={() => {
-            if (menuPath) {
-              globalNavigate(menuPath);
-            }
-          }}
-        >
-          {menuTitle}
-        </span>
-      ),
+    const itemKey = menuPath || menuTitle;
+
+    const menuItem: any = {
+      key: itemKey,
+      label: menuTitle,
       icon: icon,
-      children: children,
+      data: menuInfo,
     };
 
-    if (children && children.length) {
+    if (children && children.length > 0) {
       menuItem.children = convertMenuList(children);
     }
-
     return menuItem;
   });
 };
 
 const MenuList = () => {
+  // 2. 핵심: useLocation()을 사용해야 URL 변경 시 리렌더링이 발생합니다.
+  const location = useLocation();
+
   const profile = useStore(useAppStore, (state) => state.profile);
   const displayLeftMenu = useStore(useUIStore, (state) => state.displayLeftMenu);
   const selectedMenuKeys = useStore(useUIStore, (state) => state.selectedMenuKeys);
   const changeSelectedMenuKeys = useStore(useUIStore, (state) => state.changeSelectedMenuKeys);
-  const menuList = getMenuListByProfileInfo(profile);
-  const applyMenuList = convertMenuList(menuList);
 
-  // 1. 최상위(1depth) 메뉴들의 키 리스트를 미리 추출합니다.
+  const menuList = getMenuListByProfileInfo(profile);
+  const applyMenuList = useMemo(() => convertMenuList(menuList), [menuList]);
+
   const rootSubmenuKeys = useMemo(() => {
     return applyMenuList.map((menu) => menu.key);
-  }, [menuList]);
+  }, [applyMenuList]);
 
-  // 2. 핵심 아코디언 로직
   const onOpenChange = (keys: string[]) => {
-    // keys: 현재 열려있는 모든 키 (사용자가 방금 누른 키 포함)
-    // openKeys: 직전까지 열려있던 키 리스트
-
     const latestOpenKey = keys.find((key) => selectedMenuKeys.indexOf(key) === -1);
-
-    // 최상위 메뉴를 클릭한 경우
     if (latestOpenKey && rootSubmenuKeys.indexOf(latestOpenKey) !== -1) {
-      // 방금 누른 최상위 키만 열고 나머지는 닫음
       changeSelectedMenuKeys([latestOpenKey]);
     } else {
-      // 하위 메뉴(2, 3depth)를 클릭한 경우나 메뉴를 닫은 경우
       changeSelectedMenuKeys(keys);
     }
   };
 
-  useEffect(() => {
-    const currentPath = location.pathname;
+  const handleMenuClick = (info: any) => {
+    // Antd v5에서는 props 바로 아래 data가 위치함
+    const { data } = info.item.props;
+    if (data?.menuPath) {
+      globalNavigate(data.menuPath);
+    }
+  };
 
-    // 현재 이미 열려있는 키들(selectedMenuKeys) 중에
-    // 현재 경로의 부모가 이미 포함되어 있다면 굳이 다시 계산하지 않음
-    const isAlreadyOpen = selectedMenuKeys.some((key) => key.endsWith(currentPath));
-    if (isAlreadyOpen) return;
+  useEffect(() => {
+    const currentPath = location.pathname; // location 객체 사용
 
     const parentKeys: string[] = [];
     const findParentKeys = (items: any[], targetPath: string, parents: string[]): boolean => {
       for (const item of items) {
-        if (item.key.endsWith(targetPath) || item.key === targetPath) {
+        if (item.key === targetPath) {
           parentKeys.push(...parents);
           return true;
         }
@@ -89,11 +79,10 @@ const MenuList = () => {
     findParentKeys(applyMenuList, currentPath, []);
 
     if (parentKeys.length > 0) {
-      // 기존에 열려있던 키들과 합치거나, 아코디언을 유지하려면 새로 세팅
       const nextKeys = Array.from(new Set([...selectedMenuKeys, ...parentKeys]));
       changeSelectedMenuKeys(nextKeys);
     }
-  }, [location.pathname]);
+  }, [location.pathname, applyMenuList]); // 경로가 바뀔 때마다 부모 찾기 실행
 
   return (
     <Menu
@@ -101,7 +90,8 @@ const MenuList = () => {
       selectedKeys={[location.pathname]}
       openKeys={selectedMenuKeys}
       onOpenChange={onOpenChange}
-      inlineCollapsed={displayLeftMenu ? true : false}
+      onClick={handleMenuClick}
+      inlineCollapsed={displayLeftMenu}
       items={applyMenuList}
     />
   );

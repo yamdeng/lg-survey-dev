@@ -205,6 +205,10 @@ export const guideMenuList = [
             menuTitle: 'table-batch-basic2',
             menuPath: '/guides/dev/GuideTableBatchBasic2',
           },
+          {
+            menuTitle: 'table batch 행추가/삭제',
+            menuPath: '/guides/dev/GuideTableBatchAddDelete',
+          },
         ],
       },
       {
