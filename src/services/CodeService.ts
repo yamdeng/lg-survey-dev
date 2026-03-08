@@ -43,7 +43,7 @@ export const getCodeLabelByValue = (groupCode, codeValue) => {
 };
 
 // code그룹id 기준으로 코드 목록 반환 : code / value 키 적용
-export const getOptions = (groupCode) => {
+export const getOptions = (groupCode, applyAllValue = false) => {
   const { codeAllMap } = useAppStore.getState();
   if (groupCode) {
     const codeAllMapOptions = codeAllMap[groupCode];
@@ -56,7 +56,17 @@ export const getOptions = (groupCode) => {
           label: label,
         };
       });
-      return options;
+      if (applyAllValue) {
+        return [
+          {
+            value: '',
+            label: '전체',
+          },
+          ...options,
+        ];
+      } else {
+        return options;
+      }
     }
   }
   return [];

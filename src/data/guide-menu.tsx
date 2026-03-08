@@ -147,6 +147,10 @@ export const guideMenuList = [
             menuTitle: 'yup 예시3',
             menuPath: '/guides/dev/GuideYupCase3',
           },
+          {
+            menuTitle: 'yup 예시4',
+            menuPath: '/guides/dev/GuideYupCase4',
+          },
         ],
       },
       {
@@ -249,6 +253,10 @@ export const guideMenuList = [
           {
             menuTitle: '테이블 batch 패턴 3',
             menuPath: '/guides/dev-pattern/GuidePatternTableBatch3',
+          },
+          {
+            menuTitle: '테이블 batch 패턴 4',
+            menuPath: '/guides/dev-pattern/GuidePatternTableBatch4',
           },
         ],
       },

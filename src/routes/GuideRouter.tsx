@@ -44,6 +44,7 @@ import GuideZustandSliceCase2 from '@/guide/dev/store/GuideZustandSliceCase2';
 import GuideYupCase1 from '@/guide/dev/GuideYupCase1';
 import GuideYupCase2 from '@/guide/dev/GuideYupCase2';
 import GuideYupCase3 from '@/guide/dev/GuideYupCase3';
+import GuideYupCase4 from '@/guide/dev/GuideYupCase4';
 
 /* guide common table component */
 import GuideTableBasic from '@/guide/dev/table/GuideTableBasic';
@@ -72,6 +73,7 @@ import GuidePatternForm2 from '@/guide/dev-pattern/GuidePatternForm2';
 import GuidePatternTableBatch1 from '@/guide/dev-pattern/GuidePatternTableBatch1';
 import GuidePatternTableBatch2 from '@/guide/dev-pattern/GuidePatternTableBatch2';
 import GuidePatternTableBatch3 from '@/guide/dev-pattern/GuidePatternTableBatch3';
+import GuidePatternTableBatch4 from '@/guide/dev-pattern/GuidePatternTableBatch4';
 // import GuidePatternStoreForm from '@/guide/dev-pattern/GuidePatternStoreForm';
 
 export const GuideRouter = [
@@ -244,6 +246,11 @@ export const GuideRouter = [
             handle: { breadcrumbName: 'yup 예시3' },
           },
           {
+            path: 'GuideYupCase4',
+            element: <GuideYupCase4 />,
+            handle: { breadcrumbName: 'yup 예시4(list)' },
+          },
+          {
             path: 'GuideTableBasic',
             element: <GuideTableBasic />,
             handle: { breadcrumbName: 'table-basic' },
@@ -358,6 +365,11 @@ export const GuideRouter = [
             path: 'GuidePatternTableBatch3',
             element: <GuidePatternTableBatch3 />,
             handle: { breadcrumbName: '테이블 batch 패턴 3' },
+          },
+          {
+            path: 'GuidePatternTableBatch4',
+            element: <GuidePatternTableBatch4 />,
+            handle: { breadcrumbName: '테이블 batch 패턴 4' },
           },
         ],
       },

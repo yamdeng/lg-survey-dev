@@ -393,6 +393,56 @@ const getYupListErrorInfo = (yupErrors, firstErrorPath, listKey = 'list') => {
   return validResult;
 };
 
+// yup error 기준으로 오류가 난 list index 추출, 첫번째 에러 정보 반환(row의 어떤 컬럼이 오류가 났는지)
+const applyErrorByList = async (yupListSchema, list) => {
+  let success = true;
+  const resultList = _.cloneDeep(list);
+  const validResult: any = {
+    firstListErrorPath: '',
+    firstErrorIndex: -1,
+    isListFirstError: false,
+    listErrorIndexList: [],
+  };
+  const errors = {};
+  try {
+    if (yupListSchema && resultList) {
+      await yupListSchema.validate(resultList, { abortEarly: false });
+    }
+  } catch (error: any) {
+    success = false;
+    console.log(error.errors);
+    const yupErrors = error.inner;
+    const firstYupError = yupErrors[0];
+    const groupErrorInfo = _.groupBy(yupErrors, 'path');
+    const errorKeys = Object.keys(groupErrorInfo);
+    errorKeys.forEach((errorKey) => {
+      errors[errorKey] = groupErrorInfo[errorKey][0].message;
+    });
+    const listValidResult = getYupListErrorInfo(yupErrors, firstYupError.path, '');
+    validResult.firstListErrorPath = listValidResult.firstListErrorPath;
+    validResult.firstErrorIndex = listValidResult.firstErrorIndex;
+    validResult.isListFirstError = listValidResult.isListFirstError;
+    validResult.listErrorIndexList = listValidResult.listErrorIndexList;
+    validResult.isValid = success;
+    validResult.errors = errors;
+  }
+
+  if (validResult.listErrorIndexList && validResult.listErrorIndexList.length) {
+    // list 속성에 isError을 셋팅
+    resultList.forEach((listInfo, index) => {
+      if (
+        validResult.listErrorIndexList.findIndex((listErrorIndex) => index === listErrorIndex) !==
+        -1
+      ) {
+        listInfo.isError = true;
+      } else {
+        listInfo.isError = false;
+      }
+    });
+  }
+  return resultList;
+};
+
 const getNowDateString = (displayFormat = 'YYYY-MM-DD') => {
   return dayjs().format(displayFormat);
 };
@@ -794,4 +844,5 @@ export default {
   normalizeTreeData,
   getFilterListByMenuList,
   onCellValueChanged,
+  applyErrorByList,
 };
