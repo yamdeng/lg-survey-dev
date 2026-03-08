@@ -21,6 +21,7 @@ export const listBaseState = {
   selectedRowKeys: [],
   selectedRowInfos: [],
   searchParamErrors: {},
+  deletedRows: [],
   isDirty: false,
 };
 
@@ -191,7 +192,7 @@ export const createListSlice = (set, get) => ({
       const applyList = convertList ? convertList(list) : list;
       const totalCount = list.length;
       setTotalCount(totalCount);
-      set({ list: applyList || [], selectedRowKeys: [], selectedRowInfos: [] });
+      set({ list: applyList || [], selectedRowKeys: [], selectedRowInfos: [], deletedRows: [] });
       if (searchAfterAction) {
         searchAfterAction();
       }
@@ -245,14 +246,13 @@ export const createListSlice = (set, get) => ({
     globalNavigate(`${baseRoutePath}/add`);
   },
 
-  addRow: () =>
+  addRow: (newRowInfo) => {
     set(
       produce((state: any) => {
-        state.list.unshift({
-          rowStatus: 'A',
-        });
+        state.list.unshift(newRowInfo);
       }),
-    ),
+    );
+  },
 
   deleteAll: () => {
     set({ list: [] });
@@ -289,7 +289,7 @@ export const createListSlice = (set, get) => ({
     );
   },
 
-  clearList: () => {
+  clear: () => {
     set({ ...listBaseState });
   },
 });

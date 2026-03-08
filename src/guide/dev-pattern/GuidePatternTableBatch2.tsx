@@ -1,22 +1,108 @@
 import AppButton from '@/components/common/AppButton';
 import AppTable from '@/components/common/AppTable';
 import CodeLabelComponent from '@/components/common/CodeLabelComponent';
-import CodeService from '@/services/CodeService';
-import Config from '@/config/Config';
-import { useRef, useState } from 'react';
 import { batchTestData } from '@/data/grid/example-data-new';
+import { produce } from 'immer';
+import CodeService from '@/services/CodeService';
+import { useEffect } from 'react';
+import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
+import { create } from 'zustand';
+import CommonUtil from '@/utils/CommonUtil';
 
 /*
 
-  기본 에디팅 input 사용방법
-   1.[추가] 버튼 클릭시 행 추가
-   2.[삭제] 선택한 정보 행 삭제
-   3.액션 버튼의 [삭제] 버튼 클릭시 행 삭제
+  batch CRUD 개발 패턴 2 : 기존 패턴1을 store로 분리(공통 slice로 사용 가능)
 
 */
+
+/* zustand store 생성 */
+
+const initListData = {
+  ...listBaseState,
+};
+
+/* zustand store 생성 */
+const testListStore = create<any>((set, get) => ({
+  ...createListSlice(set, get),
+
+  ...initListData,
+
+  deletedRows: [],
+
+  // 행 추가
+  addRow: (newRow) => {
+    const { gridApi } = get();
+    gridApi.applyTransaction({
+      add: [newRow],
+      addIndex: 0, // 맨 위에 추가하고 싶을 때 (생략 시 맨 아래)
+    });
+  },
+
+  // 선택한 정보 삭제
+  deleteSelect: () => {
+    const { gridApi, deleteRow } = get();
+    const selectedRows = gridApi.getSelectedRows();
+    deleteRow(selectedRows);
+  },
+
+  // row 삭제 : [] 기준
+  deleteRow: (rowsToRemove) => {
+    const { gridApi } = get();
+    const currentDeletedRows = rowsToRemove
+      .filter((row) => row.rowStatus === 'R' || row.rowStatus === 'U')
+      .map((row) => ({ ...row, rowStatus: 'D' })); // 상태를 'D'로 변경
+
+    set(
+      produce((state: any) => {
+        state.deletedRows.unshift(...currentDeletedRows);
+      }),
+    );
+
+    // 그리드 UI에서 제거
+    gridApi.applyTransaction({ remove: rowsToRemove });
+  },
+
+  onCellValueChanged: (params) => {
+    CommonUtil.onCellValueChanged(params);
+  },
+
+  saveBatch: () => {
+    const { gridApi, deletedRows } = get();
+
+    const created = [];
+    const updated = [];
+
+    // 그리드에 현재 존재하는 노드 순회
+    gridApi.forEachNode((node) => {
+      const { data } = node;
+      if (data.rowStatus === 'A') {
+        created.push(data);
+      } else if (data.rowStatus === 'U') {
+        updated.push(data);
+      }
+    });
+
+    // 최종 결과물
+    const saveData = {
+      createList: created, // 추가된 데이터
+      updateList: updated, // 수정된 데이터
+      deleteList: deletedRows, // 삭제된 데이터 (D 상태)
+    };
+
+    console.log('=== 저장 데이터 확인 ===');
+    console.log('추가:', saveData.createList);
+    console.log('수정:', saveData.updateList);
+    console.log('삭제:', saveData.deleteList);
+    console.log('전체 전송 객체:', saveData);
+  },
+}));
+
 const ActionButtons = (params) => {
+  // params 내부에 cellRendererParams로 전달한 onDelete가 들어있습니다.
+  const { onDelete, data } = params;
+
   const onDeleteRow = () => {
-    params.api.applyTransaction({ remove: [params.data] });
+    onDelete(data);
   };
 
   return (
@@ -28,9 +114,11 @@ const ActionButtons = (params) => {
   );
 };
 
-function GuideTableBatchAddDelete() {
-  const gridApiRef = useRef<any>(null);
-  const [rowData, setRowData] = useState(batchTestData);
+function GuidePatternTableBatch2() {
+  const listStore = testListStore();
+
+  const { list, setList, addRow, deleteRow, deleteSelect, onCellValueChanged, saveBatch } =
+    listStore;
 
   const codeOptions = CodeService.getOptions('USER_LEVEL');
   const codeColumnData = Object.fromEntries(codeOptions.map((item) => [item.value, item.label]));
@@ -87,32 +175,13 @@ function GuideTableBatchAddDelete() {
       filter: false, // 필터 제외
       resizable: false, // 크기 조절 방지 (선택 사항)
       pinned: 'right', // 우측에 고정 (데이터가 많을 때 유용)
+      cellRendererParams: {
+        onDelete: (data) => deleteRow([data]),
+      },
     },
   ];
 
-  const getGridRef = (event) => {
-    // 외부에서 api 인스턴스를 직접 사용하고 싶을 경우에 사용
-    gridApiRef.current = event.api;
-  };
-
-  const save = () => {
-    const allData = [];
-
-    gridApiRef.current.forEachNode((node) => {
-      allData.push(node.data);
-    });
-
-    console.log(allData);
-  };
-
-  const addRow = () => {
-    const currentData = [];
-    // 1. 현재 그리드에 있는 (수정된) 모든 데이터를 뽑아옴
-    gridApiRef.current.forEachNode((node) => {
-      currentData.push(node.data);
-    });
-
-    // 2. 새 로우 객체 생성
+  const handleAddButton = () => {
     const newRow = {
       dataTestId: `temp_${Date.now().toString()}`,
       name: '',
@@ -123,85 +192,27 @@ function GuideTableBatchAddDelete() {
       rowStatus: 'A',
     };
 
-    // 3. 기존 데이터 + 새 데이터를 합쳐서 State 업데이트
-    const newRowData = [newRow, ...currentData];
-    setRowData(newRowData);
-
-    // 마지막에 추가하고 싶을때
-    // setRowData([...currentData, newRow]);
+    addRow(newRow);
   };
 
-  const addRow2 = () => {
-    const newRow = {
-      dataTestId: `temp_${Date.now().toString()}`,
-      name: '',
-      desc: '',
-      active: false,
-      userLevel: '',
-      mainDisplayYn: 'N',
-      rowStatus: 'A',
-    };
-
-    // State를 건드리지 않고 그리드에 직접 행을 추가합니다.
-    // 이 명령을 실행해도 기존 셀에 타이핑 중이던 데이터는 그대로 유지됩니다.
-    gridApiRef.current.applyTransaction({
-      add: [newRow],
-      addIndex: 0, // 맨 위에 추가하고 싶을 때 (생략 시 맨 아래)
-    });
-  };
-
-  const deleteSelect = () => {
-    const selectedRows = gridApiRef.current.getSelectedRows();
-    gridApiRef.current.applyTransaction({ remove: selectedRows });
-  };
-
-  const onCellValueChanged = (params) => {
-    const { data, newValue, colDef, node } = params;
-    console.log(`${colDef.field} 필드가 ${newValue}로 변경됨!`);
-    console.log('업데이트된 행 데이터:', data);
-
-    if (!data.rowStatus || data.rowStatus === 'R') {
-      // setDataValue 를 사용하기 위해서는 rowStatus로 filed 가 정의되어야 함
-      // node.setDataValue('rowStatus', 'U');
-      // {
-      //   field: 'rowStatus',
-      //   hide: true, // 화면에는 보이지 않게 설정
-      // },
-
-      const updatedData = {
-        ...data,
-        rowStatus: 'U',
-      };
-
-      // 2. node.setData를 통해 행 데이터 전체를 업데이트
-      node.setData(updatedData);
-      console.log('rowStatus U!!!');
-    }
-  };
+  useEffect(() => {
+    setList(batchTestData);
+  }, []);
 
   return (
     <>
       <main className="content-main">
         <div className="content-inner">
           <div className="content-title">
-            <h3 className="title-text">
-              table batch 행추가/삭제 :{' '}
-              <a
-                style={{ fontSize: 20 }}
-                href={Config.hrefBasePath + `dev/table/GuideTableBatchAddDelete.tsx`}
-              >
-                GuideTableBatchAddDelete
-              </a>
-            </h3>
+            <h3 className="title-text">테이블 batch 패턴 1 : </h3>
           </div>
           <div className="content-body">
             <div className="form-block border-none">
               <form>
                 <div className="form-inline justify-start">
-                  <AppButton value="추가1" style={{ marginRight: 10 }} onClick={addRow} />
-                  <AppButton value="추가2" style={{ marginRight: 10 }} onClick={addRow2} />
+                  <AppButton value="추가" style={{ marginRight: 10 }} onClick={handleAddButton} />
                   <AppButton value="선택삭제" style={{ marginRight: 10 }} onClick={deleteSelect} />
-                  <AppButton value="저장" onClick={save} style={{ marginRight: 10 }} />
+                  <AppButton value="저장" onClick={saveBatch} style={{ marginRight: 10 }} />
                 </div>
               </form>
             </div>
@@ -211,12 +222,11 @@ function GuideTableBatchAddDelete() {
                   <AppTable
                     tableHeight={500}
                     pageSize={50}
-                    rowData={rowData}
-                    getGridRef={getGridRef}
+                    rowData={list}
+                    store={listStore}
                     columns={columns}
                     editable
                     hiddenPagination={true}
-                    undoRedoCellEditing={true}
                     stopEditingWhenCellsLoseFocus={true}
                     onCellValueChanged={onCellValueChanged}
                     enableCheckBox
@@ -232,4 +242,4 @@ function GuideTableBatchAddDelete() {
     </>
   );
 }
-export default GuideTableBatchAddDelete;
+export default GuidePatternTableBatch2;

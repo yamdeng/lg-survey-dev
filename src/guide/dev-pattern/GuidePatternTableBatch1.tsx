@@ -3,159 +3,13 @@ import AppTable from '@/components/common/AppTable';
 import CodeLabelComponent from '@/components/common/CodeLabelComponent';
 import CodeService from '@/services/CodeService';
 import { useRef, useState } from 'react';
+import { batchTestData } from '@/data/grid/example-data-new';
 
 /*
 
   batch CRUD 개발 패턴 1 : store를 사용하지 않는 버전
 
 */
-
-const tempData = [
-  {
-    dataTestId: '1',
-    name: 'test1',
-    age: 10,
-    desc: '',
-    status: '대기',
-    cityCode: 'SEO',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '2',
-    name: 'test2',
-    age: 11,
-    desc: '설명2',
-    status: '진행중',
-    cityCode: 'SEO',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '3',
-    name: 'test3',
-    age: 30,
-    desc: 'ㅁㅁㅁ',
-    status: '대기',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '7',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '4',
-    name: 'test4',
-    age: 40,
-    desc: '',
-    status: '대기',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '6',
-    mainDisplayYn: 'N',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '5',
-    name: 'test5',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '6',
-    name: 'test6',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '7',
-    name: 'test7',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '8',
-    name: 'test8',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '9',
-    name: 'test9',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '10',
-    name: 'test10',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '11',
-    name: 'test11',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-  {
-    dataTestId: '12',
-    name: 'test12',
-    age: 50,
-    desc: '',
-    status: '완료',
-    cityCode: 'ICN',
-    active: false,
-    userLevel: '9',
-    mainDisplayYn: 'Y',
-    rowStatus: 'R',
-  },
-];
 
 const ActionButtons = (params) => {
   // params 내부에 cellRendererParams로 전달한 onDelete가 들어있습니다.
@@ -182,7 +36,7 @@ const ActionButtons = (params) => {
 
 function GuidePatternTableBatch1() {
   const gridApiRef = useRef<any>(null);
-  const [rowData] = useState(tempData);
+  const [rowData] = useState(batchTestData);
   const [deletedRows, setDeletedRows] = useState([]);
 
   const codeOptions = CodeService.getOptions('USER_LEVEL');
@@ -326,14 +180,6 @@ function GuidePatternTableBatch1() {
 
     if (newValue === oldValue) {
       return;
-    }
-
-    if (data.rowStatus !== 'A') {
-      const updatedData = {
-        ...data,
-        rowStatus: 'U',
-      };
-      node.setData(updatedData);
     }
 
     if (!data.rowStatus || data.rowStatus === 'R') {

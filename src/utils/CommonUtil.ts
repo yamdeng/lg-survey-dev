@@ -726,6 +726,22 @@ const getFilterListByMenuList = (menuList, keyword) => {
   return filtedList;
 };
 
+const onCellValueChanged = (tableRowParams) => {
+  const { data, node, newValue, oldValue } = tableRowParams;
+
+  if (newValue === oldValue) {
+    return;
+  }
+
+  if (!data.rowStatus || data.rowStatus === 'R') {
+    const updatedData = {
+      ...data,
+      rowStatus: 'U',
+    };
+    node.setData(updatedData);
+  }
+};
+
 export default {
   formatString,
   saveInfoToLocalStorage,
@@ -777,4 +793,5 @@ export default {
   downloadFile,
   normalizeTreeData,
   getFilterListByMenuList,
+  onCellValueChanged,
 };

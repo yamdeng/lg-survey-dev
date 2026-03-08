@@ -70,6 +70,7 @@ import GuidePatternTable3 from '@/guide/dev-pattern/GuidePatternTable3';
 import GuidePatternForm1 from '@/guide/dev-pattern/GuidePatternForm1';
 import GuidePatternForm2 from '@/guide/dev-pattern/GuidePatternForm2';
 import GuidePatternTableBatch1 from '@/guide/dev-pattern/GuidePatternTableBatch1';
+import GuidePatternTableBatch2 from '@/guide/dev-pattern/GuidePatternTableBatch2';
 // import GuidePatternStoreForm from '@/guide/dev-pattern/GuidePatternStoreForm';
 
 export const GuideRouter = [
@@ -346,6 +347,11 @@ export const GuideRouter = [
             path: 'GuidePatternTableBatch1',
             element: <GuidePatternTableBatch1 />,
             handle: { breadcrumbName: '테이블 batch 패턴 1' },
+          },
+          {
+            path: 'GuidePatternTableBatch2',
+            element: <GuidePatternTableBatch2 />,
+            handle: { breadcrumbName: '테이블 batch 패턴 2' },
           },
         ],
       },
