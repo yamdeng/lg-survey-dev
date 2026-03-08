@@ -178,6 +178,10 @@ export const guideMenuList = [
             menuPath: '/guides/dev/GuideTableSelect',
           },
           {
+            menuTitle: 'table select2',
+            menuPath: '/guides/dev/GuideTableSelect2',
+          },
+          {
             menuTitle: 'table selectable',
             menuPath: '/guides/dev/GuideTableSeletable',
           },
@@ -233,6 +237,10 @@ export const guideMenuList = [
           {
             menuTitle: 'form case 2 (immer)',
             menuPath: '/guides/dev-pattern/GuidePatternForm2',
+          },
+          {
+            menuTitle: '테이블 batch 패턴 1',
+            menuPath: '/guides/dev-pattern/GuidePatternTableBatch1',
           },
         ],
       },

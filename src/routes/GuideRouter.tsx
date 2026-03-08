@@ -50,6 +50,7 @@ import GuideTableBasic from '@/guide/dev/table/GuideTableBasic';
 import GuideTableClick from '@/guide/dev/table/GuideTableClick';
 import GuideTableOnlySingleSelect from '@/guide/dev/table/GuideTableOnlySingleSelect';
 import GuideTableSelect from '@/guide/dev/table/GuideTableSelect';
+import GuideTableSelect2 from '@/guide/dev/table/GuideTableSelect2';
 import GuideTableSeletable from '@/guide/dev/table/GuideTableSeletable';
 import GuideTableCodeLabel from '@/guide/dev/table/GuideTableCodeLabel';
 import GuideTableButton from '@/guide/dev/table/GuideTableButton';
@@ -68,6 +69,7 @@ import GuidePatternTable2 from '@/guide/dev-pattern/GuidePatternTable2';
 import GuidePatternTable3 from '@/guide/dev-pattern/GuidePatternTable3';
 import GuidePatternForm1 from '@/guide/dev-pattern/GuidePatternForm1';
 import GuidePatternForm2 from '@/guide/dev-pattern/GuidePatternForm2';
+import GuidePatternTableBatch1 from '@/guide/dev-pattern/GuidePatternTableBatch1';
 // import GuidePatternStoreForm from '@/guide/dev-pattern/GuidePatternStoreForm';
 
 export const GuideRouter = [
@@ -260,6 +262,11 @@ export const GuideRouter = [
             handle: { breadcrumbName: 'table-select' },
           },
           {
+            path: 'GuideTableSelect2',
+            element: <GuideTableSelect2 />,
+            handle: { breadcrumbName: 'table-select2' },
+          },
+          {
             path: 'GuideTableSeletable',
             element: <GuideTableSeletable />,
             handle: { breadcrumbName: 'table-selectable' },
@@ -334,6 +341,11 @@ export const GuideRouter = [
             path: 'GuidePatternForm2',
             element: <GuidePatternForm2 />,
             handle: { breadcrumbName: '폼 개발 패턴2' },
+          },
+          {
+            path: 'GuidePatternTableBatch1',
+            element: <GuidePatternTableBatch1 />,
+            handle: { breadcrumbName: '테이블 batch 패턴 1' },
           },
         ],
       },

@@ -175,7 +175,6 @@ function GuideTableBatchBasic2() {
   const save = () => {
     const allData = [];
 
-    // 방법 1: API를 통해 모든 행 데이터 수집 (가장 확실함)
     gridApiRef.current.forEachNode((node) => {
       allData.push(node.data);
     });

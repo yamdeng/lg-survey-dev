@@ -71,6 +71,8 @@ function AppTable(props) {
     tableHeight = Config.defaultGridHeight,
     noDataMessage = Config.defaultGridNoDataMessage,
     displayTableLoading = false,
+    selectedRowIds = undefined,
+    rowIdKey,
     handleRowDoubleClick,
     handleRowSingleClick,
     handleRowSelect = () => {},
@@ -112,10 +114,35 @@ function AppTable(props) {
   // columns convert 작업
   const applyColumns = convertColumns(columns, editable);
 
+  // 1. 외부 props(selectedRowIds) 변경 시 그리드에 반영
+  useEffect(() => {
+    const api = gridRef.current?.api;
+    if (!api || !rowData || selectedRowIds === undefined) return;
+
+    // 현재 그리드에 선택된 행들의 ID 추출
+    const currentlySelectedNodes = api.getSelectedNodes();
+    const currentlySelectedIds = currentlySelectedNodes.map((node) => node.data[rowIdKey]);
+
+    // 외부에서 들어온 ID와 현재 그리드 상태가 다를 때만 업데이트 (무한 루프 방지)
+    const isDiff =
+      selectedRowIds.length !== currentlySelectedIds.length ||
+      !selectedRowIds.every((id) => currentlySelectedIds.includes(id));
+
+    if (isDiff) {
+      api.forEachNode((node) => {
+        const isTarget = selectedRowIds.includes(node.data[rowIdKey]);
+        // 선택 상태가 변경되어야 하는 노드만 setSelected 호출
+        if (node.isSelected() !== isTarget) {
+          node.setSelected(isTarget, false, true); // (selected, clearSelection, suppressEvents)
+        }
+      });
+    }
+  }, [selectedRowIds, rowData, rowIdKey]);
+
   // table 선택 변경시 props로 전달받은 handleRowSelect 재전달
   const onSelectionChanged = useCallback(() => {
     const selectedRows = gridRef.current.api.getSelectedRows() || [];
-    return handleRowSelect(rowSelectMode === 'singleRow' ? selectedRows[0] : selectedRows);
+    handleRowSelect(rowSelectMode === 'singleRow' ? selectedRows[0] : selectedRows);
   }, [handleRowSelect, rowSelectMode]);
 
   useEffect(() => {
@@ -180,6 +207,7 @@ function AppTable(props) {
           tooltipMouseTrack={true}
           enableBrowserTooltips={false}
           loading={displayTableLoading ? true : false}
+          getRowId={rowIdKey ? (params) => String(params.data[rowIdKey]) : undefined}
           onGridReady={(params) => {
             if (getGridRef) {
               getGridRef(params);

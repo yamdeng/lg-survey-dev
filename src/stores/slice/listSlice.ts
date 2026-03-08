@@ -1,8 +1,6 @@
 import { produce } from 'immer';
 import ApiService from '@/services/ApiService';
 import CommonUtil from '@/utils/CommonUtil';
-import ToastService from '@/services/ToastService';
-import ModalService from '@/services/ModalService';
 import { globalNavigate } from '@/utils/navigation';
 
 export const listBaseState = {
@@ -21,6 +19,7 @@ export const listBaseState = {
   searchParam: {},
   sortParam: {},
   selectedRowKeys: [],
+  selectedRowInfos: [],
   searchParamErrors: {},
   isDirty: false,
 };
@@ -32,8 +31,12 @@ export const createListSlice = (set, get) => ({
     set({ [propsName]: propsValue });
   },
 
-  changeToSelectedRowKeys: (keys) => {
+  changeSelectedRowKeys: (keys) => {
     set({ selectedRowKeys: keys });
+  },
+
+  changeSelectedRowInfos: (rowInfos) => {
+    set({ selectedRowInfos: rowInfos });
   },
 
   getGridRef: (gridRef) => {
@@ -182,10 +185,13 @@ export const createListSlice = (set, get) => ({
       });
 
       const list = apiResult || [];
+      list.forEach((info) => {
+        info.rowStatus = 'R';
+      });
       const applyList = convertList ? convertList(list) : list;
       const totalCount = list.length;
       setTotalCount(totalCount);
-      set({ list: applyList || [], selectedRowKeys: [] });
+      set({ list: applyList || [], selectedRowKeys: [], selectedRowInfos: [] });
       if (searchAfterAction) {
         searchAfterAction();
       }
@@ -243,7 +249,7 @@ export const createListSlice = (set, get) => ({
     set(
       produce((state: any) => {
         state.list.unshift({
-          updated: true,
+          rowStatus: 'A',
         });
       }),
     ),
@@ -281,20 +287,6 @@ export const createListSlice = (set, get) => ({
         listInfo.updated = true;
       }),
     );
-  },
-
-  deleteBySelectedKeys: async () => {
-    const { selectedRowKeys, listApiPath, enterSearch } = get();
-    if (selectedRowKeys && selectedRowKeys.length) {
-      ModalService.confirm({
-        body: '선택한 정보를 삭제하시겠습니가?',
-        ok: async () => {
-          await ApiService.delete(`${listApiPath}`, { data: selectedRowKeys });
-          ToastService.success('선택한 정보가 삭제되었습니다.');
-          enterSearch();
-        },
-      });
-    }
   },
 
   clearList: () => {
