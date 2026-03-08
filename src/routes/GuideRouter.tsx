@@ -63,6 +63,7 @@ import GuideTableBatchAddDelete from '@/guide/dev/table/GuideTableBatchAddDelete
 
 /* 모달 */
 import GuideFormModal from '@/guide/dev/modal/GuideFormModal';
+import GuideListSearchModal from '@/guide/dev/modal/GuideListSearchModal';
 
 /* 개발 패턴 component */
 import GuidePatternTable1 from '@/guide/dev-pattern/GuidePatternTable1';
@@ -74,7 +75,10 @@ import GuidePatternTableBatch1 from '@/guide/dev-pattern/GuidePatternTableBatch1
 import GuidePatternTableBatch2 from '@/guide/dev-pattern/GuidePatternTableBatch2';
 import GuidePatternTableBatch3 from '@/guide/dev-pattern/GuidePatternTableBatch3';
 import GuidePatternTableBatch4 from '@/guide/dev-pattern/GuidePatternTableBatch4';
-// import GuidePatternStoreForm from '@/guide/dev-pattern/GuidePatternStoreForm';
+import GuidePatternListWidthForm from '@/guide/dev-pattern/GuidePatternListWidthForm';
+import GuidePatternListWidthFormModal1 from '@/guide/dev-pattern/GuidePatternListWidthFormModal1';
+import GuidePatternListWidthFormModal2 from '@/guide/dev-pattern/GuidePatternListWidthFormModal2';
+import GuidePatternTreeListForm from '@/guide/dev-pattern/GuidePatternTreeListForm';
 
 export const GuideRouter = [
   {
@@ -320,6 +324,11 @@ export const GuideRouter = [
             element: <GuideFormModal />,
             handle: { breadcrumbName: 'modal basic' },
           },
+          {
+            path: 'GuideListSearchModal',
+            element: <GuideListSearchModal />,
+            handle: { breadcrumbName: 'modal list search' },
+          },
         ],
       },
       {
@@ -370,6 +379,26 @@ export const GuideRouter = [
             path: 'GuidePatternTableBatch4',
             element: <GuidePatternTableBatch4 />,
             handle: { breadcrumbName: '테이블 batch 패턴 4' },
+          },
+          {
+            path: 'GuidePatternListWidthForm',
+            element: <GuidePatternListWidthForm />,
+            handle: { breadcrumbName: '목록과 폼 연동 패턴' },
+          },
+          {
+            path: 'GuidePatternListWidthFormModal1',
+            element: <GuidePatternListWidthFormModal1 />,
+            handle: { breadcrumbName: '목록과 폼모달 연동 패턴' },
+          },
+          {
+            path: 'GuidePatternListWidthFormModal2',
+            element: <GuidePatternListWidthFormModal2 />,
+            handle: { breadcrumbName: '목록과 폼모달 연동 패턴2' },
+          },
+          {
+            path: 'GuidePatternTreeListForm',
+            element: <GuidePatternTreeListForm />,
+            handle: { breadcrumbName: '좌측 트리 우측 목록 패턴' },
           },
         ],
       },

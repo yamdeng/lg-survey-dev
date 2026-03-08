@@ -160,6 +160,10 @@ export const guideMenuList = [
             menuTitle: 'modal basic',
             menuPath: '/guides/dev/GuideFormModal',
           },
+          {
+            menuTitle: 'modal list search',
+            menuPath: '/guides/dev/GuideListSearchModal',
+          },
         ],
       },
       {
@@ -257,6 +261,22 @@ export const guideMenuList = [
           {
             menuTitle: '테이블 batch 패턴 4',
             menuPath: '/guides/dev-pattern/GuidePatternTableBatch4',
+          },
+          {
+            menuTitle: '테이블 + 폼',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthForm',
+          },
+          {
+            menuTitle: '테이블 + 폼모달 case1',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModal1',
+          },
+          {
+            menuTitle: '테이블 + 폼모달 case2',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModal2',
+          },
+          {
+            menuTitle: '좌측 트리 우측목록',
+            menuPath: '/guides/dev-pattern/GuidePatternTreeListForm',
           },
         ],
       },
