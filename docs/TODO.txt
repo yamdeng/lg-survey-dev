@@ -1,0 +1,45 @@
+### 목록 퍼블리싱 ###
+
+#.GuideTableBatchBasic : http://localhost:8082/guides/dev/GuideListSearchModal
+
+
+
+### 추가 패턴 가이드 ###
+
+1.목록과 폼이 한화면에 있을 경우 case
+GuidePatternListWidthForm : http://localhost:8082/guides/dev-pattern/GuidePatternListWidthForm
+
+2.목록과 폼 모달 연동 case 1 : store 사용버전 X
+GuidePatternListWidthFormModal1 : http://localhost:8082/guides/dev-pattern/GuidePatternListWidthFormModal1
+
+3.목록과 폼 모달 연동 case 2 : store 사용버전 O
+GuidePatternListWidthFormModal2 : http://localhost:8082/guides/dev-pattern/GuidePatternListWidthFormModal2
+
+4.좌측 svar grid 트리 + 우측 목록
+GuidePatternTreeListForm : http://localhost:8082/guides/dev-pattern/GuidePatternTreeListForm
+
+
+===
+
+1.GuidePatternListWidthFormModal1 : zustand를 사용하는 예제
+-getDetail() API 호출
+-오픈시 목록에 있는 데이터를 전달
+-종료시에 결과 값을 받아서 결국은 상위 list에서 해결. API를 호출하고 모달을 close하는 책임은 상위 list store에 있음
+-listSlice, formSlice를 상속받은 store로 해결
+
+2.GuidePatternListWidthFormModal2 : zustand를 사용하지 않는 예제, use-immer
+-getDetail() API 호출
+-오픈시 목록에 있는 데이터를 전달
+
+3.GuidePatternListWidthForm : store 예제로만 작성
+
+4.GuideListSearchModal : store가 아닌 일반 예제로 작성
+-싱글 선택, 멀티 선택 관련 가이드
+-close시 호출한 쪽에서 받아서 사용함
+
+4-1.UserSearchInput 같은 상세 ID를 기준으로 호출하는 input 예제 작성
+
+5.savrgrid, 트리 연동 예제 작성
+-GuidePatternTreeListForm
+
+
