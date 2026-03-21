@@ -315,10 +315,6 @@ export const guideMenuList = [
             menuTitle: '사용자 input(id base로 인터페이스)',
             menuPath: '/guides/dev/GuideAppUserInput',
           },
-          {
-            menuTitle: '공통 트리 인터페이스',
-            menuPath: '/guides/dev/GuideAppTree',
-          },
         ],
       },
       {

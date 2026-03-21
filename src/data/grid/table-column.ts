@@ -133,3 +133,40 @@ export const noticeBaseColumns = [
     cellStyle: { textAlign: 'center' },
   },
 ];
+
+export const userBaseColumns = [
+  {
+    field: 'userKey',
+    headerName: '사용자 키',
+    width: 100,
+  },
+  {
+    field: 'deptKey',
+    headerName: '부서키',
+    width: 120,
+  },
+  {
+    field: 'userName',
+    headerName: '사용자명',
+    minWidth: 200,
+    flex: 1, // 남은 공간을 모두 차지하도록 설정
+    cellStyle: { fontWeight: 'bold' },
+  },
+  {
+    field: 'userId',
+    headerName: '사용자ID',
+    hide: true, // 목록에서는 숨김 처리 (상세 페이지용 데이터)
+  },
+  {
+    field: 'positionTitle',
+    headerName: '직위',
+    width: 100,
+    cellStyle: { textAlign: 'center' },
+  },
+  {
+    field: 'authorCd',
+    headerName: '권한코드',
+    width: 100,
+    cellStyle: { textAlign: 'center' },
+  },
+];

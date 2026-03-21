@@ -89,7 +89,6 @@ import GuidePatternTwoListBatchCase2 from '@/guide/dev-pattern/GuidePatternTwoLi
 import GuidePatternTwoListBatchCase3 from '@/guide/dev-pattern/GuidePatternTwoListBatchCase3';
 import EtcGuide1 from '@/guide/dev-pattern/EtcGuide1';
 
-import GuideAppTree from '@/guide/dev/GuideAppTree';
 import GuideAppUserInput from '@/guide/dev/GuideAppUserInput';
 
 export const GuideRouter = [
@@ -345,11 +344,6 @@ export const GuideRouter = [
             path: 'GuideAppUserInput',
             element: <GuideAppUserInput />,
             handle: { breadcrumbName: '사용자 input(id base로 인터페이스)' },
-          },
-          {
-            path: 'GuideAppTree',
-            element: <GuideAppTree />,
-            handle: { breadcrumbName: '공통 트리 인터페이스' },
           },
         ],
       },
