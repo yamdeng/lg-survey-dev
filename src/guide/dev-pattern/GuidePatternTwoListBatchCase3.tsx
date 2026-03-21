@@ -2,14 +2,13 @@ import AppButton from '@/components/common/AppButton';
 import AppTable from '@/components/common/AppTable';
 import { batchTestData, batchTestData2 } from '@/data/grid/example-data-new';
 import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
-import CommonUtil from '@/utils/CommonUtil';
 import { produce } from 'immer';
 import { useEffect } from 'react';
 import { create } from 'zustand';
 
 /*
 
-  batch CRUD 개발 패턴 2 : 기존 패턴1을 store로 분리(공통 slice로 사용 가능)
+  2 list edit : only store
 
 */
 
@@ -28,12 +27,12 @@ const testListStore = create<any>((set, get) => ({
   deletedRows: [],
 
   // 행 추가
-  addRow: (newRow) => {
-    const { gridApi } = get();
-    gridApi.applyTransaction({
-      add: [newRow],
-      addIndex: 0, // 맨 위에 추가하고 싶을 때 (생략 시 맨 아래)
-    });
+  addRow: (newRowInfo) => {
+    set(
+      produce((state: any) => {
+        state.list.unshift(newRowInfo);
+      }),
+    );
   },
 
   // 선택한 정보 삭제
@@ -45,53 +44,56 @@ const testListStore = create<any>((set, get) => ({
 
   // row 삭제 : [] 기준
   deleteRow: (rowsToRemove) => {
-    const { gridApi } = get();
+    const removeIds = rowsToRemove.map((r: any) => r.dataTestId);
+
+    // 서버 전송용 삭제 목록 추출 (상태가 R이거나 U인 것만)
     const currentDeletedRows = rowsToRemove
-      .filter((row) => row.rowStatus === 'R' || row.rowStatus === 'U')
-      .map((row) => ({ ...row, rowStatus: 'D' })); // 상태를 'D'로 변경
+      .filter((row: any) => row.rowStatus === 'R' || row.rowStatus === 'U')
+      .map((row: any) => ({ ...row, rowStatus: 'D' }));
 
     set(
       produce((state: any) => {
+        // 1. deletedRows에 추가
         state.deletedRows.unshift(...currentDeletedRows);
+        // 2. list에서 실제로 제거 (Store Sync)
+        state.list = state.list.filter((row: any) => !removeIds.includes(row.dataTestId));
       }),
     );
-
-    // 그리드 UI에서 제거
-    gridApi.applyTransaction({ remove: rowsToRemove });
   },
 
   onCellValueChanged: (params) => {
-    CommonUtil.onCellValueChanged(params);
+    const { data } = params;
+    set(
+      produce((state: any) => {
+        const index = state.list.findIndex((item: any) => item.dataTestId === data.dataTestId);
+        if (index !== -1) {
+          state.list[index] = { ...data };
+          // 상태 변경 로직 (기존 R/U 처리)
+          if (state.list[index].rowStatus !== 'A') {
+            state.list[index].rowStatus = 'U';
+          }
+        }
+      }),
+    );
   },
 
+  // 저장 로직 (forEachNode 대신 Store의 list 순회)
   saveBatch: () => {
-    const { gridApi, deletedRows } = get();
+    const { list, deletedRows } = get();
 
-    const created = [];
-    const updated = [];
+    const created = list.filter((row: any) => row.rowStatus === 'A');
+    const updated = list.filter((row: any) => row.rowStatus === 'U');
 
-    // 그리드에 현재 존재하는 노드 순회
-    gridApi.forEachNode((node) => {
-      const { data } = node;
-      if (data.rowStatus === 'A') {
-        created.push(data);
-      } else if (data.rowStatus === 'U') {
-        updated.push(data);
-      }
-    });
-
-    // 최종 결과물
     const saveData = {
-      createList: created, // 추가된 데이터
-      updateList: updated, // 수정된 데이터
-      deleteList: deletedRows, // 삭제된 데이터 (D 상태)
+      list: list,
+      createList: created,
+      updateList: updated,
+      deleteList: deletedRows,
     };
 
-    console.log('=== 저장 데이터 확인 ===');
-    console.log('추가:', saveData.createList);
-    console.log('수정:', saveData.updateList);
-    console.log('삭제:', saveData.deleteList);
+    console.log('=== Store Sync 기준 저장 데이터 ===');
     console.log('전체 전송 객체:', saveData);
+    // axios.post(...) 이후 성공하면 deletedRows 비우기 등 처리
   },
 }));
 
@@ -104,12 +106,12 @@ const testListStore2 = create<any>((set, get) => ({
   deletedRows: [],
 
   // 행 추가
-  addRow: (newRow) => {
-    const { gridApi } = get();
-    gridApi.applyTransaction({
-      add: [newRow],
-      addIndex: 0, // 맨 위에 추가하고 싶을 때 (생략 시 맨 아래)
-    });
+  addRow: (newRowInfo) => {
+    set(
+      produce((state: any) => {
+        state.list.unshift(newRowInfo);
+      }),
+    );
   },
 
   // 선택한 정보 삭제
@@ -121,53 +123,56 @@ const testListStore2 = create<any>((set, get) => ({
 
   // row 삭제 : [] 기준
   deleteRow: (rowsToRemove) => {
-    const { gridApi } = get();
+    const removeIds = rowsToRemove.map((r: any) => r.dataTestId);
+
+    // 서버 전송용 삭제 목록 추출 (상태가 R이거나 U인 것만)
     const currentDeletedRows = rowsToRemove
-      .filter((row) => row.rowStatus === 'R' || row.rowStatus === 'U')
-      .map((row) => ({ ...row, rowStatus: 'D' })); // 상태를 'D'로 변경
+      .filter((row: any) => row.rowStatus === 'R' || row.rowStatus === 'U')
+      .map((row: any) => ({ ...row, rowStatus: 'D' }));
 
     set(
       produce((state: any) => {
+        // 1. deletedRows에 추가
         state.deletedRows.unshift(...currentDeletedRows);
+        // 2. list에서 실제로 제거 (Store Sync)
+        state.list = state.list.filter((row: any) => !removeIds.includes(row.dataTestId));
       }),
     );
-
-    // 그리드 UI에서 제거
-    gridApi.applyTransaction({ remove: rowsToRemove });
   },
 
   onCellValueChanged: (params) => {
-    CommonUtil.onCellValueChanged(params);
+    const { data } = params;
+    set(
+      produce((state: any) => {
+        const index = state.list.findIndex((item: any) => item.dataTestId === data.dataTestId);
+        if (index !== -1) {
+          state.list[index] = { ...data };
+          // 상태 변경 로직 (기존 R/U 처리)
+          if (state.list[index].rowStatus !== 'A') {
+            state.list[index].rowStatus = 'U';
+          }
+        }
+      }),
+    );
   },
 
+  // 저장 로직 (forEachNode 대신 Store의 list 순회)
   saveBatch: () => {
-    const { gridApi, deletedRows } = get();
+    const { list, deletedRows } = get();
 
-    const created = [];
-    const updated = [];
+    const created = list.filter((row: any) => row.rowStatus === 'A');
+    const updated = list.filter((row: any) => row.rowStatus === 'U');
 
-    // 그리드에 현재 존재하는 노드 순회
-    gridApi.forEachNode((node) => {
-      const { data } = node;
-      if (data.rowStatus === 'A') {
-        created.push(data);
-      } else if (data.rowStatus === 'U') {
-        updated.push(data);
-      }
-    });
-
-    // 최종 결과물
     const saveData = {
-      createList: created, // 추가된 데이터
-      updateList: updated, // 수정된 데이터
-      deleteList: deletedRows, // 삭제된 데이터 (D 상태)
+      list: list,
+      createList: created,
+      updateList: updated,
+      deleteList: deletedRows,
     };
 
-    console.log('=== 저장 데이터 확인 ===');
-    console.log('추가:', saveData.createList);
-    console.log('수정:', saveData.updateList);
-    console.log('삭제:', saveData.deleteList);
+    console.log('=== Store Sync 기준 저장 데이터 ===');
     console.log('전체 전송 객체:', saveData);
+    // axios.post(...) 이후 성공하면 deletedRows 비우기 등 처리
   },
 }));
 
@@ -307,11 +312,6 @@ function GuidePatternTwoListBatchCase3() {
     addRow2(newRow);
   };
 
-  const handleTable1RowDoubleClick = (selectedInfo) => {
-    // selectedInfo.data
-    alert(selectedInfo.data.name);
-  };
-
   useEffect(() => {
     setList(batchTestData);
     setList2(batchTestData2);
@@ -358,7 +358,8 @@ function GuidePatternTwoListBatchCase3() {
                     hiddenPagination={true}
                     stopEditingWhenCellsLoseFocus={true}
                     onCellValueChanged={onCellValueChanged}
-                    handleRowDoubleClick={handleTable1RowDoubleClick}
+                    enableCheckBox
+                    rowSelectMode={'multiRow'}
                     rowIdKey="dataTestId"
                   />
                 </div>

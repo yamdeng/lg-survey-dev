@@ -9,7 +9,7 @@ import { create } from 'zustand';
 
 /*
 
-  batch CRUD 개발 패턴 2 : 기존 패턴1을 store로 분리(공통 slice로 사용 가능)
+  2 list edit : applyTransaction
 
 */
 
@@ -27,13 +27,27 @@ const testListStore = create<any>((set, get) => ({
 
   deletedRows: [],
 
+  syncListWithGrid: () => {
+    const { gridApi } = get();
+    if (!gridApi) return;
+
+    const rows: any[] = [];
+    // 현재 그리드의 모든 노드를 순회하며 데이터를 추출 (필터/정렬 상태 반영됨)
+    gridApi.forEachNode((node) => {
+      rows.push(node.data);
+    });
+
+    set({ list: rows });
+  },
+
   // 행 추가
   addRow: (newRow) => {
-    const { gridApi } = get();
+    const { gridApi, syncListWithGrid } = get();
     gridApi.applyTransaction({
       add: [newRow],
       addIndex: 0, // 맨 위에 추가하고 싶을 때 (생략 시 맨 아래)
     });
+    syncListWithGrid();
   },
 
   // 선택한 정보 삭제
@@ -45,7 +59,7 @@ const testListStore = create<any>((set, get) => ({
 
   // row 삭제 : [] 기준
   deleteRow: (rowsToRemove) => {
-    const { gridApi } = get();
+    const { gridApi, syncListWithGrid } = get();
     const currentDeletedRows = rowsToRemove
       .filter((row) => row.rowStatus === 'R' || row.rowStatus === 'U')
       .map((row) => ({ ...row, rowStatus: 'D' })); // 상태를 'D'로 변경
@@ -58,6 +72,8 @@ const testListStore = create<any>((set, get) => ({
 
     // 그리드 UI에서 제거
     gridApi.applyTransaction({ remove: rowsToRemove });
+
+    syncListWithGrid();
   },
 
   onCellValueChanged: (params) => {
@@ -65,7 +81,7 @@ const testListStore = create<any>((set, get) => ({
   },
 
   saveBatch: () => {
-    const { gridApi, deletedRows } = get();
+    const { gridApi, deletedRows, list } = get();
 
     const created = [];
     const updated = [];
@@ -88,6 +104,7 @@ const testListStore = create<any>((set, get) => ({
     };
 
     console.log('=== 저장 데이터 확인 ===');
+    console.log('원본:', list);
     console.log('추가:', saveData.createList);
     console.log('수정:', saveData.updateList);
     console.log('삭제:', saveData.deleteList);
@@ -103,13 +120,27 @@ const testListStore2 = create<any>((set, get) => ({
 
   deletedRows: [],
 
+  syncListWithGrid: () => {
+    const { gridApi } = get();
+    if (!gridApi) return;
+
+    const rows: any[] = [];
+    // 현재 그리드의 모든 노드를 순회하며 데이터를 추출 (필터/정렬 상태 반영됨)
+    gridApi.forEachNode((node) => {
+      rows.push(node.data);
+    });
+
+    set({ list: rows });
+  },
+
   // 행 추가
   addRow: (newRow) => {
-    const { gridApi } = get();
+    const { gridApi, syncListWithGrid } = get();
     gridApi.applyTransaction({
       add: [newRow],
       addIndex: 0, // 맨 위에 추가하고 싶을 때 (생략 시 맨 아래)
     });
+    syncListWithGrid();
   },
 
   // 선택한 정보 삭제
@@ -121,7 +152,7 @@ const testListStore2 = create<any>((set, get) => ({
 
   // row 삭제 : [] 기준
   deleteRow: (rowsToRemove) => {
-    const { gridApi } = get();
+    const { gridApi, syncListWithGrid } = get();
     const currentDeletedRows = rowsToRemove
       .filter((row) => row.rowStatus === 'R' || row.rowStatus === 'U')
       .map((row) => ({ ...row, rowStatus: 'D' })); // 상태를 'D'로 변경
@@ -134,6 +165,7 @@ const testListStore2 = create<any>((set, get) => ({
 
     // 그리드 UI에서 제거
     gridApi.applyTransaction({ remove: rowsToRemove });
+    syncListWithGrid();
   },
 
   onCellValueChanged: (params) => {
@@ -141,7 +173,7 @@ const testListStore2 = create<any>((set, get) => ({
   },
 
   saveBatch: () => {
-    const { gridApi, deletedRows } = get();
+    const { gridApi, deletedRows, list } = get();
 
     const created = [];
     const updated = [];
@@ -164,6 +196,7 @@ const testListStore2 = create<any>((set, get) => ({
     };
 
     console.log('=== 저장 데이터 확인 ===');
+    console.log('원본:', list);
     console.log('추가:', saveData.createList);
     console.log('수정:', saveData.updateList);
     console.log('삭제:', saveData.deleteList);
@@ -307,11 +340,6 @@ function GuidePatternTwoListBatchCase2() {
     addRow2(newRow);
   };
 
-  const handleTable1RowDoubleClick = (selectedInfo) => {
-    // selectedInfo.data
-    alert(selectedInfo.data.name);
-  };
-
   useEffect(() => {
     setList(batchTestData);
     setList2(batchTestData2);
@@ -358,7 +386,8 @@ function GuidePatternTwoListBatchCase2() {
                     hiddenPagination={true}
                     stopEditingWhenCellsLoseFocus={true}
                     onCellValueChanged={onCellValueChanged}
-                    handleRowDoubleClick={handleTable1RowDoubleClick}
+                    enableCheckBox
+                    rowSelectMode={'multiRow'}
                     rowIdKey="dataTestId"
                   />
                 </div>
