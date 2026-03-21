@@ -30,7 +30,13 @@ import './yupLocale';
 setAutoFreeze(false);
 
 createRoot(document.getElementById('root')!).render(
-  <ConfigProvider theme={customTheme} locale={koKR}>
+  <ConfigProvider
+    theme={customTheme}
+    locale={koKR}
+    modal={{
+      className: 'survey',
+    }}
+  >
     <App>
       <RouterProvider router={Router} />
     </App>

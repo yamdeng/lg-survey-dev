@@ -1,53 +1,74 @@
-import { Modal } from 'antd';
-import { FilePenLine } from 'lucide-react';
 import AppButton from '@/components/common/AppButton';
 import AppCheckbox from '@/components/common/AppCheckbox';
-import { useState, useEffect } from 'react';
-import AppTable from '@/components/common/AppTable';
-import { getAllData } from '@/data/grid/example-data-new';
-import { testColumnInfos } from '@/data/grid/table-column';
 import AppSearchInput from '@/components/common/AppSearchInput';
+import AppTable from '@/components/common/AppTable';
+import { noticeBaseColumns } from '@/data/grid/table-column';
+import { createListSlice, listBaseState } from '@/stores/slice/listSlice';
+import { Modal } from 'antd';
+import { FilePenLine } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { create } from 'zustand';
 
 /*
 
-  #.목록 모달 오픈 case : useState 기반 예시
+  #.목록 모달 오픈 case : store 기반 예시
    -모달에서 오픈 되서 전달받은 값을 이용하는 case
 
 */
 
+const initListData = {
+  ...listBaseState,
+  listApiPath: 'notices',
+};
+
+const useListStore = create<any>((set, get) => ({
+  ...createListSlice(set, get),
+
+  ...initListData,
+
+  clear: () => {
+    set({ ...listBaseState });
+  },
+}));
+
 const ListTestModal = (props) => {
   const { isOpen, isMultiple, closeModal, okModal } = props;
-  const [selectedInfo, setSelectedInfo] = useState(null);
-  const [selectedIds, setSelectedIds] = useState([]);
-  const [rowData, setRowData] = useState(getAllData());
-  const columns = testColumnInfos;
+  const columns = noticeBaseColumns;
+
+  const {
+    search,
+    list,
+    selectedRowInfos,
+    selectedRowKeys,
+    changeSelectedRowInfos,
+    changeSelectedRowKeys,
+  } = useListStore();
 
   const handleRowSelect = (selectedData) => {
     // 멀티 선택 모드일 경우 배열로 들어옴
+    changeSelectedRowInfos(selectedData);
 
-    setSelectedInfo(selectedData);
-
+    // 중요! : boardKey로 정의(각 행의 id 키값 반영)
     const ids = Array.isArray(selectedData)
-      ? selectedData.map((item) => item.id)
-      : [selectedData?.id];
+      ? selectedData.map((item) => item.boardKey)
+      : [selectedData?.boardKey];
 
-    setSelectedIds(ids);
+    changeSelectedRowKeys(ids);
   };
 
   const handleApply = () => {
-    okModal(selectedInfo);
+    okModal(selectedRowInfos);
   };
 
   useEffect(() => {
     if (isOpen) {
-      setRowData(getAllData());
-    } else {
-      setRowData([]);
-      setSelectedIds([]);
+      search();
     }
   }, [isOpen]);
 
-  const okButtonEnable = isMultiple ? selectedInfo && selectedInfo.length : selectedInfo;
+  const okButtonEnable = isMultiple
+    ? selectedRowInfos && selectedRowInfos.length
+    : selectedRowInfos;
 
   return (
     <Modal
@@ -75,13 +96,13 @@ const ListTestModal = (props) => {
                 <AppTable
                   tableHeight={500}
                   pageSize={20}
-                  rowData={rowData}
+                  rowData={list}
                   columns={columns}
                   rowSelectMode={isMultiple ? 'multiRow' : 'singleRow'}
                   handleRowSelect={handleRowSelect}
                   enableCheckBox
-                  selectedRowIds={selectedIds}
-                  rowIdKey="id"
+                  selectedRowIds={selectedRowKeys}
+                  rowIdKey="boardKey"
                 />
               </div>
             </div>
@@ -96,7 +117,7 @@ const ListTestModal = (props) => {
   );
 };
 
-const GuideSearchModal1 = () => {
+const GuideSearchModal2 = () => {
   const [isMultiple, setIsMultiple] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -148,4 +169,4 @@ const GuideSearchModal1 = () => {
   );
 };
 
-export default GuideSearchModal1;
+export default GuideSearchModal2;

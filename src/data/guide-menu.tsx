@@ -272,6 +272,10 @@ export const guideMenuList = [
             menuPath: '/guides/dev-pattern/GuideSearchModal1',
           },
           {
+            menuTitle: '검색 모달 인터페이스(store)',
+            menuPath: '/guides/dev-pattern/GuideSearchModal2',
+          },
+          {
             menuTitle: '목록+폼모달(store + list선택연동)',
             menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModalCase1',
           },

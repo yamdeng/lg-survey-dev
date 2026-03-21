@@ -78,6 +78,7 @@ import GuidePatternTableBatch4 from '@/guide/dev-pattern/GuidePatternTableBatch4
 
 /* 추가 가이드 0323 */
 import GuideSearchModal1 from '@/guide/dev-pattern/GuideSearchModal1';
+import GuideSearchModal2 from '@/guide/dev-pattern/GuideSearchModal2';
 import GuidePatternListWidthFormModalCase1 from '@/guide/dev-pattern/GuidePatternListWidthFormModalCase1';
 import GuidePatternListWidthFormModalCase2 from '@/guide/dev-pattern/GuidePatternListWidthFormModalCase2';
 import GuidePatternListWidthFormModalCase3 from '@/guide/dev-pattern/GuidePatternListWidthFormModalCase3';
@@ -409,6 +410,11 @@ export const GuideRouter = [
             path: 'GuideSearchModal1',
             element: <GuideSearchModal1 />,
             handle: { breadcrumbName: '검색 모달 인터페이스' },
+          },
+          {
+            path: 'GuideSearchModal2',
+            element: <GuideSearchModal2 />,
+            handle: { breadcrumbName: '검색 모달 인터페이스(store)' },
           },
           {
             path: 'GuidePatternListWidthFormModalCase1',
