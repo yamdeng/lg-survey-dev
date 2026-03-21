@@ -296,12 +296,16 @@ export const guideMenuList = [
             menuPath: '/guides/dev-pattern/GuidePatternListWidthFormCase2',
           },
           {
-            menuTitle: '2 list edit : applyTransaction',
+            menuTitle: '테이블간 선택 행 이동 case',
             menuPath: '/guides/dev-pattern/GuidePatternTwoListBatchCase1',
           },
           {
-            menuTitle: '2 list edit : only store',
+            menuTitle: '2 list edit : applyTransaction',
             menuPath: '/guides/dev-pattern/GuidePatternTwoListBatchCase2',
+          },
+          {
+            menuTitle: '2 list edit : only store',
+            menuPath: '/guides/dev-pattern/GuidePatternTwoListBatchCase3',
           },
           {
             menuTitle: '추가패턴 가이드1(좌측목록, 우측 폼, 목록)',

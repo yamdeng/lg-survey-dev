@@ -86,6 +86,7 @@ import GuidePatternListWidthFormCase1 from '@/guide/dev-pattern/GuidePatternList
 import GuidePatternListWidthFormCase2 from '@/guide/dev-pattern/GuidePatternListWidthFormCase2';
 import GuidePatternTwoListBatchCase1 from '@/guide/dev-pattern/GuidePatternTwoListBatchCase1';
 import GuidePatternTwoListBatchCase2 from '@/guide/dev-pattern/GuidePatternTwoListBatchCase2';
+import GuidePatternTwoListBatchCase3 from '@/guide/dev-pattern/GuidePatternTwoListBatchCase3';
 import EtcGuide1 from '@/guide/dev-pattern/EtcGuide1';
 
 import GuideAppTree from '@/guide/dev/GuideAppTree';
@@ -444,11 +445,16 @@ export const GuideRouter = [
           {
             path: 'GuidePatternTwoListBatchCase1',
             element: <GuidePatternTwoListBatchCase1 />,
-            handle: { breadcrumbName: '2 list edit : applyTransaction' },
+            handle: { breadcrumbName: '테이블간 선택 행 이동 case' },
           },
           {
             path: 'GuidePatternTwoListBatchCase2',
             element: <GuidePatternTwoListBatchCase2 />,
+            handle: { breadcrumbName: '2 list edit : applyTransaction' },
+          },
+          {
+            path: 'GuidePatternTwoListBatchCase3',
+            element: <GuidePatternTwoListBatchCase3 />,
             handle: { breadcrumbName: '2 list edit : only store' },
           },
           {

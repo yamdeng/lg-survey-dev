@@ -188,7 +188,7 @@ const ActionButtons = (params) => {
   );
 };
 
-function GuidePatternTwoListBatchCase2() {
+function GuidePatternTwoListBatchCase3() {
   const listStore = testListStore();
   const listStore2 = testListStore2();
 
@@ -403,4 +403,4 @@ function GuidePatternTwoListBatchCase2() {
     </>
   );
 }
-export default GuidePatternTwoListBatchCase2;
+export default GuidePatternTwoListBatchCase3;
