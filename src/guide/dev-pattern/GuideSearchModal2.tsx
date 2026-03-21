@@ -136,7 +136,7 @@ const GuideSearchModal2 = () => {
       <div className="content-inner">
         <div className="content-title">
           <FilePenLine size={18} />
-          <h3 className="title-text">GuideSearchModal1</h3>
+          <h3 className="title-text">GuideSearchModal2</h3>
         </div>
         <div className="content-body">
           <div className="form-block border-none">

@@ -7,7 +7,19 @@ import { produce } from 'immer';
 const yupFormSchema = yup.object({
   boardTitle: yup.string().required('게시판 제목을 입력해주세요.'),
   boardType: yup.string().required('게시판 유형을 선택해주세요.'),
-  boardContent: yup.string().required('내용을 입력해주세요'), // 목록에서 숨김 처리되나 상세 데이터용
+  boardContent: yup
+    .string()
+    .test('is-empty', '내용을 입력해주세요', (value) => {
+      if (!value) return false;
+      // 1. HTML 태그 제거
+      // 2. 공백 문자(&nbsp; 등) 제거
+      const cleanText = value
+        .replace(/<[^>]*>/g, '')
+        .replace(/&nbsp;/g, '')
+        .trim();
+      return cleanText.length > 0; // 실제 글자가 있어야 통과
+    })
+    .required('내용을 입력해주세요'),
   useYn: yup.string().default('Y'),
   mainYn: yup.string().default('N'),
   boardAuthType: yup.string().nullable(),

@@ -108,7 +108,7 @@ function GuidePatternTable3() {
         <div className="content-inner">
           <div className="content-title">
             <FilePenLine size={18} />
-            <h3 className="title-text">목록 개발 패턴1(store)</h3>
+            <h3 className="title-text">목록 개발 패턴3</h3>
           </div>
           <div className="content-body">
             <div className="form-block border-none">

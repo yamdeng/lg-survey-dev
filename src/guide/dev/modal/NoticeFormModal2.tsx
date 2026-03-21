@@ -4,12 +4,16 @@ import AppSelect from '@/components/common/AppSelect';
 import AppTextEditor from '@/components/common/AppTextEditor';
 import AppTextInput from '@/components/common/AppTextInput';
 import Code from '@/config/Code';
-import CommonUtil from '@/utils/CommonUtil';
-import { Check, FilePenLine } from 'lucide-react';
-import { useState } from 'react';
+import { Modal } from 'antd';
+import { Check, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useImmer } from 'use-immer';
 import * as yup from 'yup';
+import CommonUtil from '@/utils/CommonUtil';
+import { FORM_TYPE_ADD, FORM_TYPE_UPDATE } from '@/config/CommonConstant';
+import ApiService from '@/services/ApiService';
 import ToastService from '@/services/ToastService';
+import ModalService from '@/services/ModalService';
 
 /* yup validation */
 const yupFormSchema = yup.object({
@@ -36,12 +40,15 @@ const initFormValue = {
   securityLevel: '1', // 숫자 필드는 null 혹은 기본값 설정
 };
 
-const GuidePatternForm2 = () => {
-  /* formStore state input 변수 */
+/* store 연동 모달 */
+function NoticeFormModal2(props) {
+  const { isOpen, detailId, okModal, closeModal } = props;
 
   const [formValue, setFormValue] = useImmer({ ...initFormValue });
+  const [formType, setFormType] = useState(FORM_TYPE_ADD);
   const [errors, setErrors] = useState<any>({});
 
+  /* formStore state input 변수 */
   const { boardType, boardTitle, boardContent, useYn, mainYn, boardAuthType, securityLevel } =
     formValue;
 
@@ -68,7 +75,7 @@ const GuidePatternForm2 = () => {
     }
   };
 
-  const save = async () => {
+  const handleSave = async () => {
     const validateResult = await CommonUtil.validateYupForm(yupFormSchema, formValue);
     const { success, firstErrorFieldKey, firstErrorMessage, errors } = validateResult;
     if (!success) {
@@ -84,16 +91,64 @@ const GuidePatternForm2 = () => {
         firstInputDom.focus();
       }
       ToastService.warn(`${firstErrorMessage}`);
+    } else {
+      ModalService.confirm({
+        body: '저장하시겠습니까?',
+        ok: async () => {
+          if (formType === FORM_TYPE_ADD) {
+            await ApiService.post('notices', formValue);
+            okModal();
+          } else {
+            await ApiService.put(`notices/${detailId}`, formValue);
+            okModal();
+          }
+          ToastService.success('저장되었습니다.');
+        },
+      });
     }
   };
 
+  const getDetail = async (detailId) => {
+    const apiResult = await ApiService.get(`notices/${detailId}`);
+    const data = apiResult;
+    setFormValue({ ...data });
+    setFormType(FORM_TYPE_UPDATE);
+  };
+
+  const clear = () => {
+    setFormValue({ ...initFormValue });
+    setErrors({});
+    setFormType(FORM_TYPE_ADD);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      if (detailId) {
+        getDetail(detailId);
+      } else {
+        setFormValue({ ...initFormValue });
+      }
+    } else {
+      clear();
+    }
+  }, [isOpen, detailId]);
+
+  useEffect(() => {
+    clear();
+  }, []);
+
   return (
-    <main className="content-main">
-      <div className="content-inner">
-        <div className="content-title">
-          <FilePenLine size={18} />
-          <h3 className="title-text">폼 예시(store)</h3>
-        </div>
+    <Modal
+      width={800} // 직접 props로 전달 (숫자는 px 단위)
+      centered // 양이 많으므로 화면 중앙에 배치 추천
+      closable={true}
+      title={formType === FORM_TYPE_ADD ? '공지사항 등록' : ' 공지사항수정'}
+      open={isOpen}
+      onOk={closeModal}
+      onCancel={closeModal}
+      footer={null}
+    >
+      <div>
         <div className="content-body">
           <div className="content-block-modify">
             <table className="modify-table">
@@ -214,12 +269,13 @@ const GuidePatternForm2 = () => {
             </table>
           </div>
           <div className="btn-group-end">
-            <AppButton icon={<Check size={18} />} value="저장" onClick={save} />
+            <AppButton icon={<Check size={18} />} value="저장" onClick={handleSave} />
+            <AppButton icon={<X size={18} />} value="취소" theme="secondary" onClick={closeModal} />
           </div>
         </div>
       </div>
-    </main>
+    </Modal>
   );
-};
+}
 
-export default GuidePatternForm2;
+export default NoticeFormModal2;

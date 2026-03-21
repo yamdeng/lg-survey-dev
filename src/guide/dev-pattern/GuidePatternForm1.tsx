@@ -10,18 +10,11 @@ import { useEffect } from 'react';
 
 const GuidePatternForm1 = () => {
   /* formStore state input 변수 */
-  const { errors, changeInput, changeBoardType, formValue, save } = useGuidePatternFormStore();
+  const { errors, changeInput, changeBoardType, formValue, save, clear } =
+    useGuidePatternFormStore();
 
-  const {
-    boardType,
-    boardTitle,
-    boardContent,
-    useYn,
-    mainYn,
-    boardAuthType,
-    securityLevel,
-    clear,
-  } = formValue;
+  const { boardType, boardTitle, boardContent, useYn, mainYn, boardAuthType, securityLevel } =
+    formValue;
 
   useEffect(() => {
     return clear;

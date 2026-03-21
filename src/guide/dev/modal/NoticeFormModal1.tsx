@@ -4,18 +4,31 @@ import AppSelect from '@/components/common/AppSelect';
 import AppTextEditor from '@/components/common/AppTextEditor';
 import AppTextInput from '@/components/common/AppTextInput';
 import Code from '@/config/Code';
-import CommonUtil from '@/utils/CommonUtil';
-import { Check, FilePenLine } from 'lucide-react';
-import { useState } from 'react';
-import { useImmer } from 'use-immer';
+import { createFormSliceYup, formBaseState } from '@/stores/slice/formSlice';
+import { Modal } from 'antd';
+import { Check, X } from 'lucide-react';
+import { create } from 'zustand';
 import * as yup from 'yup';
-import ToastService from '@/services/ToastService';
+import { useEffect } from 'react';
+import { FORM_TYPE_ADD } from '@/config/CommonConstant';
 
 /* yup validation */
 const yupFormSchema = yup.object({
   boardTitle: yup.string().required('게시판 제목을 입력해주세요.'),
   boardType: yup.string().required('게시판 유형을 선택해주세요.'),
-  boardContent: yup.string().required('내용을 입력해주세요'), // 목록에서 숨김 처리되나 상세 데이터용
+  boardContent: yup
+    .string()
+    .test('is-empty', '내용을 입력해주세요', (value) => {
+      if (!value) return false;
+      // 1. HTML 태그 제거
+      // 2. 공백 문자(&nbsp; 등) 제거
+      const cleanText = value
+        .replace(/<[^>]*>/g, '')
+        .replace(/&nbsp;/g, '')
+        .trim();
+      return cleanText.length > 0; // 실제 글자가 있어야 통과
+    })
+    .required('내용을 입력해주세요'),
   useYn: yup.string().default('Y'),
   mainYn: yup.string().default('N'),
   boardAuthType: yup.string().nullable(),
@@ -36,64 +49,79 @@ const initFormValue = {
   securityLevel: '1', // 숫자 필드는 null 혹은 기본값 설정
 };
 
-const GuidePatternForm2 = () => {
-  /* formStore state input 변수 */
+/* form 초기화 */
+const initFormData = {
+  ...formBaseState,
 
-  const [formValue, setFormValue] = useImmer({ ...initFormValue });
-  const [errors, setErrors] = useState<any>({});
+  byPassSaveCancel: true /* 매우중요! */,
+  formApiPath: 'notices',
+  baseRoutePath: '/notices',
+  formName: '',
+  formValue: {
+    ...initFormValue,
+  },
+};
+
+const useNoticeFormStore = create<any>((set, get) => ({
+  ...createFormSliceYup(set, get),
+
+  ...initFormData,
+
+  yupFormSchema: yupFormSchema,
+
+  clear: () => {
+    set({ ...formBaseState, formValue: { ...initFormValue }, fileList: [] });
+  },
+}));
+
+/* store 연동 모달 */
+function NoticeFormModal1(props) {
+  const { isOpen, formInfo, detailId, closeModal, okModal } = props;
+
+  /* formStore state input 변수 */
+  const { errors, changeInput, formValue, formType, getDetail, save, clear, setFormValue } =
+    useNoticeFormStore();
 
   const { boardType, boardTitle, boardContent, useYn, mainYn, boardAuthType, securityLevel } =
     formValue;
 
-  const changeInput = async (inputName: string, inputValue: any) => {
-    setFormValue((draft) => {
-      draft[inputName] = inputValue;
-    });
-
-    try {
-      await yupFormSchema.validateAt(inputName, {
-        ...formValue,
-        [inputName]: inputValue,
-      });
-
-      setErrors((prevErrors: any) => ({
-        ...prevErrors,
-        [inputName]: null,
-      }));
-    } catch (error: any) {
-      setErrors((prevErrors: any) => ({
-        ...prevErrors,
-        [inputName]: error.message,
-      }));
-    }
+  const handleSave = () => {
+    save(okModal);
   };
 
-  const save = async () => {
-    const validateResult = await CommonUtil.validateYupForm(yupFormSchema, formValue);
-    const { success, firstErrorFieldKey, firstErrorMessage, errors } = validateResult;
-    if (!success) {
-      const applyFirstErrorFieldKey = firstErrorFieldKey;
-      const firstInputDom = document.getElementById(applyFirstErrorFieldKey);
-      const firstEditorDom: any = document.querySelector(`#${applyFirstErrorFieldKey} .ql-editor`);
-      setErrors(errors);
-      if (firstEditorDom) {
-        setTimeout(() => {
-          firstEditorDom.focus();
-        }, 10);
-      } else if (firstInputDom) {
-        firstInputDom.focus();
+  useEffect(() => {
+    if (isOpen) {
+      if (formInfo || detailId) {
+        if (formInfo) {
+          setFormValue(formInfo, formInfo.boardKey);
+        }
+        if (detailId) {
+          getDetail(detailId);
+        }
+      } else {
+        setFormValue(initFormValue);
       }
-      ToastService.warn(`${firstErrorMessage}`);
+    } else {
+      clear();
     }
-  };
+  }, [isOpen, formInfo]);
+
+  useEffect(() => {
+    clear();
+  }, []);
 
   return (
-    <main className="content-main">
-      <div className="content-inner">
-        <div className="content-title">
-          <FilePenLine size={18} />
-          <h3 className="title-text">폼 예시(store)</h3>
-        </div>
+    <Modal
+      width={800} // 직접 props로 전달 (숫자는 px 단위)
+      centered // 양이 많으므로 화면 중앙에 배치 추천
+      closable={true}
+      title={formType === FORM_TYPE_ADD ? '공지사항 등록' : ' 공지사항수정'}
+      open={isOpen}
+      onOk={closeModal}
+      onCancel={closeModal}
+      footer={null}
+    >
+      <div>
         <div className="content-body">
           <div className="content-block-modify">
             <table className="modify-table">
@@ -214,12 +242,13 @@ const GuidePatternForm2 = () => {
             </table>
           </div>
           <div className="btn-group-end">
-            <AppButton icon={<Check size={18} />} value="저장" onClick={save} />
+            <AppButton icon={<Check size={18} />} value="저장" onClick={handleSave} />
+            <AppButton icon={<X size={18} />} value="취소" theme="secondary" onClick={closeModal} />
           </div>
         </div>
       </div>
-    </main>
+    </Modal>
   );
-};
+}
 
-export default GuidePatternForm2;
+export default NoticeFormModal1;
