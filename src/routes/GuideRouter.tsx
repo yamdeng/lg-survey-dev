@@ -75,10 +75,20 @@ import GuidePatternTableBatch1 from '@/guide/dev-pattern/GuidePatternTableBatch1
 import GuidePatternTableBatch2 from '@/guide/dev-pattern/GuidePatternTableBatch2';
 import GuidePatternTableBatch3 from '@/guide/dev-pattern/GuidePatternTableBatch3';
 import GuidePatternTableBatch4 from '@/guide/dev-pattern/GuidePatternTableBatch4';
-import GuidePatternListWidthForm from '@/guide/dev-pattern/GuidePatternListWidthForm';
-import GuidePatternListWidthFormModal1 from '@/guide/dev-pattern/GuidePatternListWidthFormModal1';
-import GuidePatternListWidthFormModal2 from '@/guide/dev-pattern/GuidePatternListWidthFormModal2';
-import GuidePatternTreeListForm from '@/guide/dev-pattern/GuidePatternTreeListForm';
+
+/* 추가 가이드 0323 */
+import GuideSearchModal1 from '@/guide/dev-pattern/GuideSearchModal1';
+import GuidePatternListWidthFormModalCase1 from '@/guide/dev-pattern/GuidePatternListWidthFormModalCase1';
+import GuidePatternListWidthFormModalCase2 from '@/guide/dev-pattern/GuidePatternListWidthFormModalCase2';
+import GuidePatternListWidthFormModalCase3 from '@/guide/dev-pattern/GuidePatternListWidthFormModalCase3';
+import GuidePatternListWidthFormCase1 from '@/guide/dev-pattern/GuidePatternListWidthFormCase1';
+import GuidePatternListWidthFormCase2 from '@/guide/dev-pattern/GuidePatternListWidthFormCase2';
+import GuidePatternTwoListBatchCase1 from '@/guide/dev-pattern/GuidePatternTwoListBatchCase1';
+import GuidePatternTwoListBatchCase2 from '@/guide/dev-pattern/GuidePatternTwoListBatchCase2';
+import EtcGuide1 from '@/guide/dev-pattern/EtcGuide1';
+
+import GuideAppTree from '@/guide/dev/GuideAppTree';
+import GuideAppUserInput from '@/guide/dev/GuideAppUserInput';
 
 export const GuideRouter = [
   {
@@ -322,12 +332,22 @@ export const GuideRouter = [
           {
             path: 'GuideFormModal',
             element: <GuideFormModal />,
-            handle: { breadcrumbName: 'modal basic' },
+            handle: { breadcrumbName: 'modal basic(퍼블리싱)' },
           },
           {
             path: 'GuideListSearchModal',
             element: <GuideListSearchModal />,
-            handle: { breadcrumbName: 'modal list search' },
+            handle: { breadcrumbName: 'modal list search(퍼블리싱)' },
+          },
+          {
+            path: 'GuideAppUserInput',
+            element: <GuideAppUserInput />,
+            handle: { breadcrumbName: '사용자 input(id base로 인터페이스)' },
+          },
+          {
+            path: 'GuideAppTree',
+            element: <GuideAppTree />,
+            handle: { breadcrumbName: '공통 트리 인터페이스' },
           },
         ],
       },
@@ -381,24 +401,54 @@ export const GuideRouter = [
             handle: { breadcrumbName: '테이블 batch 패턴 4' },
           },
           {
-            path: 'GuidePatternListWidthForm',
-            element: <GuidePatternListWidthForm />,
-            handle: { breadcrumbName: '목록과 폼 연동 패턴' },
+            path: 'GuidePatternTableBatch4',
+            element: <GuidePatternTableBatch4 />,
+            handle: { breadcrumbName: '테이블 batch 패턴 4' },
           },
           {
-            path: 'GuidePatternListWidthFormModal1',
-            element: <GuidePatternListWidthFormModal1 />,
-            handle: { breadcrumbName: '목록과 폼모달 연동 패턴' },
+            path: 'GuideSearchModal1',
+            element: <GuideSearchModal1 />,
+            handle: { breadcrumbName: '검색 모달 인터페이스' },
           },
           {
-            path: 'GuidePatternListWidthFormModal2',
-            element: <GuidePatternListWidthFormModal2 />,
-            handle: { breadcrumbName: '목록과 폼모달 연동 패턴2' },
+            path: 'GuidePatternListWidthFormModalCase1',
+            element: <GuidePatternListWidthFormModalCase1 />,
+            handle: { breadcrumbName: '목록+폼모달(store + list선택연동)' },
           },
           {
-            path: 'GuidePatternTreeListForm',
-            element: <GuidePatternTreeListForm />,
-            handle: { breadcrumbName: '좌측 트리 우측 목록 패턴' },
+            path: 'GuidePatternListWidthFormModalCase2',
+            element: <GuidePatternListWidthFormModalCase2 />,
+            handle: { breadcrumbName: '목록+폼모달(store + 상세ID)' },
+          },
+          {
+            path: 'GuidePatternListWidthFormModalCase3',
+            element: <GuidePatternListWidthFormModalCase3 />,
+            handle: { breadcrumbName: '목록+폼모달(useImmer + list선택연동)' },
+          },
+          {
+            path: 'GuidePatternListWidthFormCase1',
+            element: <GuidePatternListWidthFormCase1 />,
+            handle: { breadcrumbName: '목록+폼(store + list선택연동)' },
+          },
+          {
+            path: 'GuidePatternListWidthFormCase2',
+            element: <GuidePatternListWidthFormCase2 />,
+            handle: { breadcrumbName: '목록+폼(store + 상세ID)' },
+          },
+          {
+            path: 'GuidePatternTwoListBatchCase1',
+            element: <GuidePatternTwoListBatchCase1 />,
+            handle: { breadcrumbName: '2 list edit : applyTransaction' },
+          },
+          {
+            path: 'GuidePatternTwoListBatchCase2',
+            element: <GuidePatternTwoListBatchCase2 />,
+            handle: { breadcrumbName: '2 list edit : only store' },
+          },
+          {
+            path: 'EtcGuide1',
+            element: <EtcGuide1 />,
+            handle: { breadcrumbName: '추가 가이드' },
           },
         ],
       },

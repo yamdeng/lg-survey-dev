@@ -262,59 +262,60 @@ export const guideMenuList = [
             menuTitle: '테이블 batch 패턴 4',
             menuPath: '/guides/dev-pattern/GuidePatternTableBatch4',
           },
+        ],
+      },
+      {
+        menuTitle: '추가 개발 가이드',
+        children: [
           {
-            menuTitle: '테이블 + 폼',
-            menuPath: '/guides/dev-pattern/GuidePatternListWidthForm',
+            menuTitle: '검색 모달 인터페이스',
+            menuPath: '/guides/dev-pattern/GuideSearchModal1',
           },
           {
-            menuTitle: '테이블 + 폼모달 case1',
-            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModal1',
+            menuTitle: '목록+폼모달(store + list선택연동)',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModalCase1',
           },
           {
-            menuTitle: '테이블 + 폼모달 case2',
-            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModal2',
+            menuTitle: '목록+폼모달(store + 상세ID)',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModalCase2',
           },
           {
-            menuTitle: '좌측 트리 우측목록',
-            menuPath: '/guides/dev-pattern/GuidePatternTreeListForm',
+            menuTitle: '목록+폼모달(useImmer + list선택연동)',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormModalCase3',
+          },
+          {
+            menuTitle: '목록+폼(store + list선택연동)',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormCase1',
+          },
+          {
+            menuTitle: '목록+폼(store + 상세ID)',
+            menuPath: '/guides/dev-pattern/GuidePatternListWidthFormCase2',
+          },
+          {
+            menuTitle: '2 list edit : applyTransaction',
+            menuPath: '/guides/dev-pattern/GuidePatternTwoListBatchCase1',
+          },
+          {
+            menuTitle: '2 list edit : only store',
+            menuPath: '/guides/dev-pattern/GuidePatternTwoListBatchCase2',
+          },
+          {
+            menuTitle: '추가패턴 가이드1(좌측목록, 우측 폼, 목록)',
+            menuPath: '/guides/dev-pattern/EtcGuide1',
+          },
+          {
+            menuTitle: '사용자 input(id base로 인터페이스)',
+            menuPath: '/guides/dev/GuideAppUserInput',
+          },
+          {
+            menuTitle: '공통 트리 인터페이스',
+            menuPath: '/guides/dev/GuideAppTree',
           },
         ],
       },
       {
         menuTitle: '퍼블리싱 가이드',
-        children: [
-          {
-            menuTitle: 'input 전체 모음',
-            menuPath: '/guides/publish/PBasicInput',
-          },
-          {
-            menuTitle: 'text input(textarea)',
-            menuPath: '/guides/publish/PTextInput',
-          },
-          {
-            menuTitle: 'radio, checkbox',
-            menuPath: '/guides/publish/PCheckboxRadio',
-          },
-          {
-            menuTitle: 'datepicker',
-            menuPath: '/guides/publish/PDatePicker',
-          },
-          {
-            menuTitle: 'select',
-            menuPath: '/guides/publish/PSelect',
-          },
-          {
-            menuTitle: 'AlertConfirmModal',
-            menuPath: '/guides/publish/PAlertConfirmModal',
-          },
-          {
-            menuTitle: 'LoadingBar',
-            menuPath: '/guides/publish/PLoadingBar',
-          },
-        ],
-      },
-      {
-        menuTitle: '추가 개발 가이드',
+        children: [],
       },
     ],
   },
