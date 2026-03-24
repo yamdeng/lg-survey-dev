@@ -1,0 +1,7 @@
+#.vscdoe 에디터 초기 셋팅 방법
+
+ 1.vscode/extensions.json 파일 : eslint, prettier 필수적은 플러그인을 자동으로 설치해주는 설정 파일입니다.
+  -온라인 환경에서만 자동 설치가 됩니다.
+  -오픈라인이 경우 아래 그림처럼 
+ 2.vscode/settings.json 파일 : vscode 에디터 셋팅을 통일시키기 위한 에디터 설정 파일입니다.
+
