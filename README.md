@@ -109,4 +109,37 @@ npm run build
 npm run build:pass
 ```
 
+## 📂 6. 주요 폴더 및 파일 구조
+
+### 📂 Root Directories
+
+- **`/(Root)`**
+  - `.prettierrc` / `eslint.config.js`: 코드 스타일 및 린트 설정
+  - `vite.config.ts`: 로컬 Proxy 서버 설정 및 기본 빌드 설정
+  - `index.html`: 최종 빌드되는 Template HTML 파일
+- **`docs/`**
+  - `nginx.conf`: Nginx Proxy 설정 (서버/프론트 도메인 교체 설정 포함)
+  - `.env.development.local`: 로컬 개발용 환경 변수 원본 (복사해서 사용)
+- **`env/`**: 각 환경별 설정 파일 모음
+- **`public/`**: 빌드 시 정적 반영되는 리소스 폴더
+
+### 📂 Source Code (`src/`)
+
+- **`components/`**: UI 컴포넌트 (`common`: 공통, `layout`: 레이아웃, `modal`: 모달)
+- **`config/`**: 전역 설정 및 상수
+  - `Code.ts`(코드), `CommonConstant.ts`(상수), `Config.ts`(전역객체), `ModalType.ts`
+- **`page/`**: 메뉴와 매핑되는 실제 화면 페이지 파일 모음
+- **`store/`**: Zustand 상태 관리
+  - `common/`: 공통 스토어
+  - `slice/`: form, list 등 기능별 slice
+  - `useAppStore.ts`: 전역 데이터 / `useUiStore.ts`: 전역 UI 제어
+- **`data/`**: 메뉴 구성 데이터 및 테이블 예제 샘플 데이터
+- **`routes/`**: 페이지 라우팅 및 권한 설정
+- **`services/`**: 공통 유틸 서비스 및 비즈니스 로직
+- **`resources/`**: SCSS 스타일, 이미지, 폰트 파일
+- **`utils/`**: 프로젝트 공용 유틸리티 함수
+- **`hooks/`**: 공통 Custom Hooks
+- **`guide/`**: 개발 참고용 공통 컴포넌트 가이드
+- **`publish/`**: 퍼블리싱 단계 결과물 관리
+
 ---
