@@ -117,3 +117,124 @@
 
  4.npm run build:pass
  -동일하게 빌드를 수행하지만 문법 오류 체크하지 않고 실행
+
+
+
+#.주요 파일/폴더 설명
+
+ 1./(ROOT 폴더)
+  -.prettierrc : prettier 설정 수정하고 싶을 경우 수정
+  -eslint.config.js : eslint 설정 수정하고 싶을 경우 수정
+  -vite.config.ts : local proxy 서버 설정 및 기본 빌드 설정
+  -index.html : 최종 빌드되는 template html 파일
+
+ 2.docs
+  -nginx.conf : nginx proxy 서버 설정 파일(각각 아래의 정보를 replace)
+   : http://localhost:8080 => 서버 도메인
+   : http://localhost => 프론트 도메인
+  -.env.development.local : 로컬 개발 시작시 해당 파일을 env 파일에 복사
+
+ 3.env : 환경변수 파일 폴더
+
+ 4.public : 정적 리소스 파일 모음 폴더(빌드시 해당 폴더의 resource도 같이 반영됩니다.)
+
+ 5.src/components
+  -common : 공통 컴포넌트
+  -layout : 레이아웃 관련 컴포넌트
+  -modal : 모달
+
+ 6.src/config : 설정, 상수 파일 모음 폴더
+  -Code.ts : 프론트 전용 코드 파일
+  -CmmonConstant.ts : 상수
+  -Config.ts : 전역 설정 객체
+  -ModalType.ts : 모달 유형 상수
+
+ 7.src/data : 실제 적용되는 메뉴 데이터, 테이블 예제 데이터 폴더
+
+ 8.src/guide : 개발 가이드 컴포넌트 모음 폴더
+
+ 9.src/hooks : 공통 hook 폴더
+
+ 10.src/page : 메뉴에 매핑되어있는 페이지 모음 폴더
+
+ 11.src/publish : 퍼블리싱 작업 파일들 모음 폴더
+
+ 12.src/resources : scss, 이미지, 폰트 파일
+
+ 13.src/routes : 라우터 설정
+
+ 14.services : 공통 유틸 서비스
+
+ 15.src/store : zustand store 파일 모음
+  -common : 공통 store 폴더
+  -slice : 공통 기능 모음 slice(form, list) 폴더
+  -useAppStore.ts : 전역 데이터 stroe
+  -useUiStore.ts : 전역 UI store
+
+ 16.src/utils : 유틸성 함수
+
+주요 폴더 및 파일 구조
+
+📂 Root Directories
+
+/ (Root): 프로젝트 설정 파일
+
+.prettierrc / eslint.config.js: 코드 스타일 및 린트 설정
+
+vite.config.ts: Vite 빌드 및 로컬 Proxy 서버 설정
+
+index.html: 앱의 메인 엔트리 템플릿 파일
+
+docs/: 문서 및 서버 설정 리소스
+
+nginx.conf: Nginx Proxy 서버 설정 (도메인 Replace 정보 포함)
+
+.env.development.local: 로컬 개발용 환경 변수 템플릿
+
+env/: 각 환경별(.env, .development, .stage, .publish) 설정 파일
+
+public/: 빌드 시 변환 없이 복사되는 정적 리소스 (파비콘 등)
+
+📂 Source Code (src/)
+
+프로젝트의 핵심 소스코드는 src 폴더 내에 기능별로 구조화되어 있습니다.
+
+components/: 모든 화면 구성 요소
+
+common/: 버튼, 입력창 등 공통 UI 컴포넌트
+
+layout/: 헤더, 사이드바 등 레이아웃 컴포넌트
+
+modal/: 팝업 및 모달 관련 컴포넌트
+
+config/: 전역 설정 및 상수
+
+Code.ts (프론트 전용 코드), CommonConstant.ts (상수), Config.ts (설정 객체), ModalType.ts
+
+pages/: 라우터와 매핑되는 메뉴별 메인 페이지 (예: Login.tsx, Home.tsx)
+
+store/: Zustand 기반 상태 관리
+
+common/: 공통 스토어
+
+slice/: 기능별 조각(form, list 등) 관리
+
+useAppStore.ts (전역 데이터), useUiStore.ts (UI 제어)
+
+data/: 실제 바인딩되는 메뉴 데이터 및 테이블 예제 데이터
+
+routes/: 전체 앱의 페이지 라우팅 경로 설정
+
+services/: 공통 비즈니스 로직 및 API 호출 서비스
+
+resources/: 스타일 파일(SCSS), 이미지, 웹 폰트 등 에셋
+
+utils/: 프로젝트 전반에서 재사용되는 헬퍼 함수
+
+hooks/: 공통 React Custom Hooks
+
+guide/: 개발자용 컴포넌트 사용 가이드 페이지
+
+publish/: 퍼블리싱 작업 결과물 관리
+
+
