@@ -142,4 +142,76 @@ npm run build:pass
 - **`guide/`**: 개발 참고용 공통 컴포넌트 가이드
 - **`publish/`**: 퍼블리싱 단계 결과물 관리
 
+## 🧭 개발 가이드 메뉴 구조 (Guide Menu List)
+
+| 상위 분류               | 타이틀 (Menu Title)                       | 메뉴 경로 (Menu Path)                                     |
+| :---------------------- | :---------------------------------------- | :-------------------------------------------------------- |
+| **공통 가이드**         | 버튼                                      | `/guides/dev/GuideButton`                                 |
+|                         | 네비게이션                                | `/guides/dev/GuideNavigate`                               |
+|                         | 토스트                                    | `/guides/dev/GuideToastService`                           |
+|                         | 로딩바                                    | `/guides/dev/GuideLoadingBar`                             |
+|                         | 에러 case                                 | `/guides/dev/GuideError`                                  |
+|                         | ApiService                                | `/guides/dev/GuideApiService`                             |
+|                         | alert, confirm 모달                       | `/guides/dev/GuideAlertConfirmModal`                      |
+|                         | ModalService                              | `/guides/dev/GuideModalService`                           |
+|                         | CodeService                               | `/guides/dev/GuideCodeService`                            |
+| **input 가이드**        | textinput, searchinput                    | `/guides/dev/GuideAppTextInput`                           |
+|                         | editor                                    | `/guides/dev/GuideAppTextEditor`                          |
+|                         | checkbox, radio                           | `/guides/dev/GuideAppCheckbox`                            |
+|                         | select                                    | `/guides/dev/GuideAppSelect`                              |
+|                         | code-select                               | `/guides/dev/GuideAppCodeSelect`                          |
+|                         | date-picker                               | `/guides/dev/GuideAppDatePicker`                          |
+|                         | date-picker2                              | `/guides/dev/GuideAppDatePicker2`                         |
+|                         | time-picker                               | `/guides/dev/GuideAppTimePicker`                          |
+|                         | date-range-picker                         | `/guides/dev/GuideAppRangeDatePicker`                     |
+|                         | date-range-picker2                        | `/guides/dev/GuideAppRangeDatePicker2`                    |
+| **immer, zustand, yup** | immer 라이브러리 object case              | `/guides/dev/GuideImmer1`                                 |
+|                         | immer 라이브러리 list case                | `/guides/dev/GuideImmer2`                                 |
+|                         | zustand create                            | `/guides/dev/GuideZustandCreateFunction`                  |
+|                         | zustand createStore                       | `/guides/dev/GuideZustandCreateStoreFunction`             |
+|                         | zustand 내부 속성 변경 방법 예시          | `/guides/dev/GuideZustandNestedPropsUpdate`               |
+|                         | zustand + immer                           | `/guides/dev/GuideZustandImmer`                           |
+|                         | zustand + immer middleware                | `/guides/dev/GuideZustandImmerMiddleware`                 |
+|                         | store 간의 소통 방법                      | `/guides/dev/GuideZustandStoreCommunication`              |
+|                         | zustand slice 예시1                       | `/guides/dev/GuideZustandSliceCase1`                      |
+|                         | zustand slice 예시2                       | `/guides/dev/GuideZustandSliceCase2`                      |
+|                         | yup 예시1                                 | `/guides/dev/GuideYupCase1`                               |
+|                         | yup 예시2                                 | `/guides/dev/GuideYupCase2`                               |
+|                         | yup 예시3                                 | `/guides/dev/GuideYupCase3`                               |
+|                         | yup 예시4                                 | `/guides/dev/GuideYupCase4`                               |
+| **table**               | table basic                               | `/guides/dev/GuideTableBasic`                             |
+|                         | table click                               | `/guides/dev/GuideTableClick`                             |
+|                         | table select(only single)                 | `/guides/dev/GuideTableOnlySingleSelect`                  |
+|                         | table select                              | `/guides/dev/GuideTableSelect`                            |
+|                         | table select2                             | `/guides/dev/GuideTableSelect2`                           |
+|                         | table selectable                          | `/guides/dev/GuideTableSeletable`                         |
+|                         | table-code-use                            | `/guides/dev/GuideTableCodeLabel`                         |
+|                         | table-button                              | `/guides/dev/GuideTableButton`                            |
+|                         | table-store-use1                          | `/guides/dev/GuideTableUseStore1`                         |
+|                         | table-store-use2                          | `/guides/dev/GuideTableUseStore2`                         |
+|                         | table-batch-basic                         | `/guides/dev/GuideTableBatchBasic`                        |
+|                         | table-batch-basic2                        | `/guides/dev/GuideTableBatchBasic2`                       |
+|                         | table batch 행추가/삭제                   | `/guides/dev/GuideTableBatchAddDelete`                    |
+| **개발 패턴 가이드**    | table 검색1(store)                        | `/guides/dev-pattern/GuidePatternTable1`                  |
+|                         | table 검색2(immer)                        | `/guides/dev-pattern/GuidePatternTable2`                  |
+|                         | table 검색3                               | `/guides/dev-pattern/GuidePatternTable3`                  |
+|                         | form case 1 (store)                       | `/guides/dev-pattern/GuidePatternForm1`                   |
+|                         | form case 2 (immer)                       | `/guides/dev-pattern/GuidePatternForm2`                   |
+|                         | 테이블 batch 패턴 1                       | `/guides/dev-pattern/GuidePatternTableBatch1`             |
+|                         | 테이블 batch 패턴 2                       | `/guides/dev-pattern/GuidePatternTableBatch2`             |
+|                         | 테이블 batch 패턴 3                       | `/guides/dev-pattern/GuidePatternTableBatch3`             |
+|                         | 테이블 batch 패턴 4                       | `/guides/dev-pattern/GuidePatternTableBatch4`             |
+| **추가 개발 가이드**    | 검색 모달 인터페이스                      | `/guides/dev-pattern/GuideSearchModal1`                   |
+|                         | 검색 모달 인터페이스(store)               | `/guides/dev-pattern/GuideSearchModal2`                   |
+|                         | 목록+폼모달(store + list선택연동)         | `/guides/dev-pattern/GuidePatternListWidthFormModalCase1` |
+|                         | 목록+폼모달(store + 상세ID)               | `/guides/dev-pattern/GuidePatternListWidthFormModalCase2` |
+|                         | 목록+폼모달(useImmer + list선택연동)      | `/guides/dev-pattern/GuidePatternListWidthFormModalCase3` |
+|                         | 목록+폼(store + list선택연동)             | `/guides/dev-pattern/GuidePatternListWidthFormCase1`      |
+|                         | 목록+폼(store + 상세ID)                   | `/guides/dev-pattern/GuidePatternListWidthFormCase2`      |
+|                         | 테이블간 선택 행 이동 case                | `/guides/dev-pattern/GuidePatternTwoListBatchCase1`       |
+|                         | 2 list edit : applyTransaction            | `/guides/dev-pattern/GuidePatternTwoListBatchCase2`       |
+|                         | 2 list edit : only store                  | `/guides/dev-pattern/GuidePatternTwoListBatchCase3`       |
+|                         | 추가패턴 가이드1(좌측목록, 우측 폼, 목록) | `/guides/dev-pattern/EtcGuide1`                           |
+|                         | 사용자 input(id base로 인터페이스)        | `/guides/dev/GuideAppUserInput`                           |
+
 ---
